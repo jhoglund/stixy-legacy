@@ -49,7 +49,7 @@ Rails::Initializer.run do |config|
   
   config.gem 'sqlite3'
   config.gem 'icalendar'
-  config.gem 'aws-s3', :lib => 'aws/s3'
+  # config.gem 'aws-s3', :lib => 'aws/s3'  # Disabled - using local file storage instead
   #config.gem 'rmagick'
   config.gem 'mini_magick'
   config.gem 'paginator'

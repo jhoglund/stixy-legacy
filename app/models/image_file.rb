@@ -1,9 +1,7 @@
 class ImageFile < AbstractFile
 
-    has_attachment :storage => :s3,
-        :s3_access => :authenticated_read, 
-        :path_prefix => 'content/images', 
-        :disposition => :download,
+    has_attachment :storage => :file_system,
+        :path_prefix => 'public/system/images',
         :thumbnail_class => 'ThumbnailFile',
         :thumbnails => { :original => '600>', :t => '200>'}
 

@@ -1,9 +1,7 @@
-require 'aws/s3'
 module AttachmentFuExtensions
-  include AWS::S3
   
   def require_authentication?
-    attachment_options[:s3_access] == :authenticated_read
+    false  # Local files don't require authentication
   end
   
   # Overrides AttachmentFu's attachment_path_id method.
@@ -12,12 +10,12 @@ module AttachmentFuExtensions
     encode(((respond_to?(:parent_id) && parent_id) || id).to_s)
   end
   
-  # Alias
+  # Alias - returns the public URL for local file system storage
   def public_uri
-    unless require_authentication?
-      s3_url
+    if respond_to?(:public_filename) && public_filename
+      public_filename
     else
-      authenticated_s3_url(:expires_in => 3.minute.to_i)
+      "/system/#{self.class.to_s.underscore.gsub('_file', '')}s/#{id}/#{filename}"
     end
   end
   

@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'fileutils'
 
 class AbstractFile < ActiveRecord::Base
 
@@ -15,25 +16,29 @@ class AbstractFile < ActiveRecord::Base
       base_name encode(parent_id||id)
     end
     def base_name name
-      "content/images/#{name}/#{filename}"
+      "public/system/images/#{name}/#{filename}"
     end
     def copy_to_new
       begin
-        if AWS::S3::S3Object.exists?(self.new_name, 'stixy')
+        new_path = File.join(RAILS_ROOT, new_name)
+        old_path = File.join(RAILS_ROOT, old_name)
+        
+        if File.exists?(new_path)
           self.update_attribute(:storage_state, 12)
-          yield 0, "Error #{id} new exist. #{self.new_name}, #{self.old_name}" if block_given?
+          yield 0, "Error #{id} new exist. #{new_path}, #{old_path}" if block_given?
         else 
-          if AWS::S3::S3Object.exists?(self.old_name, 'stixy') 
-            if AWS::S3::S3Object.copy(self.old_name, self.new_name, 'stixy') 
+          if File.exists?(old_path)
+            FileUtils.mkdir_p(File.dirname(new_path))
+            if FileUtils.cp(old_path, new_path)
               self.update_attribute(:storage_state, 9)
-              yield 1, "#{self.old_name} -> #{self.new_name}" if block_given?
+              yield 1, "#{old_path} -> #{new_path}" if block_given?
             else
               self.update_attribute(:storage_state, 10)
-              yield 0, "Error #{id}, Couldn't copy #{self.old_name} -> #{self.new_name}" if block_given?
+              yield 0, "Error #{id}, Couldn't copy #{old_path} -> #{new_path}" if block_given?
             end
           else
             self.update_attribute(:storage_state, 13)
-            yield 0, "Error #{id} don't exist. #{self.old_name}" if block_given?
+            yield 0, "Error #{id} don't exist. #{old_path}" if block_given?
           end
         end
       rescue => m

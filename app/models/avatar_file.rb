@@ -1,15 +1,14 @@
 class AvatarFile < AbstractFile
 
-    has_attachment :storage => :s3, 
-        :s3_access => :public_read, 
-        :path_prefix => 'content/avatars'
+    has_attachment :storage => :file_system, 
+        :path_prefix => 'public/system/avatars'
    
     # Shared extensions to AttachmentFu
     include AttachmentFuExtensions
 
     # Used for copying old names to new. Not to be used in production. Remove when done!!
     def base_name name
-      "content/avatars/#{name}/#{filename}"
+      "public/system/avatars/#{name}/#{filename}"
     end
    
 end

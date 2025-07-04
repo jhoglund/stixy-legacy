@@ -1,6 +1,6 @@
 class DocumentFile < AbstractFile
     
-    has_attachment :storage => :s3, :path_prefix => 'content/documents', :disposition => :download, :s3_access => :authenticated_read
+    has_attachment :storage => :file_system, :path_prefix => 'public/system/documents'
     
     has_many  :library_documents_widget_instances, :foreign_key => 'library_document_id'
     has_many  :widget_instances, :through => :library_documents_widget_instances

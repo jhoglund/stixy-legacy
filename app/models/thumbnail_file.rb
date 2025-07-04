@@ -1,9 +1,8 @@
 require 'mini_magick'
 
 class ThumbnailFile < AbstractFile
-    has_attachment :storage => :s3, 
-        :s3_access => :public_read,
-        :path_prefix => 'content/thumbs'
+    has_attachment :storage => :file_system, 
+        :path_prefix => 'public/system/thumbs'
    
    # Fix so thumbnail relations are generated even though they are not specified by the has_attachment method
    belongs_to :parent, :class_name => "AbstractFile" 
@@ -12,7 +11,7 @@ class ThumbnailFile < AbstractFile
    include AttachmentFuExtensions
     
    def base_name name
-     "content/thumbs/#{name}/#{filename}"
+     "public/system/thumbs/#{name}/#{filename}"
    end
    
    # Test if ANY of the conditions provided is different from what's stored in the db
@@ -31,7 +30,7 @@ class ThumbnailFile < AbstractFile
    end
   
    def public_uri
-     "#{s3_url}?#{[width,height,rotation,filter].to_s}"
+     "/system/thumbs/#{id}/#{filename}?#{[width,height,rotation,filter].to_s}"
    end  
          
 end
