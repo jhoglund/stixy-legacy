@@ -1,4 +1,5 @@
 class ResourcesController < ApplicationController
+  skip_before_filter :supported_browsers, :only => [:generate, :default]
   after_filter :set_header
   
   def log
@@ -23,6 +24,19 @@ class ResourcesController < ApplicationController
     render :inline => "true", :status => 200
   end
   
+  
+  # Handle the case where the route interprets the action as "default"
+  def default
+    # Extract type and file info from params
+    if params[:id] && params[:id] =~ /^(.+)\.(css|js)$/
+      params[:type] = params[:action] # "default"
+      params[:browser] = $1           # "other"  
+      params[:mime] = $2              # "css"
+      generate
+    else
+      render :nothing => true, :status => 404
+    end
+  end
   
   # This should be done differantly. Instead of creating the resource files in the controller, they should be created in the
   # AssetTagHelper module. 

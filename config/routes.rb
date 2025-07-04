@@ -2,6 +2,10 @@ ActionController::Routing::Routes.draw do |map|
   # Add your own custom routes here.
   # The priority is based upon order of creation: first created -> highest priority.
   
+  # Resource routes MUST come first to avoid being caught by catch-all routes  
+  map.connect 'resources/:type/:browser.:mime', :controller => "resources", :action => "generate"
+  map.connect 'resources/:type/:version/:browser.:mime', :controller => "resources", :action => "generate"
+  
   # Here's a sample route:
   # map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action
@@ -22,8 +26,6 @@ ActionController::Routing::Routes.draw do |map|
   map.board 'board/:id', :controller => "board", :action => "index", :requirements => { :id => /\d+/ }
   map.widget 'board/:id/widget/:widget_id/:flag', :controller => "board", :action => "index", :flag => :view, :requirements => { :id => /\d+/, :widget_id => /\d+/ }
   map.connect 'guest/:id', :controller => "guest", :action => "index", :requirements => { :id => /\d+/ }
-  map.connect 'resources/:type/:version/:browser.:mime', :controller => "resources", :action => "generate"
-  map.connect 'resources/:type/:browser.:mime', :controller => "resources", :action => "generate"
   map.connect 'widgets/photo/photo/:id', :controller => "widgets/photo", :action => "photo", :id => /.*/
   map.connect 'dev/:id', :controller => "public", :action => "development"
   map.connect 'api/calendar/address/', :controller => "calendar", :action => "ical_address"
