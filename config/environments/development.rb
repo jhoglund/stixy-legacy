@@ -1,7 +1,7 @@
 # So we can pass cookies between upload and main apps. 
 # The domain needs to be set up in the host file on the development machine
 # Comment the line below to disable this feature during development
-ActionController::CgiRequest::DEFAULT_SESSION_OPTIONS.update(:session_domain => '.localhost.com')
+# ActionController::CgiRequest::DEFAULT_SESSION_OPTIONS.update(:session_domain => '.localhost.com')  # Disabled - using single server now
 
 # Specifies gem version of Rails to use when vendor/rails is not present
 
@@ -29,8 +29,8 @@ config.action_mailer.raise_delivery_errors = true
 # Don't care if the mailer can't send
 
 #config.action_mailer.logger = Logger.new("#{RAILS_ROOT}/log/mail.log")
-SERVER = "localhost.com"
-HELPDESK_SERVER = "helpdesk.localhost.com"
-UPLOAD_SERVER = "upload.localhost.com"
+SERVER = "localhost:3000"
+HELPDESK_SERVER = "localhost:3000"
+UPLOAD_SERVER = "localhost:3000"
 RESOURCE_CACHING = false
 BLOG_SERVER = "blogserver"
