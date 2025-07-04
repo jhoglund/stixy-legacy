@@ -7,7 +7,7 @@ module AttachmentFuExtensions
   # Overrides AttachmentFu's attachment_path_id method.
   # The attachment ID used in the full path of a file
   def attachment_path_id
-    encode(((respond_to?(:parent_id) && parent_id) || id).to_s)
+    ((respond_to?(:parent_id) && parent_id) || id || 0).to_i
   end
   
   # Alias - returns the public URL for local file system storage

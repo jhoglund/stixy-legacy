@@ -1,15 +1,38 @@
 class Widgets::DocumentController < Widgets::AbstractFile
   include Widgets::DocumentHelper
-  skip_before_filter :supported_browsers, :only => :file
+  skip_before_filter :supported_browsers, :only => [:file, :index]
   skip_before_filter :login_required
     
+  # Handle form uploads from the upload popup
+  def index
+    create
+  end
+  
   # RESTfull action, limit it to REST api only
   skip_before_filter :supported_browsers, :login_from_cookie, :set_session_id, :only => :create
   verify :params => "document", :method => "post", :only => :create, :redirect_to => '/'
   def create
-    # An empty response is is expected with a 'Location' header value:
+    # Handle both multipart form uploads and XML API calls
     respond_to do |format|
-      format.html { head :method_not_allowed }
+      format.html { 
+        # Handle file upload from form
+        if params[:document] && params[:document][:file]
+          document = DocumentFile.new
+          document.uploaded_data = params[:document][:file]
+          document.upload_id = params[:upload_id]
+          document.session_id = session[:session_key] || session.session_id || 'temp_session'
+          
+          if document.save
+            # Redirect to after_upload action
+            redirect_to :action => 'after_upload', :file => document.id, :board_id => params[:board_id]
+          else
+            # Redirect back to upload with error
+            redirect_to :action => 'upload', :board_id => params[:board_id], :error => document.errors.full_messages.join(', ')
+          end
+        else
+          head :method_not_allowed 
+        end
+      }
       format.xml { 
         # if id attribute is present in remote call, then update method is called
         #  - to force using create, user remote_id
