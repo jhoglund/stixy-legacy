@@ -11,6 +11,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'widgets/documents/after_upload', :controller => "/widgets/document", :action => "after_upload"
   map.connect 'widgets/documents/metadata', :controller => "/widgets/document", :action => "metadata"
   map.connect 'widgets/photos/upload', :controller => "/widgets/photo", :action => "upload"
+  map.connect 'widgets/photos/after_upload', :controller => "/widgets/photo", :action => "after_upload"
+  map.connect 'widgets/photos/metadata', :controller => "/widgets/photo", :action => "metadata"
   
   # Here's a sample route:
   # map.connect 'products/:id', :controller => 'catalog', :action => 'view'
