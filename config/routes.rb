@@ -6,6 +6,12 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'resources/:type/:browser.:mime', :controller => "resources", :action => "generate"
   map.connect 'resources/:type/:version/:browser.:mime', :controller => "resources", :action => "generate"
   
+  # Custom upload routes for documents and photos (MUST come before resource routes)
+  map.connect 'widgets/documents/upload', :controller => "/widgets/document", :action => "upload"
+  map.connect 'widgets/documents/after_upload', :controller => "/widgets/document", :action => "after_upload"
+  map.connect 'widgets/documents/metadata', :controller => "/widgets/document", :action => "metadata"
+  map.connect 'widgets/photos/upload', :controller => "/widgets/photo", :action => "upload"
+  
   # Here's a sample route:
   # map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action

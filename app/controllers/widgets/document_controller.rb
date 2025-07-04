@@ -1,6 +1,6 @@
 class Widgets::DocumentController < Widgets::AbstractFile
   include Widgets::DocumentHelper
-  skip_before_filter :supported_browsers, :only => [:file, :index]
+  skip_before_filter :supported_browsers, :only => [:file, :index, :upload, :after_upload, :metadata]
   skip_before_filter :login_required
     
   # Handle form uploads from the upload popup
