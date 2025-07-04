@@ -3,8 +3,11 @@ module StixyBrowser
     # Skip browser check if test_browser_support parameter is present
     return true if !params[:test_browser_support].nil?
     
-    # Only enforce browser checks in production and development
-    return true unless ENV["RAILS_ENV"] == "production" || ENV["RAILS_ENV"] == "development"
+    # Skip browser check in development environment to allow modern browsers
+    return true if ENV["RAILS_ENV"] == "development"
+    
+    # Only enforce browser checks in production
+    return true unless ENV["RAILS_ENV"] == "production"
     
     set_session_browser
     if not is_browser_supported?
