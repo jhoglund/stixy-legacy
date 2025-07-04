@@ -1,0 +1,61 @@
+<%= error_messages_for 'invite' %>
+
+<table class="admin">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  <%= hidden_field ("invite", "id") if controller.action_name == 'edit' %>
+  
+  <tr class="light">
+    <td><label for="board_title">Invited by User:</label></td>
+    <td>
+    <% if controller.action_name == 'new' || controller.action_name == 'create' %>
+    <%= select("invite", "inviter_user_id", @users.collect {|p| [ p.login, p.id ] if p.is_visible? }, {:include_blank => true}, {"style" => "width: 250px;", 
+     "onchange" => "javascript:new Ajax.Updater('boards_holder', '/admin/invite/boards_ajax/' +$('invite_inviter_user_id').options[$('invite_inviter_user_id').options.selectedIndex].value); return false;"
+     } ) %>
+    <% else %>
+        <%= @invite.inviter_user.login %>
+    <% end %>
+     </td>
+  </tr>
+  
+  <tr class="light">
+    <td><label for="board_title">To Shared Board:</label></td>
+    <td>
+    <% if controller.action_name == 'new' || controller.action_name == 'create' %>
+    <span id="boards_holder">   
+        <%= select("invite", "board_id", @boards.collect {|p| [ p.title, p.id ]  }, {:include_blank => true}, "style" => "width: 250px;") %>
+    <span>
+    <% else %>
+        <%= @invite.board.title %>
+    <% end %></td>
+  </tr>
+  
+  <tr class="light">
+    <td><label for="board_title">Accepted by User:</label></td>
+    <td>
+    <% if (controller.action_name == 'new' || controller.action_name == 'create') || @invite.accepted_user == nil %>
+    <%= select("invite", "accepted_user_id", @users.collect {|p| [ p.login, p.id ] if p.is_visible? }, {:include_blank => true}, "style" => "width: 250px;") %>
+    <% else %>
+        <%= @invite.accepted_user.login %>
+    <% end %>
+    </td>
+  </tr>
+  
+  
+  <tr class="dark">
+    <td><label for="invite_status">Is Active?</label></td>
+    <td>
+        <%= radio_button("invite", "status", Status::ACTIVE ) %>Active<br>
+        <%= radio_button("invite", "status", Status::DISABLED ) %>Disabled<br>
+        <%= radio_button("invite", "status", Status::PENDING ) %>Pending</td>
+  </tr>
+  
+  <tr class="dark">
+    <td><label for="invite_invitation_text">Invitation text</label></td>
+    <td><%= text_area('invite', 'invitation_text', 'rows' => 4, 'cols' => 30)  %></td>
+  </tr>
+
+  
+</table>

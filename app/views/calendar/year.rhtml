@@ -1,0 +1,14 @@
+<%
+	@header_include = "<link href=\"/resources/calendar/#{ session[:browser][:type] }.css\" media=\"all\" rel=\"Stylesheet\" type=\"text/css\" />"
+  @header_include  << "<script type=\"text/javascript\" src=\"/resources/calendar/#{ session[:browser][:type] }.js\"></script>"
+%>
+
+<div class="canvas">
+	<div class="stixy-calendar" id="calendar">
+		<%= render :partial => "year" %>
+	</div>
+	<div class="stixy-calendar-panel" id="calendar_panel">
+	</div>
+</div>
+
+<% @buttons = "#{ link_to_function "Close", 'window.parent.Stixy.popup.close()', :button => {:type => false} }"%>

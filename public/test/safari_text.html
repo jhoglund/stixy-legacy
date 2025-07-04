@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html debug="true">
+<head>
+	<title>Welcome to Stixy</title>
+	<script>
+	//onload = function(){
+	//	window.addEventListener("DOMAttrModified", function(){
+	//		console.log(1)
+	//	},false)
+	//	document.getElementById("button").style.position = "relative"
+	//	document.getElementById("button").style.top = "30px"
+	//	var obj = Event.prototype
+	//	var str = ""
+	//	for(var i in obj) str += (i + ": " + obj[i] + "<br>")
+	//	document.getElementById("debug").innerHTML = str
+	//}
+	alert(DOMParser.parseFromString("<i>tttt</i>"))
+		onload = function(){
+			document.getElementById("button").onmousedown = function(e){
+				e.preventDefault();
+	      e.stopPropagation()
+			}
+			var old
+			document.getElementById("button").onmouseup = function(e){
+				function insert_bottom(parent, str){
+					var element = document.getElementById("debug");
+					var child = parse("<div style=\"background:red\">mee</div>");
+					alert(child)
+					//var firstChild = element.getElementsByTagName("*")[0];
+					//if(child) { 
+					//	//var el = ((firstChild && (firstChild.tagName.toLowerCase() == "tbody")) ? firstChild : element)
+					//	alert(11)
+					//	//el.appendChild(child) 
+					//}
+				}
+				function parse(str){
+					
+					if(!DOMParser){
+						return DOMParser.parseFromString(str)
+					}else{
+						var range = document.createRange();
+						range.selectNode(document.body);
+						var fragment = range.createContextualFragment('<div>test</div>');
+						range.detach()
+						return fragment;
+					}
+				}
+				insert_bottom()
+				
+				//var n = window.getSelection().getRangeAt(0)
+				//if(old){
+				//	console.log((n.compareBoundaryPoints(Range.START_TO_START,old)==0)&&(n.compareBoundaryPoints(Range.END_TO_END,old)==0))
+				//}
+				//old = n
+				//var obj = window.getSelection().getRangeAt(0)||document.selection.createRange()
+				//document.execCommand("fontsize", false, "5")
+				//str = ""
+				//for(var i in obj) str += (i + ": " + obj[i] + "<br>")
+				//document.getElementById("debug").innerHTML = str
+			}
+		}
+	</script>
+</head>
+<body>
+<div contenteditable="true">
+	thisisaverylongword <br>dasdasd dasdasdasd<br> dasdas<br>dasd das<br>dasdasd da<br>sdasdas <br>dasdasdas dasdasdas dasdasd dasdasdasdasd dasdasdas dasdasd d
+	dsadasd dasdas dasdasda dasdasdasdasdasdas d asd asd as dasdas dasdas dasdasdasd sadasdas dasd asd asdasdasdas dasdas das dasdsa
+	dsdas dsadasd dasdasdd asdasdasd dasdasd dsadasd dasdasd dasdas 
+	<div id="debug"></div>
+</div>
+<div id="button" unselectable="on">
+	text
+</div>
+</body>
+</html>

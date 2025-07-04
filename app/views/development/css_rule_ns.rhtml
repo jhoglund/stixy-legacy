@@ -1,0 +1,25 @@
+<html xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript">
+		onload = function(){
+			var rules = document.styleSheets[0].cssRules
+				//document.styleSheets[0].insertRule(rules[0].cssText.replace(/^\s*sx:/,"sx\\:"),null)
+				console.log("  sx:xx".replace(/^\s*[^\S]+sx:/,"xx\\:"))
+				//console.log(rules[2].cssText)
+		}
+	</script>
+	
+	<style>
+
+		ssx\:bt { color:red; }
+		a:hover {color:green}
+
+	</style>
+	
+	
+</head>
+<body>
+	<sx:bt>ddddddd</sx:bt>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<% @pending_content = "Uploading document..." %>
+
+<form action="http://<%= UPLOAD_SERVER %>/widgets/documents" enctype="multipart/form-data" method="post">
+	<input type="hidden" name="board_id" value="<%= @board.id %>">
+	<input type="hidden" name="upload_id" id="upload_id" value="<%= CGI::Session.generate_unique_id %>">
+	<input type="hidden" value="<%= request.host %>" name="host">
+	<h2 style="margin-bottom:0px;">Add a document</h2>
+	<% if flash[:error].nil? %>
+	<div class="description" style="margin:4px 0 10px">Browse your computer for a document, and click "Add document" to upload your document to Stixy.</div>
+	<% else %>
+	<div class="description inline-message-error" style="margin:4px 0 10px; right:auto;"><%= flash[:error] %></div>
+	<% end %>
+	
+  <input type="file" name="document[file]" style="width:300px;">
+  <input type="submit" style="display:none;">
+</form>
+<div style="margin:8px 0 10px">
+	<div style="color:rgb(150,150,150)">Maximum file size: 50MB</div>
+</div>
+<script language="javascript" type="text/javascript">
+	function loadDocument(){
+		Stixy.element.addClassName(document.body, "show-pending");
+		document.forms[0].submit()
+	}
+</script>
+
+<% 
+@buttons = "#{ link_to_function "Cancel", 'window.parent.Stixy.popup.close()', :button => {:type => false} }
+						#{ link_to_function "Add document", 'loadDocument()', :button => {:type => 'default'}, :style => "margin-left:10px;"  }"
+
+%>

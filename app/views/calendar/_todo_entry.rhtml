@@ -1,0 +1,8 @@
+<span class="calendar-entry todo-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+	<span class="label">
+	<!-- <sx:todo-checkbox><%= check_box_tag('todo_entry[completed]',1, todo_entry.completed?, :id => 'todo_status', "sx:id" => "status", "sx:entry-id" => todo_entry.id, "sx:entry-type" => todo_entry.class.to_s.underscore, :style => "position:relative;top:-1px;vertical-align:middle; width:11px; height:11px;") %></sx:todo-checkbox> -->
+	<% if todo_entry.priority > 0 %><span class="todo-list-priority-<%= todo_entry.priority(:name).downcase %>">!</span><% end %>
+	<%= todo_entry.calendar_text %></span>
+	
+</span>

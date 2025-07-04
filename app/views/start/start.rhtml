@@ -1,0 +1,71 @@
+<div class="start-content" style="min-height:400px;">
+	<div class="start-promotion">
+		<div class="background">&nbsp;</div>
+		<div class="content">
+			<h2>Hello <%= current_user.display_name  %></h2>
+
+						And welcome to Stixy. This is what we have been working on over the past year. Of course, we would love it if you like it! 
+						<p>In case you like it, feel free to spread the word around and start using Stixy as a playground for you and your friends or perhaps as a place for organizing your family life. </p>
+							
+						<h3>Beta Support</h3>
+						We aren't able to give you around the clock support during our beta phase. 
+						But we promise that we will answer your questions and comments as fast as we can. 
+						If you like, try asking your friends who also use Stixy. They might be able to help you. 
+						<p>Thank you for helping us test Stixy.</p>
+
+						/Jonas and Otto
+		</div>
+			<div id="feedback_note" style="bottom: 20px; left: 205px; width: 280px; height: 160px; z-index: 1000009; display: block; visibility: visible;" class="note widget">
+				<div class="shadow"><u></u><i><b></b><s></s></i></div>
+				<div class="focus" style="visibility: hidden;"></div>
+				<div style="" class="base">
+					<div class="base-bg"></div>
+					<div class="editor-bg"> </div>
+					<div class="editor" style="display: block;overflow:visible;">
+						<h2 style="color:rgb(245,204,0);margin:8px 0 4px;">What do you think?</h2>
+												You're among one of the first to use Stixy, and it would be very helpful to find out what you think.
+												<p>Please let us know by sending us a line or two to <%= mail_to "feedback@stixy.com" %>
+					</div>
+				</div>
+				<div class="remove"></div>
+				<div class="resizer"></div>
+			</div>
+	</div>
+
+	<div class="start-list">
+		<% unless current_user.pending_invitations.empty? %>
+		<h2>Invitaions</h2>
+		<% end %>
+		<% current_user.pending_invitations.each do | invite | %>
+			<p style="margin-bottom:3px">
+		  <b><%= invite.inviter_user.display_name %></b> has invited you to join 
+			<% if invite.board.title.empty? %>
+				a Stixyboard
+			<% else %>
+				<b><%= invite.board.title %></b>.
+			<% end %>
+			</p>
+			
+		  <%= link_to "Join now!", { :controller => 'invitation', :action => 'join', :token => invite.reference_token} %> | 
+			<%= link_to "View invitation", { :controller => 'invitation', :action => 'index', :token => invite.reference_token} %> <!-- | 
+			<%= link_to "Reject", { :controller => 'invitation', :action => 'reject', :token => invite.reference_token} %> -->
+			
+		<% end %>
+		<h2>Recently Updated Stixyboard</h2>
+		<% @boards.each do |board| %>
+		<div class="box">
+			<h3><%= link_to(formated_str(board.title, nil, "Untitled"), { :controller => "board", :action => "show", :id => board.id }) %></h3>
+			<span class="title">Updated - </span> <%= formated_date(board.updated_on) %>
+			<span style="margin-left:10px;" class="title">By - </span> <%= board.updated_by.display_name %><br />
+			<span class="title"<%= formated_tooltip{ board.shared_with(current_user).collect{|u| u.display_name }.join(", ") } unless board.shared_with(current_user).empty? %>>Shared with - </span> <%= formated_collection(board.shared_with(current_user), 5,"(Not shared)"){|u| u.short_name } %><br />
+			<span class="title">Description - </span> <%= formated_str(board.description) %>
+		</div>
+		<% end %>
+		<div class="overview-link"><%= link_to "View all your Stixyboards", :action => "overview" %></div>
+		<div style="margin-top: 12px; margin-left:-3px; text-align: left;">
+			<%= link_to("Start new Stixyboard", { :controller => "board", :action => "create" }, :button => {:type => "new"}) %> 	
+	  </div>
+	</div>
+
+	<div class="float-break">&nbsp;</div>
+</div>

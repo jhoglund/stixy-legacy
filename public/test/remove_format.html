@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>
+		Test
+	</title>
+	<style>
+		body { background:rgb(215,215,215); }
+		.editor { position:relative; width:400px; height:200px; border:1px inset; background:white; margin:10px; padding:5px; }
+		#_stixy_bogus_hidden { position:absolute;width:0;height:0;overflow:hidden;}
+	</style>
+	<script>
+		function removeFormat(){
+			var editor = document.getElementById("editor_1");
+			editor.focus()
+			var tags = editor.getElementsByTagName('*');
+			for(var i=0; i<tags.length; i++){
+			  var tag = tags[i];
+			  if(tag.tagName=='A'){
+			    
+			  }else{
+			    
+			  }
+			}
+			document.execCommand('selectall',false,true);
+			document.execCommand('removeformat',false,true);
+		}
+	
+	</script>
+</head>
+<body> 
+	<input type="button" onclick="removeFormat()" value="Remove">
+	<span id="_stixy_bogus_hidden"></span>
+	<div class="editor" contenteditable="true" id="editor_1">
+	  <sx:moz-editor-spacer><div></div></sx:moz-editor-spacer>
+    <div style="margin-left: 40px; font-weight: bold;"><ul style="font-style: italic; text-align: right; text-decoration: underline line-through;"><li><i>Lorem</i></li></ul> ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div>
+	</div>
+
+</body>
+</html>

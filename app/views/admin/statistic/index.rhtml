@@ -1,0 +1,69 @@
+<%= link_to "<< #{ Date::MONTHNAMES[@previouse_date.month] }, #{@previouse_date.year}", "/admin/statistic/?year=#{@previouse_date.year}&month=#{@previouse_date.month}" %> | 
+<%= link_to "#{ Date::MONTHNAMES[@next_date.month] }, #{@next_date.year} >>", "/admin/statistic/?year=#{@next_date.year}&month=#{@next_date.month}" %> 
+
+
+
+<h2>Summary: <%= Date::MONTHNAMES[@date.month] %>, <%= @date.year %></h2>
+<table class="admin">
+	<tr class="dark">
+		<td>Total users at month end:</td><td><%= @list[:summary][:end_user_count] %></td>
+	</tr>
+	<!-- <tr class="light">
+			<td>Active users from last month:</td><td><%#= @list[:summary][:start_active_user_count] %></td>
+		</tr>
+		<tr class="light">
+			<td>Active users at month end:</td><td><%#= @list[:summary][:end_active_user_count] %></td>
+		</tr>
+		<tr class="dark">
+			<td>Users atteration:</td><td><%#= @list[:summary][:user_atteration] %>%</td>
+		</tr>
+		<tr class="light">
+			<td>New users for month:</td><td><%#= @list[:summary][:new_user_count] %></td>
+		</tr>
+		<tr class="dark">
+			<td>New users by invitations:</td><td><%#= @list[:summary][:new_user_invites_count] %></td>
+		</tr>
+		<tr class="light">
+			<td>New users by registartion:</td><td><%#= @list[:summary][:new_user_registration_count] %></td>
+		</tr>
+		<tr class="dark">
+			<td>New user by invitations growth:</td><td><%#= @list[:summary][:new_user_invites_growth] %>%</td>
+		</tr>
+		<tr class="light">
+			<td>New user by registartion growth:</td><td><%#= @list[:summary][:new_user_registration_growth] %>%</td>
+		</tr>
+		<tr class="dark">
+			<td>New user growth total:</td><td><%#= @list[:summary][:new_user_growth] %>%</td>
+		</tr>
+		<tr class="light">
+			<td>New users per existing user:</td><td><%#= @list[:summary][:new_user_per_user] %></td>
+		</tr> -->
+</table>
+	 
+
+<h2>Details</h2>
+<table class="admin">
+	<tr>
+		<th>Date</th>
+		<th>New users by invitation</th>
+		<th>New users by registration</th>
+		<th>New users total</th>
+		<th>Total invitations</th>
+		<th>Total active users</th>
+	</tr>
+<% 
+	@list[:rows].each_with_index do |row, index|  
+	  color = "dark"
+    color = "light" if index.remainder(2) == 0
+  
+%>
+	<tr class="<%= color %>">
+		<td><%= row[:date] %></td>
+		<td style="text-align:center"><%= row[:new_user_invites] %></td>
+		<td style="text-align:center"><%= row[:new_user_registration] %></td>
+		<td style="text-align:center"><%= row[:new_users] %></td>
+		<td style="text-align:center"><%= row[:new_invites] %></td>
+		<td style="text-align:center"><%= row[:active_users] %></td>
+	</tr>
+<% end  %>
+</table>

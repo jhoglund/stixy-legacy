@@ -1,0 +1,14 @@
+Hello!
+ 
+This is a reminder for calendar to-do due at <%=  (@user.adjusted_time(@entry.activity.start)).strftime(@user.time_format.get_long_date[:value]) %>
+
+Subject: <%= @entry.calendar_text %>
+<% if @entry.location and not @entry.location.empty? -%>
+<% end -%>
+Due at: <%=  (@user.adjusted_time(@notification.remind_time)).strftime("#{@user.time_format.get_long_date[:value]} at #{@user.time_format.get_time[:value]}") %>
+Priority: <%= @entry.priority(:name) %>
+<% if @entry.note and not @entry.note.empty? -%>
+Note: <%= strip_tags(@entry.note) %>
+<% end -%>
+
+If you think this reminder has been sent to you by mistake, contact us at Stixy at support@stixy.com, and we will help you.

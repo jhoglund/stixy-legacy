@@ -1,0 +1,47 @@
+<%= @doc_type %>
+
+<html lang="en" style="background:white;" xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<title>Stixy: For Flexible Online Creation Collaboration and Sharing</title>
+	<%= render :partial => "/shared/meta" %>
+	<%= include_resource :javascript, :default %>
+	<%= include_resource :stylesheet, :default %>
+	<%= include_resource :stylesheet, :feature %>
+</head>
+<body scroll="no" style="background:white;">
+	<iframe unselectable="on" height="100%" style="position:absolute;height:100%;width:100%;z-index:1000000;" frameborder="0" allowtransparency="true" id="load_error_frame" src="/load_wait.html"></iframe>
+	<div class="popup-canvas">
+		<div class="popup-pending">
+			<div class="popup-pending-background"></div>
+			<div class="popup-pending-content"><%= @pending_content %></div>
+		</div>
+		<table class="popup-grid">
+			<tr>
+				<td class="popup-top">
+					<%= link_to_function "&nbsp;", 'window.parent.Stixy.popup.close()', :class => "popup-top-close"  %>
+					<div class="popup-top-line">&nbsp;</div>
+					<div class="popup-content">
+			  		<%= render(:partial => @feature_partial) if @feature_partial %>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="popup-bottom">
+					<div class="popup-button-bar">
+						<div class="popup-buttons">
+						<% @buttons ||= "#{ link_to_function "Close", 'window.parent.Stixy.popup.close()', :button => {:type => 'default'} }" %>
+						<%= @buttons %>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="feature-promo feature-promo-canvas">&nbsp;</div>
+	<div class="feature-promo-content">
+		<div class="feature-promo-bg">&nbsp;</div>
+		<%= @content_for_layout %>
+	</div>
+	<%= render(:partial => "/shared/google_analytics") %>
+</body>
+</html>

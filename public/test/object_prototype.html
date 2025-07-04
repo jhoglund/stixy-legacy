@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html debug="true">
+<head>
+	<title>Welcome to Stixy</title>
+	<script language="javascript" type="text/javascript" src="/javascripts/all/firebug/firebug.js"></script>
+
+	<script>
+	Object.prototype.__prototype_extension = false;
+	Object.prototype.__unique_id_index = 0;
+	Object.prototype.get_unique_id = function(type,f,debug){
+		this.__unique_id = this.__unique_id || ("uid_" + Object.prototype.__unique_id_index++);
+		return this.__unique_id;
+	}
+	Object.prototype.get_unique_id.__prototype_extension = true;
+	Object.prototype.announce = function(){
+		try{
+			var args = [];
+			for(var i=0; i<arguments.length; i++) args[i] = arguments[i];
+			var type = args.shift();
+			var e = this.__cashed_custom_events[type];
+			var l = e.length;
+			for(var i=0; i<l; i++){ e[i].apply(null, args) }
+		}catch(e){}
+	}
+	Object.prototype.announce.__prototype_extension = true;
+	Object.prototype.listen = function(type,f,debug){
+		this.__cashed_custom_events = this.__cashed_custom_events || {};  
+		this.__cashed_custom_events[type] = this.__cashed_custom_events[type] || [];
+		var e = this.__cashed_custom_events[type];
+		var l = e.length;
+	  for(var i=0; i<l; i++){ if(e[i]==f) { return false } }
+		e.push(f);
+		return true
+	}
+	Object.prototype.listen.__prototype_extension = true;
+	Object.prototype.unlisten = function(type,f,debug){
+		try{
+			var e = this.__cashed_custom_events[type];
+			var l = e.length;
+	  	for(var i=0; i<l; i++){ if(e[i]==f) { return e.splice(i, 1) } }
+			return false;
+		}catch(e){}
+	}
+	Object.prototype.unlisten.__prototype_extension = true;
+	Object.prototype.eachProperty = function(fn){
+		for(var i in this){
+			if(this[i].__prototype_extension||i.substr(0,2)=="__"){ continue };
+			fn(i,this[i])
+		}
+	}
+	Object.prototype.eachProperty.__prototype_extension = true;
+	
+	//var test = {hej:1}
+	//var test2 = {hej:2}
+	//console.log(test.get_unique_id())
+	//console.log(test.get_unique_id())
+	//console.log(test2.get_unique_id())
+	//
+	//test.eachProperty(function(i){               
+	//	console.log(i) 
+	//})
+	
+	var Test = [];                          
+	var TestFun = [];                       
+	var Test2 = {page:1,test:function(){console.log(333)},widgets:{id:2,type:3,left:100,text:{value:"yes"}}}; 
+	                                        
+	for(var i=0; i<10; i++){               
+		Test[i] = {}                          
+		TestFun.push(function(val){ return function(){ console.log(val) } }(i))
+		Test[i].listen("execute", TestFun[i]) 
+	}
+	
+	var Test3 = {}
+	Test2.eachProperty(function(name,value){
+		Test3[name] = Test2[name]
+	})
+	
+	Test3.eachProperty(function(name,value){
+		console.log(name)
+	})                                   
+	                                        
+	Test[1].unlisten("execute", TestFun[1]) 
+	Test[5].unlisten("execute", TestFun[5]) 
+	Test[9].unlisten("execute", TestFun[8]) 
+	                                      
+	for(var i=0; i<Test.length; i++){       
+		Test[i].announce("execute")           
+	}                                       
+	                                        
+	Test2.announce("er")
+	console.log(Test2)  
+	
+                                            
+//	var Test = {};                    
+//	for(var i=0; i<=1000; i++){                  
+//		Test["propsar_"+i] = function(){ var b=0 };
+//	                                          
+//	}                                         
+//
+//	//var reg_start = new Date                  
+//	//for(var i in Test){                      
+//	//	var d = 3                               
+//	//}                                         
+//	//console.log("Regular for in loop: " + (new Date - reg_start))       
+//	var log = ""
+//	var cust_start = new Date                 
+//	Test.eachProperty(function(name,value){
+//		log += name + ", "                        
+//	})                                        
+//	console.log(log)        
+//	console.log("Custom eachProperty loop: " + (new Date - cust_start))        
+	</script>
+
+
+
+		<!--<script>
+			 // var console = {log:function(val){alert(val)}}
+				var start = new Date
+				var Stixy = {}
+				Stixy.cashed_custom_events = {};  
+				Stixy.announce = function(o){
+					try{
+						var args = [];
+						for(var i=0; i<arguments.length; i++) args[i] = arguments[i];
+						var type = args.shift();
+						var e = Stixy.cashed_custom_events[o][type];
+						var l = e.length;
+						for(var i=0; i<l; i++){ e[i].apply(null, args) }
+					}catch(e){}
+				}
+				Stixy.listen = function(o,type,f,debug){
+					Stixy.cashed_custom_events[o] = Stixy.cashed_custom_events[o] || {};
+					var c = Stixy.cashed_custom_events[o];
+					c[type] = c[type] || [];
+					var e = c[type];
+					var l = e.length;
+				  for(var i=0; i<l; i++){ if(e[i]==f) { return false } }
+					e.push(f);
+					return true
+				}
+				Stixy.unlisten = function(o,type,f,debug){
+					try{
+						var e = Stixy.cashed_custom_events[o][type];
+						var l = e.length;
+				  	for(var i=0; i<l; i++){ if(e[i]==f) { return e.splice(i, 1) } }
+						return false;
+					}catch(e){}
+				}
+
+				var Test = [];
+				var TestFun = [];
+				var Test2 = {};
+				//
+				//for(var i=0; i<Test2.length; i++) console.log(i)
+
+				for(var i=0; i<1000; i++){
+					Test[i] = {}
+					TestFun.push(function(val){ return function(){ /*console.log(val)*/ var d=i } }(i))
+					Stixy.listen(Test[i], "execute")
+				}
+				Stixy.unlisten(Test[1],"execute")
+				Stixy.unlisten(Test[5],"execute")
+				Stixy.unlisten(Test[9],"execute")
+
+				for(var i=0; i<Test.length; i++){
+					Stixy.announce(Test[i],"execute")
+				}
+
+				Stixy.announce(Test2,"er")
+				console.log(new Date - start)
+		</script>-->
+
+</head>
+<body>
+</body>
+</html>

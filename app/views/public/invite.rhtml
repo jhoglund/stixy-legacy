@@ -1,0 +1,22 @@
+<h1>Share your Stixyboard</h1>
+We think it's great that you are trying out Stixy and hope that you will find it useful when it comes to gathering, organizing, publishing, and sharing information.
+</p>
+
+<p>
+To be able to share your Stixyboard, however, you need to <%= link_to "sign up", {:action => "signup"} %> or <%= link_to "sign in", {:action => "signin"} %>. 
+</p>
+
+<p>
+After signing up, you can easily share your Stixyboards with as many people as you like. By sharing you give others full access to your board - from changing the name, to adding and editing information, and more. 
+</p>
+
+<p>
+You also have the option to allow "view only", or limited access by making your Stixyboard public at a specific web address. 
+</p>
+Does it sound interesting? Go ahead and <%= link_to "sign up", {:action => "signup"} %> now. It's free. 
+</p>
+
+<p class="feature-promo-buttons">
+<%= link_to_function "Close", 'window.parent.Stixy.popup.close()', :button => {:type => false}  %>
+<%= link_to "Sign-up", {:action => "signup"}, :button => {:type => 'default'}, :style => "margin-left:10px;"%>
+</p>

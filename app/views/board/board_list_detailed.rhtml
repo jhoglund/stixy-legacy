@@ -1,0 +1,7 @@
+<div id="board_list" class="board-list-detailed">
+	<%= render :partial => '/board/board_list_detailed' %>
+</div>
+
+<% 
+@buttons = "#{ link_to_function "Close", "window.parent.Stixy.popup.close()", :button => {:type => 'default'} }"
+%>

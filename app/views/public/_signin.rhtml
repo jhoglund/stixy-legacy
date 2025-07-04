@@ -1,0 +1,8 @@
+<% if flash[:signin_missmatch] %><div class="inline-message-error"><% end %>
+<div class="field-title">E-mail address</div>
+<% @login = @invite.accepted_user.login if @invite %>
+<input type="text" name="user[login]" size="30" autocomplete="on" value="<%= @user.login %>" class="text-field" /><br />
+<div class="field-title">Password</div>
+<input type="password" name="user[pwd]" size="30" maxlength="60" value="<%= @user.pwd %>" class="text-field" /><br />
+<% if flash[:signin_missmatch] %>
+<p><%= flash[:signin_missmatch] %></p></div><% end %>

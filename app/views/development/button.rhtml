@@ -1,0 +1,122 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript">
+	var Stixy = {
+		events: {
+			stop:function(){}
+		}
+	}
+	</script>
+	<link href="/resources/default/firefox.css?" media="all" rel="Stylesheet" type="text/css" />
+	
+	<style>
+/*	a { text-decoration:none;  }
+	.button { position:relative; font: 11px/12px "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; color:white; display:inline; display:inline-block; z-index:0; cursor:default; }
+	.button .left { position:absolute; top:0px; left:0px; width:50%; height:20px;overflow:hidden;z-index:-1; }
+	.button .right { position:absolute; top:0px; right:0px; width:51%; height:20px;overflow:hidden;z-index:-1; }
+	.button .left div { position:absolute; z-index:-1; top:0px; left:0px; height:20px; width:100%; background:url(/images/buttons/btn_background.png) left top no-repeat; }
+	.button .right div { position:absolute; z-index:-1; top:0px; right:0px; height:20px; width:100%; background:url(/images/buttons/btn_background.png) right top no-repeat; }
+	.button .label { position:relative; top:3px; padding:0 20px; margin-top:3px; white-space:nowrap; display:inline; }
+	.button-default .left div,
+	.button-default .right div { background-image:url(/images/buttons/btn_background_default.png) }
+	.button-ghosted .left div,
+	.button-ghosted .right div { background-image:url(/images/buttons/btn_background_ghosted.png) }
+
+	a.button,
+	a.button:link,
+	a.button:active,
+	a.button:visited { font-weight:normal; color:white; cursor:hand; cursor:pointer; }
+	a.button:hover { color:rgb(75,75,75);}
+	a.button-default:hover { color:rgb(55,50,95);}
+	a.button-ghosted:hover { color:white; cursor:default; }
+
+	.button-large { font-size:14px; }
+	.button-large .left { height:28px; }
+	.button-large .right { height:28px; }
+	.button-large .left div { height:28px; background-image:url(/images/buttons/btn_bg_large.png); }
+	.button-large .right div { height:28px; background-image:url(/images/buttons/btn_bg_large.png); }
+	.button-large .label { top:5px; margin-top:5px; }
+
+	.button-default-large .left div,
+	.button-default-large .right div { background-image:url(/images/buttons/btn_bg_default_large.png) }
+	.button-ghosted-large .left div,
+	.button-ghosted-large .right div { background-image:url(/images/buttons/btn_bg_ghosted_large.png) }
+	a.button-large-default:hover { color:rgb(55,50,95);}
+*/		
+/*	stx-button { position:relative; font: 11px/12px "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; color:white; display:inline; z-index:0; cursor:default; -moz-binding:url(/bindings/button.xml#button);}
+	stx-button a { position:relative; top:3px; padding:3px 22px 5px; text-decoration:none; color:white; }
+	stx-button a:link,
+	stx-button a:active,
+	stx-button a:visited { font-weight:normal; color:white; cursor:hand; cursor:pointer; }
+	stx-button a:hover { color:rgb(75,75,75);}
+	stx-button label { display:inline; }
+	stx-button left { position:absolute; top:0; left:0; width:50%; height:20px;overflow:hidden; background:url(/images/buttons/btn_background.png) left top no-repeat;z-index:-1; }
+	stx-button right { position:absolute; top:0; right:0; width:51%; height:20px;overflow:hidden; background:url(/images/buttons/btn_background.png) right top no-repeat;z-index:-1; }
+*/	
+	
+	/*.button .label { visibility:hidden; }
+		.button .button-face { position:absolute; left:0; top:0; padding:4px 20px; color:white; }
+		
+		body { background:rgb(205,205,205); }*/
+	
+	</style>
+</head>
+<body>
+	
+	<div class="saved">
+		<div class="toolbar">
+			<div class="toolbar-background"><div class="toolbar-background-gradient"></div></div>
+			<div class="board-list-switch">
+				<%= link_to_function_with_enhancment("Hide List", nil, :button => {:type => 'toolbar-button'}, :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>
+				<%= link_to_function_with_enhancment("Open List", nil, :button => {:type => 'toolbar-button'}, :id => "board_list_show", :class => "open-board-list-button board-list-button-closed") %>
+				<div class="board-list-switch-shadow-line"></div>
+				<div class="board-list-switch-highlight-line"></div>
+			</div>
+			<span class="board-tools">
+				<%= link_to_function_with_enhancment("New Stixyboard", "Stixy.board.newStixyboard();", :button => {:type => 'toolbar-button'}, :id => "share_open") %>
+				<%= link_to_function_with_enhancment("Share", nil, :button => {:type => 'toolbar-button'}, :id => "share_open") %>
+				<%= link_to_function_with_enhancment("Options", nil, :button => {:type => 'toolbar-button'}, :id => "board_option_open") %>
+			</span>
+			<div class="save-indicator" id="save-state">
+				<div class="text-save" id="save-state-button">
+					<%= link_to_function_with_enhancment("Save now", nil, :button => {:type => 'toolbar-button'}) %>
+					Auto-saves in <span id="save_counter" class="save-counter">30</span><span class="save-counter">s</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="save">
+		<div class="toolbar">
+			<div class="toolbar-background"><div class="toolbar-background-gradient"></div></div>
+			<div class="board-list-switch">
+				<%= link_to_function_with_enhancment("Hide List", nil, :button => {:type => 'toolbar-button'}, :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>
+				<%= link_to_function_with_enhancment("Open List", nil, :button => {:type => 'toolbar-button'}, :id => "board_list_show", :class => "open-board-list-button board-list-button-closed") %>
+				<div class="board-list-switch-shadow-line"></div>
+				<div class="board-list-switch-highlight-line"></div>
+			</div>
+			<span class="board-tools">
+				<%= link_to_function_with_enhancment("New Stixyboard", "Stixy.board.newStixyboard();", :button => {:type => 'toolbar-button'}, :id => "share_open") %>
+				<%= link_to_function_with_enhancment("Share", nil, :button => {:type => 'toolbar-button'}, :id => "share_open") %>
+				<%= link_to_function_with_enhancment("Options", nil, :button => {:type => 'toolbar-button'}, :id => "board_option_open") %>
+			</span>
+			<div class="save-indicator" id="save-state">
+				<div class="text-save" id="save-state-button">
+					<%= link_to_function_with_enhancment("Save now", nil, :button => {:type => 'toolbar-button'}) %>
+					Auto-saves in <span id="save_counter" class="save-counter">30</span><span class="save-counter">s</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<%= debug link_to_function_with_enhancment("Hide List", nil, :button => {:type => 'toolbar-button'}, :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>
+	<%= debug link_to_function_with_enhancment("Open List", nil, :button => {:type => 'toolbar-button'}, :id => "board_list_show", :class => "open-board-list-button board-list-button-closed") %>
+	<%= debug link_to_function_with_enhancment("New Stixyboard", "Stixy.board.newStixyboard();", :button => {:type => 'toolbar-button'}, :id => "share_open") %>
+	<%= debug link_to_function_with_enhancment("Share", nil, :button => {:type => 'toolbar-button'}, :id => "share_open") %>
+	<%= debug link_to_function_with_enhancment("Options", nil, :button => {:type => 'toolbar-button'}, :id => "board_option_open") %>
+	<%= debug link_to_function_with_enhancment("Save now", nil, :button => {:type => 'toolbar-button'}) %>
+	
+	
+</body>
+</html>

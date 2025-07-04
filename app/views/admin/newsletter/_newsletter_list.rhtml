@@ -1,0 +1,26 @@
+
+<% color = "light" %>
+
+<table class="admin">
+	<tr>
+		<th>Subject</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+	</tr>
+
+<% for newsletter in @newsletters %>
+	<tr class="<%=color%>">
+		<td><b><%= link_to newsletter.subject, :controller => 'admin/newsletter', :action => "show", :id => newsletter.id %></b></td>
+		<td><%= link_to "Edit", :controller => 'admin/newsletter', :action => "edit", :id => newsletter.id %></td>
+		<td><%= link_to "Delete", :controller => 'admin/newsletter', :action => "destroy", :id => newsletter.id %></td>
+	</tr>
+
+	<% if color = "light" %>
+		<% color = "dark" %>
+	<% else %>
+		<% color = "light" %>
+	<% end %>
+
+<% end %>
+
+</table>

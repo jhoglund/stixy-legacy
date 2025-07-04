@@ -1,0 +1,142 @@
+<% if not @board.nil? %>
+<% form_tag(:action => 'board_options', :id => @board) do -%>
+<%= hidden_field('board', 'id', :value => @board.id) %>
+<div class="left-sidebar-260-background"></div>
+
+<div class="left-sidebar-260">
+    <h2 style="margin-top:0;padding-top:.75em">Stixyboard Info</h2>
+		<div class="title"><label for="board_title">Title</label></div>
+    <%= text_field('board', 'title', 'size' => 30, 'maxsize' => 200, "autocomplete" => "off")  %>
+
+    <div class="title"><label for="board_keywords_str">Tags</label> <span style="font-weight:normal;">(comma separated)</span></div>
+    <%= text_field_tag('tag_list', @board.tag_list, 'size' => 30, 'maxsize' => 600, "autocomplete" => "off")  %>
+
+    <div class="title"><label for="board_description">Description</label></div>
+    <%= text_area('board', 'description', 'rows' => 6, 'cols' => 29, :style => "width:100%")  %>
+
+    <div class="title">Last updated by</div>
+    <b><%= @board.updated_by.display_name %></b> on <%= formated_date(@board.updated_on) %>
+		
+		<div class="title">Created by </div>
+    <b><%= @board.created_by.display_name %></b> on <%= formated_date(@board.created_on) %>
+    
+    <div class="title" style="padding-top:10px;margin-top:10px;border-top:1px solid rgb(200,200,200);">Make a copy of stixyboard</div>
+    <input id="board_dodelete" type="hidden" name="board[dodelete]" />
+		<div style="margin-top:8px;margin-left:-2px;">
+		  <script type="text/javascript">
+				function copyStixyboard(){
+				  var include_users = Stixy.element.$ID('include_users');
+				  path = "<%= url_for(:action => 'copy', :id => @board) %>" + '?includeUsers=' + include_users.checked;
+				  Global.popup.progress();
+				  window.location.href = path;
+				}
+			</script>
+			
+			<%= link_to_function 'Copy Stixyboard', 'copyStixyboard()', {:button => {:type => false}}  %><p>
+			<%= check_box_tag('include_users')  %> Include users
+		</div>
+    <div class="title" style="padding-top:10px;border-top:1px solid rgb(200,200,200)">Delete this stixyboard</div>
+    <input id="board_dodelete" type="hidden" name="board[dodelete]" />
+		<div style="margin-top:8px;margin-left:-2px;">
+  		<%= link_to_function("Delete", "if(confirm('Are you sure you want to delete your Stixyboard?\\n Remember, it will be deleted for everybody that you share it with and once you\\'ve deleted it, you can\\'t change your mind. If it is only you who don\\'t want to share this Stixyboard anymore, just remove yourself under the list of people who share.\\n\\n')); Stixy.element.$ID('board_dodelete').value='yes';document.forms[0].submit();", :button => {:type => false}) %>
+		</div>
+
+</div>
+
+<div class="left-sidebar-260-content">
+	<%= error_messages_for 'board' if not @board.nil? -%>
+	<%= error_messages_for 'invite' if not @invite.nil? -%>
+    <h2 style="margin-top:0;padding-top:.75em">This Stixyboard is Shared By</h2>
+    <%= render :partial => "/board/options_shared_and_invited" %>
+		<div style="border-bottom:1px solid rgb(235,235,235); margin-top:0px; margin-bottom:0;">
+			<%= link_to_function("Invite more to share", "openInvite();", :button => {:type => false}) %><br /><br />
+			<script type="text/javascript">
+				function openInvite(){
+					Stixy.popup.open("/board/invite/<%= @board.id %>?popup=true",true,true,function(){
+						Stixy.server.replace(null, '/board/options_shared_and_invited_ajax/<%= @board.id %>', "options_shared_and_invited");
+					});
+				}
+			</script>
+		</div>
+    <h2 style="margin-bottom:0;margin-top:0;padding-top:0.75em">Guest access</h2>
+		<p style="margin:4px 0 12px;">You can allow guests (people that you don't share your Stixyboard with) to view this Stixyboard.<br />
+		If you like, you can give your guests the possibility to add, remove and edit your widgets.  </p>
+    <fieldset>
+			<div class="legend">
+				<%= check_box('board', 'visible', {:onclick => "setPublicState(this.checked)"}, 1, 0)  %>
+				<label for="board_visible">Allow guests to view this Stixyboard</label>
+			</div>    	
+   		<div id="public_options" class="public-options<%= " deactive" if @board.visible == 0 %>">
+				<p/>Stixyboard web address <span class="no-address">(N/A)</span><br />
+				<div class="web-address">
+					<div class="address">http://<%= SERVER  %>/guest/<%= @board.id %></div>
+					<p><%= mail_to "", "E-mail this web address to your friends", :encode => "html", :subject => "Come and see my new Stixyboard", 
+									:body => "Hey you, come and see my new Stixyboard at the address: http://#{SERVER}/guest/#{@board.id}"  %></p>
+				</div>
+				
+				
+				<p><%= check_box('board', 'editable', {:style => "vertical-align:middle;", :disabled => (true if @board.visible == 0)}, 1, 0)  %>
+				<label for="board_editable">Allow guests to add, remove and edit widgets.</label></p>
+				
+			  <p/>
+				<table class="option-list">
+					<tr>
+						<td style="padding-right:3px;width:25px;"><%= check_box('board', 'pwd_protected', {:style => "vertical-align:middle;", :disabled => (true if @board.visible == 0), :onclick => "setPasswordState(this.checked)"}, 1, 0)  %></td>
+						<td>
+							<label for="board_pwd_protected">Guests need to enter a password.</label>
+							<p style="margin-top:4px">
+							<span<%= " class=\"ghosted\"" if @board.pwd_protected==0 %> id="board_pwd_title">Password</span><br />
+							<%= text_field("board", "pwd", :size => 30, :maxsize => 200, :autocomplete => "off", :style => "margin-top:2px;", :disabled => (true if @board.pwd_protected == 0))  %></p>
+						</td>
+					</tr>
+				</table>
+				<script type="text/javascript">
+					function preview(link){
+						window.open("/guest/<%=  @board.id  %>");
+						//Stixy.server.connect(null, "/guest/<%=  @board.id  %>?public[password]=" + Stixy.element.$ID("board_pwd").value + "&public[pwd_protected]=" + (Stixy.element.$ID("board_pwd_protected").checked ? 1:0), function(){
+						//	window.open(link.href);
+						//});
+					}
+					function setPublicState(test){
+						var public_options = Stixy.element.$ID('public_options');
+						var public_inputs = Stixy.element.$A(public_options.getElementsByTagName('input'));
+						if(test){
+							Stixy.element.removeClassName(public_options, 'deactive');
+							for(var i=0; i < public_inputs.length; i++){ 
+								if(public_inputs[i].id == 'board_pwd' && Stixy.element.$ID('board_pwd_protected').checked == false) return 
+								public_inputs[i].removeAttribute('disabled')
+							}
+						}else{
+							Stixy.element.addClassName(public_options, 'deactive');
+							for(var i=0; i < public_inputs.length; i++){ 
+								public_inputs[i].setAttribute('disabled',true)
+							}
+						}
+					}
+					function setPasswordState(test){
+						var password_inputs = Stixy.element.$ID('board_pwd');
+						var password_title = Stixy.element.$ID('board_pwd_title');
+						if(test){
+							password_inputs.removeAttribute('disabled');
+							Stixy.element.removeClassName(password_title, 'ghosted');
+						}else{
+							password_inputs.setAttribute('disabled',true);
+							Stixy.element.addClassName(password_title, 'ghosted');
+						}
+					}
+				</script>
+			</div>
+		</fieldset>		
+</div>
+
+
+<div style="clear:both;" ></div>
+
+
+<% end -%>
+
+<% end %>
+<%
+@buttons = "#{ link_to_function "Cancel", 'window.parent.Stixy.popup.close()', :button => {:type => false} } #{ link_to_function "Save", 'document.forms[0].submit()', :button => {:type => 'default'}, :style => "margin-left:10px;"  }"
+
+%>

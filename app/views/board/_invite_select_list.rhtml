@@ -1,0 +1,14 @@
+<% 
+	allready_user, allready_invited,	allready_member = false
+	if defined? invite_select_list.is_user_of_board?
+		allready_user = invite_select_list.is_user_of_board? @board
+		allready_invited = invite_select_list.is_invited_to_board? @board
+	end
+	allready_member = allready_user || allready_invited
+%>
+<tr style="cursor:default">
+  <td valign="top" nowrap<%= " class='list-box-ghosted' title='You already share this Stixyboard with #{invite_select_list.display_name}'" if allready_user %><%= " class='list-box-ghosted' style='font-style:italic;' title='#{invite_select_list.display_name} is already invited to share this Stixyboard'" if allready_invited %>>
+		<label for="contact_<%= invite_select_list.id %>"><%= check_box("contacts", invite_select_list.id, { :disabled => (true if allready_member), :checked => ("checked" if allready_member or (defined? new_contact and new_contact==true)), :onclick => "toggle_invite(this.checked, '#{invite_select_list.id}', '#{ invite_select_list.email if defined? new_contact }')"}, (allready_member ? 0 : (invite_select_list.class.name == "User" ? invite_select_list.id : invite_select_list.email))) %>
+		<%= invite_select_list.display_name %></label>
+	</td>
+</tr>

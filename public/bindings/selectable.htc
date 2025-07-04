@@ -1,0 +1,9 @@
+<public:attach event="onselectstart" onevent="enableSelect()" />
+	<script>
+		function enableSelect(){
+			if(!event.shiftKey){
+				event.cancelBubble = true;
+				event.returnValue = true
+			}
+		}
+  </script>

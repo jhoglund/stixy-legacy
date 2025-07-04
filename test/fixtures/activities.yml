@@ -1,0 +1,32 @@
+activity_widget_1_jonas:  
+  start: <%= -1.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  activatable_id: 1
+  activatable_type: WidgetInstance
+activity_widget_2_adam:  
+  start: <%= 3.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  activatable_id: 2
+  activatable_type: WidgetInstance
+activity_widget_3_jonas:
+  start: <%= -1.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  activatable_id: 3
+  activatable_type: WidgetInstance
+activity_calendar_entry:  
+  start: <%= 3.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  stop: <%= 3.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  status: Status::ACTIVE
+  activatable_id: 2
+  activatable_type: AbstractCalendar
+activity_calendar_entry_2:  
+  start: <%= 3.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  stop: <%= 3.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  status: Status::ACTIVE
+  activatable_id: 1
+  activatable_type: AbstractCalendar
+activity_calendar_entry_one_user:  
+  start: <%= 3.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  stop: <%= 3.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  status: Status::ACTIVE
+  activatable_id: 3
+  activatable_type: AbstractCalendar
+
+  

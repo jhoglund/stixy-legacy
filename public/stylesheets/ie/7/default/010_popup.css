@@ -1,0 +1,2 @@
+.popup-content { height:expression(document.body.clientHeight-76); bottom:auto; }
+.popup-blog { width:100%; }

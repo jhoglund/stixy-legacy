@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>
+		Test
+	</title>
+	<script src="/javascripts/all/default/001_prototype_extend.js"></script>
+	<style>
+	 #box { position:absolute; top:300px; width:100px; height:100px; background:green; }
+	 .diagonalslide {
+	   position:absolute; width:100px; height:100px; background:red; 
+     -webkit-animation-name: diagonal-slide;
+     -webkit-animation-duration: 2s;
+     -webkit-animation-iteration-count: 1;
+   }
+   @-webkit-keyframes diagonal-slide {
+      from {
+        -webkit-animation-timing-function: ease-in;
+        left: 8px;
+      }
+      
+      to {
+        left: 308px;
+        -webkit-animation-timing-function: ease-out;
+      }
+      
+    }
+	</style>
+	<script>
+	var StixyError = function(e,label){
+	  console.log(e.msg, label)
+	}
+	var Stixy = { 
+	  element:{ 
+  	  setOpacity: function(source, value){
+  		  if(source.filters){
+    			source.filters.item(0).Opacity = value * 100
+    		}else{
+    			source.style.opacity = value;
+    		}
+  		}
+	  },
+	  effects: (function(){
+      
+      // http://www.lostmarble.com/forum/viewtopic.php?t=3100
+      // //  ------------------------------------------------- 
+      // //              Radian based Fairings 
+      // //          Version: 1.02, Date: 2006-01-26 
+      // //               (c)2006 T.J Francis 
+      // //              tim.francis@hotmail.com 
+      // //  -------------------------------------------------- 
+      // //  Open Licence - this formula may be reproduced and 
+      // //  incorported in to any application as you wish. 
+      // //  
+      // //  The only conditions for use and re-use are: 
+      // //       *Credit must be is given to the formula's 
+      // //          author, i.e., me. 
+      // //       *If distributed, it must be done for free. 
+      // // --------------------------------------------------- 
+      // // 
+      // // --- Preamble -------------------------------------- 
+      // //  This calculation is based on the maxim that the 
+      // //  maximum velocity can only be 1 (ie, 100%). 
+      // // --------------------------------------------------- 
+      // 
+      // // --- variables / initialize variables ------------- 
+      // var Fairing_frames  = 8 
+      // var velocity_unit = 0.0 
+      // var degree_unit = 90/(Fairing_frames + 1) 
+      // var frame_degree = 0.0 
+      // var frame = 0 
+      // 
+      // // ------------------------------------------------------------------- 
+      // //   velocity unit = math.cos(math.radians(90/(Fairing_frames + 1))) 
+      // // ------------------------------------------------------------------- 
+      // 
+      // 
+      // for frame in range(Fairing_frames+1): 
+      //     velocity_unit = 1 - Math.cos(frame_degree*(Math.PI/180)) 
+      //     //print " fr:", '%3.0d' % frame, "  Vel: ", '%6.3f' % velocity_unit 
+      //     //if frame == 0: print "" 
+      //     frame_degree = frame_degree + degree_unit 
+      // 
+      // print "" 
+      // velocity_unit = 1 - Math.cos(frame_degree*(Math.PI/180)) 
+      // print " fr:", '%3.0d' % (frame + 1), "  Vel: ", '%6.3f' % velocity_unit 
+      // print "-------------------------" 
+      
+      // http://www.devmaster.net/forums/showthread.php?t=12454
+      // http://rechneronline.de/function-graphs/
+      // s(x) = 3*x^2 - 2*x^3 (note, a^b means a to the power of b)
+      // 
+      // so if your shake value eases in from 0 at frame 0 to max value at frame A, then stays at max until frame B, then and eases out from max value at frame B to 0 at frame 30:
+      // 
+      // shake(f) = 
+      // if f < A: return s(f/A)
+      // if f > B: return 1.0 - s((f-B)/(30-B))
+      // return 1.0
+      
+      var Times = function(stop, delay, callback){
+        this.callback = callback || function(){};
+        this.stop = stop || 0
+        this.next = function(){
+          this.index = this.at;
+          this.callback(++this.at);
+          var returns = this.at>=this.stop ? false : this.at;
+          if(returns===false) this.reset();
+          return returns;
+        }
+        this.reset = function(){
+          this.at = 0
+          this.index = 0;
+        }
+        this.reset();
+      }
+      
+      var Shake = function(x,d,f){
+        return 2.0 * (Math.cos((f + (Math.PI/d)) * x) - Math.cos((f - (Math.PI/d)) * x ));
+      }
+      
+      var Sequence = function(start,stop,steps){
+        var items = [];
+        this.index = 0; 
+        var times = new Times(steps);
+        var step = Math.abs(stop-start) / steps;
+        while(times.next()){
+          items.push(step * times.at);
+        }
+        return items;
+      }
+      
+      var EaseInOut = function(start,stop,easeinKey, easeoutKey, duration){
+        var e = function(f, a, b, d){
+          b = d-b 
+          var s = function(x){
+            return x - Math.sin(x*2*Math.PI) / (2*Math.PI);
+          }
+          if(a && f < a) return s(f/a);
+          if(b && f > b) return 1 - s((f-b)/(d-b));
+          return 1;
+        }
+        var steps = [], offsets = [], difference = 0, distance = start;
+        var step = stop-start / duration;
+        var times = new Times(duration);
+        while(times.next()){
+          var offset = e(times.at, easeinKey, easeoutKey, duration);
+          offsets.push(offset);
+          difference += (1*offset);
+        }
+        while(times.next()){
+          steps.push(distance += (step*(offsets[times.index]*(duration/difference))))
+        }
+        return steps
+      }
+
+      var Animation = function(from, to, seconds, ease_in_seconds, animation_callback, stop_callback){
+        var fps = 100;
+        var seconds = seconds || 1;
+        var duration = seconds * fps;
+        var ease = ease_in_seconds ? ease_in_seconds*2*fps : null;
+        this.frames = ease ? new EaseInOut(from, to, ease, ease, duration) : new Sequence(from, to, duration);
+        var delays = new Sequence(0, seconds*1000, duration);
+        var timeouts = [];
+        for(var i=0; i<this.frames.length; i++){
+          var frame = this.frames[i];
+          var delay = delays[i];
+          timeouts.push(setTimeout(function(frame, index, last){
+            animation_callback(frame, index);
+            timeouts.pop();
+            if(stop_callback && last) stop_callback();
+          }.b(this, frame, i, i==(this.frames.length-1)), delay));
+        }
+        this.cancel = function(){
+          for(var i=0; i<timeouts.length; i++){
+            clearTimeout(timeouts[i]);
+          }
+        }
+      }
+
+      var Transition = function(source, from, to, duration, done_callback){
+        this.source = source;
+        var animation = new Animation(from, to, duration, function(frame, index){
+          Stixy.element.setOpacity(source, parseFloat(frames[index]));
+        }.b(this), done_callback);
+        var frames = (from > to) ? animation.frames.reverse() : animation.frames;
+        this.cancel = function(){
+          animation.cancel();
+        }
+      }
+
+      var Appear = function(source, seconds, opacity, done_callback){
+        this.source = source;
+        Stixy.element.setOpacity(source, 0);
+        var transition = new Transition(source, 0, (opacity||1), seconds, done_callback);
+        this.cancel = function(){
+          transition.cancel();
+        }
+      }
+
+      var Disappear = function(source, seconds, done_callback){
+        this.source = source;
+        Stixy.element.setOpacity(source, 100);
+        var transition = new Transition(source, 1, 0, seconds, function(){
+          if(done_callback) done_callback();
+        });
+        this.cancel = function(){
+          transition.cancel();
+        }
+      }
+      return {
+        Animation: Animation,
+        Sequence: Sequence,
+        EaseInOut: EaseInOut,
+        Transition: Transition,
+        Appear: Appear,
+        Disappear: Disappear
+      }
+    })()	
+	}
+	onload = function(){
+	  var box = document.getElementById('box');
+	  var previous = 0
+	  var start = box.offsetLeft
+    new Stixy.effects.Animation(0,300,2,0.6,function(frame,index){
+      box.style.left = start + frame + "px";
+    });
+	}
+	</script>
+</head>
+<body> 
+	<div id="box"></div>
+	<div class="diagonalslide"></div>
+</body>
+</html>

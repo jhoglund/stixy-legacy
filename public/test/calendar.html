@@ -1,0 +1,787 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en" style="background:white;" xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<title>Stixy: For Flexible Online Creation Collaboration and Sharing</title>
+	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blogserver/xml/rsd" />
+<link rel="alternate" type="application/atom+xml" title="Atom" href="http://blogserver/xml/atom/feed.xml" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://blogserver/xml/rss20/feed.xml" />
+<!-- <link rel="shortcut icon" href="/images/main_template/favicon.ico" type="image/vnd.microsoft.icon"> -->
+<meta http-equiv="imagetoolbar" content="no">
+<meta name="verify-v1" content="U4G4Btm5m3ppHXRwTLFY7LV6J5IeRZCKyFRGf6NEPrU=" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="Stixy makes it fun and easy for you to collaborate online! Create tasks, appointments, files, photos, notes, and bookmarks on your Stixyboards, organized in whatever way make sense to you. Then share your Stixyboards with friends, family, and colleagues." />
+<meta name="keywords" content="Online collaboration, share, sharing, tool, whiteboard, white, bulletin board, photo upload, documents, file sharing, file-sharing, notes, tasks, stixy, stixyboards, organize projects, to do list, organizer, get organized, organize your stuff, jonas höglund, anders ottosson, sticky notes, ajax,  ruby on rails, web 2.0" />
+
+	<script type="text/javascript" >var STIXY_ENV = "development"</script>
+	<script type="text/javascript" src="/resources/default/firefox.js"></script>
+	<link href="/resources/default/firefox.css" media="all" rel="Stylesheet" type="text/css" />
+	<script type="text/javascript">
+		Stixy.session.id = "a33bd06bcf05066d7dea50f267732275"
+		Stixy.board.authorized = true;
+	</script>
+	<script type="text/javascript" src="/resources/calendar/firefox.js"></script>
+	<style>
+		/*-----------------*/
+		/* 001 CALENDAR    */
+		/*-----------------*/
+
+
+		/* Calendar */
+		.calendar-containor {position:relative;width:100%;}
+		.calendar-multi-day-week {width:100%;height:100px;border:2px solid red;}
+		.calendar-multi-day {position:absolute;width:100%;height:100%;border:2px solid green;}
+
+		.stixy-calendar { padding:10px 240px 10px 10px; }
+		.stixy-calendar .calendar { font-size:1.1em; margin:0px; width:100%; color:rgb(100,100,100); text-align:center; }
+		.stixy-calendar table { border-collapse:collapse; }
+		.stixy-calendar .calendar td, 
+		.stixy-calendar .calendar th { font-weight: normal; color: black; width:14.29%; padding:0; text-align:center; color:rgb(50,50,50); vertical-align:top; background:none; }
+		.stixy-calendar .calendar td { background-color:white; text-align:left; height:100px; border:1px solid rgb(200,200,200); cursor:pointer; }
+		.stixy-calendar .calendar .first-day-of-week { }
+		.stixy-calendar .calendar-other-month { color:rgb(200,200,200); background-color:rgb(245,245,245)!important; }
+		.stixy-calendar .calendar-day, .stixy-calendar .calendar-special-day { }
+		.stixy-calendar .calendar-day-number { text-align:right; padding:5px 5px 0 0; }
+		.stixy-calendar .calendar-special-day {  }
+		.stixy-calendar .calendar-special-day a, .stixy-calendar .calendar-special-day a:visited, .calendar-stixy-calendar .calendar-special-day a:hover { text-decoration: none; }
+		.stixy-calendar .calendar-special-day a:hover { }
+		.stixy-calendar .calendar-weekend-day { }
+		.stixy-calendar .calendar-nav {  }
+		.stixy-calendar .calendar-nav div {  }
+		.stixy-calendar .calendar-nav a { position: absolute; display: block; top: 0px; width: 15px; height: 15px; background: no-repeat left -15px; }
+		.stixy-calendar .calendar-nav a:hover { background-position: left -45px; } 
+		.stixy-calendar .calendar-nav .prev-month a { background-image: url(/images/widgets/todo/calendar_nav_prev.gif); left: 7px; }
+		.stixy-calendar .calendar-nav .next-month a { background-image: url(/images/widgets/todo/calendar_nav_next.gif); right: 7px; }
+		.stixy-calendar .calendar-today-day { background-color:rgb(225,250,160)!important; }
+		.stixy-calendar .calendar-selected-day {  background-color:rgb(225,235,245)!important; }
+		
+		.stixy-calendar .calendar-entry-start,
+		.stixy-calendar .calendar-entry-stop,
+		.stixy-calendar .calendar-entry-middle,
+		.stixy-calendar sx\:blank,
+		.stixy-calendar sx\:entry,
+		.stixy-calendar sx\:entry-spacer { position:relative; display:block; padding:0; margin:4px 0; height:16px; overflow:hidden; color:rgb(50,50,50); font-size:10px; white-space:nowrap; z-index:100; }
+		
+		.stixy-calendar sx\:entry .calendar-entry { position:relative; display:block; width:100%; }
+		.stixy-calendar sx\:label { display:block; padding:0 5px; }
+		
+		sx\:sp { position:absolute; display:none; z-index:-1; height:16px; width:100%; opacity:0.4; }
+		sx\:sp sx\:l,
+		sx\:sp sx\:r { position:absolute; top:0px; width:51%; height:16px; overflow:hidden; z-index:-1; }
+		sx\:sp sx\:l { left:0; }
+		sx\:sp sx\:r { right:0; }
+		sx\:sp sx\:l sx\:p,
+		sx\:sp sx\:r sx\:p { position:absolute; z-index:-1; top:0px; height:16px; width:100%; background:url(/images/calendar/multiple_days_light_blue.png) left top no-repeat; }
+		sx\:sp sx\:l sx\:p { left:0px; }
+		sx\:sp sx\:r sx\:p { right:0px; background-position:right top; }
+		.stixy-calendar .calendar-entry .label { position:relative; display:block; padding:0; white-space:normal; overflow:hidden; line-height:16px; }
+		
+		.stixy-calendar .calendar-entry-start sx\:sp,
+		.stixy-calendar .calendar-entry-stop sx\:sp,
+		.stixy-calendar .calendar-entry-middle sx\:sp { display:block; }
+		.stixy-calendar .calendar-entry-start .calendar-entry .label ,
+		.stixy-calendar .calendar-entry-stop .calendar-entry .label ,
+		.stixy-calendar .calendar-entry-middle .calendar-entry .label  { padding:0px 20px 0 10px; }
+		
+		/*.stixy-calendar .calendar-entry-start sx\:sp sx\:l { display:block; }
+				.stixy-calendar .calendar-entry-stop sx\:sp sx\:r,
+				.stixy-calendar .calendar-entry-middle sx\:sp { display:block; }*/
+
+		.stixy-calendar .calendar-entry-one-day    { left:0px; width:100%; padding-right:0px }
+		.stixy-calendar .calendar-entry-two-days   { left:0px; width:200%; padding-right:1px }
+		.stixy-calendar .calendar-entry-three-days { left:0px; width:300%; padding-right:2px }
+		.stixy-calendar .calendar-entry-four-days  { left:0px; width:400%; padding-right:3px }
+		.stixy-calendar .calendar-entry-five-days  { left:0px; width:500%; padding-right:4px }
+		.stixy-calendar .calendar-entry-six-days   { left:0px; width:600%; padding-right:5px }
+		.stixy-calendar .calendar-entry-seven-days { left:0px; width:700%; padding-right:6px }
+		
+		.stixy-calendar .calendar-entry-one-day    sx\:sp { padding-right:0px }
+		.stixy-calendar .calendar-entry-two-days   sx\:sp { padding-right:1px }
+		.stixy-calendar .calendar-entry-three-days sx\:sp { padding-right:2px }
+		.stixy-calendar .calendar-entry-four-days  sx\:sp { padding-right:3px }
+		.stixy-calendar .calendar-entry-five-days  sx\:sp { padding-right:4px }
+		.stixy-calendar .calendar-entry-six-days   sx\:sp { padding-right:5px }
+		.stixy-calendar .calendar-entry-seven-days sx\:sp { padding-right:6px; }
+		
+		.stixy-calendar .calendar-entry-rollover sx\:sp { display:block; }
+		.stixy-calendar .calendar-entry-rollover .label  { padding:0px 20px 0 10px; }
+		.stixy-calendar .calendar-entry-rollover,
+		.stixy-calendar .calendar-entry-rollover sx\:sp,
+		.stixy-calendar-panel .calendar-entry-rollover li { opacity:1; color:rgb(35,95,155); }
+		.stixy-calendar .calendar-entry-selected { background:lightblue;  opacity:1; }
+
+
+
+		.stixy-calendar-panel-left { position:absolute; left:25px; top:120px; width:200px; padding:20px; }
+		.stixy-calendar-panel-left .calendar-entry-field { width:100%; }
+		.stixy-calendar-panel-left textarea.calendar-entry-field { height:100px; }
+
+		.stixy-calendar-panel { position:absolute; right:25px; top:120px; width:200px; padding:20px; }
+		.stixy-calendar-panel .calendar-entry-field { width:100%; }
+		.stixy-calendar-panel textarea.calendar-entry-field { height:100px; }
+
+		.activity-list .activity-list-day { display:none; }
+		.activity-list .activity-list-selected-day { display:block; }
+
+		.calender-edit {  }
+		.calendar-edit-disabled { display:none; }
+		.calendar-edit-enabled { display:block; }
+		.calendar-edit-pending { display:block; }
+		.calendar-edit-pending .calendar-edit-content { opacity:0.3; }
+		.calendar-edit-pending .calendar-edit-progress { display:block; }
+		.calendar-edit-progress { position:absolute; top:0; left:0; width:16px; height:16px; background:url(/images/spinners/spinner.gif) no-repeat; z-index:1; display:none; }
+		
+	</style>
+</head>
+<body scroll="no" style="background:white;">
+	<iframe unselectable="on" height="100%" style="position:absolute;height:100%;width:100%;z-index:1000000;" frameborder="0" allowtransparency="true" id="load_error_frame" src="/load_wait.html"></iframe>
+
+	<div class="popup-canvas">
+		<div class="popup-pending">
+			<div class="popup-pending-background"></div>
+			<div class="popup-pending-content"></div>
+		</div>
+		<table class="popup-grid">
+			<tr>
+
+				<td class="popup-top">
+											<a href="#" onclick="window.location.reload(true); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)" style="">Reload</a>
+										<a class="popup-top-close" href="#" onclick="window.parent.Stixy.popup.close(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a>
+					<div class="popup-top-line">&nbsp;</div>
+					<div class="popup-content">
+			  		<div class="canvas">
+	<div class="stixy-calendar" id="calendar">
+		<a href="#" onclick="Stixy.calendar.navigateCalendar('2008-01-31'); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)"><< Previous</a>
+
+February 2008
+<a href="#" onclick="Stixy.calendar.navigateCalendar('2008-03-01'); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">Next >></a>
+<table cellspacing="0" class="calendar stixy-calendar" border="0" cellpadding="0"><thead><tr><th>Sunday</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th></tr></thead><tbody><tr><td title="2008-01-27" class="calendar-day calendar-other-month calendar-first-day-of-week calendar-weekend-day" id="2008-January-Sunday-27"><div class="calendar-day-number">27</div>&nbsp;</td><td title="2008-01-28" class="calendar-day calendar-other-month" id="2008-January-Monday-28"><div class="calendar-day-number">28</div>&nbsp;</td><td title="2008-01-29" class="calendar-day calendar-other-month" id="2008-January-Tuesday-29"><div class="calendar-day-number">29</div><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="21"><sx:label><span class="calendar-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+	<span class="label">This is the very long one test</span>
+
+</span></sx:label></sx:entry><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="16"><sx:label><span class="calendar-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+	<span class="label">e And now wwith an even longer title 2</span>
+</span></sx:label></sx:entry>&nbsp;</td><td title="2008-01-30" class="calendar-day calendar-other-month" id="2008-January-Wednesday-30"><div class="calendar-day-number">30</div>&nbsp;</td><td title="2008-01-31" class="calendar-day calendar-other-month" id="2008-January-Thursday-31"><div class="calendar-day-number">31</div>&nbsp;</td><td title="2008-02-01" class="calendar-day" id="2008-February-Friday-1"><div class="calendar-day-number">1</div><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="32"><sx:label><span class="calendar-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+	<span class="label">teteteteetet</span>
+</span></sx:label></sx:entry><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="33"><sx:label><span class="calendar-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+
+	<span class="label">bbbb</span>
+</span></sx:label></sx:entry>&nbsp;</td><td title="2008-02-02" class="calendar-day calendar-last-day-of-week calendar-weekend-day" id="2008-February-Saturday-2"><div class="calendar-day-number">2</div><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="36"><sx:label><span class="calendar-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+	<span class="label">tttest</span>
+</span></sx:label></sx:entry>&nbsp;</td></tr><tr><td title="2008-02-03" class="calendar-day calendar-first-day-of-week calendar-weekend-day" id="2008-February-Sunday-3"><div class="calendar-day-number">3</div>&nbsp;</td><td title="2008-02-04" class="calendar-day" id="2008-February-Monday-4"><div class="calendar-day-number">4</div><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="35"><sx:label><span class="calendar-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+	<span class="label">today</span>
+
+</span></sx:label></sx:entry>&nbsp;</td><td title="2008-02-05" class="calendar-day calendar-today-day" id="2008-February-Tuesday-5"><div class="calendar-day-number">5</div>&nbsp;</td><td title="2008-02-06" class="calendar-day" id="2008-February-Wednesday-6"><div class="calendar-day-number">6</div><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="widget_todo" sx:entry-id="54619"><sx:label><b><font>This is another one<br></font></b></sx:label></sx:entry>&nbsp;</td><td title="2008-02-07" class="calendar-day" id="2008-February-Thursday-7"><div class="calendar-day-number">7</div>&nbsp;</td><td title="2008-02-08" class="calendar-day" id="2008-February-Friday-8"><div class="calendar-day-number">8</div><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="17"><sx:label><span class="calendar-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+	<span class="label">repeating 4</span>
+</span></sx:label></sx:entry>&nbsp;</td><td title="2008-02-09" class="calendar-day calendar-last-day-of-week calendar-weekend-day" id="2008-February-Saturday-9"><div class="calendar-day-number">9</div>&nbsp;</td></tr><tr><td title="2008-02-10" class="calendar-day calendar-first-day-of-week calendar-weekend-day" id="2008-February-Sunday-10"><div class="calendar-day-number">10</div>&nbsp;</td><td title="2008-02-11" class="calendar-day" id="2008-February-Monday-11"><div class="calendar-day-number">11</div>&nbsp;</td><td title="2008-02-12" class="calendar-day" id="2008-February-Tuesday-12"><div class="calendar-day-number">12</div><sx:entry class="calendar-entry-start calendar-entry-stop calendar-entry-five-days" sx:entry-type="calendar_entry" sx:entry-id="15"><sx:label><span class="calendar-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+
+	<span class="label">now with title</span>
+</span></sx:label></sx:entry>&nbsp;</td><td title="2008-02-13" class="calendar-day" id="2008-February-Wednesday-13"><div class="calendar-day-number">13</div><sx:entry sx:entry-type="calendar_entry" sx:entry-id="15">&nbsp;</sx:entry><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="17"><sx:label><span class="calendar-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+	<span class="label">repeating 4</span>
+</span></sx:label></sx:entry>&nbsp;</td><td title="2008-02-14" class="calendar-day" id="2008-February-Thursday-14"><div class="calendar-day-number">14</div><sx:entry sx:entry-type="calendar_entry" sx:entry-id="15">&nbsp;</sx:entry>&nbsp;</td><td title="2008-02-15" class="calendar-day" id="2008-February-Friday-15"><div class="calendar-day-number">15</div><sx:entry sx:entry-type="calendar_entry" sx:entry-id="15">&nbsp;</sx:entry>&nbsp;</td><td title="2008-02-16" class="calendar-day calendar-last-day-of-week calendar-weekend-day" id="2008-February-Saturday-16"><div class="calendar-day-number">16</div><sx:entry sx:entry-type="calendar_entry" sx:entry-id="15">&nbsp;</sx:entry>&nbsp;</td></tr><tr><td title="2008-02-17" class="calendar-day calendar-first-day-of-week calendar-weekend-day" id="2008-February-Sunday-17"><div class="calendar-day-number">17</div>&nbsp;</td><td title="2008-02-18" class="calendar-day" id="2008-February-Monday-18"><div class="calendar-day-number">18</div><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="35"><sx:label><span class="calendar-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+
+	<span class="label">today</span>
+</span></sx:label></sx:entry><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="17"><sx:label><span class="calendar-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+	<span class="label">repeating 4</span>
+</span></sx:label></sx:entry>&nbsp;</td><td title="2008-02-19" class="calendar-day" id="2008-February-Tuesday-19"><div class="calendar-day-number">19</div><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="widget_todo" sx:entry-id="54620"><sx:label><b>this is it... dsdasdsad ddasddasdas<br></b></sx:label></sx:entry><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="widget_todo" sx:entry-id="54621"><sx:label><b><font>twelve</font></b></sx:label></sx:entry>&nbsp;</td><td title="2008-02-20" class="calendar-day" id="2008-February-Wednesday-20"><div class="calendar-day-number">20</div><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="10"><sx:label><span class="calendar-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+	<span class="label">Me too</span>
+
+</span></sx:label></sx:entry>&nbsp;</td>
+	<td title="2008-02-21" class="calendar-day" id="2008-February-Thursday-21">
+		<div class="calendar-day-number">21</div>&nbsp;</td><td title="2008-02-22" class="calendar-day" id="2008-February-Friday-22">
+			<div class="calendar-day-number">22</div>&nbsp;</td>
+			<td title="2008-02-23" class="calendar-day calendar-last-day-of-week calendar-weekend-day" id="2008-February-Saturday-23">
+		    <div class="calendar-day-number">23</div>
+		    <sx:entry class="calendar-entry-start calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="37">
+		    	<sx:label>
+			    	<span class="calendar-entry">
+				    	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+				    	<span class="label">lång, multipla månader</span>
+				    </span>
+					</sx:label>
+				</sx:entry>
+			<sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="17">
+				<sx:label>
+			    <span class="calendar-entry">
+			    	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+			    	<span class="label">repeating 4</span>
+			    </span>
+				</sx:label>
+			</sx:entry>&nbsp;
+	</td>
+</tr>
+<tr>
+	<td title="2008-02-24" class="calendar-day calendar-first-day-of-week calendar-weekend-day" id="2008-February-Sunday-24">
+		<div class="calendar-day-number">24</div>
+		<sx:entry class="calendar-entry-middle calendar-entry-seven-days" sx:entry-type="calendar_entry" sx:entry-id="37">
+			<sx:label>
+				<span class="calendar-entry">
+					<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+					<span class="label">lång, multipla månader</span>
+				</span>
+			</sx:label>
+		</sx:entry>&nbsp;
+	</td>
+<td title="2008-02-25" class="calendar-day" id="2008-February-Monday-25"><div class="calendar-day-number">25</div><sx:entry sx:entry-type="calendar_entry" sx:entry-id="37">&nbsp;</sx:entry>&nbsp;</td><td title="2008-02-26" class="calendar-day" id="2008-February-Tuesday-26"><div class="calendar-day-number">26</div><sx:entry sx:entry-type="calendar_entry" sx:entry-id="37">&nbsp;</sx:entry>&nbsp;</td><td title="2008-02-27" class="calendar-day" id="2008-February-Wednesday-27"><div class="calendar-day-number">27</div><sx:entry sx:entry-type="calendar_entry" sx:entry-id="37">&nbsp;</sx:entry>&nbsp;</td><td title="2008-02-28" class="calendar-day" id="2008-February-Thursday-28"><div class="calendar-day-number">28</div><sx:entry sx:entry-type="calendar_entry" sx:entry-id="37">&nbsp;</sx:entry><sx:entry class="calendar-entry calendar-entry-one-day" sx:entry-type="calendar_entry" sx:entry-id="17"><sx:label><span class="calendar-entry">
+	<sx:sp><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r></sx:sp>
+	<span class="label">repeating 4</span>
+</span></sx:label></sx:entry>&nbsp;</td><td title="2008-02-29" class="calendar-day" id="2008-February-Friday-29"><div class="calendar-day-number">29</div><sx:entry sx:entry-type="calendar_entry" sx:entry-id="37">&nbsp;</sx:entry>&nbsp;</td><td title="2008-03-01" class="calendar-day calendar-other-month calendar-last-day-of-week calendar-weekend-day" id="2008-March-Saturday-1"><div class="calendar-day-number">1</div><sx:entry sx:entry-type="calendar_entry" sx:entry-id="37">&nbsp;</sx:entry>&nbsp;</td></tr></tbody></table>
+
+	</div>
+	<div class="stixy-calendar-panel" id="calendar_panel">
+		<div id="calendar_entry">	
+	<div class="calender-edit calendar-edit-disabled" id="new_entry_panel">
+			<div class="calendar-edit-content">
+		<div class="calendar-edit-progress">&nbsp;</div>
+		<form action="/calendar/create" method="post"><input type="hidden" value="true" name="popup">		<p><div class="title">Subject</div>
+		<input class="text-field calendar-entry-field" id="calendar_entry_new_subject" maxsize="200" name="calendar_entry[subject]" size="30" type="text" /></p>
+
+		<p><div class="title">Location</div>
+		<input class="text-field calendar-entry-field" id="calendar_entry_new_location" maxsize="200" name="calendar_entry[location]" size="30" type="text" /></p>
+		<p><div><span class="title">Start date</span>:
+			<span id="calendar_entry_new_start_date">
+				<input id="calendar_entry_start_year" maxsize="4" name="calendar_entry[start_year]" size="4" style="width:auto" type="text" value="2008" /> 
+				<input id="calendar_entry_start_month" maxsize="2" name="calendar_entry[start_month]" size="2" style="width:auto" type="text" value="2" /> 
+				<input id="calendar_entry_start_day" maxsize="2" name="calendar_entry[start_day]" size="2" style="width:auto" type="text" value="5" /> 
+				
+				
+			</span>
+		</div>
+		
+		</p>
+
+		<p><div class="title">Start time</div>
+		
+			<select id="calendar_entry_new_start_hour" name="calendar_entry[start_hour]"><option value="0">00</option>
+<option value="1">01</option>
+<option value="2">02</option>
+<option value="3" selected="selected">03</option>
+<option value="4">04</option>
+<option value="5">05</option>
+<option value="6">06</option>
+
+<option value="7">07</option>
+<option value="8">08</option>
+<option value="9">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+</select>
+			<select id="calendar_entry_new_start_minute" name="calendar_entry[start_minute]"><option value="0">00</option>
+
+<option value="1">01</option>
+<option value="2">02</option>
+<option value="3">03</option>
+<option value="4">04</option>
+<option value="5">05</option>
+<option value="6">06</option>
+<option value="7">07</option>
+<option value="8">08</option>
+<option value="9">09</option>
+
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+<option value="32">32</option>
+<option value="33">33</option>
+<option value="34">34</option>
+<option value="35" selected="selected">35</option>
+<option value="36">36</option>
+
+<option value="37">37</option>
+<option value="38">38</option>
+<option value="39">39</option>
+<option value="40">40</option>
+<option value="41">41</option>
+<option value="42">42</option>
+<option value="43">43</option>
+<option value="44">44</option>
+<option value="45">45</option>
+
+<option value="46">46</option>
+<option value="47">47</option>
+<option value="48">48</option>
+<option value="49">49</option>
+<option value="50">50</option>
+<option value="51">51</option>
+<option value="52">52</option>
+<option value="53">53</option>
+<option value="54">54</option>
+
+<option value="55">55</option>
+<option value="56">56</option>
+<option value="57">57</option>
+<option value="58">58</option>
+</select>
+			<select id="calendar_entry_new_start_suffix" name="calendar_entry[start_suffix]"><option value="AM">AM</option>
+<option value="PM" selected="selected">PM</option>
+</select>
+		</p>
+
+		<p><div>
+			<span class="title">Stop date</span>: 
+			<span id="calendar_entry_new_stop_date">
+				<input id="calendar_entry_stop_year" maxsize="4" name="calendar_entry[stop_year]" size="4" style="width:auto" type="text" value="2008" /> 
+				<input id="calendar_entry_stop_month" maxsize="2" name="calendar_entry[stop_month]" size="2" style="width:auto" type="text" value="2" /> 
+				<input id="calendar_entry_stop_day" maxsize="2" name="calendar_entry[stop_day]" size="2" style="width:auto" type="text" value="5" /> 
+				
+				
+			</span>
+		</div></p>
+		<p><div class="title">End time</div>
+		
+			<select id="calendar_entry_new_stop_hour" name="calendar_entry[stop_hour]"><option value="0">00</option>
+
+<option value="1">01</option>
+<option value="2">02</option>
+<option value="3" selected="selected">03</option>
+<option value="4">04</option>
+<option value="5">05</option>
+<option value="6">06</option>
+<option value="7">07</option>
+<option value="8">08</option>
+<option value="9">09</option>
+
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+</select>
+			<select id="calendar_entry_new_stop_minute" name="calendar_entry[stop_minute]"><option value="0">00</option>
+<option value="1">01</option>
+<option value="2">02</option>
+<option value="3">03</option>
+
+<option value="4">04</option>
+<option value="5">05</option>
+<option value="6">06</option>
+<option value="7">07</option>
+<option value="8">08</option>
+<option value="9">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+
+<option value="31">31</option>
+<option value="32">32</option>
+<option value="33">33</option>
+<option value="34">34</option>
+<option value="35" selected="selected">35</option>
+<option value="36">36</option>
+<option value="37">37</option>
+<option value="38">38</option>
+<option value="39">39</option>
+
+<option value="40">40</option>
+<option value="41">41</option>
+<option value="42">42</option>
+<option value="43">43</option>
+<option value="44">44</option>
+<option value="45">45</option>
+<option value="46">46</option>
+<option value="47">47</option>
+<option value="48">48</option>
+
+<option value="49">49</option>
+<option value="50">50</option>
+<option value="51">51</option>
+<option value="52">52</option>
+<option value="53">53</option>
+<option value="54">54</option>
+<option value="55">55</option>
+<option value="56">56</option>
+<option value="57">57</option>
+
+<option value="58">58</option>
+</select>
+			<select id="calendar_entry_new_stop_suffix" name="calendar_entry[stop_suffix]"><option value="AM">AM</option>
+<option value="PM" selected="selected">PM</option>
+</select>
+		</p>
+		<div sx:id="recurring">
+				<div class="title">
+					<input id="recurring_status" name="calendar_entry[recurring][status]" sx:id="status" type="checkbox" value="1" />
+
+					Repeat
+				</div>
+				<div class="ghosted" sx:id="controls">
+					Every <input class="text-field calendar-entry-field" disabled="disabled" id="recurring_status_frequency" maxsize="200" name="calendar_entry[recurring][frequency]" style="width:20px" sx:id="frequency" type="text" value="0" />
+					
+					<select disabled="disabled" id="recurring_status_unit" name="calendar_entry[recurring][unit]" sx:id="unit"><option selected="selected" value="0">Days</option><option value="1">Weeks</option><option value="2">Months</option><option value="3">Years</option></select>
+				</div>
+		</div>
+
+		<p><div class="title">Note</div>
+		<textarea class="text-field calendar-entry-field" cols="40" id="calendar_entry_new_note" name="calendar_entry[note]" rows="20"></textarea></p>
+		<p style="text-align:right;">
+			
+			<sx:button class="default" onmouseover="Stixy.events.stop(event)" onmousedown="Stixy.events.stop(event)"><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r><sx:t><a class="button-label" href="#" onclick="Stixy.calendar.createEntry(); return false;">Add</a></sx:t></sx:button>
+			
+		</p>
+		</form>	</div>
+
+	</div>
+	<div class="calender-edit" id="edit_entry_panel"></div>
+	<hr>
+	<div id="activity_list_all" class="activity-list">
+		<div id="activity_list" class="activity-list-today">
+			
+	<div id="activity_list_2008-01-29" class="activity-list-day">
+		<h3>2008-01-29</h3>
+		<ul>
+
+			
+			<sx:entry class="today-entry" sx:entry-id="21"><li style="cursor:default;-moz-user-select:none">This is the very long one test</li></sx:entry>
+			
+			<sx:entry class="today-entry" sx:entry-id="16"><li style="cursor:default;-moz-user-select:none">e And now wwith an even longer title 2</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-01" class="activity-list-day">
+		<h3>2008-02-01</h3>
+
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="32"><li style="cursor:default;-moz-user-select:none">teteteteetet</li></sx:entry>
+			
+			<sx:entry class="today-entry" sx:entry-id="33"><li style="cursor:default;-moz-user-select:none">bbbb</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-02" class="activity-list-day">
+
+		<h3>2008-02-02</h3>
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="36"><li style="cursor:default;-moz-user-select:none">tttest</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-04" class="activity-list-day">
+
+		<h3>2008-02-04</h3>
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="35"><li style="cursor:default;-moz-user-select:none">today</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-06" class="activity-list-day">
+
+		<h3>2008-02-06</h3>
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="54619"><li style="cursor:default;-moz-user-select:none">widget Todo: <font>This is another one<br></font></li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-08" class="activity-list-day">
+
+		<h3>2008-02-08</h3>
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="17"><li style="cursor:default;-moz-user-select:none">repeating 4</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-12" class="activity-list-day">
+
+		<h3>2008-02-12</h3>
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="15"><li style="cursor:default;-moz-user-select:none">now with title</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-13" class="activity-list-day">
+
+		<h3>2008-02-13</h3>
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="15"><li style="cursor:default;-moz-user-select:none">now with title</li></sx:entry>
+			
+			<sx:entry class="today-entry" sx:entry-id="17"><li style="cursor:default;-moz-user-select:none">repeating 4</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-14" class="activity-list-day">
+		<h3>2008-02-14</h3>
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="15"><li style="cursor:default;-moz-user-select:none">now with title</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-15" class="activity-list-day">
+		<h3>2008-02-15</h3>
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="15"><li style="cursor:default;-moz-user-select:none">now with title</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-16" class="activity-list-day">
+		<h3>2008-02-16</h3>
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="15"><li style="cursor:default;-moz-user-select:none">now with title</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-18" class="activity-list-day">
+		<h3>2008-02-18</h3>
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="35"><li style="cursor:default;-moz-user-select:none">today</li></sx:entry>
+			
+			<sx:entry class="today-entry" sx:entry-id="17"><li style="cursor:default;-moz-user-select:none">repeating 4</li></sx:entry>
+			
+		</ul>
+		<hr>
+
+	</div>
+
+	<div id="activity_list_2008-02-19" class="activity-list-day">
+		<h3>2008-02-19</h3>
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="54620"><li style="cursor:default;-moz-user-select:none">widget Todo: this is it... dsdasdsad ddasddasdas<br></li></sx:entry>
+			
+			<sx:entry class="today-entry" sx:entry-id="54621"><li style="cursor:default;-moz-user-select:none">widget Todo: <font>twelve</font></li></sx:entry>
+
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-20" class="activity-list-day">
+		<h3>2008-02-20</h3>
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="10"><li style="cursor:default;-moz-user-select:none">Me too</li></sx:entry>
+
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-23" class="activity-list-day">
+		<h3>2008-02-23</h3>
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="37"><li style="cursor:default;-moz-user-select:none">lång, multipla månader</li></sx:entry>
+
+			
+			<sx:entry class="today-entry" sx:entry-id="17"><li style="cursor:default;-moz-user-select:none">repeating 4</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-24" class="activity-list-day">
+		<h3>2008-02-24</h3>
+		<ul>
+
+			
+			<sx:entry class="today-entry" sx:entry-id="37"><li style="cursor:default;-moz-user-select:none">lång, multipla månader</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-25" class="activity-list-day">
+		<h3>2008-02-25</h3>
+		<ul>
+
+			
+			<sx:entry class="today-entry" sx:entry-id="37"><li style="cursor:default;-moz-user-select:none">lång, multipla månader</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-26" class="activity-list-day">
+		<h3>2008-02-26</h3>
+		<ul>
+
+			
+			<sx:entry class="today-entry" sx:entry-id="37"><li style="cursor:default;-moz-user-select:none">lång, multipla månader</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-27" class="activity-list-day">
+		<h3>2008-02-27</h3>
+		<ul>
+
+			
+			<sx:entry class="today-entry" sx:entry-id="37"><li style="cursor:default;-moz-user-select:none">lång, multipla månader</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-28" class="activity-list-day">
+		<h3>2008-02-28</h3>
+		<ul>
+
+			
+			<sx:entry class="today-entry" sx:entry-id="37"><li style="cursor:default;-moz-user-select:none">lång, multipla månader</li></sx:entry>
+			
+			<sx:entry class="today-entry" sx:entry-id="17"><li style="cursor:default;-moz-user-select:none">repeating 4</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-02-29" class="activity-list-day">
+		<h3>2008-02-29</h3>
+
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="37"><li style="cursor:default;-moz-user-select:none">lång, multipla månader</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+	<div id="activity_list_2008-03-01" class="activity-list-day">
+		<h3>2008-03-01</h3>
+
+		<ul>
+			
+			<sx:entry class="today-entry" sx:entry-id="37"><li style="cursor:default;-moz-user-select:none">lång, multipla månader</li></sx:entry>
+			
+		</ul>
+		<hr>
+	</div>
+
+
+
+		</div>
+		<div id="activity_list_default" class="activity-list-day">No entries for today</div>
+
+	</div>
+	<div id="todo_list">
+		<ul>
+		 
+		</ul>
+	</div>
+	
+</div>
+
+
+	</div>
+</div>
+
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="popup-bottom">
+					<div class="popup-button-bar">
+						<div class="popup-buttons"><sx:button class="default" onmouseover="Stixy.events.stop(event)" onmousedown="Stixy.events.stop(event)"><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r><sx:t><a class="button-label" href="#" onclick="window.parent.Stixy.popup.close(); return false;">Close</a></sx:t></sx:button></div>
+					</div>
+
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

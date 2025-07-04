@@ -1,0 +1,122 @@
+<span class="calendar-panel-todo">
+	<div class="panel-shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+	<div class="bar-tools">
+		<div class="calendar-edit-progress">&nbsp;</div>
+		<div class="bar-tool-title">To-do</div>
+		<%= link_to_function nil, "Stixy.calendar.panelClose();", :class => "bar-close" %>
+	</div>
+	<div class="calendar-panel-content">
+		<div class="calendar-edit-pending-panel">&nbsp;</div>
+		<%= if @calendar_todo.id; hidden_field('calendar_todo', 'id', :value => @calendar_todo.id) end %>
+		<%= hidden_field('entry_type', 'value', :value => @calendar_todo.class.to_s.underscore) %>
+		
+		
+		<div class="title">Subject</div>
+		<%= text_field('calendar_todo', 'subject', :maxsize => 200, :value => @calendar_todo.subject, :class => "text-field stixy-calendar-entry-field", :id => "calendar_todo_#{ @calendar_todo.id ? "edit" : "new" }_subject")  %>
+		
+		<div class="divider"></div>
+		
+		<div sx:id="due"<%= unless @calendar_todo.duedate?: ' class="controls-hide"' end %>>
+			<div class="title">
+				<%= check_box_tag('calendar_todo[duedate_state]',1, @calendar_todo.duedate?, :id => "calendar_todo_#{ @calendar_todo.id ? "edit" : "new" }_duedate_state", "sx:id" => "status", :style => "vertical-align:middle") %>
+				Due at
+			</div>
+			<span class="controls">
+				<div sx:id="controls">
+					<table>
+						<tr>
+							<th class="title" width="40">Date</th>
+							<td>
+								<span id="calendar_todo<%= @calendar_todo.id ? "edit" : "new" %>_start_date">
+									<sx:date>
+										<% if (2==current_user.time_format.get(:numeric_date)) %>
+											<%= text_field('calendar_todo', 'duedate[month]', "sx:id" => "month", :maxsize => 2, :disabled => (@calendar_todo.duedate? ? false : "disabled"), :value => current_user.adjusted_time(@calendar_todo.duedate).strftime("%m"), :class => "text-field stixy-calendar-entry-field", :style => "width:25px", :size => 2, :title => "Month (up/down arrow keys)") %>
+											<%= text_field('calendar_todo', 'duedate[day]', 	"sx:id" => "day", 	:maxsize => 2, :disabled => (@calendar_todo.duedate? ? false : "disabled"), :value => current_user.adjusted_time(@calendar_todo.duedate).strftime("%d"), :class => "text-field stixy-calendar-entry-field", :style => "width:25px", :size => 2, :title => "Day (up/down arrow keys)") %>
+											<%= text_field('calendar_todo', 'duedate[year]', 	"sx:id" => "year", 	:maxsize => 4, :disabled => (@calendar_todo.duedate? ? false : "disabled"), :value => current_user.adjusted_time(@calendar_todo.duedate).year, :class => "text-field stixy-calendar-entry-field", :style => "width:auto", :size => 4, :title => "Year (up/down arrow keys)") %> 
+										<% else %>
+											<%= text_field('calendar_todo', 'duedate[year]', 	"sx:id" => "year", 	:maxsize => 4, :disabled => (@calendar_todo.duedate? ? false : "disabled"), :value => current_user.adjusted_time(@calendar_todo.duedate).year, :class => "text-field stixy-calendar-entry-field", :style => "width:auto", :size => 4, :title => "Year (up/down arrow keys)") %> 
+											<%= text_field('calendar_todo', 'duedate[month]', "sx:id" => "month", :maxsize => 2, :disabled => (@calendar_todo.duedate? ? false : "disabled"), :value => current_user.adjusted_time(@calendar_todo.duedate).strftime("%m"), :class => "text-field stixy-calendar-entry-field", :style => "width:25px", :size => 2, :title => "Month (up/down arrow keys)") %> 
+											<%= text_field('calendar_todo', 'duedate[day]', 	"sx:id" => "day", 	:maxsize => 2, :disabled => (@calendar_todo.duedate? ? false : "disabled"), :value => current_user.adjusted_time(@calendar_todo.duedate).strftime("%d"), :class => "text-field stixy-calendar-entry-field", :style => "width:25px", :size => 2, :title => "Day (up/down arrow keys)") %> 
+										<% end %>
+									</sx:date>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<th class="title" width="40">Time</th>
+							<td>
+								<sx:time>
+									<% start_time = current_user.time_format.time(current_user.adjusted_time(@calendar_todo.duedate)) %>
+									<%= text_field('calendar_todo', 'duedate[hour]', 		"sx:id" => "hour", 		:maxsize => 2, :disabled => (@calendar_todo.duedate? ? false : "disabled"), :value => start_time[:hour], :class => "text-field calendar-entry-field", :id => "calendar_entry_#{ @calendar_todo.id ? "edit" : "new" }_start_hour", :style => "width:25px", :size => 2, :title => "Hour (up/down arrow keys)")  %>
+									<%= text_field('calendar_todo', 'duedate[minute]',	"sx:id" => "minute",	:maxsize => 2, :disabled => (@calendar_todo.duedate? ? false : "disabled"), :value => current_user.adjusted_time(@calendar_todo.start).strftime("%M"), :class => "text-field calendar-entry-field", :id => "calendar_entry_#{ @calendar_todo.id ? "edit" : "new" }_start_minute", :style => "width:25px", :size => 2, :title => "Minute (up/down arrow keys)")  %>
+									<%= if current_user.time_format.twelve_hour_clock?; text_field('calendar_todo', 'duedate[suffix]', "sx:id" => "postfix", :maxsize => 2, :disabled => (@calendar_todo.duedate? ? false : "disabled"), :value => start_time[:postfix], :class => "text-field calendar-entry-field", :id => "calendar_entry_#{ @calendar_todo.id ? "edit" : "new" }_start_suffix", :style => "width:25px", :size => 2, :title => "AM/PM (up/down arrow keys)") end  %>
+								</sx:time>
+							</td>
+						</tr>
+					</table>	
+				</div>
+			
+				<div sx:id="notify"<%= unless @calendar_todo.notify?: ' class="controls-hide"' end %>>
+					<div style="margin-top:12px">
+						<%= check_box_tag('calendar_todo[notification_state]',1, @calendar_todo.notify?, :id => "calendar_todo_#{ @calendar_todo.id ? "edit" : "new" }_notification_state", "sx:id" => "status", :style => "vertical-align:middle") %>
+						Send email notification
+					</div>
+					<div sx:id="controls" class="controls" style="margin-top:3px; ">
+						<%= text_field_tag('calendar_todo[notification_value]', @calendar_todo.notification_value, :maxsize => 200, "sx:id" => "value", :disabled => (@calendar_todo.notify? ? false : "disabled"), :style => "width:20px", :class => "text-field stixy-calendar-entry-field", :id => "calendar_todo_notification_frequency")  %>
+						<% 
+							units_options = ""
+							Notification::UNITS.each_with_index do |name, index|
+								options = { :value => index }
+								options.merge!(:selected => "selected") if @calendar_todo.notification_unit == index
+					  		units_options << content_tag("option", "#{name.titlecase}", options)
+							end
+						%>
+						<%= select_tag("calendar_todo[notification_unit]", units_options, :disabled => (@calendar_todo.notify? ? false : "disabled"), :id => "calendar_todo_notification_unit", "sx:id" => "unit") %>
+						before
+					</div>
+				</div>
+			</span>
+		</div>
+		
+		<div class="divider"></div>
+		<div<%= if @calendar_todo.note.nil? or @calendar_todo.note.empty?: ' class="controls-hide"' end %> sx:id="note">
+			<div>
+				<%= check_box_tag('calendar_todo[note_status]',1, (!@calendar_todo.note.nil? and !@calendar_todo.note.empty?), "sx:id" => "note-switcher")  %>
+				<span class="title">Note</span>
+			</div>
+			<div class="controls">
+				<%= text_area('calendar_todo', 'note', :value => @calendar_todo.note, :class => "text-field stixy-calendar-entry-field", :id => "calendar_todo_#{ @calendar_todo.id ? "edit" : "new" }_note")  %>
+			</div>
+		</div>	
+		
+		<div class="divider"></div>
+		
+		<div style="padding:8px 0 0px">
+			<span class="title">Assign to:</span> <span onclick="alert('We\'re sorry, sharing is not yet implemented'); return false;" class="disabled-feature" title="We're sorry, sharing is not yet implemented">Select user</span>
+		</div>
+		
+		
+		<div class="divider"></div>
+
+		<div style="margin-top:10px">
+			<span class="title">Priority</span>
+			<%= select('calendar_todo', 'priority' , Priority::PRIORITY_NAMES.collect {|p| [ p.titlecase, eval("Priority::" + p) ] }) %>
+		</div>
+				
+		<div class="divider"></div>
+		<div>
+			<%= check_box_tag('calendar_todo[completed]',1, @calendar_todo.completed?, :id => "calendar_todo_#{ @calendar_todo.id ? "edit" : "new" }_completed", "sx:id" => "status", :style => "vertical-align:middle") %>
+			<span class="title">Completed</span>
+		</div>
+		<p style="text-align:right;">
+			<% if @calendar_todo.new_record? %>
+			<%= link_to_function "Add", 'Stixy.calendar.createEntry(\'calendar_new_todo_form\')', :button => {:type => 'default'} %>
+			<% else %>
+			<%= link_to_function "Remove", "Stixy.calendar.removeEntry(#{@calendar_todo.id})", :button => {:type => false} %>
+			<%= link_to_function "Save", "Stixy.calendar.editEntry(#{@calendar_todo.id})", :button => {:type => 'default'}, :style => "margin-left:10px;" %>
+			<% end %>
+		</p>
+		
+		
+	</div>
+</span>

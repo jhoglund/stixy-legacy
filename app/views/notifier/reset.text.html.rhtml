@@ -1,0 +1,41 @@
+<html>
+<head></head>
+<body style="margin:0;">
+<div style="background:url(cid:mt_guest_bg_pattern) white top center;padding-bottom:24px;" >
+	<div style="background:white;overflow:hidden;height:24px;">&nbsp;</div>
+	<center>
+		<div style="position: relative; width: 624px; left: 1px; margin: 24px auto; padding: 0px; border: 1px solid rgb(235,235,235);">
+			<div style="font-size:11px; line-height:140%; font-family:verdana; position: relative; text-align: left;padding: 0 48px 24px 48px; background: white; min-height: 479px; z-index: 0;">
+				<img src="cid:mt_guest_signature" width="86" height="68" style="margin-left:-5px; " >
+				<p style="color:rgb(150,150,150);text-align:right;font-family:Georgia;font-size:12px;"><%= @user.adjusted_time.strftime("%B %d, %Y %I:%M %p") %></p>
+		
+				<h1 style="font-size: 2.2em;font-family: Georgia;font-weight: normal;color:rgb(150,210,10);margin: 0 0 0.2em;">Hello!</h1>
+				<p style="font-size:15px;line-height:140%;font-family:Georgia;color:rgb(100,100,100);">You have asked us to change the password for <span style="color:rgb(150,210,10);"><%= @user.display_name %></span>. <br />
+				Your new password is:</p>
+				<div style="text-align:center;">
+					<h2 style="background-color:rgb(253,253,213);color:rgb(170,140,0);padding:20px;"><%= @password %></h2>
+				</div>
+				<p style="font-size:15px;line-height:140%;font-family:Georgia;color:rgb(100,100,100);">Use this new password to <a href="http://<%= SERVER %>/signin/" style="color:rgb(45,130,215);text-decoration:none;">sign-in to Stixy</a>. We suggest that you change your new password into something a bit more personal under "Personal settings" after you have signed in to Stixy.</p>
+		
+		
+				<div>
+					<hr style="position:relative; top:0;border-width:1px 0 0; border-style:solid;border-color:rgb(225,225,225);height:1px; margin:24px 0;">
+					<span style="color:rgb(150,150,150)">
+							We have sent this e-mail to you since you have requested a new password for the account connected to this e-mail address.
+							If this was done without your knowledge, perhaps someone entered your e-mail by mistake at the Stixy site. But don't worry, we have only sent your new password
+							to this e-mail address and no one else will be able to read or in any other way gain access to your new password.
+							<br /><br />
+							You can report any kind of abuse to <a href="mailto:abuse@stixy.com?subject=Report Abuse" style="color:rgb(45,130,215);text-decoration:none;">abuse@stixy.com</a>.
+					</span>
+				</div>
+			</div>
+			<div style="font-family:verdana; position: relative; font-size: 10px; clear: both; background-color: rgb(245,245,245); height: 24px; padding: 0 48px;">
+				<div style="float: left; margin: 5px 12px 0px 0px; color: rgb(150,150,150);">&copy; STIXY</div>
+				<div style="float: left; margin: 5px 12px 0px 0px;"><a style="color:rgb(45,130,215);text-decoration:none;" href="<%= "http://#{SERVER}/this_is_stixy" %>">This is Stixy</a></div>
+			</div>
+		</div>
+	</center>
+</div>
+</body>
+</html>
+

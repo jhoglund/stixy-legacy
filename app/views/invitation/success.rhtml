@@ -1,0 +1,21 @@
+<span class="invite">
+<div class="left-column">
+  <h1 style="margin-top:0px;">Welcome to Stixy </h1>
+  <p>You have now signed up to Stixy. Next time
+	you visit, use your e-mail address <span style="color:rgb(150,210,10)"><%= current_user.login %></span> and your new password to sign in.</p>
+  <p>Now go and help your friends on your new Stixyboard.</p>
+	<div style="margin-top: 10px; text-align: center;">
+		<%= link_to "Open Stixyboard", {:action => "go_to_board"}, :button => {:type => "default"}, :onclick => "parent.Stixy.ui.boptOpen();parent.Stixy.ui.boardListToggle();" %>
+   </div>
+</div>
+<div class="right-column">
+	<div class="message" style="position:relative;width:260px;right:-40px;">
+		<p>So, now when you have signed up, why not start your very own Stixyboards and invite your friends.</p>
+		<p>You may also want to take some time to update your personal profile under <%= link_to "Personal Settings", :controller => "setting" %>. 
+		Add your full name, a personal image, and more, to make your invitations to your friends more personal.</p>
+		<div class="nw"><p>&nbsp;</p></div><div class="ne"><p>&nbsp;</p></div><div class="se"><p>&nbsp;</p></div><div class="sw"><p>&nbsp;</p></div><div class="callout">&nbsp;</div>
+	</div>
+</div>
+</span>
+<% @buttons = "" %>
+

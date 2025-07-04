@@ -1,0 +1,16 @@
+<% @boards.each_with_index do |board, i| %>
+<%= render :partial => "/board/board_list_compact_item", :locals => { :board => board }  
+%>
+<% end %>
+<% next_page = 'Next'+content_tag('span','&nbsp;') %>
+<div class="bottom-pager">
+	<span class="pager">
+		<%= unless @boards.next? then "<span class='next'>#{next_page}</span>" end  %>
+		<% if @boards.next? %><%= link_to_function next_page, "Stixy.board.updateBoardList(null, 'page=#{@boards.next.number}')", :class => "next" %><% end %>
+	</span>	
+</div>
+<div class="board-list-item board-list-bottom-promo" style="margin-top:20px;padding-bottom:8px">
+	<!-- <h3>Create a new Stixyboard</h3>  -->
+	<strong><%= link_to_function "&raquo; Create New Stixyboard", "Stixy.board.newStixyboard()" %></strong>
+	<p>At Stixy it's free to create as many Stixyboards as you like!</p> 
+</div>

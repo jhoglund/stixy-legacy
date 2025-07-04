@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>
+		Test
+	</title>
+	<style>
+		#panel { position:absolute; z-index:0;padding:100px 5px; width:100px; background:gray; border:1px outset gray; }
+		#editor { position:absolute; top:300px; padding:10px; width:200px; height:200px; background:beige; }
+	</style>
+	<script>
+  	onload = function(){
+  	  var select = document.getElementById("select");
+  	  var panel = document.getElementById("panel");
+  	  var editor = document.getElementById("editor");
+  	  var fire = true
+  	  //select.addEventListener("DOMActivate", function(e){
+  	  //  fire = false
+		  //  console.log(22)
+		  //}, false);
+		  //select.addEventListener("DOMFocusOut", function(e){
+		  //  fire = true
+		  //  console.log(33)
+		  //}, false);
+  	  
+		  
+  	  editor.focus();
+  		console.log(select)
+	    var body = document.body;
+		  body.addEventListener("mousedown", function(e){
+		    console.log(1)
+		  }, false);
+		  panel.addEventListener("mousedown", function(e){
+		    e.stopPropagation();
+		    e.preventDefault();
+		    if(fire){
+		      var ev = document.createEvent('MouseEvent');
+  		    ev.initMouseEvent('mousedown', false, false, null, null, 0, 0, 0, 0, null, null, null, null, null, null);
+  		    select.dispatchEvent(ev)
+  		    fire = false
+		    }
+
+		    console.log(2)
+		  }, false);
+		  select.addEventListener("mousedown", function(e){
+		    e.stopPropagation();
+		    e.preventDefault();
+		    console.log(3)
+		  }, false);
+		  editor.addEventListener("blur", function(e){
+		    console.log('lostfocus')
+		  }, false);
+		  
+  	}
+	</script>
+</head>
+<body> 
+	
+	<div id="panel">
+	 <select name="some_name" id="select">
+ 	   <option value="option1">option1</option>
+ 	   <option value="option2">option2</option>
+ 	 </select>
+ 	</div>
+	
+	
+	<div id="editor" contenteditable="true">
+	  test
+	</div>
+
+</body>
+</html>

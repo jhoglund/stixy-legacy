@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+document_widget_home_page:
+  id: 1
+  library_document_id: 1
+  widget_instance_id: 7
+document_widget_home_page:
+  id: 2
+  library_document_id: 8
+  widget_instance_id: 9

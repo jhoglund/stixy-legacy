@@ -1,0 +1,31 @@
+/*--------------------*/
+/*   013 SCROLLBAR ALL   */
+/*--------------------*/
+
+.scrollbar-vertical { top:50%; right:0; width:16px; height:32px; margin-top:-16px; }
+.scrollbar-horizontal { left:50%; bottom:0; width:32px; height:16px; margin-left:-16px; }
+.scrollbar-vertical,
+.scrollbar-horizontal { position:absolute;  }
+.scrollbar-up { top:-1px; left:0; background:orange; }
+.scrollbar-down { bottom:-1px; left:0; background:orange; }
+.scrollbar-left { top:0; left:-1px; background:orange; }
+.scrollbar-right { top:0; right:-1px; background:orange; }
+.scrollbar-up-active { background:green; }
+.scrollbar-down-active { background:green; }
+.scrollbar-left-active { background:green; }
+.scrollbar-right-active { background:green; }
+
+.scrollbar-up,
+.scrollbar-down,
+.scrollbar-left,
+.scrollbar-right { position:absolute; display:none; width:16px; height:16px; cursor:default; opacity:.5; }
+
+.scrollbar-y-on .scrollbar-up,
+.scrollbar-y-on .scrollbar-down,
+.scrollbar-x-on .scrollbar-left,
+.scrollbar-x-on .scrollbar-right { display:block; }
+
+.scrollbar-up:hover,
+.scrollbar-down:hover,
+.scrollbar-left:hover,
+.scrollbar-right:hover { opacity:.85; }

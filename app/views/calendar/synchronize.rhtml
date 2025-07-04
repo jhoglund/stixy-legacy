@@ -1,0 +1,23 @@
+<% @buttons = "#{ link_to_function "Cancel", 'window.parent.Stixy.popup.close()', :button => {:type => false} }" %>
+
+
+<h1>Publish/Export</h1>
+<p>Use the address below to access your calendar from other applications.
+You can either click on the link and select to open the file in another calendar application
+You may also copy and paste the link into the subscription field of any calendar application that supports the iCal format.</p>
+
+<p>To export the events of your calendar, click on the link and save the file to your local machine.</p>
+
+<%= link_to subscription_address, subscription_address %><br/>
+
+<p>This is the private address for this calendar. Don't share this address with others unless you want them to see all the events of your calendar.
+</p>
+
+
+<br/>
+<h1>Import</h1>
+<p>To import events from another application, please export to a iCal file from the application of choice. </p>
+
+<%= render :partial => "/calendar/icalupload" %>
+
+

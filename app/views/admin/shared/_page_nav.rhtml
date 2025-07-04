@@ -1,0 +1,7 @@
+<div class="page-nav">
+	<%= pagination_links_remote(paginator, page, {:window_size => 10, :params => {:action => action}}, {:update => update}) %>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<%= stixy_remote_link('&lt; Previous page', { :url => {:action => action, :page => page.prev.number}, :update => update }) if page.prev? %>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<%= stixy_remote_link('Next page &gt;', { :url => {:action => action, :page => page.next.number}, :update => update })  if page.next? %> 
+</div>

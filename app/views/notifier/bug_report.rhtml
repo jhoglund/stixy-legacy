@@ -1,0 +1,8 @@
+<%= @bug[:description] %>
+<br/><br/>
+<b>From:</b> <%= @bug[:first_name] %> <%= @bug[:last_name] %><br/>
+<b>Browser:</b> <%= @bug[:browser] %><br/>
+<b>Platform:</b> <%= @bug[:platform] %><br/>
+<b>Useragent:</b> <%= @bug[:user_agent] %><br/>
+<b>For:</b> <%= @bug[:name].empty? ? "General" : @bug[:name].titlecase %><br/>
+<br/>

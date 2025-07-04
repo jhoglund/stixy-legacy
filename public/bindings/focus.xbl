@@ -1,0 +1,30 @@
+<xbl xmlns="http://www.w3.org/ns/xbl" xmlns:f="dijit.form" 
+          xmlns:h="http://www.w3.org/1999/xhtml">
+    <binding id="CustomLoginScreen">
+        <template>
+        	<div style="width:300px;height:150px;border:1px solid aaa;padding:10px">
+	        	<div style="font-weight:bold;margin-bottom:5px">
+                                     Please fill in your username and password!</div>
+	            <div>Username:</div> <h:input value="${username}" 
+                                   type="text" style="width:293px"/>
+	            <div>Password:</div> <h:input type="password" 
+                                   style="width:293px"/>
+	            <div style="float:left;margin-top:5px;">
+		          <f:CheckBox id="saveUsername"/>
+		          <h:label for="saveUsername">Save username</h:label>
+		    </div>
+		    <div style="float:right">
+			  <f:Button class="loginButton" label="Login"/>
+		    </div>
+            </div>
+        </template>
+        <implementation>
+	          alert(8)
+        </implementation>
+		<handlers>
+			<handler event="onclick" target=".loginButton">
+				this.login();
+			</handler>
+		</handlers>
+	</binding>
+</xbl>

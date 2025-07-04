@@ -1,0 +1,151 @@
+<%= render :partial => "public_navigation" %>
+<div class="full-column">
+	<%- if params[:action]=="signup" -%>
+	<script type="text/javascript">parent.Stixy.popup.listen("close", function(){ parent.location.href = "/" });</script>
+	<h1>Welcome to Stixy</h1>
+	<p>Here is a short summary of how Stixy works. If you need to go back to this page later on, you find it under About Stixy once you've signed in. You can always skip this tutorial and <%= link_to_function "start using Stixy", "parent.Stixy.popup.close()" %>.</p>
+	<%- else -%>
+	<h1>How Stixy Works</h1>
+	<p>Here is a short summary of how Stixy works. If you don't find the answer to your question, please send an e-mail to <%= mail_to "feedback@stixy.com" %>.</p>
+	<%- end -%>
+	<div class="screen-layer">
+		<h3>Get started</h3>
+		<div class="screen-bubble screen-bubble-top screen-bubble-blue" style="top:75px; left:52px;">
+			<div class="screen-circle" style="top:-40px; left:20px;">&nbsp;</div>
+			<div class="screen-line" style="top:-30px; left:30px; height:30px;">&nbsp;</div>
+			<div class="screen-text" style="width:215px;">
+				<h4>Start Here</h4>
+				Start a <strong>NEW</strong> Stixyboard or <strong>OPEN</strong> the list over already created boards in the top bar menu.
+			</div>
+		</div>
+		<div class="screen-bubble screen-bubble-left screen-bubble-green" style="top:70px; left:430px;">
+			<div class="screen-circle" style="top:20px; left:-80px;">&nbsp;</div>
+			<div class="screen-line" style="top:30px; left:-71px; width:71px;">&nbsp;</div>
+			<div class="screen-text" style="width:215px;">
+				<h4>This is your Stixyboard</h4>
+				This is your work area where you place your content. There are no fixed grids or maximum size on a board.
+			</div>
+		</div>
+		<div class="screen-bubble screen-bubble-bottom screen-bubble-yellow" style="top:180px; left:150px;">
+			<div class="screen-circle" style="top:110px; left:20px;">&nbsp;</div>
+			<div class="screen-line" style="top:10px; left:29px; height:110px;">&nbsp;</div>
+			<div class="screen-text" style="width:360px;">
+				<h4>Widgets</h4>
+				Widgets are the building blocks for your board. Select the type of content or functionality you want; drag, position and release a widget anywhere on your board. Once placed, you can resize, design, and move your widget around.
+			</div>
+		</div>
+		<img src="/images/how_stixy_works/screen_1.jpg" width="480" height="312" alt="Get started">
+	</div>
+	<div class="screen-layer">
+		<h3>Create</h3>
+		<div class="screen-bubble screen-bubble-bottom screen-bubble-green" style="top:5px; left:150px;">
+			<div class="screen-circle" style="top:150px; left:50px;">&nbsp;</div>
+			<div class="screen-line" style="top:10px; left:59px; height:150px;">&nbsp;</div>
+			<div class="screen-text" style="width:215px;">
+				<h4>Upload</h4>
+				Use “Add” Photo or Document and select your files. You can upload one or several files at a time. 
+			</div>
+		</div>
+		<div class="screen-bubble screen-bubble-left screen-bubble-yellow" style="top:130px; left:470px;">
+			<div class="screen-circle" style="top:20px; left:-60px;">&nbsp;</div>
+			<div class="screen-line" style="top:29px; left:-51px; width:51px;">&nbsp;</div>
+			<div class="screen-text" style="width:200px;">
+				<h4>Customize &amp; Design</h4>
+				Each widget type has a number of options. For the Note widget, you can change font, font size, font color, note color, color transparency, etc. 
+			</div>
+		</div>
+		<div class="screen-bubble screen-bubble-bottom screen-bubble-blue" style="top:220px; left:-11px;">
+			<div class="screen-circle" style="top:90px; left:36px;">&nbsp;</div>
+			<div class="screen-line" style="top:10px; left:45px; height:90px;">&nbsp;</div>
+			<div class="screen-text" style="width:215px;">
+				<h4>Add Content</h4>
+				Drag n’ drop Notes, Photos, Images, Documents and To-Do list directly from the bottom bar.
+			</div>
+		</div>
+		<img src="/images/how_stixy_works/screen_2.jpg" width="491" height="336" alt="Create" style="position:relative; left:-11px">
+	</div>
+	<div class="screen-layer">
+		<h3>Invite</h3>
+		<div class="screen-bubble screen-bubble-left screen-bubble-yellow" style="top:80px; left:350px;">
+			<div class="screen-circle" style="top:65px; left:-120px;">&nbsp;</div>
+			<div class="screen-line" style="top:74px; left:-111px; width:111px;">&nbsp;</div>
+			<div class="screen-text" style="width:200px;">
+				<h4>Each board has a unique set of members</h4>
+				Your invitations are set per Stixyboard, i.e. you can share each board with different people. 
+			</div>
+		</div>
+		<div class="screen-bubble screen-bubble-left screen-bubble-blue" style="top:190px; left:400px;">
+			<div class="screen-circle" style="top:20px; left:-60px;">&nbsp;</div>
+			<div class="screen-line" style="top:29px; left:-51px; width:51px;">&nbsp;</div>
+			<div class="screen-text" style="width:200px;">
+				<h4>To Share a Stixyboard</h4>
+				When sharing a board, you give the people you invite the same rights to your board as you have, i.e. they 
+				can upload, edit, change title, add new invites, delete content etc. 
+			</div>
+		</div>
+		<div class="screen-bubble screen-bubble-top screen-bubble-green" style="top:220px; left:68px;">
+			<div class="screen-circle" style="top:-75px; left:40px;">&nbsp;</div>
+			<div class="screen-line" style="top:-65px; left:49px; height:65px;">&nbsp;</div>
+			<div class="screen-text" style="width:185px;">
+				<h4>Invite to Share</h4>
+				Invite the people you want to share your Stixyboard with by selecting from your contact list or by adding 
+				a new e-mail address under New Contact.
+			</div>
+		</div>
+		<img src="/images/how_stixy_works/screen_3.jpg" width="480" height="312" alt="Invite">
+	</div>
+	<div class="screen-layer">
+		<h3>Stixyboard options</h3>
+		<div class="screen-bubble screen-bubble-left screen-bubble-blue" style="top:80px; left:350px;">
+			<div class="screen-circle" style="top:45px; left:-120px;">&nbsp;</div>
+			<div class="screen-line" style="top:54px; left:-111px; width:111px;">&nbsp;</div>
+			<div class="screen-text" style="width:200px;">
+				<h4>Access</h4>
+				Open up the access to your Stixyboard by selecting the settings under Guest Access.
+			</div>
+		</div>
+		<div class="screen-bubble screen-bubble-left screen-bubble-yellow" style="top:190px; left:400px;">
+			<div class="screen-circle" style="top:20px; left:-60px;">&nbsp;</div>
+			<div class="screen-line" style="top:29px; left:-51px; width:51px;">&nbsp;</div>
+			<div class="screen-text" style="width:200px;">
+				<h4>Board Options</h4>
+				Stixyboard information as well as other settings under Options, is set per Stixyboard.
+			</div>
+		</div>
+		<div class="screen-bubble screen-bubble-top screen-bubble-green" style="top:204px; left:68px;">
+			<div class="screen-circle" style="top:-75px; left:40px;">&nbsp;</div>
+			<div class="screen-line" style="top:-65px; left:49px; height:65px;">&nbsp;</div>
+			<div class="screen-text" style="width:185px;">
+				<h4>Stixyboard Info</h4>
+				Give your Stixyboard a title, tags, and, if you like, a description. Tags are useful since you can sort your list of Stixyboards by using these.
+			</div>
+		</div>
+		<img src="/images/how_stixy_works/screen_4.jpg" width="480" height="312" alt="Stixyboard options">
+	</div>
+	<div class="screen-layer">
+		<h3>Personal settings</h3>
+		<div class="screen-bubble screen-bubble-left screen-bubble-yellow" style="top:130px; left:370px;">
+			<div class="screen-circle" style="top:20px; left:-85px;">&nbsp;</div>
+			<div class="screen-line" style="top:29px; left:-76px; width:76px;">&nbsp;</div>
+			<div class="screen-text" style="width:240px;">
+				<h4>Personal Information</h4>
+				Set your time zone to make sure that you get your reminders on time. The time zone is set per user, not per Stixyboard.
+				We will never give or sell any of your personal information to a third party, except when required by law.
+			</div>
+		</div>
+		<div class="screen-bubble screen-bubble-top screen-bubble-green" style="top:204px; left:68px;">
+			<div class="screen-circle" style="top:-57px; left:70px;">&nbsp;</div>
+			<div class="screen-line" style="top:-52px; left:79px; height:65px;">&nbsp;</div>
+			<div class="screen-text" style="width:185px;">
+				<h4>E-mail</h4>
+				The e-mail address entered here is the address you use when signing in to Stixy. We also use it to 
+				communicate with you if you, for instance, forget your password.
+			</div>
+		</div>
+		<img src="/images/how_stixy_works/screen_5.jpg" width="480" height="312" alt="Personal settings">
+	</div>
+	<%- if params[:action]=="signup" -%>
+	<p>If you have any further questions, please send an e-mail to <%= mail_to "feedback@stixy.com" %> or go ahead and <%= link_to_function "start using Stixy now", "parent.Stixy.popup.close()" %>!</p>
+	<%- end -%>
+	
+</div>

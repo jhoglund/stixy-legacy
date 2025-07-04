@@ -1,0 +1,39 @@
+/*----------------*/
+/* 007 GREEN BARS */
+/*----------------*/
+
+.opt-switch,
+.board-list-switch-shadow-line,
+.opt-switch-shadow-line { border-left:1px solid rgb(90,145,25); }
+.opt-switcher-bg { background-image:url(/images/switchers/switcher_bg_green.png)}
+.opt-switch,
+.board-list-switch-highlight-line,
+.opt-switch-highlight-line,
+.tray-bar-highlight-line { border-right:1px solid rgb(190,240,70); }
+.toolbar,
+.tray-bar { border-top:1px solid rgb(190,240,70); border-bottom:1px solid rgb(90,145,25); }
+.toolbar-background,
+.tray-bar-background { background:rgb(150,210,10); }
+.toolbar-background-gradient,
+.tray-bar-background-gradient { background-image:url(/images/main_template/mt_gradient_radius_horizontal_green.png); }
+.toolbar-button sx\:l sx\:p,
+.toolbar-button sx\:r sx\:p { background-image:url(/images/buttons/btn_toolbar_bg_dark_green.png); }
+.toolbar-button a:hover { color:rgb(255,235,90); }
+/*.board-list-open .open-board-list-button .left div,
+.board-list-open .open-board-list-button .right div { background-image:url(/images/buttons/btn_toolbar_bg_green.png); }
+.board-list-open .open-board-list-button:hover { color:rgb(255,235,90); }*/
+.bopt-switcher-open { background-image:url(/images/switchers/switcher_down_green.gif); }
+.bopt-switcher-closed { background-image:url(/images/switchers/switcher_right_green.gif); }
+.tray-switcher-open,
+.wopt-switcher-open { background-image:url(/images/switchers/switcher_up_green.gif); }
+.widget-deactivated .wopt-switch .opt-switcher-bg { background-image:url(/images/switchers/switcher_green_ghosted.png); }
+.tray-switcher-closed,
+.wopt-switcher-closed { background-image:url(/images/switchers/switcher_right_green.gif); }
+.bopt-switcher-open:hover,
+.bopt-switcher-closed:hover,
+.wopt-switcher-open:hover,
+.wopt-switcher-closed:hover,
+.tray-switcher-open:hover,
+.tray-switcher-closed:hover { color:rgb(90,145,25)!important; }
+.wopt-switcher-ghosted { color:rgb(240,255,210)!important; }
+.text-saved { color:rgb(90,145,25); }

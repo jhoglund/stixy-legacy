@@ -1,0 +1,221 @@
+<html xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="/resources/default/firefox.css?" media="all" rel="Stylesheet" type="text/css" />
+	<script type="text/javascript">
+		var Stixy = { events: { stop:function(){} } }
+	</script>
+	
+	<!--<style>
+		
+		body { background:white; overflow:auto; margin:10px;}
+		a { text-decoration:none; }
+
+/* button */	
+		
+		sx\:button { position:relative; font: 11px/12px "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; color:white; display:inline; display:inline-block; z-index:0; cursor:default; }
+		sx\:button sx\:l,
+		sx\:button sx\:r { position:absolute; top:0px; width:51%; height:20px; overflow:hidden; z-index:-1; }
+		sx\:button sx\:l { left:0px; }
+		sx\:button sx\:r { right:0px; }
+		sx\:button sx\:l sx\:p,
+		sx\:button sx\:r sx\:p { position:absolute; z-index:-1; top:0px; height:20px; width:100%; background:url(/images/buttons/btn_background.png) left top no-repeat; }
+		sx\:button sx\:l sx\:p { left:0px; }
+		sx\:button sx\:r sx\:p { right:0px; background-position:right top; }
+		sx\:button .button-label { position:relative; top:3px; padding:3px 20px 4px; white-space:nowrap; display:inline; }
+		
+		sx\:button.default sx\:l sx\:p,
+		sx\:button.default sx\:r sx\:p { background-image:url(/images/buttons/btn_background_default.png) }
+		sx\:button.ghosted sx\:l sx\:p,
+		sx\:button.ghosted sx\:r sx\:p { background-image:url(/images/buttons/btn_background_ghosted.png) }
+		
+		sx\:button a,
+		sx\:button a:link,
+		sx\:button a:active,
+		sx\:button a:visited { font-weight:normal; color:white; cursor:hand; cursor:pointer; }
+		sx\:button a:hover { color:rgb(75,75,75);}
+		
+		sx\:button.default:hover { color:rgb(55,50,95);}
+		sx\:button.ghosted:hover { color:white; cursor:default; }
+
+		sx\:button.large { font-size:14px; }
+		sx\:button.large sx\:l { height:28px; }
+		sx\:button.large sx\:r { height:28px; }
+		sx\:button.large sx\:l sx\:p { height:28px; background-image:url(/images/buttons/btn_bg_large.png); }
+		sx\:button.large sx\:r sx\:p { height:28px; background-image:url(/images/buttons/btn_bg_large.png); }
+		sx\:button.large .button-label { top:5px; margin-top:5px; }
+
+		sx\:button.default-large sx\:l sx\:p ,
+		sx\:button.default-large sx\:r sx\:p  { background-image:url(/images/buttons/btn_bg_default_large.png) }
+		sx\:button.ghosted-large sx\:l sx\:p ,
+		sx\:button.ghosted-large sx\:r sx\:p  { background-image:url(/images/buttons/btn_bg_ghosted_large.png) }
+		sx\:button.large-default:hover { color:rgb(55,50,95);}
+		
+/* button */	
+
+/* toolbar */		
+		.toolbar { position:relative; top:0; left:0; height:24px; width:100%; }
+		.toolbar-background { position:absolute; overflow:hidden; top:0; left:0; height:24px; width:100%; z-index:-1; }
+		.toolbar-background-gradient { position:relative; top:-485px; left:0; height:1000px; width:1000px; margin:0 auto; background:no-repeat center 485px; z-index:0; }
+		.toolbar-tools { float:left; margin:0; }
+		
+		
+		.toolbar-button,
+		.toolbar-button sx\:l,
+		.toolbar-button sx\:r,
+		.toolbar-button sx\:l sx\:p,
+		.toolbar-button sx\:r sx\:p { position:absolute; top:0; height:18px; z-index:-1; }
+		.toolbar-button { position:relative; display:inline; float:left; height:18px; margin:3px 0 0 10px; line-height:16px; color:white; z-index:0; }
+		.toolbar-button sx\:l { overflow:hidden; left:0; width:50%; }
+		.toolbar-button sx\:r { overflow:hidden; right:0; width:51%; }
+		.toolbar-button sx\:l sx\:p,
+		.toolbar-button sx\:r sx\:p { width:100%; background-repeat:no-repeat; }
+		.toolbar-button sx\:l sx\:p { left:0; background-position:left top; }
+		.toolbar-button sx\:r sx\:p { right:0; background-position:right top; }
+		.toolbar-button .button-label { padding:3px 15px 3px 15px; margin-top:0; top:1px; }
+		.toolbar-button:link,
+		.toolbar-button:visited { color:white; }
+
+
+		/* SAVE STATES */
+		.text-saved,
+		.text-saving,
+		.text-save  { display:none; cursor:default; padding:5px 0; background:no-repeat right 4px; }
+		.text-save .toolbar-button { float:right; margin-top:-2px; margin-left:5px; }
+		.text-save .save-counter { color:white; }
+		.text-saved { display:block; }
+		.pending .text-saved { display:none; }
+		.text-saving { padding-right:20px; }
+		.save .text-saved,
+		.saving .text-saved { display:none; }
+		.saving .text-saving,
+		.save .text-save { display:block; }
+/* toolbar */	
+
+/* green */	
+		.toolbar-button sx\:l sx\:p,
+		.toolbar-button sx\:r sx\:p { background-image:url(/images/buttons/btn_toolbar_bg_dark_green.png); }
+		.toolbar-button a:hover { color:rgb(255,235,90); }
+/* green */	
+
+/* orange */	
+		#pending .toolbar-button sx\:l sx\:p,
+		#pending .toolbar-button sx\:r sx\:p { background-image:url(/images/buttons/btn_toolbar_bg_orange.png); }
+		#pending .toolbar-button a:hover { color:rgb(255,235,90); }
+/* orange */	
+	
+	</style>-->
+	
+	<!--[if lte IE 7]>-->
+	<!--<style>
+		sx\:button sx\:l,
+		sx\:button sx\:r { top:0px; }
+		sx\:button sx\:l sx\:p,
+		sx\:button sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_background.png') }
+		sx\:button .button-label { top:0px;  }
+		
+		sx\:button.default sx\:l sx\:p,
+		sx\:button.default sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_background_default.png') }
+		sx\:button.ghosted sx\:l sx\:p,
+		sx\:button.ghosted sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_background_ghosted.png') }
+              
+		sx\:button.large sx\:l sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_bg_large.png'); }
+		sx\:button.large sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_bg_large.png'); }
+		sx\:button.default-large sx\:l sx\:p,
+		sx\:button.default-large sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_bg_default_large.png') }
+		sx\:button.ghosted-large sx\:l sx\:p,
+		sx\:button.ghosted-large sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_bg_ghosted_large.png') }
+		
+		.toolbar-button .button-label { padding-top:2px; top:0; }
+		
+		/* green */	
+				.toolbar-button sx\:l sx\:p,
+				.toolbar-button sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/images/buttons/btn_toolbar_bg_dark_green.png"); }
+		/* green */	
+
+		/* orange */	
+				#pending .toolbar-button sx\:l sx\:p,
+				#pending .toolbar-button sx\:r sx\:p {  background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/images/buttons/btn_toolbar_bg_orange.png"); }
+		/* orange */	
+		
+	</style>-->
+	<!--<![endif]-->
+	
+</head>
+<body>
+	<div class="saved">
+		<div class="toolbar">
+			<div class="toolbar-background"><div class="toolbar-background-gradient"></div></div>
+			<div class="board-list-switch">
+				<%= link_to_function_with_enhancment("Hide List", nil, :button => {:type => 'toolbar-button'}, :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>
+				<%= link_to_function_with_enhancment("Open List", nil, :button => {:type => 'toolbar-button'}, :id => "board_list_show", :class => "open-board-list-button board-list-button-closed") %>
+				<div class="board-list-switch-shadow-line"></div>
+				<div class="board-list-switch-highlight-line"></div>
+			</div>
+			<span class="board-tools">
+				<%= link_to_function_with_enhancment("New Stixyboard", "Stixy.board.newStixyboard();", :button => {:type => 'toolbar-button'}, :id => "share_open") %>
+				<%= link_to_function_with_enhancment("Share", nil, :button => {:type => 'toolbar-button'}, :id => "share_open") %>
+				<%= link_to_function_with_enhancment("Options", nil, :button => {:type => 'toolbar-button'}, :id => "board_option_open") %>
+			</span>
+			<div class="save-indicator" id="save-state">
+				<div class="text-save" id="save-state-button">
+					<%= link_to_function_with_enhancment("Save now", nil, :button => {:type => 'toolbar-button'}) %>
+					Auto-saves in <span id="save_counter" class="save-counter">30</span><span class="save-counter">s</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="pending" class="save">
+		<div class="toolbar">
+			<div class="toolbar-background"><div class="toolbar-background-gradient"></div></div>
+			<div class="board-list-switch">
+				<%= link_to_function_with_enhancment("Hide List", nil, :button => {:type => 'toolbar-button'}, :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>
+				<%= link_to_function_with_enhancment("Open List", nil, :button => {:type => 'toolbar-button'}, :id => "board_list_show", :class => "open-board-list-button board-list-button-closed") %>
+				<div class="board-list-switch-shadow-line"></div>
+				<div class="board-list-switch-highlight-line"></div>
+			</div>
+			<span class="board-tools">
+				<%= link_to_function_with_enhancment("New Stixyboard", "Stixy.board.newStixyboard();", :button => {:type => 'toolbar-button'}, :id => "share_open") %>
+				<%= link_to_function_with_enhancment("Share", nil, :button => {:type => 'toolbar-button'}, :id => "share_open") %>
+				<%= link_to_function_with_enhancment("Options", nil, :button => {:type => 'toolbar-button'}, :id => "board_option_open") %>
+			</span>
+			<div class="save-indicator" id="save-state">
+				<div class="text-save" id="save-state-button">
+					<%= link_to_function_with_enhancment("Save now", nil, :button => {:type => 'toolbar-button'}) %>
+					Auto-saves in <span id="save_counter" class="save-counter">30</span><span class="save-counter">s</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<%= debug link_to_function("Hide List", "alert(s)", :button => {:type => 'default'}, :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	<%= debug link_to("Hide List", "/me/to", :button => {:type => 'ghosted'}, :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	<%= debug link_to("Hide List", { :controller => "board"}, :button => {:type => 'ghosted'}, :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	<%= debug content_tag("span", "me my man", :button => {:type => false}, :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	
+	<%= link_to_function("Hide List", "alert(s)", :button => {:type => 'default'}, :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	<%= link_to("Hide List", "/me/to", :button => {:type => 'ghosted'}, :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	<%= link_to("Hide List", { :controller => "board"}, :button => {:type => 'ghosted'}, :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	<%= content_tag("Span", "Me my man", :button => {:type => false}, :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	
+	<hr>
+	
+	<%= debug link_to_function("Hide List", "alert(s)", :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	<%= debug link_to("Hide List", "/me/to", :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	<%= debug content_tag("span", content_tag("div", "conttt"), :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	<%= debug(content_tag("span", :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") do
+		"this is the inner content"
+	end)	 %>	
+	
+	<%= link_to_function("Hide List", "alert(s)", :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	<%= link_to("Hide List", "/me/to", :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	<%= content_tag("span", content_tag("div", "conttt"), :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	<%= content_tag("span", :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") do
+		"this is the inner content"
+	end	 %>	
+	<%= button("namememe", :id => "board_list_hide", :class => "open-board-list-button  board-list-button-open") %>	
+	<%= button("namememe", :id => "board_list_hide", :button => {:type => "default"}, :class => "open-board-list-button  board-list-button-open") %>	
+	
+</body>
+</html>

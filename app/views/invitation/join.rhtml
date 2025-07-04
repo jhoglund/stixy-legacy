@@ -1,0 +1,55 @@
+<span class="invite">
+<% if @invite %>
+
+<% form_tag do -%>
+<input type="hidden" name="user[time_offset]" id="time_offset"/>
+<script type="text/javascript">
+	var t_o = new Date().getTimezoneOffset();
+	Stixy.element.$ID('time_offset').value=t_o-t_o-t_o*60
+</script>
+<%= hidden_field("user", "id", :value => @invite.accepted_user.id) %>
+<%= hidden_field("invite", "reference_token") %>
+<div class="left-column">
+  <h1 style="margin-top:0px;">Pick a password</h1>
+  <p>To join 
+	<% unless @invite.board.title.empty? %>
+		Stixyboard <span class="color-green">"<%= @invite.board.title %>"</span>
+	<% else %>
+		the Stixyboard
+	<% end %>
+	you first need to pick a password to sign up for Stixy. Stixy is free. Always.</p>
+  <p>Do you want to learn <%= link_to "more about stixy?", :controller => "public", :action => "this_is_stixy" %></p>
+</div>
+<div class="right-column-bg">&nbsp;</div>
+<div class="right-column">
+	<% if @invite.accepted_user.errors[:pwd] %><div class="inline-message-error" style="margin-bottom:10px;"><% end %>
+	<div class="field-title">Password</div>
+	<% password = (@invite.accepted_user.errors[:pwd]) ? (@pwd||"") : "" %>
+	<%= password_field "user", "pwd", :class => "text-field", :value => password %><br />
+	<div class="field-title">Retype password</div>
+   <%= password_field "user", "pwd_confirmation", :class => "text-field", :value => (@pwd_confirmation||"") %><br />
+	<% if @invite.accepted_user.errors[:pwd] %><% @invite.accepted_user.errors[:pwd].each do |msg| %>
+		<p>Password <%= msg %></p>
+	<% end %>
+	</div><% end %>
+	<% if @invite.accepted_user.errors[:terms_of_service] %><div class="inline-message-error"><% end %>
+	<div class="field-title">
+    <div style="float:left;margin: 0px 3px 20px -3px;"><%= check_box "user", "terms_of_service", :checked => (@terms_of_service=="1" ? "checked" : false) %></div>
+    <label for="user_terms_of_service">I agree to the</label>
+    <%= link_to "Terms of Service", :controller => "public", :action => "terms_of_service" %>
+  </div>
+	<% if @invite.accepted_user.errors[:terms_of_service] %><p><%= @invite.accepted_user.errors[:terms_of_service] %></p></div><% end %>
+   <div style="margin-top: 10px; text-align: right;">
+		<%= link_to_function "Continue", "submitRegistration()", :button => {:type => "default"} %>
+		<%= submit_tag "", :style => "display:none" %>
+		<script type="text/javascript">
+		 	function submitRegistration(){
+				document.forms[0].submit()
+			}
+		</script>
+   </div>
+</div>
+
+<% end -%>
+<% end %>
+</span>

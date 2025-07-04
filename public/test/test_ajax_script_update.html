@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html debug="true">
+<head>
+	<title>Script test</title>
+	<script src="/javascripts/firebug/firebug.js"></script>
+	<script>
+		onload = function(){
+			console.log(eval( "({\"attributes\": {\"left\": \"0\", \"created_on\": \"2006-09-30 07:34:43\", \"status\": \"1\", \"visible\": \"0\", \"pwd_protected\": \"0\", \"updated_by_id\": \"1\", \"title\": \"Welcome to Stixy\", \"updated_on\": \"2006-09-30 07:34:43\", \"url\": \"\", \"created_by_id\": \"1\", \"id\": \"1\", \"description\": \"Stixyboard playground\", \"pwd\": null, \"editable\": \"0\", \"top\": \"0\"}})"))
+		}
+		var request = (function(){
+		  var xmlhttp;
+		  try { xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); }
+		  catch (e) { try { xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); }
+		  catch (e) { try { xmlhttp = new XMLHttpRequest(); }
+		  catch (e) { xmlhttp = false; }}}
+		  if(!xmlhttp) { return null }
+		  return xmlhttp;
+		})()
+		
+		var JSON = {
+			decode: function(json){
+				return eval("(" + json.replace(/(\/\*JSON | JSON\*\/)/g, "") + ")");
+			},
+			replaceHTML: function(result){
+				for(var i in result.replace) { document.getElementById(i).innerHTML = result.replace[i] };
+			},
+			executeScript: function(result){
+				eval(result.script);
+			}
+		}
+
+		function update(){
+			request.open("get", "test_json", true);
+			request.onreadystatechange = function(){
+				if(request.readyState == 4){
+					var result = JSON.decode(request.responseText);
+					JSON.replaceHTML(result);
+					JSON.executeScript(result);
+				}
+			}
+			request.send();
+		}
+	</script>
+	<style>
+		div { padding:10px; border:1px solid red;}
+	</style>
+</head>
+<body style="background-color:transparent">
+	<div id="first">1</div>
+	<div id="second">2</div>
+	<a href="#" onclick="update()">Try</a>
+
+	
+</body>
+</html>

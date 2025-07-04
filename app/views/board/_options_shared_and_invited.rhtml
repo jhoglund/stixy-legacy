@@ -1,0 +1,45 @@
+<div id="options_shared_and_invited">
+	<script type="text/javascript" charset="utf-8">
+		function remove_user(id){
+			Stixy.element.addClassName(Stixy.element.$ID("shared_user_"+id),"ghosted-user");
+			Stixy.element.$ID("remove_user_"+id).value = 1;
+		}
+		function remove_invite(id){
+			Stixy.element.addClassName(Stixy.element.$ID("invites_user_"+id),"ghosted-user");
+			Stixy.element.$ID("remove_invite_"+id).value = 1;
+		}
+	</script>
+<% if flash[:share] %><!-- <div class="notice"><%= flash[:share] %></div> --><% end %>
+
+	<table class="layout-table">
+		<% ([current_user] + @board.shared_with(current_user)).each_with_index do | user, i | -%>
+		<%= "<tr>" if i % 2 == 0 %>
+			<td>
+				<div style="float:left;margin-right:15px;width:260px;padding-bottom:10px;" id="shared_user_<%= user.id %>">
+					<%= render :partial => "/board/user_list", :object => user, :locals => {:tools => true } %>
+				</div>
+			</td>
+		<%= "</tr>" if i % 2 == 2 %>
+		<% end -%>
+	</table>
+
+
+<% unless @board.invites.empty?  %>
+<div style="border-bottom:1px solid rgb(235,235,235); text-align:right;">
+	<img src="/images/buttons/btn_arrow_previous_page.gif" width="1" height="1" style="visibility:hidden;">
+</div>
+<h3>You have invited</h3>
+	<table class="layout-table">
+	<% @board.invited_users.each_with_index do | user, i | -%>
+	<% invite = user.board_invitation(@board) -%>
+		<%= "<tr>" if i % 2 == 0 %>
+			<td>
+				<div style="float:left;margin-right:15px;width:260px;padding-bottom:10px;" id="invites_user_<%= invite.id %>">
+					<%= render :partial => "user_list", :object => user, :locals => {:invite => invite, :tools => true } %>
+				</div>
+			</td>
+		<%= "</tr>" if i % 2 == 2 %>
+	<% end -%>
+	</table>
+<% end %>
+</div>

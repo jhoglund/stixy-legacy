@@ -1,0 +1,11 @@
+
+calendar_with_notification:
+  id: 1
+  subject: en lite calendar
+  note: en liten note
+  location: karlshamn
+  status: Status::ACTIVE
+  type: string, CalendarEntry
+  
+two:
+  id: 2

@@ -1,0 +1,8 @@
+Hello!
+ 
+This is a reminder for a Todo widget on Stixyboard "<%= @widget.board.display_name %>" at http://<%= SERVER %>/board/<%= @widget.board.id %>, 
+scheduled for <%=  (@reminder.user.adjusted_time(@widget.time)).strftime("%B %d, %Y %I:%M %p") %>
+
+Comments: <%= strip_tags(@widget.comment) %>
+
+If you think this reminder has been sent to you by mistake, contact us at Stixy at support@stixy.com, and we will help you.

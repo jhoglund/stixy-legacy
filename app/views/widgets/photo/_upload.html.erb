@@ -1,0 +1,22 @@
+<form action="http://<%= UPLOAD_SERVER %>/widgets/photos" enctype="multipart/form-data" method="post">
+	<input type="hidden" name="board_id" value="0">
+	<input type="hidden" name="upload_id" id="upload_id" value="<%= CGI::Session.generate_unique_id %>">
+	<input type="hidden" value="200" name="conditions[width]" id="conditions_width">
+	<input type="hidden" value="160" name="conditions[height]" id="conditions_height">
+	<input type="hidden" value="0" name="conditions[rotation]" id="conditions_rotation">
+	<input type="hidden" value="0" name="conditions[filter]" id="conditions_filter">
+	<input type="hidden" value="<%= request.host %>" name="host">
+  <h2 style="margin:0;">Add a photo</h2>
+	<% if flash[:error].nil? %>
+	<div class="description" style="margin:4px 0 10px">Browse your computer for a photo, and click "Add photo" to upload your photo to Stixy.</div>
+	<% else %>
+	<div class="description inline-message-error" style="margin:4px 0 10px; right:auto;"><%= flash[:error] %></div>
+	<% end %>
+  <input type="file" name="photo[file]" style="width:300px;">
+  <input type="submit" style="display:none;">
+</form>
+
+<div style="margin:15px 0 10px">
+	<div style="color:rgb(150,150,150)">Maximum file size: 4 MB</div>
+	<div style="color:rgb(150,150,150)">Allowed file formats: JPG, GIF, PNG</div>
+</div>

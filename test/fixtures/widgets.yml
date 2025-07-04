@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+note:
+  id: 1
+  name: Note
+photo:
+  id: 2
+  name: Photo
+document:
+  id: 3
+  name: Document
+todo:
+  id: 4
+  name: Todo

@@ -1,0 +1,25 @@
+<div class="document widget<%= if widget.locked?; " widget-locked" end %>" style="z-index:<%=index%>; <%= widget.style_prop(:top,:left,:width,:height) %>" id="widget_<%= widget[:id]  %>">
+	<%= render :partial => "/widgets/default/shadow_focus" %>
+  <div class="base">
+    <div class="base-bg document-bg">&nbsp;</div>
+		<% 
+			document = widget.documents.first
+			icon_name = document ? get_icon(document.content_type, document.filename.gsub(/.*\./,'')) : "generic"
+		-%>
+		<div class="document-icon document-icon-<%= icon_name %>"<% if document %> title="<%= document.filename %>" <% end %>></div>
+		<div class="w-d-file-link file-link"><% if document -%>
+			<%=  link_to document.filename, 
+			             :controller => "widgets/document", 
+			             :action => "file", 
+			             :id => document.filename, 
+			             :board_id => @board.id, 
+			             :document_id => document.id, 
+			             :widget_id => widget.id  %>
+<% end -%></div>
+		<% unless document -%>
+		<%= link_to_function("Add document(s)", nil, :button => {:type => "default"}, :class => "w-d-upload", :style => "margin-left:10px; font:11px 'Verdana', 'Lucida Grande', 'Bitstream Vera Sans', 'Sans';") %>
+		
+		<% end -%>
+		<%= render :partial => "/widgets/default/remove_resize", :locals => { :resize => false } %>
+	</div>
+</div>

@@ -1,0 +1,12 @@
+<div class="footer">
+    <div class="navigation">
+        <%= link_to "Home", {:controller => ''} %>
+        <span class="pipe"></span> 
+				<%= link_to "Contact Us", {:controller => "public", :action => 'contact_us'} %>
+        <span class="pipe"></span> 
+        <%= link_to "Terms of Service", {:controller => "public", :action => 'terms_of_service'} %>
+        <span class="pipe"></span> 
+        <%= link_to "Privacy Policy", {:controller => "public", :action => 'privacy_policy'} %>
+    </div>
+    <%=  render(:partial => "shared/copyright")  %>
+</div>

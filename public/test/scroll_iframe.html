@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html debug="true">
+<head>
+	<title>Welcome to Stixy</title>
+	<script language="javascript" type="text/javascript" src="/javascripts/firebug/firebug.js"></script>
+	
+	<style>
+		.test {position:absolute;visibility:hidden;;width:100px;height:100px;overflow:scroll}
+	</style>
+</head>
+<body>
+	<iframe src="/test/wrap.html" id="frame" width="100" height="100" scrolling="no"></iframe>
+		<div id="div" style="position:absolute;overflow:hidden;width:85px;height:85px;top:200px;left:10px;border:1px inset black">
+		<div id="div" style="position:absolute;overflow:scroll;width:100px;height:100px;">
+			thisisaverylongword dasdasd dasdasdasd dasdasdasd dasdasdasd dasdasdas dasdasdas dasdasdas dasdasd dasdasdasdasd dasdasdas dasdasd d
+			dsadasd dasdas dasdasda dasdasdasdasdasdas d asd asd as dasdas dasdas dasdasdasd sadasdas dasd asd asdasdasdas dasdas das dasdsa
+			dsdas dsadasd dasdasdd asdasdasd dasdasd dsadasd dasdasd dasdas 
+		</div>
+		</div>
+		<script>
+			var scroll = document.createElement("div")
+			scroll.className = "test";
+			document.body.appendChild(scroll);
+			var scrollXsize = scroll.offsetWidth-scroll.scrollWidth;
+			var scrollYsize = scroll.offsetHeight-scroll.scrollHeight;
+			document.body.removeChild(scroll);
+			console.log(scrollXsize)
+			console.log(scrollYsize)
+		</script>
+		
+</body>
+</html>

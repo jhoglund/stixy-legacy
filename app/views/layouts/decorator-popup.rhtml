@@ -1,0 +1,46 @@
+<%= @doc_type %>
+<% debug_state = false %>
+
+<html<% if ENV["RAILS_ENV"] == "development" and debug_state===true %> debug="true" debugtop="false"<% end %> lang="en" style="background:white;" xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<title>Stixy: For Flexible Online Creation Collaboration and Sharing</title>
+	<%= render :partial => "/shared/meta" %>
+	<%#= javascript_include_tag "all/firebug/firebug" if ENV["RAILS_ENV"] == "development" and debug_state===true -%>
+	<%= include_resource :javascript, :default %>
+	<%= include_resource :stylesheet, :default %>
+	<script>
+    var Global = window.parent.Stixy;
+  </script>
+	<%= @header_include %>
+</head>
+<body scroll="no" style="background:white;">
+	<div class="popup-canvas">
+		<div class="popup-pending">
+			<div class="popup-pending-background"></div>
+			<div class="popup-pending-content" id="pending_content"><%= @pending_content %></div>
+		</div>
+		<table class="popup-grid">
+			<tr>
+				<td class="popup-top">
+					<% if ENV["RAILS_ENV"] == "development" -%>
+						<%= link_to_function "Reload", 'window.location.reload(true)', :style => " position:absolute;left:10px; top:3px;"  %>
+					<% end -%>
+					<%= link_to_function "&nbsp;", 'window.parent.Stixy.popup.cancel()', :class => "popup-top-close"  %>
+					<div class="popup-top-line">&nbsp;</div>
+					<div class="popup-content" id="popup_content">
+			  		<%= @content_for_layout %>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="popup-bottom">
+					<div class="popup-button-bar">
+						<div class="popup-buttons" id="popup_buttons"><% @buttons ||= "#{ link_to_function "Close", 'window.parent.Stixy.popup.close()', :button => {:type => 'default'} }" %><%= @buttons %></div>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="popup-load-progress" id="popup_load_progress"></div>
+</body>
+</html>

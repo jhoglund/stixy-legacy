@@ -1,0 +1,36 @@
+
+<h2>Show Newsletter</h2>
+
+<span class="adminmenu"><%= link_to 'Back', :controller => 'admin/newsletter', :action => 'list' %></span>
+<span class="adminmenu"><%= link_to 'Edit', :controller => 'admin/newsletter', :action => 'edit', :id => @newsletter.id %></span>
+<span class="adminmenu"><%= link_to 'Create new from this', :controller => 'admin/newsletter', :action => 'create', :id => @newsletter.id %></span>
+<span class="adminmenu"><%= link_to 'Send to me (for testing)', :controller => 'admin/newsletter', :action => 'send_newsletter', :to => 'me', :id => @newsletter.id %></span>
+
+<br /><br />
+<%= error_messages_for :send_newsletter %>
+<% form_for :range, :url => {:action => :send_newsletter, :to => 'users', :id => @newsletter.id}  do |f| -%>
+	Select user id range (highest id:<%= @top_id %>),
+	<label for="from">from:</label>
+	<%= f.text_field :from, :size => 6 %>
+	<label for="to">to:</label>
+	<%= f.text_field :to, :size => 6 %>
+
+	<%= submit_tag 'Send' %>
+<% end -%>
+
+
+
+<br />
+<hr />
+
+
+<%= render :partial => 'newsletter_show' %>
+
+<hr />
+<b>Text version:</b>
+<hr />
+
+<%= text_area(:test, :test, :size => "140x40", :value => @text_preview) %>
+
+<br /><br />
+<br /><br />

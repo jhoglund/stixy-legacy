@@ -1,0 +1,8 @@
+<%= @feedback[:description] %>
+<br/><br/>
+<b>From:</b> <%= @feedback[:first_name] %> <%= @feedback[:last_name] %><br/>
+<b>Browser:</b> <%= @feedback[:browser] %><br/>
+<b>Platform:</b> <%= @feedback[:platform] %><br/>
+<b>Useragent:</b> <%= @feedback[:user_agent] %><br/>
+<b>For:</b> <%= @feedback[:name].empty? ? "General" : @feedback[:name].titlecase %><br/>
+<br/>

@@ -1,0 +1,42 @@
+/*-------------------------*/
+/*   DOCUMENT WIDGET IE 6  */
+/*-------------------------*/
+
+/*.document .base { background:transparent; padding:2px 0 0; font-family:"Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; }
+.document .shadow { display:none; }
+.document .document-bg { position:absolute; width:100%; height:100%; z-index:-1; left:0px; top:0px; background:none; }
+.widget-hover .document-bg { background:white!important; opacity:0.5; filter:alpha(opacity=50); }
+.widget-selected .document-bg { background:white!important; opacity:1; filter:alpha(opacity=100); }
+.document .status-pane,
+.document .progress-canvas { display:none; }
+.document .progress-canvas { position:absolute; top:5px; left:52px; height:54px; width:40px; }
+.document .progress-bar { position:absolute; bottom:0px; height:0; width:40px; background:url(/images/widgets/document/progress.gif) left bottom; }
+.document .progress-number { position:absolute; top:20px; width:40px; text-align:center; font-size:9px; color:rgb(90,145,25); }
+.document .status-pane { position:relative; top:-5px; z-index:0; }
+.document .status-file-size { text-align:center; font-size:9px; padding-bottom:2px; }
+.document .status-file-size-loaded,
+.document .status-file-size-total { font-weight:bold; }
+.document .status-file-name-text { color:rgb(150,150,150); text-align:center; }
+.document .file-link { word-wrap:break-word; text-align:center;font:11px 'Verdana', 'Lucida Grande', 'Bitstream Vera Sans', 'Sans'; }
+.document .document-icon { width:64px; height:64px; margin:0 40px 5px; background-position:no-repeat;}
+*/
+
+.document .progress-canvas { top:4px; }
+.document .error-bg { height:expression(parentNode.clientHeight); }
+
+/* Optionbar */
+/*.w-d-replace { display:none; }*/
+
+/* Icons */
+.document .document-icon-code  			 { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/document/icons/code.png');}
+.document .document-icon-compress  	 { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/document/icons/compress.png');}
+.document .document-icon-excel  		 { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/document/icons/excel.png');}
+.document .document-icon-executable  { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/document/icons/executable.png');}
+.document .document-icon-generic 		 { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/document/icons/generic.png');}
+.document .document-icon-image 			 { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/document/icons/image.png');}
+.document .document-icon-media 			 { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/document/icons/media.png');}
+.document .document-icon-pdf 				 { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/document/icons/pdf.png');}
+.document .document-icon-powerpoint  { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/document/icons/powerpoint.png');}
+.document .document-icon-text 			 { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/document/icons/text.png');}
+.document .document-icon-vector  		 { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/document/icons/vector.png');}
+.document .document-icon-word  			 { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/document/icons/word.png');}

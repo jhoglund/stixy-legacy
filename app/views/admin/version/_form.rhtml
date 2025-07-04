@@ -1,0 +1,20 @@
+<%= error_messages_for 'version' %>
+
+<table class="admin">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  <%= hidden_field ("version", "id") if controller.action_name == 'edit' %>
+  
+  <tr class="light">
+    <td><label for="version_db_version_numb">Db version numb:</label></td>
+    <td><%= @version.db_version_numb  %></td>
+  </tr>
+  
+  <tr class="dark">
+    <td><label for="version_app_version_numb">App version:</label></td>
+    <td><%= text_field('version', 'app_version_numb', 'size' => 10, 'maxsize' => 10, "autocomplete" => "off")  %></td>
+  </tr>
+</table>  
+

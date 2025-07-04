@@ -1,0 +1,38 @@
+<%= render :partial => "public/public_navigation" %>
+<div class="left-column" style="width:500px;">
+
+<% form_tag do -%>
+<%= error_messages_for 'questioner' %>
+	<h1 style="line-height:1.2em">Before You Sign In &mdash; Help Us Improve!</h1>
+	<p>Please take a minute and answer the questions below. It would really help us in our continuous effort to make Stixy even better.</p>
+	<p>Or, if you prefer, continue to <%= link_to "sign in", :controller => "/public", :action => "signin" %>.</p>
+	
+	<div style="border: 1px solid rgb(200,200,200); border-width:0 0 1px; height:0; overflow:hidden;margin-bottom:20px;">&nbsp;</div>
+	
+	<p><span class="label">How did you first hear about Stixy? </span><br>
+	<%= text_area_tag "questions[got_to_know]", nil, :rows => 2, :style => "width:100%" %></p>
+	
+	<p><span class="label">In what way are you using Stixy’s services?</span><br>
+	<%= text_area_tag "questions[how_to_use]", nil, :rows => 2, :style => "width:100%" %></p>
+	
+	<p><span class="label">What do you consider to be the best thing with Stixy?</span><br>
+	<%= text_area_tag "questions[what_is_best]", nil, :rows => 2, :style => "width:100%" %></p>
+	
+	<p><span class="label">Which new services, if any, would you like to see added to Stixy in the future?</span><br>
+	<%= text_area_tag "questions[what_to_get]", nil, :rows => 2, :style => "width:100%" %></p>
+	
+	<p><span class="label">Additional comments</span><br>
+	<%= text_area_tag "questions[additional]", nil, :rows => 2, :style => "width:100%" %></p>
+	
+	<!-- <p><span class="label">Can we ask you more questions?</span><br>
+		<%#= text_field_tag "login" %></p> -->
+	<p style="text-align:right">
+		<%= link_to_function "Submit answers", 'document.forms[0].submit()', :button => {:type => 'default'} %>
+	</p>
+	<% @buttons = "
+		#{link_to "Skip (continue to sign-in)", {:controller => "/public", :action => "signin"}, :button => {:type => false}}
+		#{link_to_function "Submit answers", 'document.forms[0].submit()', :button => {:type => 'default'}, :style => "margin-left:10px;"}
+	" %>
+<% end -%>
+
+</div>

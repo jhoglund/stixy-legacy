@@ -1,0 +1,37 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+reminder_widget_1_jonas:
+  id: 1
+  widget_instance_id: 1
+  user_id: 2
+  status: <%= Status::PENDING %>
+  time: <%= -2.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+reminder_widget_1_adam:
+  id: 2
+  widget_instance_id: 1
+  user_id: 3
+  status: <%= Status::PENDING %>
+  time: <%= -2.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+reminder_widget_2_adam:
+  id: 3
+  widget_instance_id: 2
+  user_id: 3
+  status: <%= Status::PENDING %>
+  time: <%= 2.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+reminder_widget_2_maria:
+  id: 4
+  widget_instance_id: 2
+  user_id: 4
+  status: <%= Status::PENDING %>
+  time: <%= 2.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+reminder_widget_3_jonas:
+  id: 5
+  widget_instance_id: 3
+  user_id: 0
+  status: <%= Status::PENDING %>
+  time: <%= -2.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+reminder_widget_3_adam:
+  id: 6
+  widget_instance_id: 3
+  user_id: 3
+  status: <%= Status::PENDING %>
+  time: <%= -2.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>

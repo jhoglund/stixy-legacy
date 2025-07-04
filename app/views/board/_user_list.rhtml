@@ -1,0 +1,54 @@
+<% 
+	# Default values for local variables
+	compact ||= false
+	appear_effect ||= false
+	tools ||= false
+	invite ||= false
+-%>
+<table class="option-list" id="invited_<%= user_list.id  %>"<%= 'style="display:none"' if appear_effect %>>
+	<tr>
+		<% unless compact %>
+		<td style="width:58px;">
+     	<div style="background-image:url(<%= user_list.avatar_url -%>)" class="personal-thumb" id="personal_thumb">&nbsp;</div>
+		</td>
+		<% end %>
+		<td>
+			<% if compact %>
+				<h4><%= mail_to user_list.email, user_list.display_name %></h4>
+				<% unless invite %>
+          <!-- <span class="option-list-title">Last Sign-In </span> <nobr><%= formated_date(user_list.last_login_date) %></nobr> -->
+				<% else %>
+          <!-- <span class="option-list-title">Invited on </span> <nobr><%= formated_date(invite.created_on) %></nobr><br /> -->
+				<% end %>
+			<% else %>
+				<div style="position:relative;top:4px;">
+				  <%= "<h4>" + user_list.full_name + "</h4>" unless user_list.full_name.nil? %>
+				  <div class="mail-address"><%= mail_to user_list.email, wrap_mail(user_list.email),:title => user_list.email %></div>
+				</div>
+				<% unless invite %>
+          <!-- <span class="option-list-title">Last Sign-In </span> <nobr><%= formated_date(user_list.last_login_date) %></nobr> -->
+				<% else %>
+          <!-- <span class="option-list-title">Invited on </span> <nobr><%= formated_date(invite.created_on) %></nobr><br />
+          <span class="option-list-title">By </span> <nobr><%= invite.inviter_user.display_name %></nobr><br /> -->
+				<% end %>
+				<% if tools %>
+					<div class="user-tools">
+					<% unless invite %>
+						<input type="hidden" name="remove_user[<%= user_list.id %>]" value="0" id="remove_user_<%= user_list.id %>">
+						<p/>
+						<span class="remove-user" onclick="remove_user(<%= user_list.id %>)">Remove</span>
+					<% else %>
+						<input type="hidden" name="remove_invite[<%= invite.id %>]" value="0" id="remove_invite_<%= invite.id %>">
+						<span class="remove-user" onclick="remove_invite(<%= invite.id %>)" class="remove-user">Remove</span>
+						<span class="pipe">&nbsp;</span>
+						<span id="send_reminder_progress_<%= user_list.id %>" class="spinner-16">Sending</span>
+						<span id="send_reminder_link_<%= user_list.id %>" class="send-reminder">
+							<%= stixy_remote_link("Send reminder", {:url => { :action => "send_reminder_ajax", :id => @board.id, :invite_id => invite.id }, :before => "Stixy.element.$ID('send_reminder_link_#{ user_list.id }').style.display='none';Stixy.element.$ID('send_reminder_progress_#{ user_list.id }').style.display='inline'", :complete => "Stixy.element.$ID('send_reminder_link_#{ user_list.id }').style.display='inline';Stixy.element.$ID('send_reminder_progress_#{ user_list.id }').style.display='none'"}) %>
+						</span>
+					<% end %>
+					</div>
+				<% end %>
+			<% end %>
+		</td>
+  </tr>
+</table>

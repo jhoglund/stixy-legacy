@@ -1,0 +1,3 @@
+<% time_format = (!compare_dates(activity_list_item.activity.start, activity_list_item.activity.stop) ? current_user.time_format.get_abbr_date[:value] : current_user.time_format.get_time[:value]) %>
+<span class="activity-list-item-date"><b><%= activity_list_item.activity.start.strftime(time_format) %></b> to <b><%= activity_list_item.activity.stop.strftime(time_format) %></b></span>
+<%= activity_list_item.calendar_text %>

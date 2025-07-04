@@ -1,0 +1,26 @@
+<div id="users_list">
+	
+	<%= render :partial => "/admin/shared/page_size", :locals => { :title => "Beta testers per page:", :action => "list_with_ajax", :update => "users_list" } %>
+	<table class="admin">
+  <tr>
+	  <%= sort_header_remote_tag('id', 'Id', { :url => {:action => 'list_with_ajax'}, :update => 'users_list' }, {:style => "color:black;"}) %>
+    <th>Login</th>
+    <th>Comment</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </tr>
+<% @users.each_with_index  do |beta_tester, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+%>
+  <tr class="<%= color %>">
+    <td><%= beta_tester.id %></td>
+    <td><%= mail_to beta_tester.user.login %></td>
+    <td><%= simple_format(auto_link(beta_tester.comment,:all, :target => "_stixy_external")) %></td>
+    <td><%= link_to "Show", :action => "show", :id => beta_tester.id %></td>
+    <td><%= link_to "Destroy", :action => "destroy", :id => beta_tester.id %></td>
+  </tr>
+<% end %>
+</table>
+<%= render :partial => "/admin/shared/page_nav", :locals => { :paginator => @paginator, :page => @page, :action => "list_with_ajax", :update => "users_list" } %>
+</div>

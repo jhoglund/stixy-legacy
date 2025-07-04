@@ -1,0 +1,30 @@
+<h2>Versions list</h2>
+<table class="admin">
+  <tr>
+    <th>DB Version</th>
+    <th>App Version</th>
+    <th>Modified Date</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </tr>
+  
+<% @versions.each_with_index  do |version, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+%>
+  <tr class="<%= color %>">
+    <td><%= version.db_version_numb %></td>
+	<td><%= version.app_version_numb %></td>
+	<td><%= version.updated_on %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => version %></td>
+    <td><% if index == 0 %>
+            <%= link_to 'Destroy', { :action => 'destroy', :id => version }, :confirm => "Are you sure?\n Do not delete versions, unless you know exactly why - i.e when last db update script failed, and running it again will have no side effects" %>
+        <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= link_to 'Previous page', { :page => @version_pages.current.previous } if @version_pages.current.previous %>
+<%= link_to 'Next page', { :page => @version_pages.current.next } if @version_pages.current.next %> 

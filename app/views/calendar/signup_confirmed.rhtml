@@ -1,0 +1,14 @@
+<div style="margin:24px 144px 24px 144px">
+<h1>Thank You!</h1>
+<p>Thank you for helping us test the Stixy calendar. We hope that you will use it as much as possible to be able to give us feedback. Good and bad. And don’t forget to write to us about the bugs you may find.
+
+<p>We truly appreciate it.
+
+<p><%= link_to "Continue to the calendar &gt;&gt;", :controller => :calendar, :action => :index  %>
+</div>
+
+<% 
+@buttons = "#{ link_to_function "Close", 'window.parent.Stixy.popup.close()', :button => {:type => false} }
+						#{ link_to "Open Calendar", {:controller => :calendar, :action => :index}, :button => {:type => 'default'}, :style => "margin-left:10px;"  }"
+
+%>

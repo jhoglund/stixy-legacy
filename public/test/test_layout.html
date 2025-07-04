@@ -1,0 +1,535 @@
+<!--[if lte IE 6]><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 transitional//EN"><![endif]-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Welcome to Stixy</title>
+	<style type="text/css">
+		html { overflow:hidden; height:100%; }
+		body { height:100%;width:100%;margin:0; background-image:url(/images/bg_pattern_dot.gif);  }
+		
+		table, body { font: 11px "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; }
+		h1, h2, h3 { font-weight: normal; color:rgb(150,210,10); }
+		h1 { font-size: 1.8em; margin: .67em 0; }
+		h2 { font-size: 1.5em; margin: .75em 0; }
+		h3 { font-size: 1.2em; margin:2px 0 4px; }
+		h4 { font-size: 1em; margin:0 0 0px; }
+		ul, ol { margin: 0px; padding-left: 16px; }
+		ul li { list-style-type: square; }
+		a:link,
+		a:visited,
+		a:active { color: rgb(45,130,215); text-decoration: none; }
+		a:hover { color: rgb(35,95,155); text-decoration: none; }
+
+		/* HEADER */
+		.header, 
+		.header-background-pattern, 
+		.utility { position:absolute; overflow:hidden; top:0; height:40px; width:100%; }
+		.header { left:-17px; background:rgb(50,50,50); }
+		.header-background-pattern { height:100%; background-image:url("/images/bg_pattern_dot.gif"); filter:alpha(opacity=20); opacity:0.20; z-index:-1; }
+		.header-background-gradient { position:relative; top:-480px; height:1000px; width:1000px; margin:0 auto; background:url(/images/white_gradient_radius_horizontal.png) no-repeat center 480px; z-index:-1; }
+		.utility-navigation { height:30px; top:10px; right:10px; text-align:right; }
+		
+		/* OPTIONBAR */
+		.opt-bar { position:absolute; overflow:hidden; right:27px; bottom:16px; height:100%; width:255px; }
+		.opt-bar .bar-tools { top:-24px; border-bottom:1px solid rgb(255,255,255);}
+		.opt-bar-grid { border-collapse:collapse; top:0; bottom:0; height:100%; width:0; }
+		.opt-bar-grid td { padding:0; vertical-align:top; }
+		.opt-panel { position:absolute; display:none; top:0; right:0; bottom:0; width:100%; }
+		.opt-scroll { position:absolute; overflow:auto; top:0; right:0; bottom:0; left:0; height:100%; width:100%; }
+		.opt-content { height:200px; margin:10px; }
+		.opt-background { position:absolute; width:100%; background-color:rgb(235,235,235); filter:alpha(opacity=75); opacity:0.75; }
+		.opt-gradient { position:relative; top:0; left:-5000px; height:200%; width:10000px; }
+		.opt-tab,
+		.opt-tab .left,
+		.opt-tab .right,
+		.opt-tab .left div,
+		.opt-tab .right div { position:absolute; top:0; height:21px; z-index:-1; }
+		.opt-tab { display:inline; top:-21px; height:19px; line-height:21px; }
+		.opt-tab .left { overflow:hidden; left:0; width:50%; }
+		.opt-tab .right { overflow:hidden; right:0; width:51%; }
+		.opt-tab .left div,
+		.opt-tab .right div { width:100%; background:url(/images/edit_options_tab.png) no-repeat; }
+		.opt-tab .left div { left:0; background-position:left top; }
+		.opt-tab .right div { right:0; background-position:right top; }
+		.opt-tab .label { padding:0px 15px 0 15px; white-space:nowrap; color:white; }
+		.wopt-common-tools { position:absolute; display:none; bottom:24px; height:100px; width:100%; background-color:rgb(220,220,220); }
+		
+		 /* OPTION BAR STATES*/
+		.wopt-show .opt-background,
+		.wopt-show .opt-panel { top:113px; bottom:124px; }
+		.wopt-show .opt-panel { border-top:1px solid rgb(215,215,215); }
+		
+		.bopt-show .opt-background { top:82px; }
+		.bopt-show .opt-panel { top:106px; }
+		.bopt-show .opt-background,
+		.bopt-show .opt-panel { bottom:135px; }
+		.bopt-show.tray-hide .opt-background,
+		.bopt-show.tray-hide .opt-panel { bottom:34px; }
+		.bopt-show .opt-panel { border-bottom:1px solid rgb(215,215,215); }
+		
+		.wopt-hide.bopt-hide .opt-bar { display:none; }
+		.bopt-show .opt-panel.bopt, 
+		.wopt-show .opt-panel.wopt,
+		.wopt-show .opt-bar,
+		.wopt-show .wopt-common-tools { display:block; }
+		.wopt-show .opt-bar { z-index:3; }
+		.bopt-show .bopt-switcher-show,
+		.bopt-hide .bopt-switcher-hide,
+		.wopt-show .wopt-switcher-show,
+		.wopt-hide .wopt-switcher-hide { display:block;}
+
+		/* OPTIONBAR SWITCHES */
+		.opt-switch,
+		.opt-switch-highlight-line,
+		.opt-switch-shadow-line { position:absolute; height:24px; }
+		.opt-switch { top:0; right:9px; width:254px; }
+		.opt-switch-highlight-line,
+		.opt-switch-shadow-line { overflow:hidden; top:0; width:0; }
+		.opt-switch-highlight-line { left:0; }
+		.opt-switch-shadow-line { right:0; }
+		.bopt-switcher-show,
+		.bopt-switcher-hide,
+		.wopt-switcher-show,
+		.wopt-switcher-hide { display:none; padding:5px 0 4px 30px; background:no-repeat 8px -10px; color:white; }
+		.bopt-switcher-show:hover,
+		.bopt-switcher-hide:hover,
+		.wopt-switcher-show:hover,
+		.wopt-switcher-hide:hover { background-position:8px -40px; }
+		
+		/* BOARD LIST */
+		.board-list-bar { position:relative; float:left; height:100%; width:255px; border-right:1px solid rgb(215,215,215); background:rgb(255,255,255); }
+		.board-list-bar .bar-tools { top:66px; }
+		.board-list-grid { border-collapse:collapse; height:100%; width:255px; }
+		.board-list-grid td { padding:0; vertical-align:top; }
+		.board-list-top { height:90px; }
+		.board-list-bottom { overflow:hidden; }
+		.board-list-panel { position:absolute; top:90px; bottom:0; width:100%; }
+		.board-list-scroll { position:absolute; overflow:auto; height:100%; width:100%; top:0; right:0; bottom:0; left:0; }
+		.board-list-content { height:1200px; margin:10px; }
+		.board-list-switch,
+		.board-list-switch-highlight-line,
+		.board-list-switch-shadow-line { height:24px; }
+		.board-list-switch { position:relative; float:left; top:0; left:17px; width:255px; margin-right:17px; }
+		.board-list-switch .toolbar-button { float:right; margin-left:0; margin-right:10px; }
+		.board-list-switch-highlight-line,
+		.board-list-switch-shadow-line { position:absolute; overflow:hidden; top:0; width:0; }
+		.board-list-switch-highlight-line { right:-2px; }
+		.board-list-switch-shadow-line { right:-1px; }
+		
+		/* BOARD LIST STATES*/
+		.board-list-hide .board-list-bar { display:none; }
+		.board-list-show .board-list-bar,
+		.tray-highlight-line,
+		.tray-bar-highlight-line { display:block; }
+		.board-list-show .tray-switch { left:282px; }
+		.board-list-show .tray-content { padding-left:282px; }
+		.board-list-show .tray-highlight-line,
+		.board-list-show .tray-bar-highlight-line { left:273px; }
+		
+		/* BAR TOOLS */
+		.bar-tools { position:absolute; height:24px; width:255px; background:rgb(235,235,235); }
+		.bar-close { position:absolute; top:0; right:0; height:24px; width:24px; background:url(/images/btn_bar_close.gif); }
+		
+		/* CANVAS */
+		.canvas { position:relative; overflow:scroll; height:100%; }
+		.min-space { height:5000px; width:5000px; background:transparent; }
+		
+		/* TOOLBAR */
+		.toolbar { position:absolute; top:40px; left:-17px; height:24px; width:100%; }
+		.toolbar-background { position:absolute; overflow:hidden; top:0; left:0; height:24px; width:100%; z-index:-1; }
+		.toolbar-background-gradient { position:relative; top:-485px; left:0; height:1000px; width:1000px; margin:0 auto; background:no-repeat center 485px; z-index:0; }
+		.toolbar-tools { float:left; margin:0; }
+		.toolbar-button,
+		.toolbar-button .left,
+		.toolbar-button .right,
+		.toolbar-button .left div,
+		.toolbar-button .right div { position:absolute; top:0; height:18px; z-index:-1; }
+		.toolbar-button { position:relative; display:inline; float:left; height:18px; margin:3px 0 0 10px; line-height:16px; color:white; z-index:0; }
+		.toolbar-button .left { overflow:hidden; left:0; width:50%; }
+		.toolbar-button .right { overflow:hidden; right:0; width:51%; }
+		.toolbar-button .left div,
+		.toolbar-button .right div { width:100%; background-repeat:no-repeat; }
+		.toolbar-button .left div { left:0; background-position:left top; }
+		.toolbar-button .right div { right:0; background-position:right top; }
+		.toolbar-button .label { padding:0px 15px 0 15px; }
+		.toolbar-button:hover .left div { background-position:left -18px; }
+		.toolbar-button:hover .right div { background-position:right -18px; }
+		.toolbar-button:link,
+		.toolbar-button:visited { color:white; }
+		.toolbar .save-indicator { position:absolute; right:275px; height:24px;  width:300px; text-align:right; }
+		
+		/* SAVE STATES */
+		.text-saved,
+		.text-saving,
+		.text-save  { display:none; cursor:default; padding:5px 0; background:no-repeat right 4px; }
+		.text-save .toolbar-button { float:right; margin-top:-2px; }
+		.text-save #save_counter { color:white; }
+		.text-saved { display:block; }
+		.text-saving { padding-right:20px; }
+		.save .text-saved,
+		.saving .text-saved { display:none; }
+		.saving .text-saving,
+		.save .text-save { display:block; }
+		
+		/* TRAY */
+		.tray,
+		.tray-bar,
+		.tray-background,
+		.tray-bar-background,
+		.tray-background-gradient,
+		.tray-switch,
+		.tray-highlight-line,
+		.tray-bar-highlight-line { position:absolute; }
+		.tray,
+		.tray-bar,
+		.tray-bar-background,
+		.tray-background { width:100%; }
+		.tray, 
+		.tray-bar { left:-17px; }
+		.tray { display:none; bottom:40px; height:100px; }
+		.tray-bar,
+		.tray-bar-background,
+		.tray-switch { height:24px; }
+		.tray-bar { bottom:16px; }
+		.tray-content { height:70px; padding:10px 0 0 27px; }
+		.tray-background { overflow:hidden; top:0; left:0; height:100px; z-index:-1; }
+		.tray-background-gradient { top:-480px; height:1000px; width:1000px; margin:0 auto; }
+		.tray-background { background:rgb(235,235,235); filter:alpha(opacity=85); opacity:0.85; }
+		.tray-background-gradient { background:url(/images/mt_gradient_1000x100_gray.png) no-repeat left 480px; }
+		.tray-bar-background { overflow:hidden; top:0; z-index:-1; }
+		.tray-bar-background-gradient { position:relative; top:-485px; left:0; height:1000px; width:1000px; margin:0 auto; background:no-repeat center 485px; z-index:0; }
+		.tray-switch { left:27px; color:white; }
+		.tray-switcher-show:hover,
+		.tray-switcher-hide:hover { background-position:0 -40px; }
+		.tray-highlight-line,
+		.tray-bar-highlight-line { display:block; height:100%; width:1px; border-right:1px solid rgb(245,245,245); }
+		
+		/* TRAY STATES*/
+		.tray-show .tray { display:block; }
+		.tray-hide .tray { display:none; }
+		.tray-switcher-show,
+		.tray-switcher-hide { display:none; padding:5px 0 4px 22px; background:no-repeat left -10px;  }
+		.tray-show .tray-switcher-show,
+		.tray-hide .tray-switcher-hide { display:block;}
+		
+		/* GREEN BARS */
+		.opt-switch,
+		.board-list-switch-shadow-line,
+		.opt-switch-shadow-line { border-left:1px solid rgb(90,145,25); }
+		.opt-switch,
+		.board-list-switch-highlight-line,
+		.opt-switch-highlight-line,
+		.tray-bar-highlight-line { border-right:1px solid rgb(190,240,70); }
+		.toolbar,
+		.tray-bar { border-top:1px solid rgb(190,240,70); border-bottom:1px solid rgb(90,145,25); }
+		/*.board-list-switch,*/
+		.toolbar-background,
+		.tray-bar-background { background:rgb(150,210,10); }
+		.toolbar-background-gradient,
+		.tray-bar-background-gradient { background-image:url(/images/mt_gradient_radius_horizontal_green.png); }
+		.toolbar-button .left div,
+		.toolbar-button .right div { background-image:url(/images/btn_toolbar_bg_green.gif); }
+		.toolbar-button:hover { color:rgb(175,225,45); }
+		.bopt-switcher-show { background-image:url(/images/btn_menu_toggle_down.gif); }
+		.bopt-switcher-hide { background-image:url(/images/btn_menu_toggle_right.gif); }
+		.tray-switcher-show,
+		.wopt-switcher-show { background-image:url(/images/btn_menu_toggle_up.gif); }
+		.tray-switcher-hide,
+		.wopt-switcher-hide { background-image:url(/images/btn_menu_toggle_right.gif); }
+		.bopt-switcher-show:hover,
+		.bopt-switcher-hide:hover,
+		.wopt-switcher-show:hover,
+		.wopt-switcher-hide:hover,
+		.tray-switcher-show:hover,
+		.tray-switcher-hide:hover { color:rgb(90,145,25); }
+		.text-saved { color:rgb(90,145,25); }
+		
+		/* ORANGE BAR*/
+		.saving .text-saving { background-image:url(/images/icon_spinner_orange.gif); }
+		.saving .text-saving,
+		.save .text-save { color:rgb(165,95,0); cursor:pointer; }
+		.save .toolbar, 
+		.saving .toolbar { border-top-color:rgb(255,209,54); border-bottom-color:rgb(214,122,0); }
+		.save .toolbar-background, 
+		.saving .toolbar-background { background:rgb(245,160,0); }
+		.save .toolbar-background-gradient, 
+		.saving .toolbar-background-gradient { background-image:url(/images/mt_gradient_radius_horizontal_orange.png); }
+		.save .toolbar .opt-switch,
+		.saving .toolbar .opt-switch,
+		.save .toolbar .board-list-switch-shadow-line,
+		.saving .toolbar .board-list-switch-shadow-line,
+		.save .toolbar .opt-switch-shadow-line,
+		.saving .toolbar .opt-switch-shadow-line { border-left:1px solid rgb(214,122,0); }
+		.save .toolbar .opt-switch,
+		.saving .toolbar .opt-switch,
+		.save .toolbar .board-list-switch-highlight-line,
+		.saving .toolbar .board-list-switch-highlight-line,
+		.save .toolbar .opt-switch-highlight-line,
+		.saving .toolbar .opt-switch-highlight-line { border-right:1px solid rgb(255,209,54); }
+		.save .toolbar-button .left div,
+		.saving .toolbar-button .left div,
+		.save .toolbar-button .right div,
+		.saving .toolbar-button .right div { background-image:url(/images/btn_toolbar_bg_orange.gif); }
+		.save .bopt-switcher-show,
+		.saving .bopt-switcher-show { background-image:url(/images/btn_menu_toggle_down_orange.gif); }
+		.save .bopt-switcher-hide,
+		.saving .bopt-switcher-hide { background-image:url(/images/btn_menu_toggle_right_orange.gif); }
+		.bopt-switcher-show:hover,
+		.bopt-switcher-hide:hover { color:rgb(165,95,0); }
+		
+		/*.save .toolbar-tools a:hover, 
+		.save .toolbar a:hover,
+		.saving .toolbar-tools a:hover, 
+		.save .toolbar-tools a:hover { color:rgb(165,95,0); }
+		.saving .toolbar-tools a.new, 
+		.save .toolbar-tools a.new { background-image:url(/images/btn_menu_new_orange.gif); }
+		.saving .bopt .opt-header, 
+		.save .bopt .opt-header { background:rgb(245,160,0); border-color:rgb(255,209,54) rgb(214,122,0) rgb(214,122,0) rgb(255,209,54); }*/
+
+		.saving .bopt-header .opt-switcher,
+		.save .bopt-header .opt-switcher { background-image:url(/images/btn_menu_toggle_right_orange.gif); }
+		.saving.bopt-show .bopt-header .opt-switcher,
+		.save.bopt-show .bopt-header .opt-switcher { background-image:url(/images/btn_menu_toggle_down_orange.gif); }
+		.saving .bopt-header .opt-switcher:hover,
+		.save .bopt-header .opt-switcher:hover { color:rgb(165,95,0); }
+		.saving .bopt-header .opt-header-left, 
+		.saving .bopt-header .opt-header-right,
+		.save .bopt-header .opt-header-left, 
+		.save .bopt-header .opt-header-right  { border-left-color: rgb(214,122,0); border-right-color: rgb(255,209,54); }
+		
+		/* STACK ORDER */
+		.header,
+		.board-list-switch,
+		.opt-switch { z-index:7; }
+		.toolbar { z-index:6; }
+		.board-list-bar { z-index:5; }
+		.tray-bar { z-index:4; }
+		.tray { z-index:2; }
+		.opt-bar { z-index:1; }
+		.canvas { z-index:0; }
+		
+	</style>
+	<!--[if lte IE 6]>
+		<style>
+			.header-background-gradient { filter:alpha(opacity=20,finishOpacity=0,style=2); background:white; }
+			.tray-background { background:rgb(200,200,200); }
+			.tray-background-gradient { width:2000px; height:500px; top:-150px; right:-1000px; filter:alpha(opacity=100,finishOpacity=0,style=2); background:white; }
+			.canvas { width:100%; }
+			.board-list-bar { width:252px; margin-right:-3px; }
+			.board-list-panel { position:relative; top:auto; left:auto; height:100%; }
+			.toolbar-background-gradient { filter:alpha(opacity=100,finishOpacity=0,style=2); background:rgb(192,240,70); }
+			.tray-bar-background-gradient { filter:alpha(opacity=100,finishOpacity=0,style=2); background:rgb(192,240,70); }
+			.toolbar-background,
+			.tray-bar-background { height:22px; }
+			.toolbar-button { margin-top:2px; }
+			.text-save .toolbar-button { float:right; margin-top:-3px; }
+			.board-list-top { height:88px; }
+			.board-list-bar .bar-tools { top:64px;}
+			
+			/* OPTIONBAR */
+			.opt-panel { top:auto; bottom:auto; height:100%; }
+			.opt-bar .bar-tools { top:-25px;}
+			.opt-bar-grid { width:255px; }
+			.opt-gradient { filter:alpha(opacity=100,finishOpacity=10,style=2); background:white;}
+			.opt-background { height:100%; z-index:-1; }
+			.wopt-common-tools { position:relative; bottom:auto; height:100%; }
+			
+			 /* OPTIONBAR STATES*/
+			.wopt-show .opt-bar-top { height:113px; }
+			.wopt-show .opt-bar-bottom { height:125px; }
+
+			.bopt-show .opt-bar-top { height:106px; }
+			.bopt-show .opt-bar-bottom { height:135px; }
+			.bopt-show .opt-background { top:auto; bottom:135px; }
+			.bopt-show.tray-hide .opt-bar-bottom { height:34px; }
+			.bopt-show.tray-hide  .opt-background { bottom:34px; }
+			
+			/* OPTIONBAR SWITCHES */
+			.opt-switch-shadow-line { right:-1px; }
+			.opt-switch-highlight-line,
+			.board-list-switch-highlight-line,
+			.board-list-switch-shadow-line,
+			.opt-switch-shadow-line { height:22px; width:1px; }
+			
+			.board-list-switch,
+			.opt-switch { height:22px; }
+			
+		</style>
+	 <![endif]-->
+	<script>
+		/*onload = function(){
+			var canvas = document.getElementById("canvas");
+			var scrollbar_size = canvas.offsetWidth-canvas.clientWidth;
+			alert(scrollbar_size);
+		}*/
+	</script>
+</head>
+<body scroll="no" class="board-list-show wopt-hide bopt-show tray-show">
+	
+	<!-- HEADER -->
+	<div class="header">
+		<div class="header-background-gradient"></div>
+		<div class="header-background-pattern"></div>
+		<div class="utility">
+			hej
+		</div>
+	</div>
+	
+	<!-- TOOLBAR -->
+	<div class="toolbar">
+		<div class="toolbar-background"><div class="toolbar-background-gradient"></div></div>
+		<div class="board-list-switch">
+			<a href="#" class="toolbar-button">
+			  <div class="left"><div>&nbsp;</div></div>
+			  <div class="right"><div>&nbsp;</div></div>
+				<div class="label">New</div>
+			</a>
+			<a href="#" class="toolbar-button">
+			  <div class="left"><div>&nbsp;</div></div>
+			  <div class="right"><div>&nbsp;</div></div>
+				<div class="label">Open</div>
+			</a>
+			<div class="board-list-switch-shadow-line"></div>
+			<div class="board-list-switch-highlight-line"></div>
+		</div>
+		<a href="#" class="toolbar-button">
+		  <div class="left"><div>&nbsp;</div></div>
+		  <div class="right"><div>&nbsp;</div></div>
+			<div class="label">Share</div>
+		</a>
+		<a href="#" class="toolbar-button">
+		  <div class="left"><div>&nbsp;</div></div>
+		  <div class="right"><div>&nbsp;</div></div>
+			<div class="label">Options</div>
+		</a>
+		<div class="save-indicator" id="save-state">
+			<div class="text-save">
+				<span class="toolbar-button">
+					<div class="left"><div>&nbsp;</div></div>
+					<div class="right"><div>&nbsp;</div></div>
+					<div class="label">Save now</div>
+				</span>
+				<span id="save_counter">60</span> seconds to auto-save
+			</div>
+			<div class="text-saved">
+				Nothing to be saved
+			</div>
+			<div class="text-saving">
+				Saving
+			</div>
+		</div>
+		<!-- BOARD OPTIONS SWITCH -->
+		<div class="opt-switch">
+			<div class="opt-switch-highlight-line"></div>
+			<div class="opt-switch-label">
+				<div class="bopt-switcher-show" id="bopt_show">
+					Hide Stixyboard Options
+				</div>
+				<div class="bopt-switcher-hide" id="bopt_hide">
+					Show Stixyboard Options
+				</div>
+			</div>
+			<div class="opt-switch-shadow-line"></div>
+		</div>
+	</div>
+	
+	
+	<!-- BOARD LIST -->
+	<div class="board-list-bar">
+		<div class="bar-tools">
+			<div class="bar-close"></div>
+		</div>
+		<table class="board-list-grid">
+			<tr><td class="board-list-top"></td></tr>
+			<tr>
+				<td class="board-list-bottom">
+					<div class="board-list-panel">
+						<div class="board-list-scroll">
+							<div class="board-list-content">ss</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- CANVAS -->
+	<div  class="canvas" id="canvas">
+		<div class="min-space"></div>
+		<div style="position:absolute;top:200px;left:100px;width:1000px;height:410px;background:lightgreen">
+			<a href="xxx">Test</a>
+		</div>
+	</div>
+	
+	<!-- OPTIONBAR -->
+	<div class="opt-bar">
+		<div class="opt-background">
+			<div class="opt-gradient"></div>
+		</div>
+		<table class="opt-bar-grid">
+			<tr><td class="opt-bar-top">s</td></tr>
+			<tr>
+				<td class="opt-bar-middle">
+					<div class="opt-panel bopt">
+						<div class="bar-tools"><div class="bar-close"></div></div>
+						<div class="opt-scroll">
+							<div class="opt-content"></div>
+						</div>
+					</div>
+					<div class="opt-panel wopt">
+						<span class="opt-tab">
+						  <div class="left"><div>&nbsp;</div></div>
+						  <div class="right"><div>&nbsp;</div></div>
+							<div class="label">Todo options</div>
+						</span>
+						<div class="opt-scroll">
+							<div class="opt-content">cxv</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="opt-bar-bottom">
+					<div class="wopt-common-tools">s</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<!-- TRAY -->
+	<div class="tray">
+		<div class="tray-highlight-line"></div>
+		<div class="tray-background">
+			<div class="tray-background-gradient"></div>
+		</div>
+		<div class="tray-content">
+			<div style="width:80px;height:80px;border:1px solid red;">&nbsp;</div>
+		</div>
+	</div>
+	<div class="tray-bar">
+		<div class="tray-bar-background"><div class="tray-bar-background-gradient"></div></div>
+		<div class="tray-bar-highlight-line"></div>
+		<div class="tray-switch">
+			<div class="tray-switcher-show" id="tray_show">
+				Hide Widgets
+			</div>
+			<div class="tray-switcher-hide" id="tray_hide">
+				Show Widgets
+			</div>
+		</div>
+		<!-- WIDGET OPTIONS SWITCH -->
+		<div class="opt-switch wopt-switch">
+			<div class="opt-switch-highlight-line"></div>
+			<div class="opt-switch-label">
+			  <div class="wopt-switcher-show" id="wopt_show">
+					Hide Widget Options
+				</div>
+				<div class="wopt-switcher-hide" id="wopt_hide">
+					Show Widget Options
+				</div>
+			</div>
+			<div class="opt-switch-shadow-line"></div>
+		</div>
+	</div>
+</body>
+</html>

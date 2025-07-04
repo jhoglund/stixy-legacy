@@ -1,0 +1,11 @@
+/*--------------*/
+/* TOOLBAR IE 6 */
+/*--------------*/
+
+.toolbar-background-gradient { filter:alpha(opacity=100,finishOpacity=0,style=2); background:rgb(192,240,70); }
+.toolbar-background { height:22px; }
+sx\:button.toolbar-button { top:-1px; }
+sx\:button.toolbar-button .button-label { padding-top:2px; top:0; }
+.text-save .toolbar-button { float:right; margin-top:-2px; }
+
+.toolbar-button { z-index:100; }

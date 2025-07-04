@@ -1,0 +1,74 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+todo_widget_1_jonas:
+  id: 1
+  board_id: 1
+  widget_id: 4
+  created_by_id: 2
+  updated_by_id: 2
+  widget_name: WidgetTodo
+  status: <%= Status::ACTIVE %>
+todo_widget_2_adam:
+  id: 2
+  board_id: 1
+  widget_id: 4
+  created_by_id: 3
+  updated_by_id: 3
+  widget_name: WidgetTodo
+  status: <%= Status::ACTIVE %>
+todo_widget_3_jonas:
+  id: 3
+  board_id: 1
+  widget_id: 4
+  created_by_id: 2
+  updated_by_id: 2
+  widget_name: WidgetTodo
+  status: <%= Status::ACTIVE %>
+photo_widget_4_jonas:
+  id: 4
+  board_id: 2
+  widget_id: 2
+  created_by_id: 3
+  updated_by_id: 3
+  widget_name: WidgetPhoto
+  status: <%= Status::ACTIVE %>
+photo_widget_5_jonas:
+  id: 5
+  board_id: 4
+  widget_id: 2
+  created_by_id: 3
+  updated_by_id: 3
+  widget_name: WidgetPhoto
+  status: <%= Status::ACTIVE %>
+photo_widget_272_guest:
+  id: 6
+  board_id: 272
+  widget_id: 2
+  created_by_id: 3
+  updated_by_id: 3
+  widget_name: WidgetPhoto
+  status: <%= Status::ACTIVE %>
+document_widget_272_guest:
+  id: 7
+  board_id: 272
+  widget_id: 3
+  created_by_id: 3
+  updated_by_id: 3
+  widget_name: WidgetDocument
+  status: <%= Status::DISABLED %>
+photo_widget_jonas_board:
+  id: 8
+  board_id: 8
+  widget_id: 2
+  created_by_id: 2
+  updated_by_id: 2
+  widget_name: WidgetPhoto
+  status: <%= Status::ACTIVE %>
+document_widget_jonas_board:
+  id: 9
+  board_id: 8
+  widget_id: 3
+  created_by_id: 2
+  updated_by_id: 2
+  widget_name: WidgetDocument
+  status: <%= Status::ACTIVE %>
+

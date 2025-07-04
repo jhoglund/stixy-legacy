@@ -1,0 +1,74 @@
+<div class="calendar-panel calendar-panel-show" id="calendar_entry">
+	
+	<!-- <div class="calendar-entry-panel calendar-panel-show" id="calendar_entry_panel"> -->
+	<div class="calendar-entry-panel<%= if params[:action]!='index'; " calendar-panel-show" end %> calendar-panel-show" id="calendar_entry_panel">
+		<% form_tag({:action => 'create'}, :name => 'calendar_new_entry_form') do -%>
+		<!-- <div class="calendar-edit calendar-panel-show" id="new_entry_panel"> -->
+		<div class="calendar-edit" id="new_entry_panel">
+			<%= render :partial => "edit" %>
+		</div>
+		<% end -%>
+		<% form_tag({:action => 'create'}, :name => 'calendar_new_todo_form') do -%>
+		<!-- <div class="calendar-edit-todo calendar-edit calendar-panel-show" id="new_todo_panel"> -->
+		<div class="calendar-edit" id="new_todo_panel">
+			<%= render :partial => "todo_edit" %>
+		</div>
+		<% end -%>
+		<% form_tag({:action => 'edit'}, :name => 'calendar_edit_form') do -%>
+		<div class="calendar-edit<%= unless @selected_entry.nil?;  " calendar-panel-show" end %>" id="edit_entry_panel">
+			<% if @selected_entry.class == CalendarTodo %>
+				<%= render :partial => "todo_edit" %>
+			<% else %>
+				<%= render :partial => "edit" %>
+			<% end %>
+		</div>
+		<% end -%>
+	</div>
+	<div class="calendar-list<%= unless request.xhr? or not @selected_entry.nil?; " calendar-panel-show" end %>" id="calendar_list">
+		<div class="activity-list" id="activity_list_all">
+			<div class="activity-list-today" id="activity_list">
+				<%= render :partial => "activity_list" %>
+			</div>
+		</div>
+		<div style="margin:30px 0 15px; border-top:rgb(235,235,235) 1px solid; height:0; overflow:hidden; ">&nbsp;</div>
+		<div class="todo-list calendar-panel-todo" id="todo_list">
+			<%= render :partial => "todo_list" %>
+		</div>
+	</div>
+	<div style="padding:10px 0; margin:20px 0; border-top:rgb(235,235,235) 1px solid; line-height:16px">
+		<%= link_to_function("Synchronize with desktop calendar", "openSynchronize();") %><br>
+		<script type="text/javascript">
+			function openSynchronize(){
+				Stixy.popup.open("/calendar/synchronize/?popup=true",true,true);
+			}
+		</script>
+		<p style="margin:5px 0"></p>
+		<%#= link_to "Time &amp; Date settings", :controller => "setting" %>
+		<%= link_to_function("Time &amp; Date settings", "openSetting();") %><br>
+		<script type="text/javascript">
+			function openSetting(){
+				Stixy.popup.open("/setting/?popup=true",true,true,function(){
+					window.location.reload(true)
+				});
+			}
+		</script>
+		<p style="margin:5px 0"></p>
+		<%#= link_to "Report a bug", :controller => "feedback", :action => "report_a_bug", :id => "calendar" %>
+		<%= link_to_function("Report a bug", "openBug();") %><br>
+		<script type="text/javascript">
+			function openBug(){
+				Stixy.popup.open("/feedback/report_a_bug/?id=calendar&popup=true",true,true);
+			}
+		</script>
+		<p style="margin:5px 0"></p>
+		<%#= link_to "Send feedback/Feature request", :controller => "feedback", :action => "index", :id => "calendar" %>
+		<%= link_to_function("Send feedback/Feature request", "openFeedback();") %><br>
+		<script type="text/javascript">
+			function openFeedback(){
+				Stixy.popup.open("/feedback/index/?id=calendar&popup=true",true,true);
+			}
+		</script>
+		<%#= link_to_function "Time &amp; Date settings", "Stixy.board.openSetting();" %>
+	</div>
+</div>
+

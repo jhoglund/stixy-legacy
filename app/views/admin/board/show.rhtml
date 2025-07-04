@@ -1,0 +1,36 @@
+<%= link_to 'Edit', :action => 'edit', :id => @board %> |
+<%= link_to 'View', :action => 'view', :id => @board %> |
+<%= link_to 'Back', :action => 'list' %>
+
+<table class="admin">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  <tr class="light">
+    <td>Id:</td>
+    <td><%= @board.id %></td>
+  </tr>
+  <tr class="light">
+    <td>Keywords:</td>
+    <td><%= @board.keywords.collect!{|k| k.tag }.join(", ") %>
+    </td>
+  </tr>
+  <tr class="dark">
+    <td><%= link_to "Shared with users", :action => "users", :id => @board %>:</td>
+    <td><% for shared in @board.users %>
+        <%= shared.login if shared.is_visible? %>&nbsp;
+    <% end %>
+    
+    </td>
+  </tr>
+  <% Board.content_columns.each_with_index  do |column, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+    %>
+    <tr class="<%= color %>">
+        <td><%= column.human_name %>:</td>
+        <td><%=h @board.send(column.name) %></td>
+    </tr>
+  <% end %>
+</table>

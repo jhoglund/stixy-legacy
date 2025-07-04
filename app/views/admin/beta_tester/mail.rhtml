@@ -1,0 +1,45 @@
+<% form_tag do  -%>
+<h2>Mail beta testers</h2>
+<script type="text/javascript">
+	function selectAll(state){
+		var el = document.forms[0].elements;
+		for(var i=0; i<el.length; i++){
+			if(el[i].type=="checkbox") el[i].checked = (state===false) ? false:true;
+		}
+	}
+</script>
+<%= hidden_field_tag "reminder", (params[:id]=="reminder_invites" ? "1" : "0") %>
+<%= text_area "message", "text", :style => "display:block; width:500px; height:200px; border:1px solid darkgray; margin-bottom:20px;" %>
+<%= submit_tag "Send Invitation" %>
+<hr>
+<span class="adminmenu"><%= link_to_unless_current "All",:id => "all" %></span>
+<span class="adminmenu"><%= link_to_unless_current "Notify only",:id => "notify_only" %></span>
+<span class="adminmenu"><%= link_to_unless_current "New Invites",:id => "new_invites" %></span>
+<span class="adminmenu"><%= link_to_unless_current "Reminder Invites",:id => "reminder_invites" %></span>
+<span class="adminmenu"><%= link_to_unless_current "Accepted Invites",:id => "accepted_invites" %></span>
+
+<hr>
+<span class="adminmenu"><%= link_to_function 'Select all', 'selectAll()' %></span>
+<span class="adminmenu"><%= link_to_function 'Deselect all', 'selectAll(false)' %></span>
+<div id="users_list"><table class="admin">
+  <tr>
+	  <th>&nbsp;</th>
+    <th>ID</th>
+    <th>Login</th>
+    <th>Comment</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </tr>
+<% @users.each_with_index  do |beta_tester, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+%>
+  <tr class="<%= color %>">
+    <td><%= check_box_tag "beta_tester[#{beta_tester.id}]" %></td>
+		<td><%= beta_tester.id %></td>
+		<td><%= mail_to beta_tester.user.login %></td>
+    <td><%= simple_format(auto_link(beta_tester.comment,:all, :target => "_stixy_external")) %></td>
+  </tr>
+<% end %>
+</table></div>
+<% end %>

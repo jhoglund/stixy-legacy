@@ -1,0 +1,28 @@
+<h2>Users for board <%= @board.title %> (<%= @board.id %>)</h2>
+
+<span class="adminmenu"><%= link_to 'Add user', :action => 'user_list', :id => @board %></span>
+
+<div id="item-boards">
+
+<table class="admin">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>&nbsp;</th>
+  </tr>
+  
+<% @users.each_with_index  do |user, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+%>
+  <tr class="<%= color %>">
+    <td><%= user.id %></td>
+    <td><%= link_to user.display_name, :controller => "user", :action => 'show', :id => user %></td>
+    <td><%= link_to 'Remove', :action => 'remove_user', :id => @board, :user => user.id %></td>
+  </tr>
+<% end %>
+</table>
+
+
+</div>
+<br />

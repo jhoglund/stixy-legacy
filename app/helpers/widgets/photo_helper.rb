@@ -1,0 +1,3 @@
+module Widgets::PhotoHelper
+  
+end

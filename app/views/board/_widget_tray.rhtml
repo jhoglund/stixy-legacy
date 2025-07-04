@@ -1,0 +1,79 @@
+<% drag_title = ' title="Drag, position, and drop"' -%>
+
+<!-- TRAY -->
+<div class="tray">
+	<div class="tray-highlight-line"></div>
+	<div class="tray-background">
+		<div class="tray-background-gradient"></div>
+	</div>
+	<div class="tray-content">
+		<div class="tray-slot">
+			<div class="tray-icon" id="widget-tray-note" title="Drag, position, and drop">
+				<div class="tray-item">
+	        <%= 
+					render(:partial => "/widgets/note/widget", :object => WidgetNote.new(:width => 180, :height => 150), :locals => {:index => 0, :tool => true}) 
+	        %>
+	      </div>
+			</div>
+			<div class="tray-label">Note</div>
+		</div>
+		<div class="tray-slot">
+			<div class="tray-icon" id="widget-tray-photo" title="Drag, position, and drop">
+				<div class="tray-item">
+					<%= 
+					render(:partial => "/widgets/photo/widget", :object => WidgetPhoto.new(:width => 220, :height => 160), :locals => {:index => 0, :tool => true}) 
+		      %>
+				</div>
+			</div>
+			<div class="tray-label">Photo</div>
+		</div>
+		<div class="tray-slot">
+			<div class="tray-icon" id="widget-tray-document" title="Drag, position, and drop">
+				<div class="tray-item">
+				<%= 
+				render(:partial => "/widgets/document/widget", :object => WidgetDocument.new(:width => 150, :height => 110), :locals => {:index => 0, :tool => true}) 
+       	%>
+				</div>
+			</div>
+			<div class="tray-label">Document</div>
+		</div>
+		<div class="tray-slot">
+			<div class="tray-icon" id="widget-tray-todo" title="Drag, position, and drop">
+				<div class="tray-item">
+					<%= 
+					render(:partial => "/widgets/todo/widget", :object => WidgetTodo.new(:width => 230, :height => 200), :locals => {:index => 0, :tool => true}) 
+	       	%>
+				</div>
+			</div>
+			<div class="tray-label">Todo</div>
+		</div>
+	</div>
+</div>
+<div class="tray-bar">
+	<div class="tray-bar-background"><div class="tray-bar-background-gradient"></div></div>
+	<div class="tray-bar-highlight-line"></div>
+	<div class="tray-switch">
+		<div class="opt-switcher-bg"></div>
+		<a href="#" class="tray-switcher-open" id="tray_show">
+			Hide Widgets
+		</a>
+		<a href="#" class="tray-switcher-closed" id="tray_hide">
+			Show Widgets
+		</a>
+	</div>
+	<!-- WIDGET OPTIONS SWITCH -->
+	<div class="opt-switch wopt-switch">
+		<div class="opt-switch-highlight-line"></div>
+		<div class="opt-switcher-bg"></div>
+		<div class="opt-switch-label">
+			<a href="#" class="wopt-switcher-open" id="wopt_show">
+				Hide Widget Options
+			</a>
+			<a href="#" class="wopt-switcher-closed" id="wopt_hide">
+				Show Widget Options
+			</a>
+			<span class="wopt-switcher-ghosted">Widget Options</span>
+		</div>
+		<div class="opt-switch-shadow-line"></div>
+	</div>
+</div>

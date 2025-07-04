@@ -1,0 +1,969 @@
+<%= @doc_type %>
+<html xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<title>Stixy: For Flexible Online Creation Collaboration and Sharing</title>
+	<%= render :partial => "/shared/meta" %>
+	<script type="text/javascript" >var STIXY_ENV = "<%= ENV["RAILS_ENV"] %>"</script>
+	<%= include_resource :javascript, :default %>
+	<%= include_resource :javascript, :stixyboard %>
+	<%= include_resource :stylesheet, :default %>
+	<%= include_resource :stylesheet, :sample %>
+	<%= include_resource :stylesheet, :static %>
+	<%= render :partial => "cached/#{@cached_dir_path}/script" %>
+</head>
+<body scroll="no"  class="<%= body_classes %>"> 
+	<iframe unselectable="on" height="100%" style="position:absolute;height:100%;width:100%;z-index:1000000;" frameborder="0" allowtransparency="true" id="load_error_frame" src="/load_wait.html"></iframe>
+	<%= render :partial => "shared/header" %>
+	<!-- BOARD LIST -->
+	<div class="board-list-bar" id="board_list_bar">
+		<% unless current_user.authorized? %>
+			<%= render :partial => "cached/board_list" %>
+		<% else %>
+		<%= render :partial => "board/board_list_bar" %>
+		<% end %>
+	</div>	
+
+	
+	
+	
+	<!-- CANVAS -->
+	<div  class="canvas" id="stixyboard">
+		<%= render :partial => "cached/sample_nav" %>
+    
+		
+		<div class="min-space"></div>
+		<div class="canvas-content" id="canvas_content">
+
+ 
+    <div class="photo widget no-drop-shadow" style="top:60px;left:120px;width:1164px;height:762px;; z-index:1000001" id="widget_4049">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+  <div class="base">
+  		<div class="frame" style='margin:0px; top:-0px; bottom:0px; padding:0px 0;'>
+
+		  <div class="photo-load">loading...</div>
+							<!-- <div class="photo-canvas"><img galleryimg="false" src="http://s3.amazonaws.com/stixy/content/thumbs/21314/Specification_Nav_t.png?AWSAccessKeyId=1BANHXME8F73Q29YWKG2&Expires=1188017793&Signature=0cWAxPYnEoj4jbwgJo3O1%2BncJRE%3D" alt="Specification_Nav.png" width="100%" /></div> -->
+	      <div class="photo-canvas"><img galleryimg="false" src="http://s3.amazonaws.com:/stixy/content/public/work/Specification_Nav_t.png" alt="Specification_Nav.png" width="100%" /></div>
+		</div>
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+  </div>
+</div>
+
+ 
+    <div class="photo widget no-drop-shadow" style="top:50px;left:1310px;width:1174px;height:774px;; z-index:1000002" id="widget_4050">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+  <div class="base">
+  		<div class="frame" style='margin:0px; top:-0px; bottom:0px; padding:0px 0;'>
+		  <div class="photo-load">loading...</div>
+
+							<!-- <div class="photo-canvas"><img galleryimg="false" src="http://s3.amazonaws.com/stixy/content/thumbs/7626/07-0501_specification_Content_t.png?AWSAccessKeyId=1BANHXME8F73Q29YWKG2&Expires=1188017793&Signature=enn21B0j9JwH6DZZb4915iTE7Fs%3D" alt="07-0501_specification_Content.png" width="100%" /></div> -->
+	      <div class="photo-canvas"><img galleryimg="false" src="http://s3.amazonaws.com:/stixy/content/public/work/07-0501_specification_Content_t.png" alt="07-0501_specification_Content.png" width="100%" /></div>
+		</div>
+
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+  </div>
+</div>
+ 
+    <div class="note widget wopt-theme-2" style="top:230px;left:20px;width:169px;height:305px;; z-index:1000003" id="widget_4052">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+	<div class="base">
+    <div class="base-bg note-bg" style="background-color:none;"><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor"><font size="3">Download <br><font size="2">Flat PNG:<br><br><br><br><br><br><br>All workfiles: <br>Final Graphics & PSD<br></font> </font></div></div>
+
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+ 
+    <div class="note widget wopt-theme-4" style="top:80px;left:1290px;width:224px;height:63px;; z-index:1000004" id="widget_4057">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+	<div class="base">
+    <div class="base-bg note-bg" style="background-color:none;"><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor"><font size="3" style="font-family: Verdana;"><font size="3">Design Specification v01</font><br>
+<font size="2">Media Guide: Content<br>
+<br>
+</font></font></div></div>
+
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+ 
+    <div class="note widget wopt-theme-2" style="top:210px;left:1300px;width:163px;height:157px;; z-index:1000005" id="widget_4055">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+	<div class="base">
+    <div class="base-bg note-bg" style="background-color:none;"><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor"><font size="3">Dowload<br><font size="2">Flat PNG:</font><br></font></div></div>
+		<div class="handles">
+	<div class="remove"></div>
+
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+ 
+    <div class="note widget" style="top:270px;left:2300px;width:222px;height:236px;; z-index:1000006" id="widget_4060">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+
+	<div class="base">
+    <div class="base-bg note-bg" style=""><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor"><font size="3">Should clicking the video take user directly to the "video detail page" or should we bring up an info layer?<br><br><font size="2" style="color: rgb(240, 0, 25);"><span style="font-family: Verdana;">Hmm, I'm not sure. Can you mock-up a sample screen?</span><br style="font-family: Verdana;"><span style="font-family: Verdana;">- Laura</span></font><br><br></font><font size="3">OK! - Joseph<br></font></div></div>
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+
+</div>
+	</div>
+</div>
+ 
+    <div class="document widget" style="z-index:1000007; top:276px;left:31px;width:150px;height:110px;" id="widget_4053">
+	<div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+  <div class="base">
+
+    <div class="base-bg document-bg">&nbsp;</div>
+				<div class="document-icon document-icon-image" title="Specification_Nav.png" ></div>
+		<div class="w-d-file-link file-link">
+		   <!-- :controller => "widgets/document",  
+					:action => "file", 
+			-->
+       <a href="http://s3.amazonaws.com:/stixy/content/public/work/Specification_Nav.png?board_id=395&amp;document_id=21233&amp;widget_id=4053">Specification_Nav.png</a>
+            </div>
+				<div class="handles">
+	<div class="remove"></div>
+
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+ 
+    <div class="document widget" style="z-index:1000008; top:425px;left:27px;width:150px;height:110px;" id="widget_4054">
+	<div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+
+  <div class="base">
+    <div class="base-bg document-bg">&nbsp;</div>
+				<div class="document-icon document-icon-compress" title="Workfiles_070607.zip" ></div>
+		<div class="w-d-file-link file-link">
+		   <!-- :controller => "widgets/document",  
+					:action => "file", 
+			-->
+       <a href="http://s3.amazonaws.com:/stixy/content/public/work/Workfiles_070607.zip?board_id=395&amp;document_id=345&amp;widget_id=4054">Workfiles_070607.zip</a>
+
+            </div>
+				<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+ 
+    <div class="document widget" style="z-index:1000009; top:262px;left:1308px;width:150px;height:110px;" id="widget_4056">
+	<div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+  <div class="base">
+    <div class="base-bg document-bg">&nbsp;</div>
+				<div class="document-icon document-icon-image" title="Specification_Content.png" ></div>
+		<div class="w-d-file-link file-link">
+
+		   <!-- :controller => "widgets/document",  
+					:action => "file", 
+			-->
+       <a href="http://s3.amazonaws.com:/stixy/content/public/work/Specification_Content.png?board_id=395&amp;document_id=21234&amp;widget_id=4056">Specification_Content.png</a>
+            </div>
+				<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+
+ 
+    <div class="note widget wopt-theme-4" style="top:81px;left:10px;width:227px;height:64px;; z-index:1000010" id="widget_4051">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+	<div class="base">
+    <div class="base-bg note-bg" style="background-color:none;"><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+
+		<div class="editor-canvas"><div class="editor"><font size="3" style="font-family: Verdana;"><font size="3">Design Specification v03</font><br><font size="2">Master Template: Navigation<br><br></font></font></div></div>
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+ 
+    <div class="note widget" style="top:210px;left:1040px;width:174px;height:172px;; z-index:1000011" id="widget_4058">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+	<div class="base">
+    <div class="base-bg note-bg" style=""><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor"><font size="3">Joseph,<br>We'll not have TV Shows and Movies for the first launch. Please hide these buttons.<br><br><font size="2"><span style="color: rgb(165, 0, 15);"><span style="color: rgb(240, 0, 25); font-family: Verdana;">OK! - Joseph</span></span></font><br></font></div></div>
+		<div class="handles">
+
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+ 
+    <div class="note widget wopt-theme-1" style="top:360px;left:410px;width:293px;height:147px;; z-index:1000012" id="widget_4059">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+
+</div>
+	<div class="base">
+    <div class="base-bg note-bg" style="background-color:none;"><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor"><font size="3">Should "Language" and "Genre" only open the navigation tree or is there an actual genre/language page? <br><br><font size="2" style="font-family: Verdana; color: rgb(240, 0, 25);">Only open/close the tree, no such page.<br>- Laura</font><br></font></div></div>
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+
+</div>
+	</div>
+	</div>
+</div>
+ 
+
+ 
+
+
+<!-- <div class="loading-state"></div> -->
+
+	</div>
+	<div class="canvas-hand-scroll" id="stixyboard_hand_scroll" title="Hold down the mouse button to move the canvas">&nbsp;</div>
+	
+	<!-- OPTIONBAR -->
+	<div class="opt-bar bopt-panel-open wopt-panel-closed" id="opt_bar">
+
+		<table class="opt-bar-grid">
+			<tr><td class="opt-bar-top"></td></tr>
+			<tr>
+				<td class="opt-bar-middle">
+					<div class="bopt-bar" id="bopt">
+						
+<div class="opt-background">
+	<div class="opt-gradient"></div>
+</div>
+<div class="opt-panel">
+	<div class="bar-tools"><a class="bar-close" href="#" onclick="Stixy.ui.boptClose(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)"></a></div>
+
+	<div class="opt-scroll">
+		<div class="opt-content">
+			<h3 style="margin-bottom:4px;">Stixy: Sample: Work</h3>
+			<table class="option-list">
+				<tr><td>
+					<span class="option-list-title">Tags:</span> project, 07-0501, specification, work
+					<p/><span class="option-list-title">Description:</span> <span class="no-data">(None)</span>
+
+					<p/><span class="option-list-title">Public Web Access:</span> 
+					
+						No
+					
+				</td></tr>
+			</table>
+			<div style="text-align:right;margin-top:4px;">
+					<a href="/board/options/395" onclick="Stixy.board.openOption(); return false;" style="font-weight:bold;">Edit Stixyboard Options</a>
+			</div>
+			<div id="board_shared_and_invited" style="margin-top:20px;margin-bottom:10px">
+	<h4 class="subhead">This Stixyboard is shared by</h4>
+
+	<table class="option-list" id="invited_792">
+		<tr>
+			<td style="width:58px;">
+			 	<div style="background-image:url(http://s3.amazonaws.com:/stixy/content/avatars/22103/01_Joseph_Levin.png)" class="personal-thumb" id="personal_thumb">&nbsp;</div>
+	    </td>
+			<td>
+				<h4>Joseph Levine</h4>
+				<div class="mail-address"><a href="mailto:demo01@stixy.com" title="demo01@stixy.com">joseph@levine.com</a></div>
+				<span class="option-list-title">Last Signed In </span> <nobr>Aug 29, 2007</nobr>
+			</td>
+	  </tr>
+	</table>
+	<table class="option-list" id="invited_802">
+		<tr>
+			<td style="width:58px;">
+			 	<div style="background-image:url(http://s3.amazonaws.com:/stixy/content/avatars/22112/16_Laura_DeWald.png)" class="personal-thumb" id="personal_thumb">&nbsp;</div>
+	    </td>
+			<td>
+				<h4>Laura DeWald</h4>
+				<div class="mail-address"><a href="mailto:demo16@stixy.com" title="demo16@stixy.com">laura@dewald.com</a></div>
+				<span class="option-list-title">Last Signed In </span> <nobr>Aug 09, 2007</nobr>
+			</td>
+	  </tr>
+	</table>
+	<table class="option-list" id="invited_797">
+		<tr>
+			<td style="width:58px;">
+			 	<div style="background-image:url(http://s3.amazonaws.com:/stixy/content/avatars/22109/17_Linda_Wack.png)" class="personal-thumb" id="personal_thumb">&nbsp;</div>
+	    </td>
+			<td>
+				<h4>Linda Wack</h4>
+				<div class="mail-address"><a href="mailto:demo17@stixy.com" title="demo17@stixy.com">linda@wack.com</a></div>
+				<span class="option-list-title">Last Signed In </span> <nobr>Aug 09, 2007</nobr>
+			</td>
+	  </tr>
+	</table>
+	<table class="option-list" id="invited_789">
+		<tr>
+			<td style="width:58px;">
+			 	<div style="background-image:url(http://s3.amazonaws.com:/stixy/content/avatars/22097/05_Michaela_Ludwig.png)" class="personal-thumb" id="personal_thumb">&nbsp;</div>
+	    </td>
+			<td>
+				<h4>Michaela Ludwig</h4>
+				<div class="mail-address"><a href="mailto:demo05@stixy.com" title="demo05@stixy.com">michaela@ludwig.com</a></div>
+				<span class="option-list-title">Last Signed In </span> <nobr>Aug 09, 2007</nobr>
+			</td>
+	  </tr>
+	</table>
+	<table class="option-list" id="invited_793">
+		<tr>
+			<td style="width:58px;">
+			 	<div style="background-image:url(http://s3.amazonaws.com:/stixy/content/avatars/22095/06_Mieke_Lycan.png)" class="personal-thumb" id="personal_thumb">&nbsp;</div>
+	    </td>
+			<td>
+				<h4>Mieke Lycan</h4>
+				<div class="mail-address"><a href="mailto:demo06@stixy.com" title="demo06@stixy.com">mieke@lycan.com</a></div>
+				<span class="option-list-title">Last Signed In </span> <nobr>Aug 09, 2007</nobr>
+			</td>
+	  </tr>
+	</table>	
+	<div style="text-align:right;margin-top:10px;">
+		<a href="#" onclick="Stixy.board.openInvite(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)" style="font-weight:bold;">Add more users</a>
+
+	</div>
+</div>
+		</div>
+	</div>
+</div>
+					</div>
+					<div class="wopt-bar">
+						<div class="bar-tools">
+							<span class="wopt-auto-open" id="wopt_auto_show"><input type="checkbox"<%= if current_user.pref_ui_auto_show_wopt.to_i==1; " checked" end %> class="opt-check" id="wopt_auto_show_checkbox"> <label for="wopt_auto_show_checkbox" id="wopt_auto_show_title">Auto open</label></span>
+				      <a class="bar-close" href="#" onclick="Stixy.ui.woptClose(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)"></a>
+						</div>
+						<div class="opt-background">
+							<div class="opt-gradient"></div>
+						</div>
+						<div class="opt-panel wopt wopt-deactivated" id="wopt-todo">
+							<span class="opt-tab">
+							  <div class="left"><div>&nbsp;</div></div>
+							  <div class="right"><div>&nbsp;</div></div>
+								<div class="label">Todo options<a class="wopt-close" href="#" onclick="Stixy.ui.woptClose(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a></div>
+							</span>
+							<div class="wopt-locked-panel">&nbsp;</div>
+							<div class="opt-scroll wopt-locked-ghosted">
+								<div class="opt-content">
+						      <div style="margin-top:10px">
+										<h4 style="display:inline;">View: </h4>
+									  <input type="radio" id="todo_full_view" value="full" name="todo_view"><label for="todo_full_view">Full</label>
+									  <input type="radio" id="todo_compact_view" value="compact" name="todo_view"><label for="todo_compact_view">Compact</label>
+									</div>
+						      <div style="margin-top:10px">
+										<h4>Date</h4>
+									  <div id="todo_calendar" class="todo-calendar">
+											<table class="calendar" id="todo_calendar" border="0" cellspacing="0" cellpadding="0">
+												<thead>
+													<tr class="monthName">
+						        				<th colspan="7" class="calendar-nav">
+															<div>
+						          					<span class="prev-month" id="todo_calendar_nav_previuos"><a href="#" onclick="Stixy.nothing(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a></span>
+						          					<span class="todo-calendar-month-title"><span id="todo_progress_indicator" style="display:none"></span>October 2007</span>
+						          					<span class="next-month" id="todo_calendar_nav_next"><a href="#" onclick="Stixy.nothing(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a></span>
+						        					</div>
+														</th>
+													</tr>
+													<tr class="dayName">
+														<th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="otherMonth weekendDay" id="2007-September-Sunday-30">30</td><td class="day" id="2007-October-Monday-1">1</td><td class="day" id="2007-October-Tuesday-2">2</td><td class="day" id="2007-October-Wednesday-3">3</td><td class="day" id="2007-October-Thursday-4">4</td><td class="day" id="2007-October-Friday-5">5</td><td class="day weekendDay" id="2007-October-Saturday-6">6</td></tr><tr><td class="day weekendDay firstDayOfWeek" id="2007-October-Sunday-7">7</td><td class="day" id="2007-October-Monday-8">8</td><td class="day" id="2007-October-Tuesday-9">9</td><td class="day todayDay" id="2007-October-Wednesday-10">10</td><td class="day" id="2007-October-Thursday-11">11</td><td class="day" id="2007-October-Friday-12">12</td><td class="day weekendDay" id="2007-October-Saturday-13">13</td></tr><tr><td class="day weekendDay firstDayOfWeek" id="2007-October-Sunday-14">14</td><td class="day" id="2007-October-Monday-15">15</td><td class="day" id="2007-October-Tuesday-16">16</td><td class="day" id="2007-October-Wednesday-17">17</td><td class="day" id="2007-October-Thursday-18">18</td><td class="day" id="2007-October-Friday-19">19</td><td class="day weekendDay" id="2007-October-Saturday-20">20</td></tr><tr><td class="day weekendDay firstDayOfWeek" id="2007-October-Sunday-21">21</td><td class="day" id="2007-October-Monday-22">22</td><td class="day" id="2007-October-Tuesday-23">23</td><td class="day" id="2007-October-Wednesday-24">24</td><td class="day" id="2007-October-Thursday-25">25</td><td class="day" id="2007-October-Friday-26">26</td><td class="day weekendDay" id="2007-October-Saturday-27">27</td></tr><tr><td class="day weekendDay firstDayOfWeek" id="2007-October-Sunday-28">28</td><td class="day" id="2007-October-Monday-29">29</td><td class="day" id="2007-October-Tuesday-30">30</td><td class="day" id="2007-October-Wednesday-31">31</td><td class="otherMonth" id="2007-November-Thursday-1">1</td><td class="otherMonth" id="2007-November-Friday-2">2</td><td class="otherMonth weekendDay" id="2007-November-Saturday-3">3</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div style="margin-top:10px">
+										<h4>Time</h4>
+										<select id="todo_hour">
+											<option value="1" >1</option>
+											<option value="2" >2</option>
+											<option value="3" >3</option>
+											<option value="4" >4</option>
+											<option value="5" >5</option>
+											<option value="6" >6</option>
+											<option value="7" >7</option>
+											<option value="8" >8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+										</select>
+										<select id="todo_minute">
+											<option value="00" selected>00</option>
+											<option value="15">15</option>
+											<option value="30">30</option>
+											<option value="45">45</option>
+										</select>
+										<select id="todo_postfix">
+											<option value="AM" selected>AM</option>
+											<option value="PM">PM</option>
+										</select>
+									</div>
+									<h4 style="margin-top:10px"><input type="checkbox" id="todo_reminder_switcher"> <label for="todo_reminder_switcher">Send reminder</label></h4>
+									<div class="ghosted" id="todo_reminder_panel" style="margin-top:5px;">
+										<div>
+											<select disabled id="todo_remind_at">
+												<option value="0.25">15 minutes</option>
+												<option value="1.00" selected>1 hour</option>
+												<option value="2.00">2 hours</option>
+												<option value="3.00">3 hours</option>
+												<option value="5.00">5 hours</option>
+												<option value="12.00">12 hours</option>
+
+												<option value="48.00">2 days</option>
+												<option value="72.00">3 days</option>
+												<option value="168.00">1 week</option>
+											</select> before activity
+										</div>
+										<div style="margin-top:10px">
+											Send reminder to<br />
+											<input type="radio" name="reminder_to" checked disabled id="todo_remind_all"> All
+											<input type="radio" name="reminder_to" disabled id="todo_remind_from_list"> Selected users<br />
+											<div id="todo_remind_only" class="ghosted" style="height:100px;overflow:auto;border:1px solid rgb(204,204,204);background:white;padding:4px;">
+										    <table>
+													<tr style="cursor:default">
+							  						<td valign="top" nowrap>
+															<input type="checkbox" value="3" id="todo_user_3" class="todo-remind-only">
+															<label for="todo_user_3" title="Jonas Höglund">Jonas Höglund</label>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+						    </div>
+						  </div>
+						</div>
+						<div class="opt-panel wopt wopt-deactivated" id="wopt-note">
+							<span class="opt-tab">
+							  <div class="left"><div>&nbsp;</div></div>
+							  <div class="right"><div>&nbsp;</div></div>
+								<div class="label">Note options<a class="wopt-close" href="#" onclick="Stixy.ui.woptClose(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a></div>
+							</span>
+							<div class="wopt-locked-panel">&nbsp;</div>
+							<div class="opt-scroll wopt-locked-ghosted">
+								<div class="opt-content">
+						      <h4>Note Style</h4>
+									<div class="opt-themes" id="widget_note_opt_themes">
+										<div class="opt-theme-spacer">&nbsp;</div>
+										<div class="wopt-theme opt-theme wopt-theme-1" id="wopt-theme-1"><span class="label">Indian</span></div>
+						        <div class="wopt-theme opt-theme wopt-theme-2" id="wopt-theme-2"><span class="label">Spring</span></div>
+						        <div class="wopt-theme opt-theme wopt-theme-3" id="wopt-theme-3"><span class="label">Caribbean</span></div>
+						        <div class="wopt-theme opt-theme wopt-theme-4" id="wopt-theme-4"><span class="label">New Haven</span></div>
+									</div>
+						      <div class="deactivated opt-row" style="padding-top:6px;">
+                    <div class="opt-devider"></div>
+                    <h4>Link to web page</h4>
+                    <div class="opt-row" style="padding-top: 6px;">
+                      <sx:button class="button-label insert-link button-icon   ghosted" id="link_text" onmouseover="Stixy.events.stop(event)" onmousedown="Stixy.events.stop(event)"><sx:i>&nbsp;</sx:i><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r><sx:t><a class="button-label" href="#" onclick="; return false;">Insert link</a></sx:t></sx:button>
+                    </div>
+						      </div>
+						      <span class="wopt-style-more">
+						        <div class="deactivated opt-row w-n-font">
+											<div class="opt-devider"></div>
+						          <h4>Font</h4>
+						          <span>
+						            <select style="width:100%; margin:2px 0px 8px;" id="widget_note_font" disabled="true">
+						              <optgroup style="border-bottom:1px solid gray;padding-bottom:5px;margin-bottom:5px;">
+														<option value="Georgia" style="font-family:Georgia;">Georgia</option>
+						              	<option value="Times" style="font-family:Times;">Times</option>
+						              	<option value="Verdana" style="font-family:Verdana;">Verdana</option>
+
+														<option value="Arial" style="font-family:Arial;">Arial</option>
+														<option value="Trebushe MS" style="font-family:Trebushe MS;">Trebushe MS</option>
+														<option value="Comic Sans MS" style="font-family:Comic Sans;">Comic Sans</option>
+													</optgroup>
+													<optgroup>
+														<option value="Monospace" style="font-family:Monospace;">Monospace</option>
+														<option value="Cursive" style="font-family:Cursive;">Cursive</option>
+
+														<option value="Fantasy" style="font-family:Fantasy;">Fantasy</option>
+														<option value="Sans-Serif" style="font-family:Sans-Serif;">Sans-Serif</option>
+														<option value="Serif" style="font-family:Serif;">Serif</option>
+													</optgroup>
+						            </select>
+						          </span>
+						          <div class="deactivated opt-font-style">
+						            <span style="float:left">
+						              <div style="font-style:italic" class="w-n-text-italic" id="widget_note_italic">Italic</div>
+						              <div style="font-weight:bold" class="w-n-text-bold" id="widget_note_bold">Bold</div>
+						            </span>
+						            <span style="float:right">
+						              <div style="text-decoration:underline; font-weight:bold" class="w-n-text-underline" id="widget_note_underline">U</div>
+						              <div style="text-decoration:line-through; font-weight:bold" class="w-n-text-strikethrough" id="widget_note_strikethrough">S</div>
+						            </span>
+						          </div>
+						        </div>
+						        <div class="opt-row" style="padding-bottom:30px;">
+						          <div class="deactivated opt-font-size-palett" id="widget_note_size">
+						            <div size="1" style="font-size:13px;" class="w-n-size"><span  style="margin-top:-30px;">&nbsp;</span>a</div>
+									      <div size="2" style="font-size:16px;" class="w-n-size"><span style="margin-top:-31px;">&nbsp;</span>a</div>
+									      <div size="3" style="font-size:19px;" class="w-n-size"><span style="margin-top:-33px;">&nbsp;</span>a</div>
+									      <div size="4" style="font-size:22px;" class="w-n-size"><span style="margin-top:-34px;">&nbsp;</span>a</div>
+									      <div size="5" style="font-size:24px;" class="w-n-size"><span style="margin-top:-35px;">&nbsp;</span>a</div>
+									      <div size="6" style="font-size:28px;" class="w-n-size"><span style="margin-top:-36px;">&nbsp;</span>a</div>
+												<div size="7" style="font-size:32px;" class="w-n-size"><span style="margin-top:-38px;">&nbsp;</span>a</div>
+						          </div>
+						        </div>
+						        <div class="deactivated opt-color-palett opt-row" id="widget_note_fgcolor">
+											<span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(255,255,255)">&nbsp;</div></span>
+										  <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(240,0,25)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(255,150,20)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(245,204,0)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(150,210,10)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(85,165,240)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(180,60,150)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(255,25,115)">&nbsp;</div></span><br class="activated-color-palett" clear="both" />
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(50,50,50)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(165,0,15)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(165,95,0)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(170,140,0)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(90,145,25)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(35,95,155)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(105,35,85)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(185,5,70)">&nbsp;</div></span>
+											<span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(239,239,239)">&nbsp;</div></span>
+										  <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(236,188,193)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(239,218,192)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(237,229,188)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(218,230,190)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(197,214,231)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(224,200,218)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(239,193,211)">&nbsp;</div></span><br class="deactivated-color-palett" clear="both" />
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(198,198,198)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(221,188,191)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(221,207,188)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(222,216,188)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(206,217,193)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(195,207,219)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(209,195,205)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(225,189,202)">&nbsp;</div></span>
+						        </div>
+
+						        <div class="opt-row" style="padding-top:0;">
+						          <span class="deactivated" style="width:108px;float:left;">
+						            <h4>Text Align</h4>
+						            <select style="width:100px" id="widget_note_align" disabled="true">
+						              <option value="justifyleft">Left</option>
+						              <option value="justifyright">Right</option>
+						              <option value="justifycenter">Center</option>
+						            </select>
+						          </span>
+						          <span class="deactivated" style="width:108px;float:right;">
+						            <h4>List</h4>
+						            <select style="width:100px" id="widget_note_list" disabled="true">
+						              <option value="">None</option>
+						              <option value="insertunorderedlist">Bullet</option>
+						              <option value="insertorderedlist">Numbered</option>
+						            </select>
+						          </span>
+						        </div>
+						        <div class="opt-row">
+						          <div class="opt-devider"></div>
+						          <h4><input type="checkbox" class="opt-check w-n-bg-switch" id="note_bg_switch"/> <label for="note_bg_switch">Background color</label></h4>
+						          <div class="deactivated opt-color-palett" id="widget_note_bgcolor">
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(245,245,245)">&nbsp;</div></span>
+											  <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(250,155,165)">&nbsp;</div></span>
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(255,215,160)">&nbsp;</div></span>
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(250,250,170)">&nbsp;</div></span>
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(225,250,160)">&nbsp;</div></span>
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(190,220,250)">&nbsp;</div></span>
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(225,180,215)">&nbsp;</div></span>
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(255,165,200)">&nbsp;</div></span><br class="activated-color-palett" clear="both" />
+												<span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(125,125,125)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(240,0,25)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(255,150,20)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(255,220,30)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(175,225,45)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(85,165,240)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(180,60,150)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(225,25,115)">&nbsp;</div></span>
+												<span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(237,237,237)">&nbsp;</div></span>
+											  <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(238,219,221)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,231,220)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(238,238,222)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(236,239,230)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(226,232,238)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(233,224,231)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,221,228)">&nbsp;</div></span><br class="deactivated-color-palett" clear="both" />
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(213,213,213)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(236,188,193)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,218,192)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,232,194)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(223,233,197)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(205,221,236)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(224,200,218)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,207,220)">&nbsp;</div></span>
+											</div>
+										</div>
+
+										<div class="opt-row">
+											<h4>Background opacity</h4>
+						          <span>
+						            <select id="widget_note_bg_opacity" style="margin:2px 0px 8px;">
+						              <option value="1">100%</option>
+													<option value="0.9">90%</option>
+													<option value="0.8">80%</option>
+													<option value="0.7">70%</option>
+													<option value="0.6">60%</option>
+													<option value="0.5">50%</option>
+													<option value="0.4">40%</option>
+													<option value="0.3">30%</option>
+													<option value="0.2">20%</option>
+													<option value="0.1">10%</option>
+						            </select>
+						          </span>
+						        </div>
+						      </span>
+						    </div>
+						  </div>
+						</div>
+						<div class="opt-panel wopt wopt-deactivated" id="wopt-photo">
+							<span class="opt-tab">
+							  <div class="left"><div>&nbsp;</div></div>
+							  <div class="right"><div>&nbsp;</div></div>
+								<div class="label">Photo options<a class="wopt-close" href="#" onclick="Stixy.ui.woptClose(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a></div>
+							</span>
+							<div class="wopt-locked-panel">&nbsp;</div>
+							<div class="opt-scroll wopt-locked-ghosted">
+								<div class="opt-content">
+						      <div class="opt-row">
+						        <h4>Image name</h4>
+						        <div class="w-p-image-name ghosted" style="margin:4px 0"></div>
+										<div style="margin:8px 0">
+											<%= link_to_function("Add photo(s)", nil, :button => {:type => "default"}, :class => "w-p-upload") %>
+											<%= link_to_function("Replace photo", nil, :button => {:type => false}, :class => "w-p-upload w-p-replace") %>
+											<%= link_to_function("Get", nil, :button => {:type => false}, :class => "w-p-get-original", :style => "margin-left:10px") %>
+										</div>
+						      </div>
+						      <div class="opt-row">
+						        <div class="opt-devider"></div>
+										<h4>Effect</h4>
+										<div class="opt-themes" style="">
+						        	<div class="opt-theme-spacer">&nbsp;</div>
+											<div class="opt-theme w-p-theme-effects" id="w-p-theme-noeffect"></div>
+							        <div class="opt-theme w-p-theme-effects" id="w-p-theme-sepia"></div>
+							        <div class="opt-theme w-p-theme-effects" id="w-p-theme-gray"></div>
+										</div>
+						      </div>
+						      <div class="opt-row">
+						        <div class="opt-devider" style="margin-bottom:10px"></div>
+						        <h4>Frame</h4>
+										<div class="opt-themes">
+						         	<div class="opt-theme-spacer">&nbsp;</div>
+											<div class="opt-theme w-p-theme-border" id="w-p-theme-noframe"></div>
+						          <div class="opt-theme w-p-theme-border" id="w-p-theme-frame"></div>
+										</div>
+									</div>
+									<div class="opt-row">
+							      <div class="opt-devider" style="margin-bottom:10px"></div>
+						        <h4>Rotate</h4>
+										<div class="opt-themes">
+						          <div class="opt-theme-spacer">&nbsp;</div>
+											<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-0"></div>
+											<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-90"></div>
+											<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-180"></div>
+											<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-270"></div>
+										</div>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						<div class="opt-panel wopt wopt-deactivated" id="wopt-document">
+							<span class="opt-tab">
+							  <div class="left"><div>&nbsp;</div></div>
+							  <div class="right"><div>&nbsp;</div></div>
+								<div class="label">Documents options<a class="wopt-close" href="#" onclick="Stixy.ui.woptClose(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a></div>
+							</span>
+							<div class="wopt-locked-panel">&nbsp;</div>
+							<div class="opt-scroll wopt-locked-ghosted">
+								<div class="opt-content">
+						      <div class="opt-row">
+						        <h4>Document name</h4>
+						        <div class="w-d-document-name ghosted" style="margin:4px 0"></div>
+										<div style="margin:8px 0">
+											<%= link_to_function("Add document(s)", nil, :button => {:type => "default"}, :class => "w-d-upload") %>
+											<%= link_to_function("Replace document", nil, :button => {:type => false}, :class => "w-d-upload w-d-replace") %>
+										</div>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<td class="opt-bar-bottom">
+					<div class="wopt-common-tools" id="wopt_common_tools">
+						<div class="wopt-defaults" id="wopt-default">
+						  <div class="wopt-locked-panel">&nbsp;</div>
+							<div class="opt-cont wopt-locked-ghosted">
+						    <div class="opt-row">
+								  <input type="checkbox" class="opt-check w-drop-shadow" id="widget_drop_shadow"> <label for="widget_drop_shadow" id="widget_drop_shadow_title">Drop Shadow</label>
+						      <div class="opt-devider" style="postion:relative; top:3px; margin:0"></div>
+							  </div>
+								<span>
+							    <h4 style="position:relative; top:2px; margin:-8px 8px 0px 0; display:inline">Bring to</h4>
+									<%= link_to_function("Front", nil, :button => {:type => false}, :class => "w-top") %>
+									<%= link_to_function("Back", nil, :button => {:type => false}, :class => "w-bottom",  :style => "margin-left:6px") %>
+								</span>
+						    <div class="opt-row" style="margin-top:12px;">
+						      <span class="wopt-locked-ghosted">
+										<input type="checkbox" class="opt-check w-auto-move" id="widget_bring_forward"> <label for="widget_bring_forward" id="widget_bring_forward_title">Bring forward when selected</label><br>
+								  </span>
+								</div>    
+						  </div>
+							<div class="opt-row wopt-locked-controller">
+							  <div class="opt-devider" style="postion:relative; top:-2px; margin:0"></div>
+								<input type="checkbox" class="opt-check w-lock" id="widget_locked"> <label for="widget_locked" id="widget_locked_title">Lock widget</label><br>
+							</div>
+						</div>
+
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	
+<!-- TRAY -->
+
+<div class="tray">
+	<div class="tray-highlight-line"></div>
+	<div class="tray-background">
+		<div class="tray-background-gradient"></div>
+	</div>
+	<div class="tray-content">
+		<div class="tray-slot">
+			<div class="tray-icon" id="widget-tray-note" title="Drag, position, and drop">
+				<div class="tray-item">
+
+	        <div class="note widget" style="top:100px;left:100px;width:180px;height:150px;; z-index:0" id="widget_">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+	<div class="base">
+    <div class="base-bg note-bg" style=""><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+
+		<div class="editor-canvas"><div class="editor"><font size='3'></font></div></div>
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+	      </div>
+			</div>
+			<div class="tray-label">Note</div>
+
+		</div>
+		<div class="tray-slot">
+			<div class="tray-icon" id="widget-tray-photo" title="Drag, position, and drop">
+				<div class="tray-item">
+					<div class="photo widget" style="top:100px;left:100px;width:220px;height:160px;; z-index:0" id="widget_">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+
+</div>
+  <div class="base">
+  		<div class="frame" style='margin:10px; top:-10px; bottom:10px; padding:10px 0;'>
+		  <div class="photo-load">loading...</div>
+				      <img alt="Add a photo" galleryimg="false" src="/images/widgets/photo/widget_photo_placeholder_200x140.jpg?1167834735" width="100%" />
+	       
+				<div class="upload-pane" style="display:block;">
+					<div class="upload-offset">
+						<div class="upload-overlay"><div>&nbsp;</div></div>
+						<div class="w-p-upload upload-button">
+				      <%= link_to_function("Add photo(s)", nil, :button => {:type => "default"}, :style => "position:relative;top:-10px;font:11px 'Verdana', 'Lucida Grande', 'Bitstream Vera Sans', 'Sans';") %>
+						</div>
+					</div>
+				</div>
+
+						</div>
+
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+  </div>
+</div>
+				</div>
+			</div>
+			<div class="tray-label">Photo</div>
+
+		</div>
+		<div class="tray-slot">
+			<div class="tray-icon" id="widget-tray-document" title="Drag, position, and drop">
+				<div class="tray-item">
+				<div class="document widget" style="z-index:0; top:100px;left:100px;width:150px;height:110px;" id="widget_">
+	<div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+
+</div>
+  <div class="base">
+    <div class="base-bg document-bg">&nbsp;</div>
+				<div class="document-icon document-icon-generic"></div>
+		<div class="w-d-file-link file-link"></div>
+						<%= link_to_function("Add document(s)", nil, :button => {:type => "default"}, :class => "w-d-upload", :style => "margin-left:10px; font:11px 'Verdana', 'Lucida Grande', 'Bitstream Vera Sans', 'Sans';") %>
+				<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+
+</div>
+				</div>
+			</div>
+			<div class="tray-label">Document</div>
+		</div>
+		<div class="tray-slot">
+			<div class="tray-icon" id="widget-tray-todo" title="Drag, position, and drop">
+				<div class="tray-item">
+					<div class="todo widget" style="width:230px;height:200px;top:100px;left:100px;; z-index:0" id="widget_">
+
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+  <div class="base">
+		<div class="base-bg todo-bg"><p></p></div>
+    <div class="todo-header">
+			<div class="header-bg"><p></p></div>
+
+			<div class="todo-content">
+							<div class="todo-reminder-icon">&nbsp;</div>
+				<div class="todo-indicator">TODO</div>
+				<div class="todo-day">26</div>
+				<div class="todo-month-year"><span class="todo-month">August</span> <span class="todo-year">2007</span></div>
+				<div class="todo-dayname-time">
+
+					<span class="todo-dayname">Sunday</span>
+					<span class="todo-time">
+						<span class="todo-hour">6</span>:<span class="todo-minute">00</span>
+			 			<span class="todo-postfix">AM</span>
+					</span>
+				</div>
+
+			</div>
+    </div>
+    <div class="todo-comments">COMMENTS</div>
+		<div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor">&nbsp;</div>
+  	</div>
+	  <div class="handles">
+	<div class="remove"></div>
+
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+				</div>
+			</div>
+			<div class="tray-label">Todo</div>
+		</div>
+	</div>
+
+</div>
+<div class="tray-bar">
+	<div class="tray-bar-background"><div class="tray-bar-background-gradient"></div></div>
+	<div class="tray-bar-highlight-line"></div>
+	<div class="tray-switch">
+		<div class="opt-switcher-bg"></div>
+		<a href="#" class="tray-switcher-open" id="tray_show">
+			Hide Widgets
+		</a>
+		<a href="#" class="tray-switcher-closed" id="tray_hide">
+
+			Show Widgets
+		</a>
+	</div>
+	<!-- WIDGET OPTIONS SWITCH -->
+	<div class="opt-switch wopt-switch">
+		<div class="opt-switch-highlight-line"></div>
+		<div class="opt-switcher-bg"></div>
+		<div class="opt-switch-label">
+		  <a href="#" class="wopt-switcher-open" id="wopt_show">
+
+				Hide Widget Options
+			</a>
+			<a href="#" class="wopt-switcher-closed" id="wopt_hide">
+				Show Widget Options
+			</a>
+			<span class="wopt-switcher-ghosted">Widget Options</span>
+		</div>
+		<div class="opt-switch-shadow-line"></div>
+	</div>
+
+</div>
+
+<%= render(:partial => "/shared/google_analytics") %>
+</body>
+</html>

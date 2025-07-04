@@ -1,0 +1,11 @@
+load 'deploy' if respond_to?(:namespace) # cap2 differentiator
+Dir['vendor/plugins/*/recipes/*.rb'].each { |plugin| load(plugin) }
+load 'config/deploy'
+require 'capistrano/recipes/deploy/dependencies'
+Capistrano::Deploy::RemoteDependency.class_eval do
+	def file_not_exist(path, options={})
+		@message ||= "`#{path}' exists"
+		try("test ! -e #{path}", options)
+		self
+	end
+end

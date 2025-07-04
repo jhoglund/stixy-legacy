@@ -1,0 +1,37 @@
+
+<h2>List of roles</h2>
+<span class="adminmenu"><%= link_to 'New role', :action => 'new' %></span>
+
+<table class="admin">
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Is Visible?</th>
+    <th>Is Locked?</th>
+    <th>Status</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </tr>
+  
+<% @roles.each_with_index  do |role, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+%>
+  <tr class="<%= color %>">
+    <td><%= role.id %></td>
+    <td><%= role.name %></td>
+    <td><%= role.is_visible_str %></td>
+    <td><%= role.is_locked_str %></td>
+	<td><%= role.status_name %></td>
+	<td><%= link_to('Show', :action => 'show', :id => role) %></td>
+    <td><%= link_to('Edit', :action => 'edit', :id => role) unless role.is_locked? %></td>
+    <td><%= link_to('Destroy', { :action => 'destroy', :id => role }, :confirm => 'Are you sure?') unless role.is_locked? %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @page.prev.number } if @page.prev? %>
+<%= link_to 'Next page', { :page => @page.next.number } if @page.next? %> 
+
+

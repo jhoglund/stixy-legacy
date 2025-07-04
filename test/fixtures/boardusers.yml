@@ -1,0 +1,65 @@
+first_board_jonas:
+ id: 1
+ board_id: 1
+ user_id: 2
+first_board_adam:
+ id: 2
+ board_id: 1
+ user_id: 3
+first_board_maria:
+ id: 3
+ board_id: 1
+ user_id: 4
+first_board_camilla:
+ id: 4
+ board_id: 1
+ user_id: 5
+ 
+# Public pwd protected board
+second_board_adam:
+ id: 5
+ board_id: 4
+ user_id: 3
+ 
+# Home page example board accessible by anonomus
+example_board_anonomus:
+  id: 6
+  board_id: 5
+  user_id: 1
+
+# Home page example board accessible by jonas
+example_board_jonas:
+  id: 7
+  board_id: 5
+  user_id: 2
+  
+# Board accessible by jonas only
+invite_board_jonas_only:
+  id: 8
+  board_id: 6
+  user_id: 2
+  
+# Board used for beta invite
+beta_invite_board:
+  id: 9
+  board_id: 459
+  user_id: 3
+
+# Board used for new sign up's
+welcome_board:
+  id: 10
+  board_id: 1897
+  user_id: 2
+  # Board used for new sign up's
+home_board:
+  id: 11
+  board_id: 272
+  user_id: 1
+home_board_jonas:
+  id: 12
+  board_id: 272
+  user_id: 2
+jonas_board:
+ id: 13
+ board_id: 8
+ user_id: 2

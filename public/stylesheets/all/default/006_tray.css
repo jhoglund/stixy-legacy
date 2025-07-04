@@ -1,0 +1,54 @@
+/*----------*/
+/* 006 TRAY */
+/*----------*/
+
+.tray,
+.tray-bar,
+.tray-background,
+.tray-bar-background,
+.tray-background-gradient,
+.tray-switch,
+.tray-highlight-line,
+.tray-bar-highlight-line { position:absolute; }
+.tray-bar,
+.tray-bar-background,
+.tray-background { width:100%; }
+.tray, 
+.tray-bar { left:-17px; }
+.tray { display:none; bottom:40px; height:100px; left:10px; right:27px; behavior:url(/bindings/unselectable.htc); -moz-user-select:none; -webkit-user-select:none; }
+.tray-bar,
+.tray-bar-background,
+.tray-switch { height:24px; }
+.tray-switch .opt-switcher-bg { left:0px; }
+.tray-bar { bottom:16px; }
+.tray-content { height:97px; padding:0 0 0 27px; overflow:auto; white-space:nowrap; }
+.tray-background { overflow:hidden; top:0; left:0; height:100px; z-index:-1; }
+.tray-background-gradient { top:-480px; height:1000px; width:1000px; margin:0 auto; }
+.tray-background { background:rgb(235,235,235); filter:alpha(opacity=85); opacity:0.85; }
+.tray-background-gradient { background:url(/images/main_template/mt_gradient_1000x100_gray.png) no-repeat left 480px; }
+.tray-bar-background { overflow:hidden; top:0; z-index:-1; }
+.tray-bar-background-gradient { position:relative; top:-485px; left:0; height:1000px; width:1000px; margin:0 auto; background:no-repeat center 485px; z-index:0; }
+.tray-switch { left:27px; background:0px 4px no-repeat; }
+a.tray-switcher-open,
+a.tray-switcher-closed { color:white!important; }
+.tray-switcher-open:hover,
+.tray-switcher-closed:hover { background-position:3px -41px; }
+.tray-highlight-line,
+.tray-bar-highlight-line { display:block; height:100%; width:1px; border-left:1px solid rgb(245,245,245); }
+.tray-slot { position:relative; float:left; height:90px; width:90px; cursor:move; }
+.tray-icon { position:absolute; height:72px; width:75px; top:5px; left:0px; background-position:0px 0px; background-repeat:no-repeat; }
+.tray-icon:hover { background-position:0px -77px; }
+.tray-label { position:absolute; bottom:0px; width:75px; left:5px; right:5px; text-align:center; }
+.tray-item { display:none; }
+#widget-tray-note { background-image:url(/images/widgets/note/icon_widget_note.png); }
+#widget-tray-photo { background-image:url(/images/widgets/photo/icon_widget_photo.png); }
+#widget-tray-document { background-image:url(/images/widgets/document/icon_widget_document.png); }
+#widget-tray-todo { background-image:url(/images/widgets/todo/icon_widget_reminder.png); }
+
+/* TRAY STATES*/
+.tray-open .tray { display:block; }
+.tray-closed .tray { display:none; }
+.tray-switcher-open,
+.tray-switcher-closed { display:none; padding:5px 0 4px 22px; background:no-repeat 3px -11px;  }
+.tray-open .tray-switcher-open,
+.tray-closed .tray-switcher-closed { display:block;}

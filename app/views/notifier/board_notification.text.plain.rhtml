@@ -1,0 +1,11 @@
+Hello!
+
+<%= 	@sender.display_name %> wants to let you know that the Stixyboard "<%= @board.display_name  %>" has been updated.	
+<% if @content and not @content.empty? %>
+Personal message from <%= @sender.display_name %>:
+
+<%= @content %>
+<% end %>				
+View the Stixyboard at: <%= "http://#{ SERVER }#{ url_for :controller => "board", :id => @board.id }" %>.
+
+If you think this notification has been sent to you by mistake, contact us at Stixy at support@stixy.com, and we will help you.

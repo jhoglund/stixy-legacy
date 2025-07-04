@@ -1,0 +1,452 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html debug="true">
+<head>
+	<title>Welcome to Stixy</title>
+	<script language="javascript" type="text/javascript" src="/javascripts/all/firebug/firebug.js"></script>
+
+	<script>
+		var start = new Date
+		//var console = {log:function(){}}
+		Object.prototype.__prototype_extension = false;
+		Object.prototype.announce = function(){
+			try{
+				var args = [];
+				for(var i=0; i<arguments.length; i++) args[i] = arguments[i];
+				var type = args.shift();
+				var e = this.__cashed_custom_events[type];
+				var l = e.length;
+				for(var i=0; i<l; i++){ e[i].apply(null, args) }
+			}catch(e){}
+		}
+		Object.prototype.announce.__prototype_extension = true;
+		Object.prototype.listen = function(type,f,debug){
+			this.__cashed_custom_events = this.__cashed_custom_events || {};  
+			this.__cashed_custom_events[type] = this.__cashed_custom_events[type] || [];
+			var e = this.__cashed_custom_events[type];
+			var l = e.length;
+			for(var i=0; i<l; i++){ 
+			if(e[i].ub()==f.ub()) { return false } }
+			e.push(f);
+			return true
+		}
+		Object.prototype.listen.__prototype_extension = true;
+		Object.prototype.unlisten = function(type,f,debug){
+			try{
+				var e = this.__cashed_custom_events[type];
+				var l = e.length;
+		  	for(var i=0; i<l; i++){ 
+					if(e[i].ub()==f.ub()) { return e.splice(i, 1) } }
+				return false;
+			}catch(e){}
+		}
+		Object.prototype.unlisten.__prototype_extension = true;
+		Object.prototype.eachProperty = function(fn){
+			for(var i in this){
+				if(this[i].__prototype_extension||i.substr(0,2)=="__"){ continue };
+				fn(i,this[i])
+			}
+		}
+		Object.prototype.eachProperty.__prototype_extension = true;
+		Object.prototype.__unique_id_index = 0;
+		Object.prototype.get_unique_id = function(){
+			this.__unique_id = this.__unique_id || ("_uid_" + Object.prototype.__unique_id_index++);
+			return this.__unique_id;
+		}
+		Object.prototype.get_unique_id.__prototype_extension = true;
+		Object.prototype.getOrCreate = function(o,d){
+			this[o] = this[o] || d || {};
+			return this[o]
+		}
+		Object.prototype.getOrCreate.__prototype_extension = true;
+		
+		function $A(item) {
+		  if(!item){
+				return [];
+			}else if(item.splice){
+				return item;
+			}else{
+		    var results = [];
+				if(item.length>0) {
+		    	for (var i = 0; i < item.length; i++) results.push(item[i]);
+				} else {
+					results.push(item);
+				}
+		    return results;
+		  }
+		}
+		Function.prototype.ub = function() {
+			function o(s){
+				if(s.__original_function) return o(s.__original_function)
+				return s
+			}
+			return o(this);
+		}
+		Function.prototype.b = function() {
+			var a = $A(arguments), o = a.shift(), m = this;
+			var f = function() {
+		    return m.apply(o, a.concat($A(arguments)));
+		  }
+			f.__original_function = m;
+		  return f;
+		}
+		Function.prototype.be = function(o) {
+		  var m = this;
+			var f = function(e) {
+		    return m.call(o, e || window.event);
+		  }
+			f.__original_function = m;
+		  return f;
+		}
+		
+		var Stixy = {
+			events: {
+				Custom: function(){ },
+				halt: function(e){
+					if(e.stopPropagation){
+						e.stopPropagation();
+					}else{
+		      	event.cancelBubble = true;
+		      }
+				},
+				related: function(e,t){
+					var r = (e.relatedTarget!=undefined) ? e.relatedTarget : (e.type=="mouseout") ?  e.toElement : e.fromElement;
+					while(r){
+						if(r==t){ return true }
+						else{ r = r.parentNode}
+					}
+					return false;
+				},
+			  element: function(e) {
+			    return e.target || e.srcElement;
+			  },
+			  stop: function(e) {
+					if(!e) { return };
+					if(e.preventDefault){
+			      e.preventDefault();
+			      e.stopPropagation();
+			    }else{
+			      e.returnValue = false;
+			      e.cancelBubble = true;
+			    }
+			  },
+				before_unload_filters: [],
+				observers: {},
+				_addToCache: function(e, n, o, c){
+					var n = this.observers.getOrCreate(n),c = n.getOrCreate(c),f = c.getOrCreate(o.ub().get_unique_id(), []);
+					for(var i=0; i<f.length; i++){ 
+						if(f[i].element==e){ return false } 
+					}
+					f.push({element:e,func:o});
+					return o;
+				},
+				_getFromCache: function(e, n, o, c){
+					try{ 
+						var a = this.observers[n][c][o.ub().get_unique_id()], l = a.length;
+						for(var i=0; i<l; i++){
+							if(a[i].element==e) return a[i].func;
+						}
+					}
+					catch(e){ console.log(e); return false; }
+				},
+				_removeFromCache: function(e, n, o, c){
+					try{ 
+						var a = this.observers[n][c][o.ub().get_unique_id()], l = a.length;
+						for(var i=0; i<l; i++){
+							if(a[i].element==e){
+								a.splice(i,1);
+								if(a.length==0){
+									delete this.observers[n][c][o.ub().get_unique_id()];
+								}
+								break;
+							}
+						}
+					}
+					catch(e){ console.log(e); return false; }
+				},
+			  getCachedObserverForElement: function(e){
+					var cached = [];
+					this.observers.eachProperty(function(tn,tp){
+						tp.eachProperty(function(cn,cp){
+							cp.eachProperty(function(fn,fp){
+								//console.log(fp)
+								for(var i=0; i<fp.length; i++){
+									if(fp[i].element==e){
+										console.log(e)
+										cached.push({element:fp[i].element,name:tn,observer:fp[i].func,capture:cn});
+									}
+								}
+							});
+						});
+					});
+					return cached;
+				},
+				unloadCache: function() {
+					var s = this._removeObserver.b(this);
+					this.observers.eachProperty(function(tn,tp){
+						tp.eachProperty(function(cn,cp){
+							cp.eachProperty(function(fn,fp){
+								for(var i=0; i<fp.length; i++){
+									s(fp[i].element,tn,fp[i].func,(cn=="true"));
+								}
+							});
+						});
+					});
+			    this.observers = {};
+			  },
+				before_unload_filters: [],
+				beforeUnloadExecute: function(){
+					for(var i=0; i<this.before_unload_filters.length; i++){
+						this.before_unload_filters[i]();
+					}
+				},
+				beforeUnload: function(fun){
+					this.before_unload_filters.push(fun)
+				},
+			  observe: function(e, n, o, c) {
+			    var c = c || false;
+			    if (n == 'keypress' && (navigator.appVersion.match(/Konqueror|Safari|KHTML/) || n.attachEvent)) { n = 'keydown' }
+					if(e.addEventListener) {
+						if(e===window && n=="ready"){ n = "DOMContentLoaded" }
+						var o = this._addToCache(e, n, o, c);
+			    	if(o){ e.addEventListener(n, o, c) };
+					}else if(e.attachEvent){
+						if(e===window && n=="ready"){ n = "load" }
+						if(e==window && n=="mouseup") { e = document }
+						var r = this._addToCache(e, n, o, c);
+				  	if(r){ e.attachEvent('on' + n, o) };
+			    }
+			  },
+			  stopObserving: function(e, n, o, c) {
+					var c = c || false;
+					this._removeObserver(e, n, this._getFromCache(e, n, o, c), c);
+					return this._removeFromCache(e, n, o, c)
+			  },
+				_removeObserver: function(e, n, o, c) {
+					if(n == 'keypress' && (navigator.appVersion.match(/Konqueror|Safari|KHTML/) || e.detachEvent)) { n = 'keydown' }
+					if(e.removeEventListener){
+						if(o){ e.removeEventListener(n, o, c) };
+			    }else if(e.detachEvent){
+						if(e==window && n=="mouseup") { e = document }
+			      if(o){ e.detachEvent('on' + n, o) };
+			    }
+			  },
+				activeKeys: [],
+				setKey: function(key, add){
+					if(add!==false){
+						this.activeKeys[key] = true;
+					}else{
+						this.activeKeys[key] = null;
+					}
+				}
+			}
+		}
+		//Stixy.events.observe(window,"unload",Stixy.events.beforeUnloadExecute.b(Stixy.events))
+
+		var obj = {name:"my name"};
+		var add = function(){
+			console.log(this.name)
+		}
+		var add2 = function(name,c){
+			console.log(name +": "+c)
+		}
+		var f1 = add.b(obj,"click",true)
+		onload = function(){
+			var divs = document.getElementsByTagName("div");
+			var is = document.getElementsByTagName("i");
+			var bs = document.getElementsByTagName("b");
+
+			//Stixy.events.observe(bs[0],"mouseup",add.b(obj,"mouseup",true),true)
+			//console.log(Stixy.events.observers["mouseup"][true][add.ub().get_unique_id()][0].element==document.getElementsByTagName("b")[0])
+			//
+			//Stixy.events.stopObserving(bs[0],"mouseup",add,true)
+			//console.log(Stixy.events.observers["mouseup"][true][add.ub().get_unique_id()]==undefined)
+      //
+			//Stixy.events.observe(bs[0],"mouseup",add.b(obj,"mouseup",true),true)
+			//console.log(Stixy.events.observers["mouseup"][true][add.ub().get_unique_id()][0].element==document.getElementsByTagName("b")[0])
+			//
+			//Stixy.events.observe(divs[0],"click",add.b(obj),false)
+			//console.log(Stixy.events.observers["click"][false][add.ub().get_unique_id()][0].element==document.getElementsByTagName("div")[0])
+			//console.log(Stixy.events.observers["click"][false][add.ub().get_unique_id()].length==1)
+			//
+			//Stixy.events.observe(divs[0],"click",add.b(obj),true)
+			//console.log(Stixy.events.observers["click"][true][add.ub().get_unique_id()][0].element==document.getElementsByTagName("div")[0])
+			//console.log(Stixy.events.observers["click"][true][add.ub().get_unique_id()].length==1)
+      //
+			//Stixy.events.observe(divs[1],"click",add.b(obj),true)
+			//console.log(Stixy.events.observers["click"][true][add.ub().get_unique_id()][1].element==document.getElementsByTagName("div")[1])
+			//console.log(Stixy.events.observers["click"][true][add.ub().get_unique_id()].length==2)
+			//
+			//Stixy.events.observe(divs[1],"click",add.b(obj),true)
+			//console.log(Stixy.events.observers["click"][true][add.ub().get_unique_id()][1].element==document.getElementsByTagName("div")[1])
+			//console.log(Stixy.events.observers["click"][true][add.ub().get_unique_id()].length==2)
+      //
+			//console.log(Stixy.events.stopObserving(bs[0],"mouseuper",add,true)==false)
+			//console.log(Stixy.events.stopObserving(bs[0],"load",add,true)==false)
+			//var MyAnnouncer = {
+			//	fire: function(){
+			//		this.announce("ann")
+			//	}
+			//}
+			//
+			//var MyListener = {
+			//	child: new function(){
+			//		this.meth = function(){
+			//			this.prop = 1;
+			//		}
+			//		MyAnnouncer.listen("ann",this.meth.b(this))
+			//	},
+			//	test: function(){
+			//		console.log(MyAnnouncer.__cashed_custom_events.ann.length)
+			//		MyAnnouncer.unlisten("ann",this.child.meth)
+			//		console.log(MyAnnouncer.__cashed_custom_events.ann.length)
+			//		MyAnnouncer.listen("ann",this.child.meth.b(this))
+			//		console.log(MyAnnouncer.__cashed_custom_events.ann.length)
+			//	}
+			//}
+      //
+			//MyListener.test()
+			
+			//MyAnnouncer.listen("clicked", function(){
+			//	console.log(this.test)
+			//}.b({test:"me"}));
+			
+			Stixy.events.observe(divs[0],"click",add.b(obj),true)
+			Stixy.events.observe(divs[1],"click",add.b(obj),true)
+			Stixy.events.observe(divs[2],"mouseup",add2.b(obj),false)
+			Stixy.events.observe(divs[3],"click",add.b(obj),true)
+			//console.log(Stixy.events.getCachedObserverForElement(divs[0]))
+			
+			//function removeEvents(source,target){
+			//	var observers = Stixy.events.observers;
+			//	for(var i=0; i<observers.length; i++){
+			//		var observer = observers[i];
+			//		logger.debug(1)
+			//		if(observer[0].tagName && (observer[0] == source)){
+			//			logger.debug(2)
+			//			target.detachEvent("on" + observer[1], observer[2].bc(source))
+			//		}
+			//	}
+			//}
+			
+			
+			var clone = divs[0].cloneNode(true);
+			document.body.appendChild(clone);
+			var cached = Stixy.events.getCachedObserverForElement(divs[0]);
+			console.log(cached[0].name)
+			console.log(cached[0].observer)
+			//Stixy.events.stopObserving(d,cached[0].name,cached[0].observer)
+			for(var i=0; i<cached.length; i++){
+				clone.detachEvent("on" + cached[i].name, cached[i].observer)
+			}		
+			console.log(new Date - start)
+			//console.log(Stixy.events.observers)
+		}
+		function stop(){
+			Stixy.events.stopObserving(document.getElementsByTagName("b")[0],"mouseup",add,true)
+			console.log(Stixy.events.observers["mouseup"][true][add.ub().get_unique_id()]==undefined)
+		}
+
+	</script>
+
+</head>
+<body>
+	<div>click and mouseout</div>
+	<div>mousedown</div>
+	<div>mouseup</div>
+	<div>click</div>
+	<div onclick="Stixy.events.unloadCache()">Unload all</div>
+	<div onclick="stop()">Stop mouseup</div>
+	<b>x</b>
+	<br>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<!-- <i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i>
+	<i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i> -->
+</body>
+</html>

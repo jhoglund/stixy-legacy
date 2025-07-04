@@ -1,0 +1,40 @@
+<% if @boards %>
+<div class="bar-tools">
+	<div class="pager">
+		<% previous_page = content_tag('span','&nbsp;')+'Previous' %>
+		<% next_page = 'Next'+content_tag('span','&nbsp;') %>
+		<%= unless @boards.prev? then "<span class='previous'>#{previous_page}</span>" end  %>
+		<% if @boards.prev? %><%= link_to_function previous_page, "Stixy.board.updateBoardList(null, 'page= #{@boards.prev.number}')", :class => "previous" %></a><% end %>
+		<%= unless @boards.next? then "<span class='next'>#{next_page}</span>" end  %>
+		<% if @boards.next? %><%= link_to_function next_page, "Stixy.board.updateBoardList(null, 'page=#{ @boards.next.number }')", :class => "next" %><% end %>
+	</div>
+	<%= link_to_function "Detailed view", "Stixy.board.openOverview()" %>
+	<%= link_to_function "&nbsp;", "Stixy.ui.boardListToggle()", :class => "bar-close" %>
+</div>
+<div class="tag-filter">
+	<% has_filters = !current_user.board_filters.filter_list.blank? %>
+	<%= text_field_tag nil, nil, :id => "tag_filter", :title => "Show only tagged with", :value => has_filters==false ? "Show only tagged with" : current_user.board_filters.filter_list, :class => (has_filters ? "" : "no-filter") %>
+	<%= link_to_function "&nbsp;", "Stixy.board.addBoardFilter(0)", :class => "reset-filter", :title => "Show all Stixyboards" %>
+	<%= link_to_function "Show", "Stixy.board.addBoardFilter()", :button => {:type => "ghosted"} %>
+</div>
+<table class="board-list-grid">
+	<tr><td class="board-list-top"></td></tr>
+	<tr>
+		<td class="board-list-bottom">
+			<div class="board-list-panel">
+				<div class="board-list-scroll" id="board_list_scroll">
+					<div class="board-list-content">
+						<% if @boards.number_of_pages == 0 and not @board_filters.empty? %>
+							You don't have any Stixyboards tagged <%= current_user.board_filters.filter_list_as_text %>. Try removing one or more tags.
+							<p><%= link_to_function "&raquo; Show all Stixyboards", "Stixy.board.addBoardFilter(0)" %></p>
+						<% else %>
+							<%= render(:partial => "board/board_list_compact") %>
+						<% end %>
+					</div>
+					<div class="loading-spinner"><div class="spinner-16">&nbsp;</div></div>
+				</div>
+			</div>
+		</td>
+	</tr>
+</table>
+<% end %>

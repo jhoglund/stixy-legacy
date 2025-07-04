@@ -1,0 +1,9 @@
+<div id="board_notification" style="margin-top:20px;margin-bottom:10px">
+	<h4 class="subhead">Notify of updates</h4>
+	Send a notification to everyone sharing this Stixyboard.
+	<p><%= text_area_tag "board_notification_box", "Add a personal message (optional)", :title => "Add a personal message (optional)", :style => "width:215px;", :class => "no-data", :rows => "3" %></p>  
+	<div style="text-align:right;margin-top:10px;">
+		<span id="board_notification_send"><%= link_to_function "Send", "Stixy.board.sendNotification()", :style => "font-weight:bold;" %></span>
+		<span id="board_notification_sendig" class="spinner-16">Sending notification</span>
+	</div>
+</div>

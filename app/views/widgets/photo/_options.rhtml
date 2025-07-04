@@ -1,0 +1,53 @@
+<div class="opt-panel wopt wopt-deactivated" id="wopt-photo">
+	<span class="opt-tab">
+	  <div class="left"><div>&nbsp;</div></div>
+	  <div class="right"><div>&nbsp;</div></div>
+		<div class="label">Photo options</div>
+	</span>
+	<div class="wopt-locked-panel">&nbsp;</div>
+	<div class="opt-scroll wopt-locked-ghosted">
+		<div class="opt-content">
+      <div class="opt-row">
+        <h4>Image name</h4>
+        <div class="w-p-image-name ghosted" style="margin:4px 0"></div>
+				<div style="margin:8px 0">
+					<%= link_to_function("Add photo(s)", nil, :button => {:type => "default"}, :class => "w-p-upload") %>
+					<%= link_to_function("Replace photo", nil, :button => {:type => false}, :class => "w-p-upload w-p-replace") %>
+					<%= link_to_function("Get", nil, :button => {:type => false}, :class => "w-p-get-original", :style => "margin-left:10px") %>
+				</div>
+      	<div style="margin-top:8px;color:rgb(150,150,150)">Maximum file size: 4 MB</div>
+			</div>
+      <div class="opt-row">
+        <div class="opt-devider"></div>
+				<h4>Effect</h4>
+				<div class="opt-themes" style="">
+        	<div class="opt-theme-spacer">&nbsp;</div>
+					<div class="opt-theme w-p-theme-effects" id="w-p-theme-noeffect"></div>
+	        <div class="opt-theme w-p-theme-effects" id="w-p-theme-sepia"></div>
+	        <div class="opt-theme w-p-theme-effects" id="w-p-theme-gray"></div>
+				</div>
+      </div>
+      <div class="opt-row">
+        <div class="opt-devider" style="margin-bottom:10px"></div>
+        <h4>Frame</h4>
+				<div class="opt-themes">
+         	<div class="opt-theme-spacer">&nbsp;</div>
+					<div class="opt-theme w-p-theme-border" id="w-p-theme-noframe"></div>
+          <div class="opt-theme w-p-theme-border" id="w-p-theme-frame"></div>
+					<!-- <div class="opt-theme w-p-theme-border" id="w-p-theme-frame-1px"></div> -->
+				</div>
+			</div>
+			<div class="opt-row">
+	      <div class="opt-devider" style="margin-bottom:10px"></div>
+        <h4>Rotate</h4>
+				<div class="opt-themes">
+          <div class="opt-theme-spacer">&nbsp;</div>
+					<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-0"></div>
+					<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-90"></div>
+					<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-180"></div>
+					<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-270"></div>
+				</div>
+      </div>
+    </div>
+  </div>
+</div>

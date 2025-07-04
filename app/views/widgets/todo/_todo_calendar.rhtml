@@ -1,0 +1,10 @@
+<% widget_todo_calendar = generate_widget_todo_calendar %>
+<div class="calendar-nav">
+  <span class="prev-month" id="todo_calendar_nav_previuos" title="<%= @calendar.previous.to_s %>"><%= link_to_function "&nbsp;", "Stixy.nothing()" %></span>
+  <span class="todo-calendar-month-title">
+    <span id="todo_progress_indicator" style="display:none"></span>
+    <%= Date::MONTHNAMES[calendar_date(:widget_todo).month] %> <%= calendar_date(:widget_todo).year %>
+  </span>
+  <span class="next-month" id="todo_calendar_nav_next" title="<%= @calendar.next.to_s %>"><%= link_to_function "&nbsp;", "Stixy.nothing()" %></span>
+</div>
+<%=	widget_todo_calendar  %>

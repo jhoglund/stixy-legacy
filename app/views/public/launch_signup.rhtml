@@ -1,0 +1,41 @@
+<%= render :partial => "public_navigation" %>
+<% if @beta_signup_success %>
+<div class="full-column">
+	<h1>Thank you for your interest in Stixy.</h1>
+	<p>We will send you an e-mail as soon as we launch.</p>
+	
+	<p>The Stixy Team</p>
+</div>
+<% else %>
+<div class="left-column">
+  <h1>Sign Up for Stixy Launch Alert</h1>
+  <p>Enter your e-mail address and we will notify you as soon as we launch.</p>
+	<p>If you are interested in joining our group of beta testers, <%= link_to "click here", :action => "beta_signup" %>. </p>
+</div>
+<div class="right-column-bg"></div>
+<div class="right-column">
+
+	<% form_tag(:action => 'launch_signup') do -%>
+	<input type="hidden" name="beta_tester[time_offset]" id="time_offset" value="0"/>
+	<script type="text/javascript">
+		var t_o = new Date().getTimezoneOffset();
+		Stixy.element.$ID('time_offset').value=t_o-t_o-t_o*60
+	</script>
+
+	<% if @beta_tester.user.errors[:login] %><div class="inline-message-error"><% end %>
+  <div class="field-title">E-mail address</div>
+  <%= text_field("beta_tester", "login", :size => 30, :class => "text-field", :value => @beta_tester.user[:login]||"") %><br />
+  <div class="field-title">Send us a message. Any questions or comments are welcome.</div>
+	<%= text_area('beta_tester', 'comment', :rows => 6, :class => "text-field")  %>
+	<% if @beta_tester.user.errors[:login] %><% @beta_tester.user.errors[:login].each do |msg| %>
+		<p>Email <%= msg %></p>
+	<% end %>  
+	</div><% end %>
+  <div style="margin-top: 16px; text-align: right;">
+		<%= link_to_function "Send request", "document.forms[0].submit()", :button => { :type => "default"} %>
+	  <%= submit_tag '', :style => "display:none" %>
+  </div>
+	<% end -%>
+ </div>
+<% end %>
+

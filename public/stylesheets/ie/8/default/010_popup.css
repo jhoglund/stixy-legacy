@@ -1,0 +1,5 @@
+/*---------------*/
+/*   POPUP IE 8  */
+/*---------------*/
+.popup-content { height:expression(document.body.clientHeight-76); bottom:auto; }
+.popup-blog { width:100%; }

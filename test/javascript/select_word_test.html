@@ -1,0 +1,694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>JavaScript unit test file</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script type="text/javascript">
+    var StixyError = function(e){
+      throw(e);
+    }
+    var STIXY_ENV = 'test';
+  </script>
+  
+  <script src="../../public/javascripts/all/default/001_prototype_extend.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/002_stixy_init.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/003_events.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/004_elements.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/005_str_html_xml.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/006_board.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/007_flash.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/008_features_init.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/009_features_move.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/010_features_resize.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/011_features_hover.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/012_features_focus.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/013_features_order.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/014_features_remove.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/015_features_text.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/016_features_upload.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/017_scroll.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/018_effects.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/027_popup.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/028_server.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/029_ui.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/030_widgets.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/031_tools.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/032_widgets_optionbar.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/default/033_event_observers.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/widgets/document.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/widgets/note.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/widgets/photo.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/widgets/todo.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../public/javascripts/all/stixyboard/001_event_observers.js" type="text/javascript" charset="utf-8"></script>
+  
+  <script src="assets/jsunittest.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="assets/unittest.css" type="text/css" />
+  <link rel="stylesheet" href="../../public/stylesheets/all/default/010_popup.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  
+  <link rel="stylesheet" href="../../public/stylesheets/all/widgets/101_default.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="../../public/stylesheets/all/widgets/102_document.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="../../public/stylesheets/all/widgets/103_note.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="../../public/stylesheets/all/widgets/104_photo.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="../../public/stylesheets/all/widgets/105_todo.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  
+</head>
+<body>
+
+<div id="content">
+
+  <div id="header">
+    <h1>JavaScript unit test file</h1>
+    <p>
+      This file tests <strong>select_word.js</strong>.
+    </p>
+  </div>
+
+  <!-- Log output (one per Runner, via {testLog: "testlog"} option)-->
+  <div id="testlog"></div>
+  
+  <!-- Put or load sample/test html here (load via sampleLoad(file) in setup() methods) -->
+  <div class="canvas" id="stixyboard">
+
+    <div class="canvas-content" id="canvas_content">
+      
+      <div id="widget_1" style="top: 39px; left: 38px; width: 195px; height: 138px; z-index: 1000012;" class="note widget  ">
+        <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+        <div class="focus">
+        	<div class="focus-border-spacer"> </div>
+        </div>
+      	<div class="base">
+          <div style="" class="base-bg note-bg"><p></div>
+          <div class="editor-bg"><div class="editor-bg-border"> </div></div>
+      		<div class="editor-canvas">
+      		  <div contenteditable="true" class="editor" id="editor">firstword
+      		    <font size="2">
+      		      <span style="font-family: Georgia;"><a href="http://www.link.se/" id="link">http://www.link.se/</a></span>
+      		    </font>
+      		    <span style="font-family: Verdana;" id="spaced_element">
+    		        spaced element
+    		      </span>
+    		      <span id="adjecent_left_of_block_element">left of block<div id="adjecent_block_element">to the right side of the block</div></span>
+    		      <span id="adjecent_left_of_block_element_with_nested">left of block with nested tags<div id="adjecent_block_element_with_nested"><i>t<b>o<u> the</u> right</b> side of the block inside nested</i></div></span>
+      		    <span class="stixy-spacer"></span>
+      		    <div>
+      		      <span style="font-size: medium;" class="Apple-style-span" id="nested_outer">nested<b><i id="nested_inner">words</i></b></span>
+      		    </div>
+      		    <div id="after">after </div>
+      		    <b id="empty_node"></b><i id="not_empty_node">empty</i> 
+      		    lastword
+      		  </div>
+      		</div>
+      		<div class="handles">
+      	    <div class="remove"></div>
+          	<div class="resizer"></div>
+          </div>
+      	</div>
+      </div>
+      
+      <div id="widget_2" style="top: 200px; left: 38px; width: 195px; height: 138px; z-index: 1000012;" class="note widget  ">
+        <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+        <div class="focus">
+        	<div class="focus-border-spacer"> </div>
+        </div>
+      	<div class="base">
+          <div style="" class="base-bg note-bg"><p></div>
+          <div class="editor-bg"><div class="editor-bg-border"> </div></div>
+      		<div class="editor-canvas">
+      		  <div contenteditable="true" class="editor" id="editor_find_adjecent_element">
+      		    <span id="find_adjecent_element_node_1">
+                <span id="find_adjecent_element_node_11">
+                  <div id="find_adjecent_element_node_111">
+                    111
+                  </div>
+                  <span id="find_adjecent_element_node_112">
+                    112
+                  </span>
+                </span>
+                <div id="find_adjecent_element_node_12">
+                  <span id="find_adjecent_element_node_121">
+                    <span id="find_adjecent_element_node_1211">
+                      <u id="find_adjecent_element_node_12111">
+                        12111
+                      </u>
+                      <i id="find_adjecent_element_node_12112">
+                        12112
+                      </i>
+                    </span>
+                  </span>
+                  <div id="find_adjecent_element_node_122">
+                    122
+                  </div>
+                </div>
+                <div id="find_adjecent_element_node_13">
+                  13
+                </div>
+              </span>
+      		  </div>
+      		</div>
+      		<div class="handles">
+      	    <div class="remove"></div>
+          	<div class="resizer"></div>
+          </div>
+      	</div>
+      </div>
+      
+      <div id="widget_3" style="top: 539px; left: 38px; width: 195px; height: 238px; z-index: 1000012;" class="note widget  ">
+        <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+        <div class="focus">
+        	<div class="focus-border-spacer"> </div>
+        </div>
+      	<div class="base">
+          <div style="" class="base-bg note-bg"><p></div>
+          <div class="editor-bg"><div class="editor-bg-border"> </div></div>
+      		<div class="editor-canvas">
+      		  <div contenteditable="true" class="editor" id="editor_3"><b id="empty_preceeding_node">  </b>firstword
+      		    <font size="2">
+      		      <span style="font-family: Georgia;"><a href="http://www.link.se/" >http://www.link.se/</a></span>
+      		    </font>
+      		    <span style="font-family: Verdana;" >
+    		        spaced element
+    		      </span>
+    		      <span >left of block<div >to the right side of the block</div></span>
+    		      <span >left of block with nested tags<div ><i>t<b>o<u> the</u> right</b> side of the block inside nested</i></div></span>
+      		    <span class="stixy-spacer"></span>
+      		    <div>
+      		      <span style="font-size: medium;" class="Apple-style-span" >nested<b><i >words</i></b></span>
+      		    </div>
+      		    <div >after </div>
+      		    <b ></b><i >empty</i> 
+      		    lastword<b id="empty_trailing_node"> </b>
+      		  </div>
+      		</div>
+      		<div class="handles">
+      	    <div class="remove"></div>
+          	<div class="resizer"></div>
+          </div>
+      	</div>
+      </div>
+      
+      <div id="widget_4" style="top: 39px; right: 38px; width: 195px; height: 238px; z-index: 1000012;" class="note widget  ">
+        <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+        <div class="focus">
+        	<div class="focus-border-spacer"> </div>
+        </div>
+      	<div class="base">
+          <div style="" class="base-bg note-bg"><p></div>
+          <div class="editor-bg"><div class="editor-bg-border"> </div></div>
+      		<div class="editor-canvas">
+      		  <div contenteditable="true" class="editor" id="editor_4"><b id="empty_preceeding_node">  </b>firstword
+      		    <font size="2">
+      		      <span style="font-family: Georgia;"><a href="http://www.link.se/" >http://www.link.se/</a></span>
+      		    </font>
+      		    <span style="font-family: Verdana;" >
+    		        spaced element
+    		      </span>
+    		      <span >left of block<div >to the right side of the block</div></span>
+    		      <span >left of block with nested tags<div ><i>t<b>o<u> the</u> right</b> side of the block inside nested</i></div></span>
+      		    <span class="stixy-spacer"></span>
+      		    <div>
+      		      <span style="font-size: medium;" class="Apple-style-span" >before<br><br id="test_word_break"><br><br>after</span>
+      		    </div>
+      		    <div >after </div>
+      		    <b ></b><i >empty</i> 
+      		    lastword<b id="empty_trailing_node"> </b>
+      		  </div>
+      		</div>
+      		<div class="handles">
+      	    <div class="remove"></div>
+          	<div class="resizer"></div>
+          </div>
+      	</div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+	
+<script type="text/javascript">
+// <![CDATA[
+  
+  Stixy.listen('ready', function(){
+      
+      var getTrimmedSelection = function(){
+        return getSelection().toString().replace(/\n/,' ');
+      }
+      
+      var setSelection = function(word, node, offset){
+        with(this){
+          var offset = word ? node.data.search(new RegExp(word)) + (offset || Math.floor(word.length/2)) : offset || 0;
+          var selection = document.selection || window.getSelection();
+          range.setStart(node, offset);
+          range.setEnd(node, offset);
+          selection.removeAllRanges()
+          selection.addRange(range);
+          assertEqual('', getTrimmedSelection());
+        }
+      }
+      
+      var testTextNode = function(matchText, nodeId, nodeText, position){
+        with(this){
+          setSelection.b(this)(null, widget.text.findTextNode(Stixy.element.$ID(nodeId)), position)
+          widget.text.selectWord()
+          assertEqual(matchText, getTrimmedSelection());
+        }
+      }
+      var testElementNode = function(matchText, nodeId, nodeText, position){
+        with(this){
+          setSelection.b(this)(null, Stixy.element.$ID(nodeId), position)
+          widget.text.selectWord();
+          assertEqual(matchText, getTrimmedSelection());
+        }
+      }
+      
+      var node1 = Stixy.element.$ID('find_adjecent_element_node_1');
+      var node11 = Stixy.element.$ID('find_adjecent_element_node_11');
+      var node111 = Stixy.element.$ID('find_adjecent_element_node_111');
+      var node112 = Stixy.element.$ID('find_adjecent_element_node_112');
+      var node112Text = node112.firstChild;
+      var node12 = Stixy.element.$ID('find_adjecent_element_node_12');
+      var node122 = Stixy.element.$ID('find_adjecent_element_node_122');
+      var node12111 = Stixy.element.$ID('find_adjecent_element_node_12111');
+      var node12112 = Stixy.element.$ID('find_adjecent_element_node_12112');
+      var node13 = Stixy.element.$ID('find_adjecent_element_node_13');
+      var nodeWordBreak = Stixy.element.$ID('test_word_break');
+      
+      var widget = Stixy.widgets.addWidget(new Stixy.widgets.Note("widget_1"));
+      var widget2 = Stixy.widgets.addWidget(new Stixy.widgets.Note("widget_2"));
+      var widget3 = Stixy.widgets.addWidget(new Stixy.widgets.Note("widget_3"));
+      var widget4 = Stixy.widgets.addWidget(new Stixy.widgets.Note("widget_4"));
+      
+      new Test.Unit.Runner({
+
+        // replace this with your real tests
+        setup: function() {
+          range = document.createRange();
+        },
+
+        teardown: function() {
+          range.detach();
+        },
+        
+        testWordBreak: function(){
+          // # TODO: before we can turn on the word selection in link editing we need to fix so wor selection breaks correctly at <br> tags
+          this.warning("Before we can turn on the word selection in link editing we need to fix so wor selection breaks correctly at <br> tags")
+          var node = setSelection.b(this)(null, nodeWordBreak);
+          widget4.text.selectWord();
+          this.assertEqual('', getTrimmedSelection());
+          
+        },
+        
+        testMixedInlineTagsInsideNestedTagFirstCharacter: function() {
+          //return
+          testTextNode.b(this)('nestedwords', 'nested_inner', 'words', 0)
+          testTextNode.b(this)('nestedwords', 'nested_inner', 'words', 1)
+          testTextNode.b(this)('nestedwords', 'nested_inner', 'words', 5)
+          testTextNode.b(this)('nestedwords', 'nested_outer', 'nested', 0)
+          testTextNode.b(this)('nestedwords', 'nested_outer', 'nested', 1)
+          testTextNode.b(this)('nestedwords', 'nested_outer', 'nested', 5)
+          testElementNode.b(this)('empty', 'not_empty_node', 'empty')
+          testElementNode.b(this)('empty', 'empty_node', '')
+        },
+        
+        testSelectLink: function() {
+          //return
+          // This breaks in Safari. 
+          // When setting the range start to the #link element, Safari selects the last whitespace in the textNode "firstword    "
+          // This should not be a problem in the real app, when selection is caused by user click.
+          // firstword
+    		  //   <font size="2">
+    		  //     <span style="font-family: Georgia;"><a href="http://www.link.se/" id="link">http://www.link.se/</a></span>
+    		  //   </font>
+    		  this.warning("This should not run in Safari");
+          if(!Stixy.ua.webkit)
+            testTextNode.b(this)('http://www.link.se/', 'link', 'http://www.link.se/')
+        },
+        testSameNode: function() {
+          //return
+          with(this) {
+            var node = Stixy.element.$ID('adjecent_block_element');
+            
+            // Select all words with cursor positioned in the middle of the word
+            var words = node.textContent.split(/\s/);
+            for(var i=0; i<words.length; i++){
+              setSelection.b(this)(words[i], node.firstChild);
+              widget.text.selectWord();
+              assertEqual(words[i], getTrimmedSelection());
+            }
+            
+            // Select all words with cursor positioned at the begining of word
+            var words = node.textContent.split(/\s/);
+            for(var i=0; i<words.length; i++){
+              setSelection.b(this)(words[i], node.firstChild, 0);
+              widget.text.selectWord();
+              assertEqual(words[i], getTrimmedSelection());
+            }
+            
+            // Select all words with cursor positioned at the end of word
+            var words = node.textContent.split(/\s/);
+            for(var i=0; i<words.length; i++){
+              setSelection.b(this)(words[i], node.firstChild, words[i].length);
+              widget.text.selectWord();
+              assertEqual(words[i], getTrimmedSelection());
+            }
+            
+          }
+        },
+        
+        testAdjecentBlockElementOutsideNested: function() {
+          //return
+          with(this) {
+            var blockElement = Stixy.element.$ID('adjecent_block_element_with_nested');
+            var adjecentElement = Stixy.element.$ID('adjecent_left_of_block_element_with_nested');
+            setSelection.b(this)(null, blockElement.firstChild, 0);
+            widget.text.selectWord();
+            assertEqual(blockElement.textContent.match(/^\S*/)[0], getTrimmedSelection());
+          }
+        },
+        
+        testAdjecentBlockElement: function() {
+          //return
+          with(this) {
+            var blockElement = Stixy.element.$ID('adjecent_block_element');
+            var adjecentElement = Stixy.element.$ID('adjecent_left_of_block_element');
+            setSelection.b(this)(null, blockElement.firstChild, 1);
+            widget.text.selectWord();
+            assertEqual(blockElement.textContent.match(/^\S*/)[0], getTrimmedSelection());
+          }
+        },
+        testPositionedLastCharacterInEditor: function() {
+          //return
+          with(this) {
+            var lastNode = Stixy.element.$ID('editor').lastChild;
+            var offset = lastNode.textContent.search(/\w(?!.*\w)/);
+            setSelection.b(this)(null, lastNode, offset);
+            widget.text.selectWord();
+            assertEqual('lastword', getTrimmedSelection());
+          }
+        },
+        testPositionedFirstCharacterInEditor: function() {
+          //return
+          with(this) {
+            var firstNode = Stixy.element.$ID('editor').firstChild;
+            setSelection.b(this)(null, firstNode, 0);
+            widget.text.selectWord();
+            assertEqual('firstword', getTrimmedSelection());
+          }
+        },
+        testLastWordWithEmptyTrailingNode: function() {
+          //return
+          with(this) {
+            var lastTextNode = Stixy.element.$ID('empty_trailing_node').firstChild;
+            setSelection.b(this)(null, lastTextNode, 0);
+           
+            widget3.text.selectWord();
+            assertEqual('lastword', getTrimmedSelection());
+          }
+        },
+        testFirstWordWithEmptyPreceedingNode: function() {
+          //return
+          with(this) {
+            var firstTextNode = Stixy.element.$ID('empty_preceeding_node').firstChild;
+            setSelection.b(this)(null, firstTextNode, firstTextNode.length);
+           
+            widget3.text.selectWord();
+            assertEqual('firstword', getTrimmedSelection());
+          }
+        },
+        //testFirstWordWithEmptyPreceedingNodeBeforeSpace: function() {
+        //  // This breaks. I can't figure out a way to do it. TODO
+        //  //return
+        //  with(this) {
+        //    var firstTextNode = Stixy.element.$ID('empty_preceeding_node').firstChild;
+        //    setSelection.b(this)(null, firstTextNode, 0);
+        //   
+        //    widget3.text.selectWord();
+        //    assertEqual('', getTrimmedSelection());
+        //  }
+        //},
+        
+        
+        
+        
+        testFindParentNode: function() {
+          //return
+          with(this){
+            
+            // Find first parent
+            assertEqual(node11.parentNode, widget2.text.findParentNode(node11));    
+            
+            // Find no parent because node has no parent
+            assertNull(widget2.text.findSiblingNode(document));
+            
+            // Find no parent with id notmatching
+            assertNull(widget2.text.findParentNode(node11, function(node){
+              return node.id == 'notmatching';
+            }));
+            
+            // Find first parent that is a non inline element
+            assertEqual(node12, widget2.text.findParentNode(node12111, function(node){
+              return node.nodeName != "#text" && !/inline/.test(document.defaultView.getComputedStyle(node,false).getPropertyValue('display'));
+            }));
+            
+            // Find first parent that is a specific element
+            assertEqual(node1, widget2.text.findParentNode(node12112, function(node){
+              return node == node1;
+            }));
+            
+          }
+        },
+        
+        testFindSiblingNode: function() {
+          //return
+          with(this){
+            
+            // Forward
+            // Find first sibling
+            assertEqual(node11.nextSibling, widget2.text.findSiblingNode(node11));    
+            //
+            // Find no sibling with id notmatching
+            assertNull(widget2.text.findSiblingNode(node11, function(node){
+              return node.id == 'notmatching';
+            }));
+            
+            // Find first sibling that is a non inline element
+            assertEqual(node12, widget2.text.findSiblingNode(node11, function(node){
+              return node.nodeName != "#text" && !/inline/.test(document.defaultView.getComputedStyle(node,false).getPropertyValue('display'));
+            }));
+            
+            // Find first sibling that is a specific element
+            assertEqual(node13, widget2.text.findSiblingNode(node11, function(node){
+              return node == node13;
+            }));
+            
+            // Backward
+            // Find first preceeding sibling
+            assertEqual(node12.previousSibling, widget2.text.findSiblingNode(node12, null, true));    
+            
+            // Find no preceeding sibling with id notmatching
+            assertNull(widget2.text.findSiblingNode(node11, function(node){
+              return node.id == 'notmatching';
+            }, true));
+            
+            // Find first preceeding sibling that is a non inline element
+            assertEqual(node12, widget2.text.findSiblingNode(node13, function(node){
+              //console.log(node,node.nodeName != "#text" && !/inline/.test(document.defaultView.getComputedStyle(node,false).getPropertyValue('display')))
+              return node.nodeName != "#text" && !/inline/.test(document.defaultView.getComputedStyle(node,false).getPropertyValue('display'));
+            },true));
+            
+          }
+        },
+        
+        testFindSiblingNodeAt: function() {
+          //return
+          with(this){
+            
+            // Find first sibling
+            assertEqual(node12, widget2.text.findSiblingNodeAt(node11, 1));    
+            
+            // Find second sibling
+            assertEqual(node13, widget2.text.findSiblingNodeAt(node11, 2));    
+
+
+            // Find no third sibling
+            assertNull(widget2.text.findSiblingNodeAt(node11, 3));    
+            
+            // Find first sibling that if match
+            assertEqual(node12, widget2.text.findSiblingNodeAt(node11, 1, function(node){
+              return node == node12;
+            }));
+            
+            // Find no sibling when no match
+            assertNull(widget2.text.findSiblingNodeAt(node11, 1, function(node){
+              return node == node13;
+            }));
+                        
+          }
+        },
+        
+        testIsTextOrElementNode: function() {
+          //return
+          with(this){
+            
+            // Find first sibling
+            var elementNode = document.createElement('div');
+            var textNode = document.createTextNode('lorem');
+            
+            assert(widget2.text.isTextNode(textNode));    
+            assert(widget2.text.isElementNode(elementNode));    
+            
+            assertEqual(false, widget2.text.isTextNode(elementNode));    
+            assertEqual(false, widget2.text.isElementNode(textNode));    
+            assertEqual(false, widget2.text.isTextNode(null));    
+            assertEqual(false, widget2.text.isElementNode(false));    
+            assertEqual(false, widget2.text.isElementNode(undefined));    
+            assertEqual(false, widget2.text.isElementNode({}));    
+            assertEqual(false, widget2.text.isElementNode('xxx'));    
+            
+                        
+          }
+        },
+        
+        
+        testFindChildNode: function() {
+          //return
+          with(this){
+            // Returns null. Node has no children
+            assertNull(widget2.text.findChildNode(node112Text));
+            
+            // Returns first child
+            assertEqual(node122.firstChild, widget2.text.findChildNode(node122));
+            
+            // Returns null. Has no matching child
+            assertNull(widget2.text.findChildNode(node11, function(node){
+              return node.nodeName == "#text" && /122/.test(node.data);
+            }));
+            // Returns first matching child
+            assertEqual(node112Text, widget2.text.findChildNode(node11, function(node){
+              return node.nodeName == "#text" && /112/.test(node.data);
+            }));
+          }
+        },
+        
+        testFindTextNode: function() {
+          //return
+          with(this){
+            // Find first sibling that is a text node and has content matching " 122 "
+            assertEqual(node122.firstChild, widget2.text.findTextNode(node12111, /122/));
+            assertEqual(node112Text, widget2.text.findTextNode(node12111, /112/, true));
+          }
+        },
+        testFindNodeBelow: function() {
+          //return
+          with(this){
+            // Find first sibling
+            assertEqual(node12111.firstChild, widget2.text.findNodeBelow(node12111));    
+            
+            // Find first sibling that is a text node and has content matching " 122 "
+            assertEqual(node122.firstChild, widget2.text.findNodeBelow(node12111, function(node){
+              return node.nodeName == "#text" && /\s122(\s||\n)/.test(node.data);
+            }));
+            
+            // Find first sibling that is a non inline element
+            assertEqual(node122, widget2.text.findNodeBelow(node12111, function(node){
+              return node.nodeName != "#text" && !/inline/.test(document.defaultView.getComputedStyle(node,false).getPropertyValue('display'));
+            }));
+            
+            // Find first sibling that is a specific element
+            assertEqual(node12112, widget2.text.findNodeBelow(node12111, function(node){
+              return node == node12112;
+            }));
+            
+            // Find first sibling that is the last element of the body
+            assertEqual(document.body.lastChild, widget2.text.findNodeBelow(node12111, function(node){
+              return node == document.body.lastChild;
+            }));            
+          }
+        },
+        
+        testFindNodeAbove: function() {
+          //return
+          with(this){
+            // Find first preceeding sibling
+            assertEqual(node12111.previousSibling, widget2.text.findNodeAbove(node12111, null));
+
+            // Find first preceeding sibling that is the first element of the body
+            assertEqual(document.body.firstChild, widget2.text.findNodeAbove(node12111, function(node){
+              return node == document.body.firstChild;
+            }));
+            
+            // Find first preceeding sibling that is a specific element
+            assertEqual(node111, widget2.text.findNodeAbove(node12111, function(node){
+              return node == node111;
+            }));
+            
+            // Find first preceeding sibling that is a specific text node
+            assertEqual(node112Text, widget2.text.findNodeAbove(node12111, function(node){
+              return node == node112Text;
+            }));
+            
+          }
+        },
+        
+        testFindNode: function() {
+          //return
+          with(this){
+            
+            // Below
+            // Find first sibling
+            assertEqual(node12111.firstChild, widget2.text.findNode(node12111));    
+            
+            // Find first sibling that is a text node and has content matching " 122 "
+            assertEqual(node122.firstChild, widget2.text.findNode(node12111, function(node){
+              return node.nodeName == "#text" && /\s122(\s||\n)/.test(node.data);
+            }));
+            
+            // Find first sibling that is a non inline element
+            assertEqual(node122, widget2.text.findNode(node12111, function(node){
+              return node.nodeName != "#text" && !/inline/.test(document.defaultView.getComputedStyle(node,false).getPropertyValue('display'));
+            }));
+            
+            // Find first sibling that is a specific element
+            assertEqual(node12112, widget2.text.findNode(node12111, function(node){
+              return node == node12112;
+            }));
+            
+            // Find first sibling that is the last element of the body
+            assertEqual(document.body.lastChild, widget2.text.findNode(node12111, function(node){
+              return node == document.body.lastChild;
+            }));
+            
+            // Above
+            // Find first preceeding sibling
+            assertEqual(node12111.previousSibling, widget2.text.findNode(node12111, null, true));
+            
+            // Find first preceeding sibling that is the first element of the body
+            assertEqual(document.body.firstChild, widget2.text.findNode(node12111, function(node){
+              return node == document.body.firstChild;
+            }, true));
+
+            // Find first preceeding sibling that is a specific element
+            assertEqual(node111, widget2.text.findNode(node12111, function(node){
+              return node == node111;
+            }, true));
+            
+            // Find first preceeding sibling that is a specific text node
+            assertEqual(node112Text, widget2.text.findNode(node12111, function(node){
+              return node == node112Text;
+            }, true));
+            
+          }
+        }
+
+      }, {testLog: "testlog"}); 
+      // For each Test.UnitRunner instance, specify the element id where results will be
+      // published; e.g. <div id="testlog"/> above.
+      // That is, you can have multiple "new Test.Unit.Runner() { ... }" on this page, just
+      // create more <div id="testlog2"></div> etc, and pass the element id to the hash above:
+      // e.g. {testLog: "testlog2"}
+    // ]]>
+    
+  })
+</script>
+</body>
+</html>

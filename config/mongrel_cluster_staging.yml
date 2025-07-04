@@ -1,0 +1,8 @@
+---
+address: 127.0.0.1
+log_file: /home/stixy/application/staging/shared/log/mongrel.log
+port: "8000"
+cwd: /home/stixy/application/staging/current/
+environment: staging
+pid_file: /home/stixy/application/staging/shared/pids/mongrel.pid
+servers: 2

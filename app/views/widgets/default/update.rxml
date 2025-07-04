@@ -1,0 +1,21 @@
+xml.instruct!
+xml.returned {
+  if @boards
+    @boards.each do |name,widgets|
+      xml.tag!(name) do
+	      widgets.each do |old_id,new_id|
+          xml.widget do
+            xml.old_id(old_id)
+            xml.new_id(new_id)
+          end
+        end
+      end
+    end
+  else
+    xml.error do
+      xml.type(@error_type)
+      xml.message(@error_message)
+    end
+  end
+}
+

@@ -1,0 +1,302 @@
+<% 
+@user = current_user
+pwd_active = (current_user.errors[:pwd] or current_user.errors[:pwd_confirmation]) 
+login_active = (current_user.errors[:login] or current_user.errors[:login_confirmation]) 
+%>
+<script type="text/javascript">
+	Stixy.personal_settings = {pwd_value:"", pwd_confirmation_value:""};
+	Stixy.personal_settings.upload = new top.Stixy.features.Upload;
+	Stixy.personal_settings.upload.settings = {
+		upload_backend: "http://<%= UPLOAD_SERVER %>/avatars",
+		allowed_filetypes: "*.gif; *.jpg; *.jpeg; *.png; *.GIF; *.JPG; *.JPEG; *.PNG;",
+		allowed_filesize: "4000",
+		filetype_description: "*.gif, *.jpg, *.png",
+		fallback: {
+			upload_backend: "/setting/upload",
+			width: 400,
+			height: 195
+		}
+	}
+	Stixy.personal_settings.upload.beforeStart = function(callback){ }
+	Stixy.personal_settings.upload.error = function(code, file, msg){ 
+		switch(Number(code)){
+			case -10 : 	alert("We're sorry!\nAn error occured while the photo was uploaded to Stixy.\n" + msg); break;
+			case -20 : 	alert("We're sorry!\nThere was an unspeciefied error while uploading the photo to Stixy"); break;
+			case -30 : 	alert("We're sorry!\nThere is an error in the file and it can not be uploaded to Stixy"); break;
+			case -40 : 	alert("We're sorry!\nThere was an unspeciefied error while uploading the photo to Stixy"); break;
+			case -50 : 	alert("\"" + file.name + " \" is to big!\nThe size is " + this.formatedFileSize(file.size) + ". Our maximum allowed file size for photos is 4 MB."); break;
+			default  :	alert("We're sorry!\nThere was an unspeciefied error while uploading the photo to Stixy"); break;
+		} 
+	}
+	Stixy.personal_settings.upload.fallback = Stixy.personal_settings.upload.finished = function(){
+		Stixy.element.$ID("personal_thumb_spinner").style.display = "block";
+		Stixy.server.replace(null, "/setting/ajax_personal_image", "personal_image")
+	}
+	Stixy.personal_settings.upload.start = function(){
+		Stixy.element.$ID("personal_thumb_spinner").style.display = "block";
+	}
+	Stixy.personal_settings.remove = function(){
+		Stixy.element.$ID("personal_thumb_spinner").style.display = "block";
+		Stixy.server.replace(null, "/setting/ajax_remove_personal_image", "personal_image")
+	}
+	
+	function setPasswordState(test){
+		if(!Stixy.personal_settings.pwd_inputs){
+			Stixy.personal_settings.pwd_inputs = Stixy.element.$ID('user_pwd');
+			Stixy.personal_settings.pwd_clone = Stixy.personal_settings.pwd_inputs.cloneNode(true);
+			Stixy.personal_settings.pwd_clone.removeAttribute('disabled');
+			Stixy.personal_settings.pwd_clone.setAttribute('type', 'password');
+			Stixy.personal_settings.pwd_clone.setAttribute('name', 'user[pwd]');
+			Stixy.personal_settings.pwd_title = Stixy.element.$ID('user_pwd_title');
+			
+			Stixy.personal_settings.pwd_confirmation_inputs = Stixy.element.$ID('user_pwd_confirmation');
+			Stixy.personal_settings.pwd_confirmation_clone = Stixy.personal_settings.pwd_confirmation_inputs.cloneNode(true);
+			Stixy.personal_settings.pwd_confirmation_clone.removeAttribute('disabled');
+			Stixy.personal_settings.pwd_confirmation_clone.setAttribute('type', 'password');
+			Stixy.personal_settings.pwd_confirmation_clone.setAttribute('name', 'user[pwd_confirmation]');
+			Stixy.personal_settings.pwd_confirmation_title = Stixy.element.$ID('user_pwd_confirmation_title');
+		}
+		
+		if(test){
+			Stixy.personal_settings.pwd_clone.value = Stixy.personal_settings.pwd_value;
+			Stixy.personal_settings.pwd_inputs.parentNode.replaceChild(Stixy.personal_settings.pwd_clone,Stixy.personal_settings.pwd_inputs);
+			
+			Stixy.personal_settings.pwd_confirmation_clone.value = Stixy.personal_settings.pwd_confirmation_value;
+			Stixy.personal_settings.pwd_confirmation_inputs.parentNode.replaceChild(Stixy.personal_settings.pwd_confirmation_clone,Stixy.personal_settings.pwd_confirmation_inputs);
+			
+			Stixy.element.removeClassName(Stixy.personal_settings.pwd_title, 'ghosted');
+			Stixy.element.removeClassName(Stixy.personal_settings.pwd_confirmation_title, 'ghosted');
+		}else{
+			Stixy.personal_settings.pwd_value = Stixy.personal_settings.pwd_clone.value;
+			Stixy.personal_settings.pwd_inputs.value = "";
+			Stixy.personal_settings.pwd_clone.parentNode.replaceChild(Stixy.personal_settings.pwd_inputs,Stixy.personal_settings.pwd_clone);
+			
+			Stixy.personal_settings.pwd_confirmation_value = Stixy.personal_settings.pwd_confirmation_clone.value;
+			Stixy.personal_settings.pwd_confirmation_inputs.value = "";
+			Stixy.personal_settings.pwd_confirmation_clone.parentNode.replaceChild(Stixy.personal_settings.pwd_confirmation_inputs,Stixy.personal_settings.pwd_confirmation_clone);
+			
+			Stixy.element.addClassName(Stixy.personal_settings.pwd_title, 'ghosted');
+			Stixy.element.addClassName(Stixy.personal_settings.pwd_confirmation_title, 'ghosted');
+		}
+	}
+	
+	function setLoginState(test){
+		var login_inputs = Stixy.element.$ID('user_login');
+		var login_title = Stixy.element.$ID('user_login_title');
+		var login_confirmation_inputs = Stixy.element.$ID('user_login_confirmation');
+		var login_confirmation_title = Stixy.element.$ID('user_login_confirmation_title');
+		if(test){
+			login_inputs.removeAttribute('disabled');
+			login_confirmation_inputs.removeAttribute('disabled');
+			login_inputs.setAttribute('name','user[login]');
+			login_confirmation_inputs.setAttribute('name','user[login_confirmation]');
+			Stixy.element.removeClassName(login_title, 'ghosted');
+			Stixy.element.removeClassName(login_confirmation_title, 'ghosted');
+		}else{
+			login_inputs.setAttribute('disabled',true);
+			login_confirmation_inputs.setAttribute('disabled',true);
+			login_inputs.setAttribute('name','');
+			login_confirmation_inputs.setAttribute('name','');
+			Stixy.element.addClassName(login_title, 'ghosted');
+			Stixy.element.addClassName(login_confirmation_title, 'ghosted');
+		}
+	}
+	
+</script>
+<div class="personal-settings">
+	<h1>Personal Settings</h1>
+	<div class="fixed-column-300">
+	   <h3>Sign in &amp; Contact Information</h3>
+			<%= hidden_field("user", "id") %>
+	    <% form_tag(:action => 'update') do -%>
+	    <div class="full-width" >
+				<table class="layout-table">
+					<tr>
+						<td style="padding-right:3px;width:25px;">
+							<input <%=  'checked="checked" ' if pwd_active  %>id="user_pwd_update" onclick="setPasswordState(this.checked)" style="position:relative;vertical-align:top;top:-3px;" type="checkbox" value="1" />
+						</td>
+						<td style="width:272px;">
+							
+							
+							<div class="title" style="margin-top:0;"><label for="user_pwd_update"> Update password</label></div>
+							<div class="title<%= " ghosted" unless pwd_active %>" id="user_pwd_title"><label for="user_pwd">Password</label></div>
+							<% if current_user.errors[:pwd] %><div class="inline-message-error" style="margin-bottom:10px;"><% end %>
+							<input class="text-field"<% if not pwd_active %> disabled="disabled"<% end %> id="user_pwd" name="<%=  pwd_active ? "user[pwd]" : "" %>" size="30" type="<%=  pwd_active ? "password" : "text" %>" value="<%= (@prefils.nil? ? "" : @prefils[:pwd]) %>" />
+
+				    	<div class="title<%= " ghosted" unless pwd_active %>" id="user_pwd_confirmation_title"><label for="user_pwd_confirmationation">Retype password</label></div>
+							<input class="text-field"<% if not pwd_active %> disabled="disabled"<% end %>  id="user_pwd_confirmation" name="<%=  pwd_active ? "user[pwd_confirmation]" : "" %>" size="30" type="<%=  pwd_active ? "password" : "text" %>" value="<%= (@prefils.nil? ? "" : @prefils[:pwd_confirmation]) %>" />
+							<% if current_user.errors[:pwd] %>
+								<% current_user.errors[:pwd].each do |msg| %><p>Password <%= msg %></p><% end %></div>
+							<% end %>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<!-- <div class="full-width help-link">
+				<%#= link_to "Password help", {:controller => "public", :action => "help", :params => {:popup => true}, }, :popup => popup_default %>
+			</div> -->
+			
+			<div style="clear:both;padding-top:0px;width:305px;">&nbsp;</div>
+
+			<div class="full-width" >
+				<table class="layout-table">
+					<tr>
+						<td style="padding-right:3px;width:25px;">
+							<input <%=  'checked="checked" ' if login_active  %>id="user_login_update" onclick="setLoginState(this.checked)" style="position:relative;vertical-align:top;top:-3px;" type="checkbox" value="1" />
+						</td>
+						<td style="width:272px;">
+							<div class="title" style="margin-top:0"><label for="user_login_update"> Update e-mail/login</label></div>
+					    <div class="title<%= " ghosted" unless login_active %>" id="user_login_title"><label for="user_email">E-mail</label> <span style="color:rgb(153,153,153);font-weight:normal">(You need this to sign in to Stixy)</span></div>
+					    <% if current_user.errors[:login] %><div class="inline-message-error" style="margin-bottom:10px;"><% end %>
+							<input class="text-field" <% if not login_active %> disabled="disabled"<% end %>  id="user_login" maxsize="200" name="<%=  login_active ? "user[login]" : "" %>" size="30" type="text" value="<%= (@prefils.nil? ? current_user.login : @prefils[:login]) %>" />
+
+					    <div class="title<%= " ghosted" unless login_active %>" id="user_login_confirmation_title"><label for="user_email_confirmation">Retype e-mail</label></div>
+							<input class="text-field" <% if not login_active %> disabled="disabled"<% end %>  id="user_login_confirmation" maxsize="200" name="<%=  login_active ? "user[login_confirmation]" : "" %>" size="30" type="text" value="<%= (@prefils.nil? ? current_user.login : @prefils[:login_confirmation]) %>" />
+							<% if current_user.errors[:login] %>
+								<% current_user.errors[:login].each do |msg| %><p>The e-mail address <%= msg %></p><% end %></div>
+							<% end %>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<!-- <div class="full-width help-link">
+				<%= link_to "E-mail help", {:controller => "public", :action => "help", :params => {:popup => true}, }, :popup => popup_default %>
+			</div> -->
+	</div>
+	<div class="fixed-gutter-20">&nbsp;</div>
+	<div class="fixed-column-300">
+		<h3>Personal Information</h3>
+    <div class="half-width" >
+			<div class="title"><label for="user_display_name">First name</label></div>
+	    <%= text_field('user', 'first_name','maxsize' => 200, :class => "text-field")  %>
+		</div>
+		<div class="fixed-gutter-10">&nbsp;</div>
+		<div class="half-width" >
+			<div class="title"><label for="user_display_name">Last name</label></div>
+	    <%= text_field('user', 'last_name', 'maxsize' => 200, :class => "text-field")  %>
+		</div>
+	  <div class="full-width" >
+			<div class="title"><label for="user_city">City</label></div>
+	    <%= text_field('user', 'city', 'maxsize' => 200, :class => "text-field")  %>
+		</div>
+		<div class="half-width" >
+    	<div class="title"><label for="user_state">State</label></div>
+	    <%= text_field('user', 'state', 'maxsize' => 200, :class => "text-field")  %>
+		</div>
+		<div class="fixed-gutter-10">&nbsp;</div>
+		<div class="half-width" >
+	    <div class="title"><label for="user_zip">Zip</label></div>
+	    <%= text_field('user', 'zip', 'maxsize' => 20, :class => "text-field")  %>
+		</div>
+		<div class="full-width" >
+	    <div class="title"><label for="user_country">Country</label></div>
+	    <%= text_field('user', 'country', 'maxsize' => 60, :class => "text-field")  %>
+		</div>
+		<% unless (current_user.in_role? Role::CALENDAR_BETA_TESTER) %>
+		
+		<div class="full-width" >
+	    <div class="title">Time zone</div>
+			<select name="user[time_offset]" style="width:100%;">
+				<% TimeZones::ZONES.each do |zone| -%>
+				<option style="margin-right:16px;" name="" value="<%= zone.first*3600 %>"<%= if(current_user.time_offset==(zone.first*3600)) then " selected" end %>>(GMT <%= "+" if zone.first > 0 %><%= zone.first.to_s %>) <%= zone.last %></option>
+				<% end -%>
+			</select>
+		</div>
+		<div class="full-width" >
+	    <%= check_box "user", "daylight_savings" %>
+			<label for="user_daylight_savings">Adjust for daylight saving</label>
+		</div>
+		
+		<% end %>
+		
+		<div class="half-width" >
+	    <div class="title"><label for="user_phone">Phone</label></div>
+	    <%= text_field('user', 'phone', 'maxsize' => 60, :class => "text-field")  %>
+		</div>
+		<div class="fixed-gutter-10">&nbsp;</div>
+		<div class="half-width" >
+	    <div class="title"><label for="user_mobile_phone">Mobile</label></div>
+	    <%= text_field('user', 'mobile_phone', 'maxsize' => 60, :class => "text-field")  %>
+		</div>
+		
+		<% if (current_user.in_role? Role::CALENDAR_BETA_TESTER) %>
+	  	<div style="clear:both;margin:1px 0 10px;border-bottom:1px solid rgb(200,200,200)">&nbsp;</div>
+			<a name="date_settings"><h3>Calendar and Time Settings</h3></a>
+				<div class="full-width" >
+			    <div class="title">Time zone</div>
+					<select name="user[time_offset]" style="width:100%;">
+						<% TimeZones::ZONES.each do |zone| -%>
+						<option style="margin-right:16px;" name="" value="<%= zone.first*3600 %>"<%= if(current_user.time_offset==(zone.first*3600)) then " selected" end %>>(GMT <%= "+" if zone.first > 0 %><%= zone.first.to_s %>) <%= zone.last %></option>
+						<% end -%>
+					</select>
+				</div>
+				<div class="full-width" >
+			    <%= check_box "user", "daylight_savings" %>
+					<label for="user_daylight_savings">Adjust for daylight saving</label>
+				</div>
+				
+	  		<div class="full-width">
+	  			<div class="title">Date format</div>
+					<%= radio_button_tag("user[time_format][date]", 4, (4==current_user.time_format.get(:numeric_date)), :style => "vertical-align:middle;", :id => "time_format_date_4" ) %> <label for="time_format_date_4">year/month/day (2008 February 14)</label><br>
+	  			<%= radio_button_tag("user[time_format][date]", 2, (2==current_user.time_format.get(:numeric_date)), :style => "vertical-align:middle;", :id => "time_format_date_2" ) %> <label for="time_format_date_2">month/day/year (February 14, 2008)</label><br>
+	  			<p>
+	  		  <div class="title">Time format</div>
+	  			<%= radio_button_tag("user[time_format][time]", 0, (0==current_user.time_format.get(:time)), :style => "vertical-align:middle;", :id => "time_format_time_0" ) %> <label for="time_format_time_0">24 hour clock (13:00)</label><br>
+	  			<%= radio_button_tag("user[time_format][time]", 1, (1==current_user.time_format.get(:time)), :style => "vertical-align:middle;", :id => "time_format_time_1" ) %> <label for="time_format_time_1">12 hour clock (1:00 PM)</label><br>
+	  		  <p>
+		  		<%= check_box_tag('user[time_format][offset]', 1, (current_user.time_format.get(:offset)==1), {:style => "vertical-align:middle;margin-top:6px;", :id => "time_format_offset"})  %>
+	  	    <%= hidden_field_tag('user[time_format][offset]', 0)  %>
+		  		<label for="time_format_offset">Week starts on Sunday</label><br>
+	  		  <%= check_box_tag('user[time_format][week]', 1, current_user.time_format.week?, {:style => "vertical-align:middle;margin-top:6px;", :id => "time_format_week"})  %>
+	  	    <%= hidden_field_tag('user[time_format][week]', 0)  %>
+	  	    <label for="time_format_week">Display weeks in calendar</label>
+	  	  </div>
+		<% end %>
+		
+		<!-- <div class="full-width" >
+	    <%#= check_box('user', 'pref_send_email_and_mobile', {:style => "vertical-align:middle;"}, 1, 0)  %>
+	    <label for="user_pref_send_email_and_mobile">Send both email and mobile notifivations</label>
+		</div> -->
+		<!-- <div class="full-width help-link">
+			<%#= link_to "Privacy Policy", {:controller => "public", :action => "privacy_policy", :params => {:popup => true}, }, :popup => popup_default %>
+		</div> -->
+	</div>
+	<div class="fixed-gutter-20">&nbsp;</div>
+	<div class="fixed-column-300">
+	  <h3>About Me</h3>
+		<div class="full-width" id="personal_image">
+			<%= render :partial => "personal_image" %>
+		</div>
+		<div style="clear:both;padding:1px">&nbsp;</div>
+		<div class="full-width" >
+			<div class="title"><label>Personal description</label></div>
+			Write a personal description about yourself.
+	  	<%= text_area('user', 'description', :rows => 4, :style => 'margin-top:6px', :class => "text-field")  %>
+		</div>
+		<div style="clear:both;margin:1px 0 10px;border-bottom:1px solid rgb(200,200,200)">&nbsp;</div>
+		
+	  <h3>Other Settings</h3>
+	
+		<div class="full-width title">
+		  <%= check_box('user', 'pref_disable_flash_upload', {:style => "vertical-align:middle;"}, 1, 0)  %>
+	    <label for="user_pref_disable_flash_upload">Use popup for file uploads</label>
+			<br/>
+		  <%= check_box('user', 'receive_newsletter', {:style => "vertical-align:middle;"}, 1, 0)  %>
+	    <label for="receive_newsletter">Receive newsletter</label>
+	  </div>
+		<div style="clear:both;margin:1px 0 10px;border-bottom:1px solid rgb(200,200,200)">&nbsp;</div>
+		<!-- <h3>Account Settings</h3> -->
+		<div class="full-width">
+			<%= link_to "Deactivate account...", { :controller => :setting, :action => "deactivate_account" } %>
+		</div>
+	</div>
+	<%= submit_tag "",:style => "display:none" %>
+<% end -%>
+
+</div>
+
+<% 
+@buttons = "#{ link_to_function "Cancel", 'window.parent.Stixy.popup.close()', :button => {:type => false} }
+						#{ link_to_function "Save", 'document.forms[0].submit()', :button => {:type => 'default'}, :style => "margin-left:10px;"  }"
+
+%>

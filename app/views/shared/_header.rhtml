@@ -1,0 +1,62 @@
+<!-- HEADER -->
+<div class="header">
+	<div class="header-background">
+		<div class="header-background-gradient"></div>
+		<div class="header-background-pattern"></div>
+	</div>
+	<!-- TOP AD -->
+  <%- if current_user.display_ad? -%>
+  <%= render :partial => "shared/global_top_ad" %>
+  <%- end -%>
+	<div class="utility-navigation" id="utility_navigation">
+		<%= render :partial => "/shared/utility" %>
+	</div>
+	<div class="public-navigation" id="public_navigation">
+		<a href="/welcome">Go To Stixy</a>
+		<span class="pipe"></span>
+		<%= link_to "About Stixy", {:controller => "how_stixy_works"}, :onclick => "Stixy.popup.open('/how_stixy_works?popup=true',null,null); return false;" %><span class="pipe"></span> 
+		<%= mail_to "feedback@stixy.com", "Feedback" %>
+		<span class="pipe"></span> 
+		<%= link_to "Support", support_path, :onclick => "Stixy.events.stop(event); Stixy.popup.openExternal('#{support_path}',null,null); return false;" %>
+	</div>
+	<a href="/welcome"><div class="stixy-signature-top"></div><div class="stixy-signature-bottom"><div></div></div></a>
+	<div class="beta-sign">beta</div>
+</div>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+	<div class="toolbar-background"><div class="toolbar-background-gradient"></div></div>
+	<div class="board-list-switch">
+		<%= link_to_function("Hide List", nil, :button => {:type => 'toolbar-button'}, :class => "open-board-list-button board-list-button-open",   :id => "board_list_hide") %>
+		<%= link_to_function("Open List", nil, :button => {:type => 'toolbar-button'}, :class => "open-board-list-button board-list-button-closed", :id => "board_list_show") %>
+		<div class="board-list-switch-shadow-line"></div>
+		<div class="board-list-switch-highlight-line"></div>
+	</div>
+	<span class="board-tools">
+		<%= link_to_function("New Stixyboard", "Stixy.board.newStixyboard()", :button => {:type => "toolbar-button"}) %> 	
+		<%= link_to_function("Share", nil, :button => {:type => "toolbar-button"}, :id => "share_open") %> 	
+		<%= link_to_function("Options", nil, :button => {:type => 'toolbar-button'}, :id => "board_option_open") %>
+	</span>
+	<span class="save-indicator" id="save-state">
+		<div class="text-save" id="save-state-button">
+			<%= link_to_function("Save now", nil, :button => {:type => 'toolbar-button'}) %>
+			<span id="auto-save-text">Auto-saves in <span id="save_counter" class="save-counter">30</span><span class="save-counter">s</span></span>
+		</div>
+		<div class="text-saved">Nothing to be saved</div>
+		<div class="text-saving">Saving</div>
+	</span>
+	<!-- BOARD OPTIONS SWITCH -->
+	<div class="opt-switch bopt-switch">
+		<div class="opt-switch-highlight-line"></div>
+		<div class="opt-switcher-bg"></div>
+		<div class="opt-switch-label">
+			<a href="#" class="bopt-switcher-open" id="bopt_show">
+				Hide Stixyboard Options
+			</a>
+			<a href="#" class="bopt-switcher-closed" id="bopt_hide">
+				Show Stixyboard Options
+			</a>
+		</div>
+		<div class="opt-switch-shadow-line"></div>
+	</div>
+</div>

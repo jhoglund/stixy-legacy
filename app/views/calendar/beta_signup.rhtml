@@ -1,0 +1,66 @@
+<style>
+	.calendar-promo-content  li { margin:4px 8px;}
+	.calendar-promo-content { margin:24px; font-size:12px; line-height:1.4em; }
+</style>
+
+<div class="calendar-promo-content">
+	<div style="width:400px;height:207px;float:right;border:1px solid rgb(200,200,200);margin: 0 -65px 10px 10px">
+		<img src="/images/calendar/promo_overview.png" width="100%">
+	</div>
+<h1>Staying organized just got easier</h1>
+<p>Stixy helps you and your friends to organize all those projects that are continuously going on in your life. Now, by adding the Stixy calendar, getting organized by using Stixy got even easier.
+<p>In addition to being able to enter events, set reminders, and so forth, the Stixy calendar gives you an overview of all your calendar widgets on your different Stixyboards, shared or not shared. This way, you can easily
+keep track of your life both inside and outside of Stixy.
+
+<!-- <div class="message message-error" style="position:relative; width:300px; top:0; left:0; font-size:14px; margin:0px -300px 10px 40px; line-height:1.3em!important; float:right;">
+	Your browser is not supported during this first phase of beta testing, but we expect to support it very soon.
+	<p style="margin-top:8px"></p>
+	If you like, we’d be happy to <%= link_to "notify you", { :controller => :calendar, :action => "beta_signup", :signup => true } %> when this happens.
+	<div class="nw"><p>&nbsp;</p></div><div class="ne"><p>&nbsp;</p></div><div class="se"><p>&nbsp;</p></div><div class="sw"><p>&nbsp;</p></div><div class="callout">&nbsp;</div>
+</div> -->
+<% if @pending == true %>
+<div class="message message-error" style="position:relative; width:250px; top:0; left:0; font-size:14px; margin:0px -270px 10px 40px; line-height:1.3em!important; float:right;">
+	The Stixy calendar is still in private beta. We'll let you know when it is ready for release.	
+	<div class="nw"><p>&nbsp;</p></div><div class="ne"><p>&nbsp;</p></div><div class="se"><p>&nbsp;</p></div><div class="sw"><p>&nbsp;</p></div><div class="callout">&nbsp;</div>
+</div>
+<% elsif @beta_full == true %>
+<div class="message message-error" style="position:relative; width:300px; top:0; left:0; font-size:14px; margin:0px -300px 10px 40px; line-height:1.3em!important; float:right;">
+	The interest for testing the Stixy calendar has been great. Unfortunately, this means that we’re not able to add any more users during the test phase.
+	<p style="margin-top:8px"></p>
+	But don’t panic! Within a few weeks the Stixy calendar will be released to all Stixy users. 
+	<p style="margin-top:8px"></p>
+	If you like, we’d be happy to <%= link_to "notify you", { :controller => :calendar, :action => "beta_signup", :signup => true } %> when this happens.
+	<div class="nw"><p>&nbsp;</p></div><div class="ne"><p>&nbsp;</p></div><div class="se"><p>&nbsp;</p></div><div class="sw"><p>&nbsp;</p></div><div class="callout">&nbsp;</div>
+</div>
+<% else %>
+<div class="message" style="position:relative; width:300px; top:0; left:0; font-size:14px; margin:-10px -300px 10px 20px; line-height:1.3em!important; float:right;">
+	<h2 style="margin-top:0; font-size:1.4em; line-height:1.2em!important">Help us test the calendar</h2>
+	The Stixy calendar will be tested in limited Private Beta during the first few weeks before we release it to all Stixy users. Do you want to be part of this testing group?
+	<%= link_to "Signup for calendar!", { :controller => :calendar, :action => "beta_signup", :signup => true } %>
+	<div class="nw"><p>&nbsp;</p></div><div class="ne"><p>&nbsp;</p></div><div class="se"><p>&nbsp;</p></div><div class="sw"><p>&nbsp;</p></div><div class="callout">&nbsp;</div>
+</div>
+<% end %>
+
+<h3>What you can do with the Stixy calendar:</h3>
+<ul>
+	<li><span style="color:rgb(180, 60, 150);">Stay in synch</span> with your favorite desktop/mobile calendar
+	<li>See all your <span style="color:rgb(180, 60, 150);">calendar widgets</span>, shared or private
+	<li>Add <span style="color:rgb(180, 60, 150);">new events</span> directly into the calendar
+	<li><span style="color:rgb(180, 60, 150);">Get reminded</span> of events, to-do:s, upcoming birthdays and so forth        
+	<li>Conveniently <span style="color:rgb(180, 60, 150);">list to-do:s</span>
+	<li><span style="color:rgb(180, 60, 150);">Access your calendar</span> from any computer, any time
+</ul>
+
+
+<p>We are convinced that the Stixy calendar will further improve Stixy.com as a tool that helps you create, share, and organize your life. This is a first version, and more complex functionality will be released later on this year.
+
+<p>As always, Stixy.com, including the calendar, is <span style="color:rgb(255, 150, 20);font-weight:bold;">free of charge</span>.
+
+	<% 
+	@buttons = "#{ link_to_function "Close", 'window.parent.Stixy.popup.close()', :button => {:type => false} }
+							#{ unless (@beta_full == true or @pending == true) then link_to "Signup for Calendar", {:controller => :calendar, :action => "beta_signup", :signup => true}, :button => {:type => 'default'}, :style => "margin-left:10px;"  end }"
+
+	%>
+
+
+

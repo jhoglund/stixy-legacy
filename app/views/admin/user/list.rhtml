@@ -1,0 +1,7 @@
+<h2>Users list</h2>
+<% form_for :user, :url => { :action => "user_search" } do |f| %>
+	Login name: <%= f.text_field :login %> <%= submit_tag "Search" %>		
+<% end %>
+<span class="adminmenu"><%= link_to 'New user', :action => 'new' %></span>
+<span class="adminmenu"><%= link_to 'Newsletter', :controller => 'admin/newsletter', :action => 'index' %></span>
+<%= render :partial => "users_list" %>

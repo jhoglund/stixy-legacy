@@ -1,0 +1,4 @@
+<%= render :partial => "activity_list_items", :collection => @calendar.dates, :locals => {:list => activities()} %>
+<% if @selected_day and not @calendar.includes?(to_date(@selected_day)) %>
+	<%= render :partial => "activity_list_items", :collection => Stixy::Calendar.new(to_date(@selected_day), :day).dates , :locals => {:list => activities(@selected_day, nil, :reload => true, :cache => false)} %>
+<% end %>

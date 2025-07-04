@@ -1,0 +1,198 @@
+<html>
+<head>
+	<script type="text/javascript" src="/resources/default/<%= session[:browser][:type] %>.js"></script>	
+	<script>
+		function ControledInput(element, max, allowed_keys){
+			var keys = [];
+			for(var i=0; i<allowed_keys.length; i++){
+				keys[allowed_keys[i][0]] = allowed_keys[i][1];
+			}
+			function getKey(e){
+				return keys[e.keyCode];
+			}
+			this.arrowKeyDown = function(element, e){
+				element.value = this.arrowKeys(element.value, e.keyCode==38);
+			}
+			this.keyDown = null;
+			this.beforeSet = function(value){ return value };
+			this.afterBlur = function(){ };
+			this.arrowKeys = function(){ };
+			Stixy.events.observe(element, "focus", function(e){ this.count = 0; }.b(this));
+			Stixy.events.observe(element, "blur", function(){ this.afterBlur() }.b(this));
+			Stixy.events.observe(element, "keyup", function(e){
+				clearInterval(this.keyDown)
+			}.b(this));
+			Stixy.events.observe(element, "keypress", function(e){
+				if(e.keyCode!=9){
+					Stixy.events.stop(e);
+				}
+			}.b(this));
+			Stixy.events.observe(element, "keydown", function(e){
+				Stixy.events.stop(e);
+				code = getKey(e);
+				if(code!=undefined){
+					var members = element.value.match(/./g).reverse();
+					var pos = (this.count < max) ? (this.count++ % max) : (max-1);
+					members.splice(pos,1)
+					members.reverse();
+					members.push(code);
+					var value = members.join("");
+					var altered_value = this.beforeSet(value, code);
+					if(altered_value!==false){
+						element.value = altered_value;
+					}
+				}else{
+					if(e.keyCode==38 || e.keyCode==40){
+						this.arrowKeyDown(element, e)
+						this.keyDown = setInterval(this.arrowKeyDown.b(this, element, e),100)
+					}
+				}
+			}.b(this));
+		}
+		function formatDigit(value, num){
+			var val = value.toString();
+			while(val.length < (num||2)){
+				val = "0" + val
+				break
+			}
+			return val;
+		}
+		function DateInput(year, month, day){
+			this.year = year;
+			this.month = month;
+			this.day = day;
+			var keys = [[48,0],[49,1],[50,2],[51,3],[52,4],[53,5],[54,6],[55,7],[56,8],[57,9],
+			[96,0],[97,1],[98,2],[99,3],[100,4],[101,5],[102,6],[103,7],[104,8],[105,9]]
+			try{
+				var date = new Date(year.value, (month.value-1), day.value);
+			}catch(e){
+				var date = new Date.now();
+			}
+			this.setValues = function(d){
+				var dateToSet = d||date||new Date
+				this.year.value = dateToSet.getFullYear();
+				var month = dateToSet.getMonth()+1;
+				this.month.value = (month > 9 ? month : "0"+month);
+				var day = dateToSet.getDate();
+				this.day.value = (day > 9 ? day : "0"+day);
+			}
+			this.getDate = function(){
+				return date;
+			}
+			var year_control 	= new ControledInput(year, 4, keys);
+			var month_control = new ControledInput(month, 2, keys);
+			var day_control 	= new ControledInput(day, 2, keys);
+			year_control.afterBlur 	= this.setValues.b(this);
+			month_control.afterBlur = this.setValues.b(this);
+			day_control.afterBlur 	= this.setValues.b(this);
+			
+			year_control.beforeSet = function(value, key){
+				date.setFullYear(value);
+				return formatDigit(value, 4);
+			}
+			month_control.beforeSet = function(value, key){
+				var month = (value > 12) ? (key==0 ? 1:key) : value;
+				var lastDay = (new Date(date.getFullYear(),month,0)).getDate();
+				date.setFullYear(date.getFullYear(), (month-1), Math.min(date.getDate(), lastDay));
+				return formatDigit(month, 4);
+			}
+			day_control.beforeSet = function(value, key){
+				var lastDay = (new Date(date.getFullYear(),(date.getMonth()+1),0)).getDate();
+				var day = (value > lastDay) ? (key==0 ? 1:key) : value;
+				date.setFullYear(date.getFullYear(), date.getMonth(), day);
+				return formatDigit(day);
+			}
+			year_control.arrowKeys = function(value, up){
+				year = (Number(value) + (up ? +1 : -1));
+				date.setFullYear(year, (date.getMonth()), date.getDate());
+				return formatDigit(year);
+			}
+			month_control.arrowKeys = function(value, up){
+				var month = Number(value) + (up ? +1 : -1);
+				month = (month > 12) ? 1: month;
+				month = (month==0) ? 12: month;
+				var lastDay = (new Date(date.getFullYear(),month,0)).getDate();
+				date.setFullYear(date.getFullYear(), (month-1), Math.min(date.getDate(), lastDay));
+				return  formatDigit(month);
+			}
+			day_control.arrowKeys = function(value, up){
+				var lastDay = (new Date(date.getFullYear(),(date.getMonth()+1),0)).getDate();
+				var day = Number(value) + (up ? +1 : -1);
+				day = (day > lastDay) ? 1: day;
+				day = (day==0) ? lastDay: day;
+				date.setFullYear(date.getFullYear(), (date.getMonth()), day);
+				return  formatDigit(day);
+			}
+		}
+		
+		function TimeInput(hour, minute, postfix){
+			this.hour = hour;
+			this.minute = minute;
+			this.postfix = postfix;
+			var number_keys = [[48,0],[49,1],[50,2],[51,3],[52,4],[53,5],[54,6],[55,7],[56,8],[57,9],
+			[96,0],[97,1],[98,2],[99,3],[100,4],[101,5],[102,6],[103,7],[104,8],[105,9]]
+
+			var hour_control 	= new ControledInput(this.hour, 2, number_keys);
+			var minute_control = new ControledInput(this.minute, 2, number_keys);
+			this.setValues = function(d){
+
+			}
+			this.getTime = function(){
+				return new Date(2000,0,1,this.hour.value,this.minute.value);
+			}
+			hour_control.beforeSet = function(value, key){
+				var time = (value > (postfix ? 12 : 23)) ? (key==0 ? (postfix ? 1 : 0):key) : value < (postfix ? 1 : 0) ? (postfix ? 1 : 0) : value;
+				return formatDigit(time);
+			}
+			minute_control.beforeSet = function(value, key){
+				var time = (value > 59) ? (key==0 ? 1:key) : value;
+				return formatDigit(time);
+			}
+			hour_control.arrowKeys = function(value, up){
+				var hour = Number(value) + (up ? +1 : -1);
+				hour = (hour > (postfix ? 12 : 23)) ? (postfix ? 1 : 0): hour;
+				hour = (hour==(postfix ? 0 : -1)) ? (postfix ? 12 : 23): hour;
+				return  formatDigit(hour);
+			}
+			minute_control.arrowKeys = function(value, up){
+				var minute = Number(value) + (up ? +1 : -1);
+				minute = (minute > 59) ? 0: minute;
+				minute = (minute<0) ? 59: minute;
+				return  formatDigit(minute);
+			}
+			
+			if(postfix){
+				var postfix_control 	= new ControledInput(this.postfix, 2, [[65,"A"],[80,"P"]]);
+				postfix_control.beforeSet = function(value, key){
+					return key.toUpperCase()=="A" ? "AM" : "PM";
+				}
+				postfix_control.arrowKeys = function(value, up){
+					return  (value.search(/p/i) >= 0) ? "AM" : "PM";
+				}
+			}
+		}
+		
+		onload = function(){
+			var sx_date = Stixy.element.$nsTag("date","sx")
+			var sx_time = Stixy.element.$nsTag("time","sx")
+			new DateInput(Stixy.element.$nsID("year","sx", sx_date), Stixy.element.$nsID("month","sx", sx_date), Stixy.element.$nsID("day","sx", sx_date))
+			new TimeInput(Stixy.element.$nsID("hour","sx", sx_time), Stixy.element.$nsID("minute","sx", sx_time), Stixy.element.$nsID("postfix","sx", sx_time))
+		}
+	</script>
+</head>
+<body>
+	<sx:date>
+		<input size="4" maxlength="4" sx:id="year" value="2008">
+		<input size="2" maxlength="2" sx:id="month" value="01">
+		<input size="2" maxlength="2" sx:id="day" value="27">
+	</sx:date>
+	<br>
+	<sx:time>
+		<input size="2" maxlength="2" sx:id="hour" value="11">
+		<input size="2" maxlength="2" sx:id="minute" value="27">
+		<input size="2" maxlength="2" sx:id="postfix" value="AM">
+	</sx:time>
+	
+	
+</body>
+</html>

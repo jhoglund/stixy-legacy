@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>
+		Test
+	</title>
+	<style>
+		body { background:rgb(215,215,215); }
+		.editor { position:relative; width:400px; height:200px; border:1px inset; background:white; margin:10px; padding:5px; }
+		#_stixy_bogus_hidden { position:absolute;width:0;height:0;overflow:hidden;}
+	</style>
+	<script>
+		var node = document.createElement("div")
+		
+		function setSize(size){
+			var editor = document.getElementById("editor_2");
+			var selection = window.getSelection();
+			if(selection.toString().length == editor.textContent.length){
+				selection.collapseToStart()
+				var range = document.createRange();
+				range.selectNodeContents(editor)
+				selection.addRange(range);
+				range.insertNode(node)
+				range.setStartAfter(node)
+			}
+			document.execCommand('fontsize',false,size);
+		}
+	
+	</script>
+</head>
+<body> 
+	<input type="button" onclick="setSize(6)" value="Big text">
+	<input type="button" onclick="setSize(3)" value="Normal text">
+		<span id="_stixy_bogus_hidden"></span>
+	<div class="editor" contenteditable="true" id="editor_1">This works at all time. <a href="test" id="link">Select</a> text and click the button. The editable div tag is a direct child of the &lt;body&gt; tag<br> (&lt;body&gt;&lt;div contenteditable="true"&gt;...&lt;/div&gt;)</div>
+	
+	<div><div class="editor" contenteditable="true" id="editor_2">This doesn't work, if you select all text through a dubble-click select or cmd-A short cut. The editable tag is not a direct child of the body tag<br> (&lt;body&gt;&lt;div&gt;&lt;div contenteditable="true"&gt;...&lt;/div&gt;&lt;/div&gt;)</div></div>
+
+</body>
+</html>

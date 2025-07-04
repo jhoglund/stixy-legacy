@@ -1,0 +1,16 @@
+<html>
+
+<head>
+	<script type="text/javascript" >var STIXY_ENV = "<%= ENV["RAILS_ENV"] %>"</script>
+	<script type="text/javascript" src="/resources/default/<%= session[:browser][:type] %>.js"></script>
+	<script type="text/javascript" src="/resources/stixyboard/<%= session[:browser][:type] %>.js"></script>
+	<link href="/resources/default/<%= session[:browser][:type] %>.css?" media="all" rel="Stylesheet" type="text/css" />
+	<%= render :partial => "/board/session_script" %>
+	<%= render :partial => "/board/inline_script" %>
+</head>
+<body>
+  <div  class="canvas" id="stixyboard">
+		<%= render :partial => "/board/board_canvas" %>
+	</div>
+</body>
+</html>

@@ -1,0 +1,2 @@
+.feature-promo-bg { width: expression(parentNode.clientWidth); height: expression(parentNode.clientHeight); }
+.feature-promo-content { top:80px; }

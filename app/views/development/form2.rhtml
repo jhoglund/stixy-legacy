@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en" style="background:white;" xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script>
+		function formElementToObject(form){
+			function dig(names, object, value){
+				var current = object || {}
+				var name = names.shift()
+				current[name] = (names.length) ? dig(names, current[name], value) : value;
+				return current;
+			}
+			var root = {}
+			for(var i=0; i < form.elements.length; i++){
+				var element = form.elements[i];
+				if(element.name){
+					var names = element.name.match(/[^\]\[]+/g);
+					if(names){
+						 root = dig(names, root, element.value)
+					}
+				}
+			}
+			return root
+		}
+		
+		onload = function(){
+			console.log(formElementToObject(document.getElementsByTagName("form")[0]))
+		}
+	</script>
+</head>
+<body>
+	
+	<form action="/dev/form2" method="post">
+		<input name="user[time_format][time]" value="bbbb">
+		<input name="user[frequency][time]" value="aaaa">
+		<input name="be[time_format][time]" value="aaaa">
+		<input type="submit">
+	</form>
+		
+	<sx:button class="default" style="margin-left:10px;"><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r><sx:t><a class="button-label" href="#" onclick="document.forms[0].submit(); return false;">Save</a></sx:t></sx:button></div>
+	
+</body>
+</html>

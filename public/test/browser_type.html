@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Welcome to Stixy</title>
+	<script>
+		var Stixy = {
+			browser: (function(){
+				var s = navigator.userAgent;
+				var d = {
+					safari: /konqueror|safari|khtml|webkit/i,
+					ie: /msie/i,
+					firefox: /firefox/i
+				}
+				var o = {
+					brandIs: function(t){
+						return t.test(s);
+					},
+					versionIs: function(){
+						return s.appVersion;
+					},
+					compatible: function(b,v){
+						return (this.brandIs(b) && this.versionIs >= v)
+					}
+				}
+				o.brand = (function(){
+					for(var i in d){
+						if(o.brandIs(d[i])) return i;
+					}
+					return undefined;
+				}())
+				return o
+			}())
+		}
+		
+		console.log(Stixy.browser)
+		console.log(navigator.userAgent)
+	</script>
+
+</head>
+<body>
+</body>
+</html>

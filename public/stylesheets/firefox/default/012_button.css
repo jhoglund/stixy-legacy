@@ -1,0 +1,47 @@
+/*------------------------*/
+/*   012 BUTTON FIREFOX   */
+/*------------------------*/
+
+/*stx-button { position:relative; -moz-binding:url(/bindings/button.xml#button);}
+stx-button a { position:relative; top:3px; padding:3px 22px 5px; text-decoration:none; color:white; }
+stx-button a:link,
+stx-button a:active,
+stx-button a:visited { font-weight:normal; color:white; cursor:hand; cursor:pointer; }
+stx-button a:hover { color:rgb(75,75,75);}
+stx-button .label { display:inline; }
+stx-button .left { position:absolute; top:0; left:0; width:50%; height:20px;overflow:hidden; background:url(/images/buttons/btn_background.png) left top no-repeat;z-index:-1; }
+stx-button .right { position:absolute; top:0; right:0; width:51%; height:20px;overflow:hidden; background:url(/images/buttons/btn_background.png) right top no-repeat;z-index:-1; }
+
+stx-button.toolbar-button { position:relative; background:red; }
+stx-button.toolbar-button a { position:relative; top:0px; padding:3px 18px 5px; text-decoration:none; color:white; }
+stx-button.toolbar-button .label { padding:0px 75px 0 75px; margin-top:0; top:0; display:none; }
+stx-button.toolbar-button,
+stx-button.toolbar-button .left { position:absolute; top:0; left:0; width:50%; height:18px;overflow:hidden; background:url(/images/buttons/btn_toolbar_bg_dark_green.png) left top no-repeat; z-index:10;}
+stx-button.toolbar-button .right { position:absolute; top:0; left:0; width:50%; height:18px;overflow:hidden; background:url(/images/buttons/btn_toolbar_bg_dark_green.png) right top no-repeat; }
+*/
+
+/*-------------*/
+/* 005 TOOLBAR */
+/*-------------*/
+
+/*stx-toolbar-button { -moz-binding:url(/bindings/button.xml#button);}
+stx-toolbar-button,
+stx-toolbar-button .left,
+stx-toolbar-button .right,
+stx-toolbar-button .left div,
+stx-toolbar-button .right div { position:absolute; top:0; height:18px; z-index:-1; }
+stx-toolbar-button { position:relative; display:inline; float:left; height:18px; margin:3px 0 0 10px; line-height:16px; color:white; z-index:0; }
+stx-toolbar-button .left { overflow:hidden; left:0; width:50%; }
+stx-toolbar-button .right { overflow:hidden; right:0; width:51%; }
+stx-toolbar-button .left div,
+stx-toolbar-button .right div { width:100%; background-repeat:no-repeat; }
+stx-toolbar-button .left div { left:0; background-position:left top; }
+stx-toolbar-button .right div { right:0; background-position:right top; }
+stx-toolbar-button .label { padding:0px 15px 0 15px; margin-top:0; top:0; }
+stx-toolbar-button:link,
+stx-toolbar-button:visited { color:white; }
+
+stx-toolbar-button .left div,
+stx-toolbar-button .right div { background-image:url(/images/buttons/btn_toolbar_bg_dark_green.png); }
+stx-toolbar-button:hover { color:rgb(255,235,90); }
+*/

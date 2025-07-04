@@ -1,0 +1,6 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+first:
+  id: 1
+  taggable_id: 1
+  tag_id: 1
+  taggable_type: "Board"

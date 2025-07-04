@@ -1,0 +1,81 @@
+
+<div class="number-of-boards">
+	<span class="title">Stixyboards per page:</span>
+	<% [10,15,25,50].each do | val | %>
+	<% if session[:page_size] != val %>
+		<%= stixy_remote_link(val, 
+			{ :url => { :action => "board_list_detailed_ajax", :page_size => val },
+				:update => 'board_list'},
+				:id => "page_size_#{val}",
+				:class => "number" ) -%>
+		<% else %>
+			<span class="pager-active"><%= val %></span>
+		<% end %>
+	<% end %>
+</div>
+<div class="pager">
+	<% previous_page = content_tag('span','&nbsp;')+'Previous' %>
+	<% next_page = 'Next'+content_tag('span','&nbsp;') %>
+	<%= unless @boards.prev? then "<span class='previous'>#{previous_page}</span>" end  %>
+	<%= stixy_remote_link(previous_page, { :url => {:action => 'board_list_detailed_ajax', :page => @boards.prev.number}, :update => 'board_list' }, :class => 'previous') if @boards.prev? %>
+	
+	<% if @boards.prev? || @boards.next?  %>
+	<%= pagination_links_remote(@pages, @boards, {:action => 'board_list_detailed_ajax'}, {:update => 'board_list'}) %>
+	<% end %>
+	
+	<%= unless @boards.next? then "<span class='next'>#{next_page}</span>" end  %>
+	<%= stixy_remote_link(next_page, { :url => {:action => 'board_list_detailed_ajax', :page => @boards.next.number}, :update => 'board_list' }, :class => 'next')  if @boards.next? %>
+</div>
+<table>
+	<col style="width:20%;" />
+	<col style="width:10%;" />
+	<col style="width:10%;" />
+	<col style="width:20%;"/>
+	<col style="width:10%;" />
+	<col style="width:30%;" />
+	<thead>
+		<tr id="board_list_headers">
+			<%= sort_header_remote_tag('boards.title', 'Title', { :url => {:action => 'board_list_detailed_ajax'}, :update => 'board_list' })%>
+			<%= sort_header_remote_tag('boards.updated_on', 'Updated', { :url => {:action => 'board_list_detailed_ajax'}, :update => 'board_list' })%>
+			<th>Updated By</th>
+			<!-- <%= sort_header_remote_tag('users.first_name', 'Updated By', { :url => {:action => 'board_list_detailed_ajax'}, :update => 'board_list' })%>-->
+			<th>Shared With</th>
+			<th>Tags</th>
+			<!-- <%= sort_header_remote_tag('users.first_name', 'Shared with', { :url => {:action => 'list_with_ajax'}, :update => 'board_list' })%> -->
+			<!-- <%= sort_header_remote_tag('keywords.tag', 'Tags', { :url => {:action => 'list_with_ajax'}, :update => 'board_list' })%> -->
+			<%= sort_header_remote_tag('boards.description', 'Description', { :url => {:action => 'board_list_detailed_ajax'}, :update => 'board_list' })%>
+		</tr>
+	</thead>
+	<tbody>
+	<% @boards.each_with_index do |board, i| %>
+		<tr<%= unless i % 2 == 0 then ' class="dark-stripe"' end %>>
+	    <td class="title"<%= formated_tooltip{ board.title } if board.title.size > 30 %>>
+				<% 
+					untitle_str = "Untitled "
+					untitle_str << "(##{board.id})" if board.id
+				%>
+				<a href="/board/<%= board.id %>" onclick="parent.Stixy.board.navigate(<%= board.id %>); parent.Stixy.popup.close(); return false;"><%= formated_str(board.title, 30, untitle_str) %></a>
+			</td>
+			<td nowrap><%= formated_date(board.updated_on) %></td>
+			<td><%= board.updated_by.short_name %></td>
+			<% shared_with =  board.shared_with(current_user) %>
+			<td<%= formated_tooltip{ shared_with.collect{|u| u.display_name }.join(", ") } unless shared_with.empty? %>><%= formated_collection(shared_with, 3,"(Not shared)"){|u| u.short_name } %></td>
+			<td<%= formated_tooltip{ board.keywords.collect{|k| k.tag }.join(", ") } if board.keywords.size > 3 %>><%= formated_collection(board.keywords, 3){|k| k.tag } %></td>
+			<td<%= formated_tooltip{ board.description } if board.description.size > 55 %>><%= formated_str(board.description, 55) %></td>
+		</tr>
+	<% end %>
+	<% if @boards.number_of_pages < session[:page_size] %>
+		<% (session[:page_size] - @boards.number_of_pages).times {|i| %>
+		<tr<%= unless i % 2 == (@boards.number_of_pages % 2 == 0 ? 0:1) then ' class="dark-stripe"' end %>>
+	    <td colspan="6">&nbsp;</td>
+		</tr>
+		<% } %>
+	<% end %>
+	</tbody>
+</table>
+<div class="bottom-pager pager">
+	<% next_page = 'Next'+content_tag('span','&nbsp;') %>
+	<%= unless @boards.next then "<span class='next'>#{next_page}</span>" end  %>
+	<%= stixy_remote_link(next_page, { :url => {:action => 'board_list_detailed_ajax', :page => @boards.next.number}, :update => 'board_list' }, :class => 'next')  if @boards.next? %>
+</div>
+

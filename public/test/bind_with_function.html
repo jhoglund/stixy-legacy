@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html debug="true">
+<head>
+	<title>Welcome to Stixy</title>
+	<!-- <script language="javascript" type="text/javascript" src="/javascripts/all/firebug/firebug.js"></script> -->
+
+	<script>
+	var b = function() {
+		var a = Array.prototype.splice.apply(arguments,[0,arguments.length]), m = a.shift(), o = a.shift();
+		var f = function() {
+	    return o.apply(m, a.concat(Array.prototype.splice.apply(arguments,[0,arguments.length])));
+	  }
+		f.__original_function = m;
+	  return f;
+	}
+	
+		var test = function(a,c){
+			this.d = 4;
+			this.e = function(){
+				console.log(a,c, this.d);
+			}
+			setTimeout(b(this, this.e, 1, 2), 1000)
+			setTimeout(this.e, 1000)
+			console.log(b(this, this.e, 1, 2) == b(this, this.e, 1, 2))
+		}
+		
+		new test(1,2)
+		
+		Object.prototype.announce = function(){
+			try{
+				var args = [];
+				for(var i=0; i<arguments.length; i++) args[i] = arguments[i];
+				var type = args.shift();
+				var e = this.__cashed_custom_events[type];
+				var l = e.length;
+				for(var i=0; i<l; i++){ 
+					try{
+						if(e.length != l){
+							l = e.length;
+							i--;
+						}
+						e[i].apply(null, args);
+					}catch(e){ }
+				}
+			}catch(e){ }
+		}
+		function dd(){
+			
+		}
+		delete Function.prototype.announce
+		console.log({t:1})
+		console.log(dd)
+		
+	</script>
+
+</head>
+<body>
+</body>
+</html>

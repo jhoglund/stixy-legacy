@@ -1,0 +1,30 @@
+<%= link_to 'Edit', :action => 'edit', :id => @beta_tester %> |
+<%= link_to 'Back', :action => 'list' %>
+
+<table class="admin">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  <tr class="light">
+    <td>Id:</td>
+    <td><%= @beta_tester.id %></td>
+  </tr>
+	<tr class="dark">
+  	<td>Login:</td>
+    <td>
+			<%= mail_to @beta_tester.user.login %>
+    </td>
+  </tr>
+  <tr class="light">
+    <td>Comment</td>
+    <td><%= simple_format(auto_link(@beta_tester.comment,:all, :target => "_stixy_external")) %></td>
+  </tr>
+  <tr class="dark">
+    <td>Only send notification of launch</td>
+    <td><%= @beta_tester.notify_only.to_i==0 ? "No" : "Yes" %></td>
+  </tr>
+    
+</table>
+
+

@@ -1,0 +1,31 @@
+/*----------------*/
+/*   BUTTON IE 6  */
+/*----------------*/
+
+sx\:button sx\:l,
+sx\:button sx\:r { top:0px; }
+sx\:button sx\:l sx\:p,
+sx\:button sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_background.png') }
+sx\:button .button-label { top:0px;  }
+
+sx\:button.default sx\:l sx\:p,
+sx\:button.default sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_background_default.png') }
+sx\:button.ghosted sx\:l sx\:p,
+sx\:button.ghosted sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_background_ghosted.png') }
+          
+sx\:button.large sx\:l sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_bg_large.png'); }
+sx\:button.large sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_bg_large.png'); }
+sx\:button.large .button-label { padding-top:5px; }
+sx\:button.default-large sx\:l sx\:p,
+sx\:button.default-large sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_bg_default_large.png') }
+sx\:button.ghosted-large sx\:l sx\:p,
+sx\:button.ghosted-large sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_bg_ghosted_large.png') }
+
+/*sx\:button.tooltip sx\:l,
+sx\:button.tooltip sx\:r,
+sx\:button.tooltip sx\:l sx\:p,
+sx\:button.tooltip sx\:r sx\:p { height:38px; }
+sx\:button.tooltip .button-label { top:9px; margin-top:5px; color:rgb(75,75,75); }
+*/
+sx\:button.tooltip sx\:l sx\:p,
+sx\:button.tooltip sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_tooltip_background.png'); }

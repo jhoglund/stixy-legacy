@@ -1,0 +1,11 @@
+<%= @reciever.adjusted_time.strftime("%B %d, %Y %I:%M %p") %>
+
+Hello!
+
+This is a notifier that <%= @sender.display_name %> has udated Stixyboard "<%= ((@board.title.empty?) ? "Untitled" : @board.title) %>"
+<% unless @content.empty? %>
+Personal message from <%= @sender.inviter_user.display_name %>:
+<%= @content %>
+<%- end -%>
+Best regards,
+Stixy

@@ -1,0 +1,6 @@
+<%- cache("board/board_canvas/#{@board.id}", :expires_in => 30.days) do -%>
+<div class="min-space"></div>
+<div class="canvas-content" id="canvas_content">
+  <%=  render(:partial => "/board/canvas_content") %>
+</div>
+<% end %>

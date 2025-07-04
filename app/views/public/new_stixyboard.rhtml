@@ -1,0 +1,14 @@
+<div class="left-column">
+
+<h1>Your Stixyboard hasn't been saved</h1>
+
+<p>
+	 To save your Stixyboard, you first need to <%= link_to "sign in", :controller => "public", :action => "signin" %>, or, if you haven't already, you need to <%= link_to "sign up", :controller => "public", :action => "signup" %>.
+</p>
+
+<p>
+	If you want to continue testing at your unsaved Stixyboard, without signing up, that's fine too. 
+	Just remember that your options are limited. Continue <%= link_to_function "without saving", "parent.Stixy.board.cancelAndContinue();" %>
+	or go back to your <%= link_to_function "unsaved Stixyboard", "parent.Stixy.popup.close();" %>. 
+</p>
+</div>

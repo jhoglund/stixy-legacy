@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+activity_widget_1_jonas:
+  id: 1
+  widget_instance_id: 1
+  time: <%= -1.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  created_by_id: 1
+  updated_by_id: 1
+activity_widget_2_adam:
+  id: 2
+  widget_instance_id: 2
+  time: <%= 3.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  created_by_id: 2
+  updated_by_id: 2
+activity_widget_3_jonas:
+  id: 3
+  widget_instance_id: 3
+  time: <%= -1.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  created_by_id: 2
+  updated_by_id: 2

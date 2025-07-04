@@ -1,0 +1,37 @@
+<html style="position:relative;height:100%;margin:0;padding:0;">
+
+<head>
+  <title>Zoom test</title>
+	<link href="/resources/default/<%= session[:browser][:type] %>.css" media="all" rel="Stylesheet" type="text/css" />
+	<script>
+		onload = function(){
+			var content =	'<?xml version="1.0" encoding="UTF-8"?>                                                                          ' +
+										'<svg xmlns = "http://www.w3.org/2000/svg">                                                                          ' +
+										'  <foreignObject x="0" y="0" id="zoom_window" width="200%" height="200%" transform="scale(0.5)">                      ' +
+									  '    <htm:body style="height:100%;margin:0;">                                                                        ' +
+										'			<htm:iframe src="http://localhost/dev/zoom_frame" style="width:100%;height:100%" frameborder="no"></htm:iframe>' +
+									  '    </htm:body>                                                                                                     ' +
+									  '  </foreignObject>                                                                                                  ' +
+										'</svg>                                                                                                              ' 
+		  var parsed = (new DOMParser()).parseFromString(content, "application/xml")
+			//document.body.innerHTML = parsed.innerHTML
+			//document.getElementById("zoom").onclick = function(){
+			//	var win = document.getElementById("zoom_window");
+			//	var val = document.getElementById("zoom_factor");
+			//	
+			//	win.setAttribute("width", (100/Number(val.value/100) + "%"))
+			//	win.setAttribute("height", (100/Number(val.value/100) + "%"))
+			//	win.setAttribute("transform", "scale(" + val.value/100 + ")")
+			//	val.focus()
+			//	val.select()
+			//}
+		}
+	</script>
+</head>
+<body>
+	<!-- <span style="position:absolute;z-index:1;left:0;top:0;padding:5px; ">
+		<input value="100" size="5" id="zoom_factor" /> % &nbsp;&nbsp;<input type="button" value="Zoom" id="zoom" />
+	</span> -->
+	<iframe src='data:application/xml,<html xmlns="http://www.w3.org/1999/xhtml">111</html>'></iframe>
+</body>
+</html>

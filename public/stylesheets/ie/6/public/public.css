@@ -1,0 +1,23 @@
+/*-------------*/
+/*  PUBLIC IE  */
+/*-------------*/
+.popup-top { padding-top:25px; }
+.popup-content { padding:0; width:auto; }
+.popup-signature { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.stixy.com/images/main_template/mt_guest_signature.png", imageresizer="crop"); }
+.content { margin-left:47px; margin-bottom:0; height:100%; }
+.left-column { width:312px; margin:0 0 0 24px;  }
+.half-column { width:310px; }
+.left-column-wide { width:456px; }
+.right-column { width:264px; }
+.right-column-narrow { width:166px; }
+.navigation-column-bg,
+.right-column-bg { bottom:auto; height:400px; background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.stixy.com/images/main_template/mt_guest_gradient_sidebar.png", sizingMethod="crop"); z-index:0; }
+.right-column-bg-narrow { width:192px; }
+.full-column { width:646px; }
+
+.invite .right-column-bg { height:100%; filter:none; }
+.invite .message { width:100%; padding:24px; margin-top:24px; }
+
+.screen-bubble-green 	.screen-circle 	{ background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.stixy.com/images/how_stixy_works/circle_green.png", sizingMethod="crop"); }
+.screen-bubble-blue	 	.screen-circle	{ background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.stixy.com/images/how_stixy_works/circle_blue.png", sizingMethod="crop"); }
+.screen-bubble-yellow .screen-circle 	{ background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://www.stixy.com/images/how_stixy_works/circle_yellow.png", sizingMethod="crop"); }

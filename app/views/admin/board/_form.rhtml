@@ -1,0 +1,73 @@
+<%= error_messages_for 'board' %>
+
+<table class="admin">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  <%= hidden_field ("board", "id") if controller.action_name == 'edit' %>
+  <tr class="dark">
+    <td><label for="board_title">Title</label></td>
+    <td><%= text_field('board', 'title', 'size' => 30, 'maxsize' => 200, "autocomplete" => "off")  %></td>
+  </tr>
+  <tr class="dark">
+    <td><label for="board_description">Description</label></td>
+    <td><%= text_area('board', 'description', 'rows' => 4, 'cols' => 30)  %></td>
+  </tr>
+  <tr class="light">
+    <td><label for="board_keywords_str">Keywords</label> <span style="font-size:10pt;">(comma separated)</span></td>
+    <td>
+    <%= text_field('board', 'keywords_str', 'size' => 30, 'maxsize' => 600, "autocomplete" => "off", "value" => @board.keywords.collect{|k| k.tag }.join(", "))  %></td>
+  </tr>
+  <tr class="light">
+    <td><label for="board_visible">Visible</label></td>
+    <td>Yes:<%= radio_button('board', 'visible', 1)  %>&nbsp;&nbsp;&nbsp;No:<%= radio_button('board', 'visible', 0)  %></td>
+  </tr>
+  <tr class="dark">
+    <td><label for="board_editable">Editable</label></td>
+    <td>Yes:<%= radio_button('board', 'editable', 1)  %>&nbsp;&nbsp;&nbsp;No:<%= radio_button('board', 'editable', 0)  %></td>
+  </tr>
+  <tr class="light">
+    <td><label for="board_pwd_protected">Pwd protected</label></td>
+    <td>Yes:<%= radio_button('board', 'pwd_protected', 1)  %>&nbsp;&nbsp;&nbsp;No:<%= radio_button('board', 'pwd_protected', 0)  %></td>
+  </tr>
+  <tr class="dark">
+    <td><label for="board_pwd">Board password</label></td>
+    <td><input type="password" name="board[pwd]" size="30" maxlength="60" value="" /></td>
+  </tr>
+  <tr class="light">
+    <td><label for="board_status">Is Active?</label></td>
+    <td><%= check_box('board', 'status', {'id' => 'status'}, Status::ACTIVE, Status::DISABLED) %></td>
+  </tr>
+</table>
+
+
+
+
+
+
+<!--
+
+<p><label for="board_title">Title</label><br/>
+<%= text_field 'board', 'title'  %></p>
+
+<p><label for="board_url">Url</label><br/>
+<%= text_field 'board', 'url'  %></p>
+
+<p><label for="board_description">Description</label><br/>
+<%= text_area 'board', 'description'  %></p>
+
+<p><label for="board_visible">Visible</label><br/>
+<%= text_field 'board', 'visible'  %></p>
+
+<p><label for="board_editable">Editable</label><br/>
+<%= text_field 'board', 'editable'  %></p>
+
+<p><label for="board_pwd_protected">Pwd protected</label><br/>
+<%= text_field 'board', 'pwd_protected'  %></p>
+
+<p><label for="board_pwd">Pwd</label><br/>
+<%= text_field 'board', 'pwd'  %></p>
+
+-->
+

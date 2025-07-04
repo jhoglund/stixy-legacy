@@ -1,0 +1,33 @@
+<%= @doc_type %>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+  <title>Admin Interface : <%= controller.action_name %></title>
+	<meta http-equiv="imagetoolbar" content="no">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<%= include_resource :javascript, :default %>
+
+  <%= stylesheet_link_tag 'all/admin/adminstyle' %>
+  <%= stylesheet_link_tag 'all/default/010_popup.css' %>
+</head>
+<body>
+
+<hr noshade="true"/>
+<span class="adminmenu"><a href="/" class="sitebutton">Stixy App &#187;</a></span>
+<span class="adminmenu"><a href="/admin/beta_tester/list" class="sitebutton">Beta Testers &#187;</a></span>
+<span class="adminmenu"><a href="/admin/user/list" class="sitebutton">Users &#187;</a></span>
+<span class="adminmenu"><a href="/admin/role/list" class="sitebutton">Roles &#187;</a></span>
+<span class="adminmenu"><a href="/admin/board/list" class="sitebutton">Boards &#187;</a></span>
+<span class="adminmenu"><a href="/admin/keyword/list" class="sitebutton">Keywords &#187;</a></span>
+<span class="adminmenu"><a href="/admin/invite/list" class="sitebutton">Invites &#187;</a></span>
+<span class="adminmenu"><a href="/admin/statistic" class="sitebutton">Statistics &#187;</a></span>
+<span class="adminmenu"><a href="/signout" class="sitebutton">Signout <%=  current_user.display_name %> &#187;</a></span>
+<hr noshade="true"/>
+
+<% if flash[:notice] %><p style="color: green"><%= flash[:notice] %></p><% end %>
+<% if flash[:error] %><p style="color: red"><%= flash[:error] %></p><% end %>
+
+<%= @content_for_layout %>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<html debug="true">
+<head>
+	<title></title>
+	<script src="/javascripts/firebug/firebug.js"></script>
+	<script>
+ 		 function makeColor(v) {
+ 		  if (typeof v != "number") {
+ 		    // already in rgb (hopefully); IE doesn't get here.
+ 		    return v;
+ 		  }
+ 		  // IE sends number; convert to rgb.
+ 		  var r = v & 0xFF;
+ 		  var g = (v >> 8) & 0xFF;
+ 		  var b = (v >> 16) & 0xFF;
+ 		  return "rgb(" + r + "," + g + "," + b + ")";
+ 		}
+		
+		console.log("RGB: " + makeColor(65535) )
+		
+		onload = function(){
+			document.getElementById("setter").attachEvent("onclick", setColor)
+			document.getElementById("getter").attachEvent("onclick", getColor)
+		}
+		function setColor(){
+			document.execCommand("forecolor", false, "FFFF00")
+		}
+		function getColor(){
+			alert(document.queryCommandValue("forecolor"))
+		}
+	</script>
+</head>
+<body>
+	<div style="border:1px solid inset; width:400px; height:200px; padding:10px;" contenteditable="true">Change my color</div>
+	<input type="button" id="setter" value="Set color to red">
+	<input type="button" id="getter" value="Get color">
+</body>
+</html>

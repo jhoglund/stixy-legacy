@@ -1,0 +1,35 @@
+<%= @doc_type %>
+<% debug_state = false %>
+<html<% if ENV["RAILS_ENV"] == "development" and debug_state===true %> debug="true" debugtop="false"<% end %> xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<title>Stixy: For Flexible Online Creation Collaboration and Sharing</title>
+	<%= render :partial => "/shared/meta" %>
+	<% if ENV["RAILS_ENV"] == "development" and debug_state===true %><%= javascript_include_tag "all/firebug/firebug" %><% end %>
+	<% if @edit_view -%>
+	<%= include_resource :javascript, :default %>
+	<%= include_resource :javascript, :stixyboard %>
+	<%= render :partial => "/board/inline_script" %>
+	<script type="text/javascript">
+		Stixy.server.canBeSaved = true;
+		Stixy.server.autoSave = true;
+		Stixy.ui.saveStates = false;
+	</script>
+	<% end -%>
+	<%= include_resource :stylesheet, :default %>
+	<%= include_resource :stylesheet, :guest %>
+	<% unless @edit_view -%>
+	<style type="text/css">
+		* { cursor: inherit!important; }
+		a { cursor: pointer!important; }
+	</style>
+	<% end %>
+</head>
+<body scroll="no" class="board-list-closed tray-open wopt-closed widget-deactivated saved">
+	<% if @edit_view -%>
+	<iframe unselectable="on" height="100%" style="position:absolute;height:100%;width:100%;z-index:1000000;" frameborder="0" allowtransparency="true" id="load_error_frame" src="/load_wait.html"></iframe>
+	<% end %>
+	<%= render :partial => "shared/header_guest" %>
+	<%= @content_for_layout %>
+	<%= render(:partial => "/shared/google_analytics") %>
+</body>
+</html>

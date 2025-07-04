@@ -1,0 +1,118 @@
+/*----------------*/
+/* 003 OPTION BAR */
+/*----------------*/
+
+.opt-bar { position:absolute; display:none; overflow:hidden; right:27px; bottom:16px; height:100%; width:255px; }
+.opt-bar .bar-tools { top:-24px; border-bottom:1px solid rgb(255,255,255);}
+.opt-bar-grid { border-collapse:collapse; top:0; bottom:0; height:100%; width:0; }
+.opt-bar-grid td { padding:0; vertical-align:top; }
+/* AD SIZE UPDATE (.opt-panel): top:132px; => top:232px; */
+.opt-panel { position:absolute; top:<%= current_user.display_ad? ? 232 : 132 %>px; right:0; bottom:146px; width:100%;  }
+.opt-scroll { position:absolute; overflow:auto; top:0; right:0; bottom:0; left:0; height:100%; width:100%; }
+.opt-content { margin:10px 0 0 10px; width:220px; }
+/* AD SIZE UPDATE (.opt-background): top:107px; => top:207px; */
+.opt-background { position:absolute; top:<%= current_user.display_ad? ? 207 : 107 %>px; right:0px; bottom:125px; width:255px; overflow:hidden; background-color:rgb(235,235,235); filter:alpha(opacity=75); opacity:0.75; z-index:-1; }
+.opt-gradient { position:relative; top:0; left:-5000px; height:200%; width:10000px; }
+.opt-tab,
+.opt-tab .left,
+.opt-tab .right,
+.opt-tab .left div,
+.opt-tab .right div { position:absolute; top:0; height:21px; z-index:-1; }
+.opt-tab { display:inline; top:-46px; height:19px; line-height:21px; z-index:1; }
+.opt-tab .left { overflow:hidden; left:0; width:50%; }
+.opt-tab .right { overflow:hidden; right:0; width:51%; }
+.opt-tab .left div,
+.opt-tab .right div { width:100%; background:url(/images/widgets/default/edit_options_tab.png) no-repeat; }
+.opt-tab .left div { left:0; background-position:left top; }
+.opt-tab .right div { right:0; background-position:right top; }
+.opt-tab .label { padding:0 15px 0 15px; white-space:nowrap; color:white; }
+
+.opt-bar-controller { -moz-user-select:none; -webkit-user-select:none;  }
+
+.wopt-common-tools { position:absolute; display:none; bottom:24px; height:102px; width:235px; padding:10px; background-color:rgb(220,220,220); }
+/* AD SIZE UPDATE (.wopt-bar .bar-tools): top:107px; => top:207px; */
+.wopt-bar .bar-tools { top:<%= current_user.display_ad? ? 207 : 107 %>px; border-bottom:1px solid rgb(255,255,255); z-index:100; }
+.wopt-auto-open { position:absolute; top:3px; right:26px; padding:1px 10px 3px 8px; color:rgb(100,100,100); border-left:1px solid rgb(220,220,220); border-right:1px solid rgb(220,220,220); }
+.wopt-auto-open .opt-check{ position:relative; left:-2px;;  }
+
+ /* OPTION BAR STATES*/
+ /* AD SIZE UPDATE (.wopt-closed .opt-panel): top:100px; => top:200px; */
+.wopt-closed .opt-panel,
+.wopt-hide .opt-panel { top:<%= current_user.display_ad? ? 200 : 100 %>px; bottom:135px; border-bottom:1px solid rgb(215,215,215); }
+.wopt-closed .opt-scroll,
+.wopt-hide .opt-scroll { top:0; }
+/* AD SIZE UPDATE (.wopt-closed .opt-background): top:100px; => top:200px; */
+.wopt-closed .opt-background,
+.wopt-hide .opt-background { top:<%= current_user.display_ad? ? 200 : 100 %>px; bottom:135px; }
+.tray-closed .wopt-panel-closed .opt-panel { bottom:35px; }
+.tray-closed .wopt-panel-closed .opt-background { bottom:36px; }
+.wopt-open .tray { right:292px; }
+.wopt-hide .tray { right:27px; }
+
+.wopt-locked .wopt-locked-ghosted { opacity:0; filter:alpha(opacity=0); display:none;}
+.wopt-locked-panel { position:absolute; top:0; left:0; height:100%; width:255px; background:white; z-index:1000; opacity:0.0001; display:none;}
+.wopt-locked .wopt-locked-panel { display:block; filter:alpha(opacity=0.001); bottom:132px; top:auto; }
+.wopt-locked-controller { position:absolute; z-index:1001; bottom:0; width:235px; }
+.wopt-locked { height:145px; }
+/* AD SIZE UPDATE (.wopt-locked .opt-tab): top:-132px; => top:-232px; */
+.wopt-locked .opt-tab { top:<%= current_user.display_ad? ? -232 : -132 %>px; }
+.wopt-locked .opt-background { display:none;; }
+.wopt-locked .wopt-common-tools { height:80px; bottom:24px; }
+.wopt-locked .bar-tools { top:20px; border-bottom:1px solid rgb(255,255,255);}
+
+.widget-deactivated .wopt-switcher-ghosted,
+.wopt-activated,
+.wopt-open .wopt-common-tools,
+.wopt-open .opt-bar,
+.bopt-open .opt-bar,
+.bopt-open .bopt-bar,
+.wopt-open .wopt-bar,
+.bopt-open .bopt-switcher-open,
+.bopt-hide .bopt-switcher-closed,
+.bopt-closed .bopt-switcher-closed,
+.wopt-open .wopt-switcher-open,
+.wopt-hide .wopt-switcher-closed,
+.wopt-closed .wopt-switcher-closed { display:block!important; }
+
+.widget-activated .wopt-switcher-ghosted,
+.widget-deactivated .wopt-switcher-open,
+.widget-deactivated .wopt-switcher-closed,
+.bopt-closed .bopt-bar,
+.bopt-hide .bopt-bar,
+.bopt-hide .bopt-switcher-open,
+.wopt-hide .wopt-switcher-open,
+.wopt-hide .wopt-common-tools,
+.wopt-closed .wopt-bar,
+.wopt-hide .wopt-bar,
+.wopt-deactivated { display:none!important; }
+
+.widget-deactivated .wopt-switch { background:none; }
+
+.wopt-open .opt-bar { z-index:3; }
+
+/* OPTIONBAR SWITCHES */
+.opt-switch,
+.opt-switch-highlight-line,
+.opt-switch-shadow-line { position:absolute; height:24px; }
+.opt-switch { top:0; right:9px; width:254px; z-index:0; }
+.opt-switcher-bg { position:absolute; top:4px; left:8px; width:15px; height:15px; overflow:hidden; background:no-repeat; z-index:-1;}
+.opt-switch-highlight-line,
+.opt-switch-shadow-line { overflow:hidden; top:0; width:0; }
+.opt-switch-highlight-line { left:0; }
+.opt-switch-shadow-line { right:0; }
+.wopt-switcher-ghosted,
+.bopt-switcher-open,
+.bopt-switcher-closed,
+.wopt-switcher-open,
+.wopt-switcher-closed { display:none; padding:5px 0 4px 30px; background:no-repeat 11px -11px; }
+a.auto-show-off,
+a.auto-show-on,
+a.bopt-switcher-open,
+a.bopt-switcher-closed,
+a.wopt-switcher-open,
+a.wopt-switcher-closed { color:white!important; }
+.bopt-switcher-open:hover,
+.bopt-switcher-closed:hover,
+.wopt-switcher-open:hover,
+.wopt-switcher-closed:hover { background-position:11px -41px; }
+.wopt-switcher-ghosted { cursor:default; background-position:8px 4px; }

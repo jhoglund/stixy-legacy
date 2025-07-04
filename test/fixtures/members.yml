@@ -1,0 +1,30 @@
+member_for_calendar_entry_selected_users:
+  id: 1
+  user_id: 2
+  membershipable_id: 1
+  membershipable_type: AbstractCalendar
+yet_a_member_for_calendar_entry_selected_users:
+  id: 2
+  user_id: 3
+  membershipable_id: 1
+  membershipable_type: AbstractCalendar
+first_member_for_calendar_entry_all_users:
+  id: 3
+  user_id: 2
+  membershipable_id: 2
+  membershipable_type: AbstractCalendar
+second_member_for_calendar_entry_all_users:
+  id: 4
+  user_id: 3
+  membershipable_id: 2
+  membershipable_type: AbstractCalendar
+all_member_for_calendar_entry_all_users:
+  id: 5
+  user_id: 0
+  membershipable_id: 2
+  membershipable_type: AbstractCalendar
+one_member_for_calendar_entry:
+  id: 6
+  user_id: 2
+  membershipable_id: 3
+  membershipable_type: AbstractCalendar

@@ -1,0 +1,32 @@
+<h2>Listing keywords</h2>
+
+<span class="adminmenu"><%= link_to 'New keyword', :action => 'new' %></span>
+
+
+<table class="admin">
+  <tr>
+    <th>Id</th>
+    <th>Keyword</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </tr>
+  
+<% @keywords.each_with_index  do |keyword, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+%>
+  <tr class="<%= color %>">
+    <td><%= keyword.id %></td>
+    <td><%= keyword.tag %></td>
+    <td><%= link_to 'Show', :action => 'show', :id => keyword %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => keyword %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => keyword }, :confirm => 'Are you sure?' %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @page.prev.number } if @page.prev? %>
+<%= link_to 'Next page', { :page => @page.next.number } if @page.next? %> 
+
+

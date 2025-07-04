@@ -1,0 +1,15 @@
+<%- cache("guest/board_canvas/#{@board.id}", :expires_in => 30.days) do -%>
+<% if not @board.nil? %>
+	<!-- CANVAS -->
+	<div class="canvas" id="stixyboard">
+		<div class="min-space"></div><div class="loading-state"></div>
+		<div class="canvas-content" id="canvas_content">
+    
+		  <% index = 1000000 %>
+  		<% @board.widgets.each do |widget_instance| %> 
+  		    <%=  render(:partial => "/widgets/#{widget_instance.widget.name.downcase}/widget", :object => widget_instance, :locals => {:index => (index += 1)}) %>
+  		<% end %>
+  	</div>
+	</div>
+<% end %>
+<%- end -%>

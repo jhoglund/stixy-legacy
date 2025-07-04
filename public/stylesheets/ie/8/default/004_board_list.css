@@ -1,0 +1,11 @@
+/*-----------------*/
+/* BOARD LIST IE 8 */
+/*-----------------*/
+
+.board-list-bar .tag-filter sx\:button { top:-5px; }
+.board-list-bar .tag-filter .reset-filter { top:8px; }
+.board-list-bar .spinner-16 { right:21px; }
+
+.board-list-bar .pager a,
+.board-list-bar .pager span { padding:0 9px 0 0; }
+

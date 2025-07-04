@@ -1,0 +1,57 @@
+/*--------------------*/
+/*   012 BUTTON ALL   */
+/*--------------------*/
+
+sx\:button { position:relative; font: 11px/12px "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; color:white; display:inline; display:inline-block; z-index:0; cursor:default; behavior:url(/bindings/unselectable.htc); -moz-user-select:none; -webkit-user-select:none; }
+sx\:button sx\:l,
+sx\:button sx\:r { position:absolute; top:0px; width:50%; height:20px; overflow:hidden; z-index:-1; }
+sx\:button sx\:l { left:0px; }
+sx\:button sx\:r { left:50%; ; }
+sx\:button sx\:l sx\:p,
+sx\:button sx\:r sx\:p { position:absolute; z-index:-1; top:0px; height:20px; width:100%; background:url(/images/buttons/btn_background.png) left top no-repeat; }
+sx\:button sx\:l sx\:p { left:0px; }
+sx\:button sx\:r sx\:p { right:0px; background-position:right top; }
+sx\:button .button-label { position:relative; top:3px; padding:3px 20px 4px; white-space:nowrap; display:inline; }
+sx\:button.button-label-narrow .button-label { padding:3px 10px 4px }
+sx\:button sx\:i { position:absolute; top:3px; left:6px; width:16px; height:16px; background:left top no-repeat; display:none; }
+sx\:button.button-icon sx\:i { display:block; }
+sx\:button.button-icon .button-label { padding-left:26px; }
+sx\:button:hover sx\:i  { background-position:left -30px; }
+sx\:button.ghosted:hover sx\:i,
+sx\:button.ghosted sx\:i { background-position:left -55px; }
+
+
+sx\:button.default sx\:l sx\:p,
+sx\:button.default sx\:r sx\:p { background-image:url(/images/buttons/btn_background_default.png) }
+sx\:button.ghosted sx\:l sx\:p,
+sx\:button.ghosted sx\:r sx\:p { background-image:url(/images/buttons/btn_background_ghosted.png) }
+
+sx\:button a,
+sx\:button a:link,
+sx\:button a:active,
+sx\:button a:visited { font-weight:normal; color:white; cursor:hand; cursor:pointer; text-decoration:none!important; }
+sx\:button a:link:hover { color:rgb(75,75,75);}
+
+sx\:button.default a:hover { color:rgb(55,50,95);}
+sx\:button.ghosted a:hover { color:white; cursor:default; }
+
+sx\:button.large { font-size:14px; }
+sx\:button.large sx\:l { height:28px; }
+sx\:button.large sx\:r { height:28px; }
+sx\:button.large sx\:l sx\:p { height:28px; background-image:url(/images/buttons/btn_bg_large.png); }
+sx\:button.large sx\:r sx\:p { height:28px; background-image:url(/images/buttons/btn_bg_large.png); }
+sx\:button.large .button-label { top:5px; margin-top:5px; }
+
+sx\:button.default-large sx\:l sx\:p ,
+sx\:button.default-large sx\:r sx\:p  { background-image:url(/images/buttons/btn_bg_default_large.png) }
+sx\:button.ghosted-large sx\:l sx\:p ,
+sx\:button.ghosted-large sx\:r sx\:p  { background-image:url(/images/buttons/btn_bg_ghosted_large.png) }
+sx\:button.default-large a:hover { color:rgb(55,50,95);}
+
+sx\:button.tooltip sx\:l,
+sx\:button.tooltip sx\:r,
+sx\:button.tooltip sx\:l sx\:p,
+sx\:button.tooltip sx\:r sx\:p { height:38px; }
+sx\:button.tooltip .button-label { padding-left:30px; padding-right:30px; top:9px; margin-top:5px; color:rgb(75,75,75); }
+sx\:button.tooltip sx\:l sx\:p,
+sx\:button.tooltip sx\:r sx\:p { background-image:url(/images/buttons/btn_tooltip_background.png); }

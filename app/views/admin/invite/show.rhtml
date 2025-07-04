@@ -1,0 +1,36 @@
+<%= link_to 'Edit', :action => 'edit', :id => @invite %> |
+<%= link_to 'Back', :action => 'list' %>
+
+<table class="admin">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  <tr class="light">
+    <td>Id:</td>
+    <td><%= @invite.id %></td>
+  </tr>
+  <tr class="dark">
+    <td>Invited by User:</td>
+    <td><%= @invite.inviter_user.login if @invite.inviter_user != nil %></td>
+  </tr>
+  <tr class="light">
+    <td>Invited to board:</td>
+    <td><%= @invite.board.title if @invite.board != nil %></td>
+  </tr>
+  <tr class="dark">
+    <td>Accepted by User:</td>
+    <td><%= @invite.accepted_user.login  if @invite.accepted_user != nil %></td>
+  </tr>
+  
+  <% Invite.content_columns.each_with_index  do |column, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+    %>
+    <tr class="<%= color %>">
+        <td><%= column.human_name %>:</td>
+        <td><%=h @invite.send(column.name) %></td>
+    </tr>
+  <% end %>
+    
+</table>

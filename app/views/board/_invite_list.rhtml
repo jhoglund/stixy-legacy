@@ -1,0 +1,11 @@
+<table class="option-list" id="invited_<%= invite_list.id %>"<%= 'style="display:none"' if defined? appear_effect and appear_effect == true %>>
+	<tr>
+		<td>
+     	<div style="background-image:url(<%= invite_list.avatar_url -%>)" class="personal-thumb" id="personal_thumb">&nbsp;</div>
+		</td>
+		<td>
+			<%= "<h4>" + invite_list.full_name + "</h4>" unless invite_list.full_name.nil? %>
+			<%= mail_to invite_list.email %><br />
+		</td>
+  </tr>
+</table>

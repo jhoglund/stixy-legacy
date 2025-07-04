@@ -1,0 +1,9 @@
+.header-background-gradient { filter:alpha(opacity=20,finishOpacity=0,style=2); background:white; }
+/* AD SIZE UPDATE */
+<%- if current_user.display_ad?  -%>
+.header .stixy-signature-top { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/main_template/mt_signature_stixyboard_large_green.png', sizingMethod='crop'); }
+<%- else  -%>
+.header .stixy-signature-top { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/main_template/mt_signature_stixyboard_black.png', sizingMethod='crop'); }
+.header .stixy-signature-bottom div {background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/main_template/mt_signature_stixyboard_black.png', sizingMethod='crop'); }
+<%- end  -%>
+

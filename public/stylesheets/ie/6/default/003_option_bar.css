@@ -1,0 +1,42 @@
+/*-----------------*/
+/* OPTION BAR IE 6 */
+/*-----------------*/
+
+/* OPTIONBAR */
+.opt-bar { right:25px; }
+.opt-panel { top:auto; bottom:auto; height:100%; }
+.bopt-bar .bar-tools { top:-25px; height:25px; width:256px;}
+.opt-bar-grid { width:255px; }
+/* AD SIZE UPDATE (.opt-background): top:132px; => top:232px; */
+.opt-background {  filter:none; left:0; right:auto; top:<%= current_user.display_ad? ? 232 : 132 %>px; height:100%; bottom:auto; }
+.wopt-common-tools { position:relative; bottom:auto; height:100%; width:100%; }
+.wopt-containor { height:100%; }
+.wopt-bar { height:100%; }
+
+.wopt-locked-controller { bottom:20px; }
+.wopt-locked { height:145px; }
+.wopt-locked .wopt-common-tools { height:100px; bottom:89px; }
+/* OPTIONBAR STATES*/
+
+/* AD SIZE UPDATE (.bopt-open .opt-bar-top): top:100px; => top:200px; */
+.bopt-open .opt-bar-top { height:<%= current_user.display_ad? ? 200 : 100 %>px; }
+.bopt-open .opt-bar-bottom { height:135px; }
+.tray-closed .wopt-panel-closed .opt-bar-bottom { height:34px; }
+
+/* AD SIZE UPDATE (.wopt-open .opt-bar-top): top:132px; => top:232px; */
+.wopt-open .opt-bar-top { height:<%= current_user.display_ad? ? 232 : 132 %>px; }
+.wopt-locked .opt-bar-top { height:132px; }
+.wopt-open .opt-bar-bottom { height:125px;}
+.wopt-bar .bar-tools { border:none; }
+
+.bopt-hide .wopt-panel-open .opt-bar-bottom { height:125px; }
+
+/* OPTIONBAR SWITCHES */
+.opt-switch-shadow-line { right:-1px; }
+.opt-switch-highlight-line,
+.board-list-switch-highlight-line,
+.board-list-switch-shadow-line,
+.opt-switch-shadow-line { height:22px; width:1px; }
+
+.board-list-switch,
+.opt-switch { height:22px; }

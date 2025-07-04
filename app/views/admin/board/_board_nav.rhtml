@@ -1,0 +1,41 @@
+
+<div id="item-boards">
+	<%= render :partial => "/admin/shared/page_size", :locals => { :title => "Stixyboards per page:", :action => "list_with_ajax", :update => "item-boards" } %>
+<table class="admin">
+  <tr>
+    <%= sort_header_remote_tag('id', 'Id', { :url => {:action => 'list_with_ajax'}, :update => 'item-boards' }, {:style => "color:black;"})%>
+    <%= sort_header_remote_tag('title', 'Title', { :url => {:action => 'list_with_ajax'}, :update => 'item-boards' }, {:style => "color:black;"})%>
+    <th>Shared by</th>
+    <th>Status</th>
+    <th>Keywords</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+  </tr>
+  
+<% @boards.each_with_index  do |board, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+%>
+  <tr class="<%= color %>">
+    <td><%= board.id %></td>
+    <td><%= board.title %></td>
+    <td><%= board.boardusers.collect{|b| b.user.short_name }.join(",") %></td>
+		<td><%= board.status_name %></td>
+		<td><%= formated_collection(board.keywords, nil, nil){|k| k.tag } %></td>
+  	<td><%= link_to 'Info', :action => 'show', :id => board %></td>
+  	<td><%= link_to 'View', :action => 'view', :id => board %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => board %></td>
+		<td><%= link_to 'Users', :action => 'users', :id => board %></td>
+		<td><%= link_to 'Clone', :action => 'copy', :id => board  %></td>
+    <td><%= link_to 'Disable', :action => 'disable', :id => board %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => board }, :confirm => 'Are you sure?' %></td>
+  </tr>
+<% end %>
+</table>
+<%= render :partial => "/admin/shared/page_nav", :locals => { :paginator => @paginator, :page => @page, :action => "list_with_ajax", :update => "item-boards" } %>
+</div>

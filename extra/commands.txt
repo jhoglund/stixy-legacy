@@ -1,0 +1,5 @@
+app.post("/signin", :user => {:login => "jonas@swatdesign.com", :pwd => "password"})
+
+app.xml_http_request("/widgets/default/update","body"=>{"time"=>"1173430903785", "widgets"=>{"temp_11734308768201"=>{"left"=>"79", "text"=>{"value"=>"dsdsd<br>"}, "widget_id"=>"1", "zindex"=>"1173430888716", "height"=>"150", "top"=>"104", "width"=>"180"}}, "id"=>"0"})
+
+app.xml_http_request("/board/board_list_compact_ajax/")

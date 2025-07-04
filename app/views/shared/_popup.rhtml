@@ -1,0 +1,4 @@
+<div class="popup-container" style="visibility:visible;" id="popup_container">
+  <div class="popup-background"></div>
+	<iframe id="popup_frame" src="<%=  @popup[:data] || @popup[:src] %>" class="popup" style="display:none;width:<%= @popup[:width] %>px;height:<%= @popup[:height] %>px; margin-left:-<%= @popup[:width]/2 %>px; margin-top:-<%= @popup[:height]/2 %>px;" frameborder="0"></iframe>
+</div>

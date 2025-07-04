@@ -1,0 +1,19 @@
+<%= @doc_type %>
+<% debug_state = true %>
+<html<% if ENV["RAILS_ENV"] == "development" and debug_state===true %> debug="true" debugtop="false"<% end %>>
+<head>
+	<title>Stixy: For Flexible Online Creation Collaboration and Sharing</title>
+	<%= render :partial => "/shared/meta" %>
+	<%= include_resource :javascript, :default %>
+	<%= include_resource :javascript, :calendar %>
+	<%= include_resource :stylesheet, :default %>
+	<%= include_resource :stylesheet, :calendar %>	
+</head>
+<body scroll="no"> 
+	<%= render :partial => "/shared/header" %>
+	<%= render :partial => "/shared/message" %>
+	<%= @content_for_layout %>
+	<%= render(:partial => "/shared/google_analytics") %>
+	<%= render :partial => "/shared/popup" if @popup %>
+</body>
+</html>

@@ -1,0 +1,14 @@
+/*-----------*/
+/* TRAY IE 6 */
+/*-----------*/
+
+.tray-bar-background-gradient { filter:alpha(opacity=100,finishOpacity=0,style=2); background:rgb(192,240,70); }
+.tray-bar { height:22px; bottom:19px; }
+.tray-background { background:rgb(200,200,200); }
+.tray-background-gradient { width:2000px; height:500px; top:-150px; right:-1000px; filter:alpha(opacity=100,finishOpacity=0,style=2); background:white; }
+.tray-highlight-line,
+.tray-bar-highlight-line { height:24px; }
+#widget-tray-note { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/note/icon_widget_note.png', sizingMethod='crop'); }
+#widget-tray-photo { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/photo/icon_widget_photo.png', sizingMethod='crop'); }
+#widget-tray-document { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/document/icon_widget_document.png', sizingMethod='crop'); }
+#widget-tray-todo { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/todo/icon_widget_reminder.png', sizingMethod='crop'); }

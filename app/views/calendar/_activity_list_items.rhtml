@@ -1,0 +1,29 @@
+<div id="activity_list_<%= activity_list_items.day.to_s %>" class="activity-list-day<%= if @selected_day and compare_dates(@selected_day, activity_list_items.day); " activity-list-selected-day" end%>"<%= if @selected_day and compare_dates(@selected_day, activity_list_items.day);' sx:id="selected-day"' end%>>
+	<div class="activity-list-title">
+		<div class="activity-list-title-day"><%= activity_list_items.day.day %></div>
+		<div class="activity-list-title-dayname-time">
+			<span class="activity-list-title-dayname"><%= Date::DAYNAMES[activity_list_items.day.wday] %></span>
+		</div>
+		<div class="activity-list-title-month-year"><span class="activity-list-title-month"><%= Date::MONTHNAMES[activity_list_items.day.month] %></span> <span class="activity-list-title-year"><%= activity_list_items.day.year %></span></div>
+	</div>
+	
+	<% 
+	today_activities = list[activity_list_items.day.to_s] 
+	today_activities.delete_if{|entry| entry.class == CalendarTodo } if today_activities
+	%>
+	<div class="activity-list-activities">
+	<% if today_activities and !today_activities.empty? %>
+		<% today_activities.compact.each do |entry| %>
+		<sx:entry class="today-entry activity-list-row" sx:entry-id="<%= entry.id %>" sx:entry-type="<%= entry.class.to_s.underscore %>">
+			<span class="activity-list-item">
+				<%= render :partial => get_partial(entry, :activity_list), :object => entry %>
+			</span>
+		</sx:entry>
+		<% unless today_activities.last == entry %><div class="activity-list-divider"></div><% end %>
+		<% end %>
+	<% else %>
+		<div id="activity_list_default" class="activity-list-default">No events for <%= activity_list_items.day.strftime(current_user.time_format.get_long_date[:value]) %></div>
+	<% end %>
+		<div class="activity-list-row"><%= link_to_function "New event", "Stixy.calendar.newCalendarEntry()", :button => {:type => "default"} %></div>
+	</div>
+</div>

@@ -1,0 +1,53 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# Default board
+first:
+  id: 1
+
+# Public editable board
+guest_editable:
+  id: 2
+  visible: "1"
+  editable: "1"
+
+# Public none editable board
+guest_visible:
+  id: 3
+  visible: "1"
+  editable: "0"
+
+# Public pwd protected board
+guest_visible_pwd:
+  id: 4
+  visible: "1"
+  editable: "1"
+  pwd_protected: "1"
+  pwd: "test"
+  
+# Home page example board
+home_page_example_board:
+  id: 5
+  
+# Board accessible by jonas only
+invite_board_jonas_only:
+  id: 6
+
+# Test of session upload in files_test.rb integration test
+session_upload:
+  id: 7
+
+# Home page
+jonas_board:
+  id: 8
+
+# Home page
+home_board:
+  id: 272
+    
+# Board used for beta invite
+beta_invite_board:
+  id: 459
+  
+# Board used for new sign up's
+welcome_board:
+  id: 1897

@@ -1,0 +1,294 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html debug="true">
+<head>
+	<title>Welcome to Stixy</title>
+	<!--<script language="javascript" type="text/javascript" src="/javascripts/all/firebug/firebug.js"></script>-->
+	<script>
+		var start = new Date
+		var console = {log:function(){}}
+		Object.prototype.eachProperty = function(fn){
+			for(var i in this){
+				if(this[i].__prototype_extension||i.substr(0,2)=="__"){ continue };
+				fn(i,this[i])
+			}
+		}
+		Object.prototype.eachProperty.__prototype_extension = true;
+		Object.prototype.__unique_id_index = 0;
+		Object.prototype.get_unique_id = function(){
+			this.__unique_id = this.__unique_id || ("_uid_" + Object.prototype.__unique_id_index++);
+			return this.__unique_id;
+		}
+		Object.prototype.get_unique_id.__prototype_extension = true;
+		Object.prototype.getOrCreate = function(o){
+			this[o] = this[o] || {};
+			return this[o]
+		}
+		Object.prototype.getOrCreate.__prototype_extension = true;
+		
+		function $A(item) {
+		  if(!item){
+				return [];
+			}else if(item.splice){
+				return item;
+			}else{
+		    var results = [];
+				if(item.length>0) {
+		    	for (var i = 0; i < item.length; i++) results.push(item[i]);
+				} else {
+					results.push(item);
+				}
+		    return results;
+		  }
+		}
+		Function.prototype.ub = function() {
+			function o(s){
+				if(s.__original__) return o(s.__original__)
+				return s
+			}
+			return o(this);
+		}
+		Function.prototype.b = function() {
+			var a = $A(arguments);
+			var o = a.shift();
+		  var m = this;
+			var f = function() {
+		    return m.apply(o, a.concat($A(arguments)));
+		  }
+			f.__original__ = m;
+		  return f;
+		}
+		Function.prototype.be = function(o) {
+		  var m = this;
+			var f = function(e) {
+		    return m.call(o, e || window.event);
+		  }
+			f.__original__ = m;
+		  return f;
+		}
+		
+		var Stixy = {
+			uid: function(o){
+				if(!(o.get_unique_id)) { o.get_unique_id = Object.prototype.get_unique_id };
+				return o.get_unique_id()
+			},
+			events: {
+				Custom: function(){ },
+				halt: function(e){
+					if(e.stopPropagation){
+						e.stopPropagation();
+					}else{
+		      	event.cancelBubble = true;
+		      }
+				},
+				related: function(e,t){
+					var r = (e.relatedTarget!=undefined) ? e.relatedTarget : (e.type=="mouseout") ?  e.toElement : e.fromElement;
+					while(r){
+						if(r==t){ return true }
+						else{ r = r.parentNode}
+					}
+					return false;
+				},
+			  element: function(e) {
+			    return e.target || e.srcElement;
+			  },
+			  stop: function(e) {
+					if(!e) { return };
+					if(e.preventDefault){
+			      e.preventDefault();
+			      e.stopPropagation();
+			    }else{
+			      e.returnValue = false;
+			      e.cancelBubble = true;
+			    }
+			  },
+				before_unload_filters: [],
+				observers: {},
+				_addToCache: function(el, n, o, c){
+					var e = this.observers.getOrCreate(Stixy.uid(el)), t = e.getOrCreate("types"), n = t.getOrCreate(n), c = n.getOrCreate(c), f = c.getOrCreate(Stixy.uid(o.ub()));
+					e.element = el;
+					if(f!=o.ub()){
+						c[o.ub().get_unique_id()] = o;
+						return o;
+					}
+				},
+				_getFromCache: function(e, n, o, c){
+					try{ return this.observers[Stixy.uid(e)].types[n][c][Stixy.uid(o.ub())] }
+					catch(e){ return false }
+				},
+			  unloadCache: function() {
+					var s = this.stopObserving.b(this);
+					this.observers.eachProperty(function(en,ep){
+						ep.types.eachProperty(function(tn,tp){
+							tp.eachProperty(function(cn,cp){
+								cp.eachProperty(function(fn,fp){
+									s(ep.element,tn,fn,(cn=="true"));
+								});
+							});
+						});
+					});
+			    this.observers = {};
+			  },
+				before_unload_filters: [],
+				beforeUnloadExecute: function(){
+					for(var i=0; i<this.before_unload_filters.length; i++){
+						this.before_unload_filters[i]();
+					}
+				},
+				beforeUnload: function(fun){
+					this.before_unload_filters.push(fun)
+				},
+			  observe: function(e, n, o, c) {
+			    var c = c || false;
+			    if (n == 'keypress' && (navigator.appVersion.match(/Konqueror|Safari|KHTML/) || n.attachEvent)) { n = 'keydown' }
+				  if(e.addEventListener) {
+						if(e===window && n=="ready"){ n = "DOMContentLoaded" }
+						var o = this._addToCache(e, n, o, c);
+			    	if(o){ e.addEventListener(n, o, c) };
+					}else if(e.attachEvent){
+						if(e===window && n=="ready"){ n = "load" }
+						if(e==window && n=="mouseup") { e = document }
+						var r = this._addToCache(e, n, o, c);
+				  	if(r){ e.attachEvent('on' + n, o) };
+			    }
+			  },
+			  stopObserving: function(e, n, o, c) {
+					var c = c || false;
+					if(n == 'keypress' && (navigator.appVersion.match(/Konqueror|Safari|KHTML/) || e.detachEvent)) { n = 'keydown' }
+					if(e.removeEventListener){
+						var f = this._getFromCache(e, n, o, c)
+						if(f){ e.removeEventListener(n, f, c) };
+			    }else if(e.detachEvent){
+						if(e==window && n=="mouseup") { e = document }
+			      var r = this._getFromCache(e, n, o, c)
+			      if(r){ e.detachEvent('on' + n, r) };
+			    }
+			  }
+			}
+		}
+		Stixy.events.observe(window,"unload",Stixy.events.beforeUnloadExecute.b(Stixy.events))
+
+		var obj = {name:"my name"};
+		var divs,  add = function(name,capture){
+			console.log(name +": "+capture)
+		}
+		onload = function(){
+			divs = document.getElementsByTagName("div");
+			Stixy.events.observe(divs[0],"click",add.b(obj,"click",false),false)
+			Stixy.events.observe(divs[0],"mouseout",add.b(obj,"mouseover",false),false)
+			Stixy.events.observe(divs[1],"mousedown",add.b(obj,"mousedown",true),true)
+			Stixy.events.observe(divs[2],"mouseup",add.b(obj,"mouseup",true),true)
+			Stixy.events.observe(divs[2],"mouseup",add.b(obj,"mouseup",false),false)
+			Stixy.events.observe(divs[3],"click",add.b(obj,"click",true),true);
+			var is = document.getElementsByTagName("i");
+			for(var i=0; i<is.length;i++){
+				//is[i].addEventListener("click",add.b(obj,"click",true),true)
+				Stixy.events.observe(is[i],"click",add.b(obj,"click",true),true);
+			}
+			console.log(new Date - start)
+		}
+		function stop(){
+			Stixy.events.stopObserving(divs[2],"mouseup",add,true)
+		}
+
+	</script>
+
+</head>
+<body>
+	<div>click and mouseout</div>
+	<div>mousedown</div>
+	<div>mouseup</div>
+	<div>click</div>
+	<div onclick="Stixy.events.unloadCache()">Unload all</div>
+	<div onclick="stop()">Stop mouseup</div>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+	<i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i><i>x</i>
+</body>
+</html>

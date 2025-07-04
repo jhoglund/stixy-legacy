@@ -1,0 +1,12 @@
+all_users:
+  id: 1
+  time: '2008-02-26 10:00:00'
+  status: 2
+  noteable_id: 5
+  noteable_type: WidgetInstance
+selected_user:
+  id: 2
+  time: '2008-02-27 10:00:00'
+  status: 2
+  noteable_id: 1
+  noteable_type: Boarduser

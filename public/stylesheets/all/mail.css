@@ -1,0 +1,36 @@
+body { font: 11px/1.2em "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; color: rgb(102,102,102); margin: 0;  background:url(cid:mt_guest_bg_pattern) white top center; }
+p { font: 18px/1.5em Georgia; }
+h1 { font-size: 2.2em;font-family: Georgia;font-weight: normal;color:rgb(150,210,10);margin: 0.7em 0 0.2em;}
+a:link, a:visited, a:active   { color: rgb(45,130,215); text-decoration: none; }
+a:hover { color: rgb(35,95,155);  text-decoration: none; }
+.invite-date { color: rgb(180,180,180); text-align: right; margin-top: -24px; font-size: 14px; }
+.invited { font-size: 14px; margin-bottom: 40px;}
+.canvas { position: relative; width: 624px; left: 1px; margin: 24px auto; padding: 0px; border: 1px solid rgb(235,235,235);; }
+.canvas .content { position: relative; padding: 79px 48px 24px 48px; background: white; min-height: 479px; z-index: 0; }
+.utility { background: white; overflow: hidden; font-size: 0.95em; color: rgb(183,183,183); height: 24px; }
+.signature { position: absolute; left: 43px; top: 0px; }
+.color-green { color:rgb(150,210,10);}
+.footer { position: relative; font-size: 0.95em; clear: both; background: rgb(245,245,245); height: 24px; padding: 0 48px; }
+.footer-navigation { float: left; margin: 5px 12px 0px 0px; }
+.copyright { float: left; margin: 5px 12px 0px 0px; color: rgb(180,180,180); }
+.foot-notes { padding-top: 20px;color: rgb(150,150,150); }
+.personal-thumb { position: absolute;left: -95px;top: 50%;border:1px solid rgb(180,180,180); float:left; margin:-40px 10px 0px 0px; width:50px; height:50px; background:no-repeat center center;}
+.button-bar { position: relative; padding: 20px 0 0; width: 50%;}
+a.button { color:white; }	
+.button { position:relative; float: right;text-align: center; display: block; left: 75px;width: 150px; height: 20px;margin: 0 0 0 100px; color:white; cursor:pointer;  }
+.button .left  { vertical-align: middle;float: left; }
+.button .right { vertical-align: middle;float: right; }
+.button-label {position: relative;top: 3px; }
+.button:hover { color:rgb(75,75,75);}
+.button.default:hover { color:rgb(55,50,95);}
+.button-breaker {clear: both;height: 40px;}
+.message { position: relative; overflow: visible;padding: 12px 24px 24px; color: rgb(150,210,10); z-index: 0; width:260px;margin:0 0px 24px 120px;background-color: rgb(245,255,210)}
+.message p { font: 14px/1.3em Georgia; margin: 0px; min-height: 50px; vertical-align: middle;}
+.message .bg { position: absolute; top:0; left:0; width: 100%; height: 100%; overflow: hidden; }
+.message .nw, .message .ne, .message .se, .message .sw { position: absolute; width: 20px; height: 20px; ;}
+.message .nw { top:0; left:0; }
+.message .ne { top:0; right:0; }
+.message .se { bottom:0; right:0; }
+.message .sw { bottom:0; left:0; }
+.message .callout { position: absolute; top: 50%; left: -30px; margin-top: -19px; width: 30px; height: 29px;background-color: rgb(245,255,210)}
+.message-byline { text-align:right;margin:0 0 8px; }

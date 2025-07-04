@@ -1,0 +1,59 @@
+<html>
+<head></head>
+<body style="margin:0;">
+<div style="background:url(cid:mt_guest_bg_pattern) white top center;padding-bottom:24px;" >
+	<div style="background:white;overflow:hidden;height:24px;">&nbsp;</div>
+	<center>
+		<div style="position: relative; width: 624px; left: 1px; margin: 24px auto; padding: 0px; border: 1px solid rgb(235,235,235);">
+			<div style="font-size:11px; line-height:140%; font-family:verdana; position: relative; text-align: left;padding: 0 48px 24px 48px; background: white; min-height: 479px; z-index: 0;">
+				<img src="cid:mt_guest_signature" width="86" height="68" style="margin-left:-5px; " >
+				<p style="color:rgb(150,150,150);text-align:right;font-family:Georgia;font-size:12px;"><%= Time.now.strftime("%B %d, %Y %I:%M %p") %></p>
+		
+				<p style="font-family:Georgia;margin-bottom:48px;font-size:12px;color:rgb(150,150,150);">To: <a style="color:rgb(150,210,10);text-decoration:none;" href="mailto:<%= @invite.accepted_user.email %>" style="color:rgb(150,210,10);"><%= @invite.accepted_user.display_name %></a></p>
+		
+				<% if @reminder %>
+					<hr style="position: relative; top: 0px; border-width: 1px 0px 0px; border-style: solid; border-color: rgb(225,225,225); height: 1px; margin:0 0 12px;">
+					<span style="color:rgb(150,150,150);">This reminder was sent by <span style="color:rgb(150,210,10);font-weight:bold;"><%= @reminder.display_name %></span></span>
+					<hr style="position: relative; top: 0px; border-width: 1px 0px 0px; border-style: solid; border-color: rgb(225,225,225); height: 1px; margin:12px 0 24px;">
+				<% end %>
+		
+				<h1 style="font-size: 2.2em;font-family: Georgia;font-weight: normal;color:rgb(150,210,10);margin: 0 0 0.2em;">Hello!</h1>
+				<p style="font-size:15px;line-height:140%;font-family:Georgia;color:rgb(100,100,100);"><%= @invite.inviter_user.display_name %> has invited you to join 
+				<% unless @invite.board.title.empty? %><span class="color-green">"<%= @invite.board.title  %>"</span>,<% end %> a Stixyboard where you and your friends can share experiences and ideas, photos and documents.</p>		
+				<div style="position:relative;margin:24px 0 32px;text-align:center;font-size:15px;line-height:140%;font-family:Georgia;">
+					<a style="color:rgb(45,130,215);text-decoration:none;" href="http://<%= SERVER %>/invitation/?token=<%= @invite.reference_token %>">Open invitation</a>
+				</div>
+
+		
+				<% unless @invite.invitation_text.empty? %>
+				<table style="border-collapse:collapse;color:rgb(150,210,10);z-index:0; background-color:rgb(245,255,210);width:100%;">
+					<tr>
+						<td style="padding:12px 16px 6px;color:rgb(100,100,100);vertical-align:top;font-size:11px;">Personal message from <strong><%= @invite.inviter_user.display_name %></strong></td>
+					</tr>
+					<tr>
+						<td style="padding:6px 16px 24px;font-size:15px;line-height:140%;font-family:Georgia;min-height:50px;vertical-align:top;">
+							<%= @invite.invitation_text.gsub(/\n/, "<br>") %>
+						</td>
+					</tr>
+				</table>
+				<% end %>
+		
+				<div>
+					<hr style="position:relative; top:0;border-width:1px 0 0; border-style:solid;border-color:rgb(225,225,225);height:1px; margin:24px 0;">
+					<span style="color:rgb(150,150,150)">
+						If you can't open the invitation by clicking at "Open invitation", 
+						cut and paste the address below into the address field of your browser.</span>
+						<a href="http://<%= SERVER %>/invitation/?token=<%= @invite.reference_token %>" style="color:rgb(45,130,215);text-decoration:none;">http://<%= SERVER %>/invitation/?token=<%= @invite.reference_token %></a>
+						<br><br>
+						A friend of yours has sent this e-mail to invite you to join his or her Stixyboard. If you don't want to receive any invitations in the future, you need to contact the person who sent you this invitation. If you think this invitation has been sent to you by mistake, contact us at Stixy at <a href="mailto:support@stixy.com">support@stixy.com</a>, and we will help you.  
+				</div>
+			</div>
+			<div style="font-family:verdana; position: relative; font-size: 10px; clear: both; background-color: rgb(245,245,245); height: 24px; padding: 0 48px;">
+				<div style="float: left; margin: 5px 12px 0px 0px; color: rgb(150,150,150);">&copy; STIXY</div>
+				<div style="float: left; margin: 5px 12px 0px 0px;"><a style="color:rgb(45,130,215);text-decoration:none;" href="<%= "http://#{SERVER}/this_is_stixy" %>">This is Stixy</a></div>
+			</div>
+		</div>
+	</center>
+</div>
+</body>
+</html>

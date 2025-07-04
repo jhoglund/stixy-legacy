@@ -1,0 +1,65 @@
+<html>
+<head>
+<link rel="stylesheet" href="/images/4/sandbox.css" media="all"/>
+<title>cloneNode() is broken</title>
+
+</head>
+<body>
+<div id="sandboxinfo">
+
+<dl>
+  <dt>Last Modified</td>
+  <dd>August 25th 2006</dd>
+</dl>
+<dl>
+  <td>cloneNode() is broken</td>
+  <dd><a href="/archive/clonenode-is-broken">Visit the Discussion</a></dd>
+</dl>
+<br clear="left">
+
+</div>
+
+<h1>cloneNode() is broken</h1>
+
+<style>
+#origin,#targetArea{width:200px;height:50px;padding:5px;margin:10px;border:2px dashed red;}
+h3{margin:0}
+</style>
+<script>
+function cloneTest(){
+    document.getElementById("targetArea").innerHTML='<h3>Target Area</h3>';
+    t = document.getElementById("testCheckbox");
+    document.getElementById("targetArea").appendChild(t.cloneNode(true));
+}
+window.onload = function(){
+   document.getElementById("testCheckbox").attachEvent("onclick", function(){
+      alert("you clicked me");
+   })
+}
+</script>
+
+<p>This page tests the accuracy of <code>cloneNode()</code>, as you will see, it doesn't create a perfect clone.</p>
+
+<ul>
+<li>Step 1 : make a post page-load change to a dom element (for our example, check the checkbox in the test area. (there is also an onclick event set after the page loads)</li>
+
+<li>Step 2 : clone the Node from the Test Area to the Target area by clicking <input type="button" value="Clone Node" onclick="cloneTest()"></li>
+<li>Step 3 : verify... did the cloned copy in the target area stay checked? when you click/unclick the cloned copy does the event handle fire?</li>
+</ul>
+
+<div id="origin">
+<h3>Test Area</h3>
+<input type="checkbox" name="testCheckbox" value="1" id="testCheckbox">&lt;-- click
+</div>
+
+<div id="targetArea">
+<h3>Target Area</h3>
+
+</div>
+
+<p>Internet Explorer will fail to clone attributes that are set after the page loads</p>
+<p>Internet Explorer and Firefox fail to clone event handles that are set after the page loads</p>
+
+
+</body>
+</html>

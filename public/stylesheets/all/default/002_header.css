@@ -1,0 +1,39 @@
+/*------------*/
+/* 002 HEADER */
+/*------------*/
+
+/* AD SIZE UPDATE height:34px;  => height:134px; */
+.header,
+.header-background, 
+.header-background-pattern,
+.public-navigation, 
+.utility-navigation { position:absolute; top:0; height:<%= current_user.display_ad? ? 134 : 34 %>px; width:100%; }
+.header { left:-17px; background:rgb(50,50,50); behavior:url(/bindings/unselectable.htc); -moz-user-select:none; -webkit-user-select:none; }
+.header-background { overflow:hidden; z-index:0; }
+.header-background-pattern { height:100%; background-image:url("/images/main_template/bg_pattern_dot.gif"); filter:alpha(opacity=20); opacity:0.20; }
+.header-background-gradient { position:relative; top:-480px; height:1000px; width:1000px; margin:0 auto; background:url(/images/main_template/white_gradient_radius_horizontal.png) no-repeat center 480px; z-index:-1; }
+.header a:link { color:rgb(204,204,204); }
+.header a:visited { color:rgb(204,204,204); }
+.header a:hover { color:white; }
+.header a:link.member-name { color:rgb(255,235,90); }
+
+/* AD SIZE UPDATE */
+<%- if current_user.display_ad?  -%>
+.header .stixy-signature-top { position:absolute; top:0px; left:17px; width:188px; height:159px; background:url(/images/main_template/mt_signature_stixyboard_large_green.png) no-repeat; }
+.header .stixy-signature-bottom { display:none; }
+.header .beta-sign { display:none; }
+<%- else  -%>
+.header .stixy-signature-top { position:absolute; top:0px; left:0px; width:200px; height:34px; background-image:url(/images/main_template/mt_signature_stixyboard_black.png); }
+.header .stixy-signature-bottom { position:absolute; top:34px; left:0px; width:130px; height:24px; overflow:hidden; }
+.header .stixy-signature-bottom div { position:absolute; top:-34px; width:130px; height:58px; background-image:url(/images/main_template/mt_signature_stixyboard_black.png); }
+<%- end  -%>
+
+.beta-sign { position:absolute; left:59px; top:28px; color:rgb(150,150,150); font-size:9px; }
+
+/* AD SIZE UPDATE top:10px;  => height:110px; */
+.public-navigation,
+.utility-navigation { width:auto; height:24px; top:<%= current_user.display_ad? ? 110 : 10 %>px; z-index:1; }
+
+/* AD SIZE UPDATE left:120px;  => height:37px; */
+.public-navigation { left:<%= current_user.display_ad? ? 37 : 120 %>px; }
+.utility-navigation { right:10px; text-align:right; }

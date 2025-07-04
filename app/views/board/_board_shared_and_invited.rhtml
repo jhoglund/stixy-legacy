@@ -1,0 +1,14 @@
+<div id="board_shared_and_invited" style="margin-top:20px;margin-bottom:10px">
+	<h4 class="subhead">This Stixyboard is shared by</h4>
+	<%= render :partial => "/board/user_list", :collection => @board.shared_with, :locals => {:compact => (@board.shared_with.size > 5 ? true : false) } %>
+	<div style="text-align:right;margin-top:10px;">
+		<%= link_to_function "Add more users", "Stixy.board.openInvite()", :style => "font-weight:bold;" %>
+	</div>
+	<% unless @board.invites.empty?  %>
+	<div class="opt-devider"></div>
+	<h4>Invited to share</h4>
+	<% @board.invited_users.each do |user| %>
+	<%= render :partial => "/board/user_list", :object => user, :locals => {:compact => (@board.shared_with(current_user).size+@board.invited_users.size > 5 ? true : false), :invite => user.board_invitation(@board) } %>
+	<% end %>
+	<% end %>
+</div>

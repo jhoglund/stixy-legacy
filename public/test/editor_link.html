@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html debug="true">
+<head>
+	<title>Welcome to Stixy</title>
+	<script language="javascript" type="text/javascript" src="/javascripts/firebug/firebug.js"></script>
+	<script type="text/javascript" src="../javascripts/all/default/001_prototype_extend.js"></script>
+	<script type="text/javascript" src="../javascripts/all/default/002_stixy_init.js"></script>
+	<script type="text/javascript" src="../javascripts/all/default/003_events.js"></script>
+	<script type="text/javascript" src="../javascripts/all/default/004_elements.js"></script>
+	<script>
+	function Editor(){
+	}
+	onload = function(){
+		var content = document.getElementById("content");
+		var menu = document.getElementById("widget_note_font");
+		var editor = new Editor;
+		editor.source = content;
+		editor.body = content;
+		Stixy.events.observe(editor.source,"click", function(e){
+			var link = Stixy.events.contained(e,"a");
+			if(link){
+				Stixy.events.stop(e);
+				alert(link.getAttribute("href"))
+				Stixy.openExternalWindow(link.getAttribute("href"));
+			}
+		}, false)
+	}
+	</script>
+	
+	<style>
+		body {
+		}
+		div[contenteditable=true] {
+			outline: none;
+			-webkit-user-modify: read-write;
+		}
+		[unselectable=on] {
+			-webkit-user-select: none;
+		}
+		.w-n-font {
+			-webkit-user-select: none;
+		}
+		a[href] {
+			cursor: pointer!important;
+		}
+	</style>
+</head>
+<body>
+<div style="background:gray;width:200px;height:100px;padding:10px;" contenteditable="true" id="content">dsd <a href="http://dn.se">dsadasd</a> dsd <a href="http://news.com">ds<b>ad</b>asd</a></div>
+</body>
+</html>

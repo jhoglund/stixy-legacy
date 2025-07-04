@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Welcome to Stixy</title>
+	<script language="javascript" type="text/javascript" src="/javascripts/firebug/firebug.js"></script>
+	<script>
+	function Editor(){
+		this.getSelection = function(){
+      var selection = window.getSelection();
+      var source = this.source
+      function getNodeIndex(node){
+        var index, indexlist = [];
+        while(node && (node != source)){
+          index = 0;
+          while(node.previousSibling){
+            index++;
+            node = node.previousSibling;
+          }
+          indexlist.push(index);
+          node = node.parentNode;
+        }
+        return indexlist
+      }
+			this.storedSelection = {};
+      this.storedSelection.startIndex  = (selection.anchorNode)   ? getNodeIndex(selection.anchorNode).reverse() : [this.source.childNodes.length-1];
+      this.storedSelection.startOffset = (selection.anchorOffset) ? selection.anchorOffset : 0;
+      this.storedSelection.lastIndex   = (selection.focusNode)    ? getNodeIndex(selection.focusNode).reverse() : [this.source.childNodes.length-1];
+      this.storedSelection.lastOffset  = (selection.focusOffset)  ? selection.focusOffset : 0;
+    }
+    this.setSelection = function(){
+			var textRange = document.createRange();
+      this.selection = window.getSelection();
+			if(this.storedSelection && this.body.hasChildNodes()){
+				function getNodeFromIndex(indexlist, node){
+					if(!node) return;
+					while(indexlist.length>0){
+						node = node.childNodes[indexlist.shift()];
+					}
+					return node;
+				}
+				console.log(this.storedSelection.startIndex)
+				var start = getNodeFromIndex(this.storedSelection.startIndex, this.body);
+				var last = getNodeFromIndex(this.storedSelection.lastIndex, this.body);
+				if(!start || !last) return;
+				textRange.setStart(start,this.storedSelection.startOffset);
+				this.selection.addRange(textRange);
+				if(start==last&&this.storedSelection.startOffset==this.storedSelection.lastOffset){
+					this.selection.collapseToEnd();
+				}else{
+					console.log(this.selection)
+					this.selection.extend(last,this.storedSelection.lastOffset)
+				}
+				this.storedSelection = null;
+      }else{
+        var breakTag = document.createElement("br");
+        var spacer = this.body.appendChild(document.createTextNode("."));
+        var breaker = this.body.appendChild(breakTag);
+        textRange.setStart(spacer,0);
+        textRange.setEnd(spacer,0);
+        this.selection.addRange(textRange);
+        this.selection.collapseToEnd();
+				spacer.deleteData(0,1);
+			}
+    }
+	}
+	onload = function(){
+		var content = document.getElementById("content");
+		var button = document.getElementById("button");
+		var menu = document.getElementById("widget_note_font");
+		var editor = new Editor;
+		editor.source = content;
+		editor.body = content;
+		if(document.all){
+			button.attachEvent("onclick", color)
+			menu.attachEvent("onchange", setFont)
+		}else{
+			button.addEventListener("mousedown", function(e){
+				//console.log(2);
+				//editor.getSelection();
+				//e.preventDefault()
+				makeBold()
+				makeItalic()
+				//var focus = document.createEvent("UIEvents");
+				//focus.initEvent("focus",true,true);
+				//menu.dispatchEvent(focus);
+				//menu.focus()
+			}, false)
+			button.addEventListener("mousedown", function(e){
+				//e.preventDefault()
+			}, true)
+			menu.addEventListener("mousedown", function(e){
+				//e.preventDefault()
+			}, false)
+			//menu.addEventListener("focus", function(e){
+			//	console.log(1212)
+			//}, false)
+			//menu.addEventListener("mousedown", function(e){
+			//	e.preventDefault();
+			//	//var mousedown = document.createEvent("MouseEvents");
+			//	//mousedown.initMouseEvent("click",true,true,true,true,1,1,1,1,1,false,false,false,false,null,null);
+			//	//menu.dispatchEvent(mousedown);
+			//}, false)
+			menu.addEventListener("change", setFont, false)
+		}
+		function color(){
+			document.execCommand("forecolor", false, "663399")
+			alert(document.queryCommandValue("forecolor"))
+			document.execCommand("bold", false, null)
+		}
+		function makeItalic(){
+			document.execCommand("italic", false, null)
+		}
+		function setFont(){
+			document.execCommand("fontname", false, "Verdana")
+		}
+	}
+	</script>
+	
+	<style>
+		/*body {
+		}
+		div[contenteditable=true] {
+			outline: none;
+			-webkit-user-modify: read-write;
+		}
+		[unselectable=on] {
+			-webkit-user-select: none;
+		}
+		.w-n-font {
+			-webkit-user-select: none;
+		}*/
+	</style>
+</head>
+<body style="background-color:transparent">
+<div style="position:absolute;z-index:-1;top:0px;left:0px;right:0px;bottom:0px;background:yellow;-webkit-user-select: ignore;"></div>
+<div style="background:gray;width:200px;height:100px;padding:10px;color:#ff2299" contenteditable="true" id="content">dsd dsadasd dsd</div>
+<div id="button" unselectable="on" style="width:80px;height:20px;background:red;">BOLD</div>
+<select style="margin:2px 0px 8px;" class="w-n-font" id="widget_note_font">
+  <optgroup style="border-bottom:1px solid gray;padding-bottom:5px;margin-bottom:5px;">
+		<option value="Georgia" style="font-family:Georgia;">Georgia</option>
+  	<option value="Times" style="font-family:Times;">Times</option>
+  	<option value="Verdana" style="font-family:Verdana;">Verdana</option>
+		<option value="Arial" style="font-family:Arial;">Arial</option>
+		<option value="Trebushe MS" style="font-family:Trebushe MS;">Trebushe MS</option>
+		<option value="Comic Sans" style="font-family:Comic Sans;">Comic Sans</option>
+	</optgroup>
+	<optgroup>
+		<option value="Monospace" style="font-family:Monospace;">Monospace</option>
+		<option value="Cursive" style="font-family:Cursive;">Cursive</option>
+		<option value="Fantasy" style="font-family:Fantasy;">Fantasy</option>
+		<option value="Sans-Serif" style="font-family:Sans-Serif;">Sans-Serif</option>
+		<option value="Serif" style="font-family:Serif;">Serif</option>
+	</optgroup>
+</select>
+</body>
+</html>

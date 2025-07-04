@@ -1,0 +1,57 @@
+<%= error_messages_for 'user' %>
+
+
+
+<table class="admin">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  <%= hidden_field ("user", "id") if controller.action_name == 'edit' %>
+  
+  <tr class="dark">
+  <td>Roles:</td>
+    <td>
+    <% @allroles.each do |role| 
+        if role.is_visible?
+    %>
+	       <%= check_box_tag("user[role_ids][]", role.id, @user.roles.include?(role))  %>
+	       <%= role.name %><br/>
+	<%  end
+	end %>
+    </td>
+  </tr>
+  <tr class="dark">
+    <td><label for="user_login">Login</label></td>
+    <td>
+    <%= text_field("user", "login", "id" => "login", "size" => 30, "maxsize" => 30, "autocomplete" => "off") if controller.action_name != 'edit' %>
+    <%= @user.login if controller.action_name == 'edit' %>
+    </td>
+  </tr>
+  <tr class="light">
+    <td><label for="user_email">E-mail</label></td>
+    <td><%= text_field('user', 'email', 'size' => 30, 'maxsize' => 200, "autocomplete" => "off")  %></td>
+  </tr>
+  <tr class="dark">
+    <td><label for="user_pwd">Password</label></td>
+    <td><input type="password" name="user[pwd]" size="30" maxlength="60" value=""/></td>
+  </tr>
+  <tr class="light">
+    <td><label for="user_pwd_confirmation">Password Confirmation</label></td>
+    <td><input type="password" name="user[pwd_confirmation]" size="30" maxlength="60" value=""/></td>
+  </tr>
+  <tr class="dark">
+    <td><label for="user_display_name">First Name</label></td>
+    <td><%= text_field('user', 'first_name', 'size' => 30, 'maxsize' => 200, "autocomplete" => "off")  %></td>
+  </tr>
+	<tr class="light">
+    <td><label for="user_display_name">Last Name</label></td>
+    <td><%= text_field('user', 'last_name', 'size' => 30, 'maxsize' => 200, "autocomplete" => "off")  %></td>
+  </tr>
+	<tr class="dark">
+    <td><label for="user_status">Is Active?</label></td>
+    <td><%= check_box('user', 'status', {'id' => 'status'}, Status::ACTIVE, Status::DISABLED) %></td>
+  </tr>
+  
+</table>
+

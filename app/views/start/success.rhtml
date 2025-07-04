@@ -1,0 +1,25 @@
+
+<div class="left-column">
+  <h1 style="margin-top:0px;">Welcome to Stixy</h1>
+  <p>You have now signed up to Stixy. Next time
+	you visit, use your e-mail address <span style="color:rgb(150,210,10)"><%= current_user.login %></span> and your password to sign in.</p>
+	<div style="margin-top: 10px; text-align: right;">
+		<a href="/board/create" class="button green-button" style="padding-left:25px;padding-right:10px">
+	    <div class="left">&nbsp;</div>
+	    <div class="right">&nbsp;</div>
+	    Start new Stixyboard
+			<div class="button-icon" style="background-image:url(/images/btn_button_new.png)">&nbsp;</div>
+	  </a>
+   </div>
+</div>
+<div class="right-column">
+	<div class="message" style="position:relative;width:260px;right:-70px;">
+		<p>You may want to take some time to update your personal profile under <%= link_to "Personal Settings", :controller => "setting" %>. 
+		Add your full name, a personal image, and more, to make your future invitations to your friends more personal.</p></p>
+		<div class="nw">&nbsp;</div><div class="ne">&nbsp;</div><div class="se">&nbsp;</div><div class="sw">&nbsp;</div><div class="callout">&nbsp;</div>
+	</div>
+</div>
+
+
+
+

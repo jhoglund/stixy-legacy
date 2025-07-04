@@ -1,0 +1,16 @@
+<%
+	@header_include = include_resource(:stylesheet, :calendar)
+  @header_include  << include_resource(:javascript, :calendar)
+%>
+
+<div class="canvas">
+	<div class="calendar-view-navigation">Calendar view: <%= link_to "Month", {:controller => "calendar" }, :class => "calendar-view-nav-item" %> <span class="pipe">&nbsp;</span> <span class="disabled-feature calendar-view-nav-item" onclick="alert('We\'re sorry, the week view is not yet implemented')" title="We're sorry, the week view is not yet implemented">Week</span> <span class="pipe">&nbsp;</span> <span class="disabled-feature calendar-view-nav-item" onclick="alert('We\'re sorry, the day view is not yet implemented')" title="Sorry, the day view is not yet implemented">Day</span></div>
+	<div class="stixy-calendar" id="calendar">
+		<%= render :partial => "calendar" %>
+	</div>
+	<div class="stixy-calendar-panel" id="calendar_panel">
+		<%= render :partial => "panel" %>
+	</div>
+</div>
+
+<% @buttons = "#{ link_to_function "Close", 'window.parent.Stixy.popup.close()', :button => {:type => false} }"%>

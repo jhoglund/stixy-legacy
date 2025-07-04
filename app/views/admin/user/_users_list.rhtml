@@ -1,0 +1,50 @@
+<div id="users_list">
+	<%= render :partial => "/admin/shared/page_size", :locals => { :title => "Users per page:", :action => "list_with_ajax", :update => "users_list" } %>
+  <table class="admin">
+	<tr>
+	  <%= sort_header_remote_tag('users.id', 'Id', { :url => {:action => 'list_with_ajax'}, :update => 'users_list' }, {:style => "color:black;"}) %>
+	  <%= sort_header_remote_tag('users.login', 'Login Name', { :url => {:action => 'list_with_ajax'}, :update => 'users_list' }, {:style => "color:black;"}) %>
+	  <%= sort_header_remote_tag('users.last_login_date', 'Last visited', { :url => {:action => 'list_with_ajax'}, :update => 'users_list' }, {:style => "color:black;"}) %>
+    <th>Display Name</th>
+    <th>Roles</th>
+    <th>Contacts</th>
+		<th>Invites</th>
+	  <%= sort_header_remote_tag('users.status', 'Status', { :url => {:action => 'list_with_ajax'}, :update => 'users_list' }, {:style => "color:black;"}) %>
+	  <%= sort_header_remote_tag('(select sum(size) from abstract_files where user_id=users.id)', 'Size', { :url => {:action => 'list_with_ajax'}, :update => 'users_list' }, {:style => "color:black;"}) %>
+    <!-- <th>Size</th> -->
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+		<th>&nbsp;</th>
+  </tr>
+<% @users.each_with_index  do |user, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+%>
+  <tr class="<%= color %>">
+    <td><%= user.id %></td>
+    <td><%= user.login %></td>
+		<td><%= user.last_login_date.strftime("%m/%d/%y %H:%M") if user.last_login_date %></td>
+		<td><%= user.display_name %></td>
+		<td>
+		<% user.roles.each do |role| %>
+	       <%= role.name %>,&nbsp;
+	    <% end %>
+		</td>
+		<td>
+			<%= formated_collection(user.contacts, 5, "(None)"){|c| link_to c.short_name, :action => 'show', :id => c } %>
+		</td>
+		<td>
+			<%= formated_collection(user.invited_by, 5, "(None)"){|c| link_to c.short_name, :action => 'show', :id => c } %>
+		</td>
+		<td><%= user.status_name %></td>
+		<td nowrap><%= user.assets_formated_size %></td>
+    <td><%= link_to 'Show', :action => 'show', :id => user %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => user %></td>
+    <td><%= link_to 'Contacts', :action => 'edit_contacts', :id => user %></td>
+    <td><%= link_to 'Destroy', {:action => 'destroy', :id => user}, :confirm => "Are you sure?" %></td>
+  </tr>
+<% end %>
+</table>
+<%= render :partial => "/admin/shared/page_nav", :locals => { :paginator => @paginator, :page => @page, :action => "list_with_ajax", :update => "users_list" } %>
+</div>

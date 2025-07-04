@@ -1,0 +1,12 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  user_id: 2
+  first_name: Jonas
+  last_name: Höglund
+  email: jonas@stixy.com
+  browser: Firefox 2.0.0.12
+  platform: Mac OS X
+  user_agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X; sv-SE; rv:1.8.1.12) Gecko/20080201 Firefox/2.0.0.12
+  description: This is a bug report description
+  created_at: 2006-08-27 10:00:00

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html debug="true">
+<head>
+	<title>Welcome to Stixy</title>
+	<script language="javascript" type="text/javascript" src="/javascripts/firebug/firebug.js"></script>
+	<script>
+		onload = function(){
+			button.onclick = makeBold;
+		}
+		function makeBold(){
+			parent.document.execCommand("bold", false, null)
+		}
+		function makeItalic(){
+			document.execCommand("italic", false, null)
+		}
+		function setFont(){
+			document.execCommand("fontname", false, "Verdana")
+		}
+	</script>
+	
+	<style>
+		body { }
+		div[contenteditable=true] {
+			outline: none;
+			-webkit-user-modify: read-write;
+		}
+		[unselectable=on] {
+			-webkit-user-select: none;
+		}
+		.w-n-font {
+			-webkit-user-select: none;
+		}
+	</style>
+</head>
+<body>
+<div style="background:lime;width:200px;height:100px;padding:10px;" contenteditable="true" id="content">dsd dsadasd dsd</div>
+<div id="button" unselectable="on" style="width:40px;height:20px;background:red;">BOLD</div>
+<input type="text">
+<form>
+<select style="margin:2px 0px 8px;" class="w-n-font" id="widget_note_font">
+  <optgroup style="border-bottom:1px solid gray;padding-bottom:5px;margin-bottom:5px;">
+		<option value="Georgia" style="font-family:Georgia;">Georgia</option>
+  	<option value="Times" style="font-family:Times;">Times</option>
+  	<option value="Verdana" style="font-family:Verdana;">Verdana</option>
+		<option value="Arial" style="font-family:Arial;">Arial</option>
+		<option value="Trebushe MS" style="font-family:Trebushe MS;">Trebushe MS</option>
+		<option value="Comic Sans" style="font-family:Comic Sans;">Comic Sans</option>
+	</optgroup>
+	<optgroup>
+		<option value="Monospace" style="font-family:Monospace;">Monospace</option>
+		<option value="Cursive" style="font-family:Cursive;">Cursive</option>
+		<option value="Fantasy" style="font-family:Fantasy;">Fantasy</option>
+		<option value="Sans-Serif" style="font-family:Sans-Serif;">Sans-Serif</option>
+		<option value="Serif" style="font-family:Serif;">Serif</option>
+	</optgroup>
+</select>
+</form>
+</body>
+</html>

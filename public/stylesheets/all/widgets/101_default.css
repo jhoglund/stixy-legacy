@@ -1,0 +1,105 @@
+/*---------------------*/
+/* 101 DEFAULT WIDGETS */
+/*---------------------*/
+
+.widget { position:absolute; width:150px; height:150px; z-index:0; }
+/* 
+  # TODO Change the selector below to:
+  .widget { behavior:url(/bindings/selectable.htc)!important; }
+  
+  Needs to be tested in IE 6, and IE 7 before deployment
+  
+*/
+.widget { behavior:url(/bindings/selectable.htc)!important; }
+.widget a[href]:link, .widget a[href]:active, .widget a[href]:visited { text-decoration:underline; }
+.widget .base { position:absolute; top:0px; left:0px; right:0px; bottom:0px; background-color:white; padding:10px 10px 15px; color:rgb(50,50,50); cursor:move; overflow:hidden; z-index:0; }
+.widget .shadow { position:absolute; top:2px; left:2px; right:-8px; bottom:-0px; }
+.widget .shadow b { position:absolute; display:block; bottom:0px; left:0px; right:0px; height:0px; }
+.widget .shadow s { position:absolute; display:block; bottom:0px; top:0px; right:0px; width:8px; background:url(/images/widgets/default/widget_shadow.png) no-repeat right top;}
+.widget .shadow u { display:block; float:right; font-size:1px; height:8px; width:50%; background:url(/images/widgets/default/widget_shadow.png) no-repeat bottom left;}
+.widget .shadow i { display:block; float:right; font-size:1px; height:8px; width:49%; background:url(/images/widgets/default/widget_shadow.png) no-repeat bottom right;}
+.widget.no-background-fill .shadow,
+.widget.no-drop-shadow .shadow { display:none!important; }
+.widget .focus { position:absolute; top:-2px; left:-2px; bottom:-2px; right:-2px; border:2px solid rgb(150,210,10); visibility:hidden; }
+.widget .resizer { position:absolute; right:0px; bottom:0px; width:16px; height:16px; overflow:hidden; cursor:se-resize; visibility:hidden; opacity:1; z-index:1000; }
+.widget-hover .resizer { visibility:visible; background:url(/images/widgets/default/edit_btn_resize_hover.png) no-repeat; }
+.widget-selected .resizer { visibility:visible; background:url(/images/widgets/default/edit_btn_resize_active.png) no-repeat; }
+.widget-hover { border:1px dotted rgb(180,180,180); }
+.widget-hover.widget-selected { border:none; }
+.widget .remove { position:absolute; right:0px; top:0px; width:16px; height:16px; overflow:hidden; cursor:default; visibility:hidden; opacity:1; z-index:1000; }
+.widget-hover .remove { visibility:visible; background:url(/images/widgets/default/edit_btn_close_hover.png) no-repeat; }
+.widget-selected .remove { visibility:visible; background:url(/images/widgets/default/edit_btn_close_active.png) no-repeat; }
+.widget-selected .focus { visibility:visible; border-color:rgb(90,145,25)!important; }
+.widget .editor-bg { position:absolute; display:none; left:8px; top:8px; right:10px; bottom:15px; z-index:-1; }
+.widget .editor-bg-border { position:absolute; top:0; bottom:0; width:100%; background:white; opacity:0.3; filter:alpha(opacity=30); border:1px dashed gray; }
+.widget-hover .editor-bg,
+.widget-move-hover .editor-bg { display:block; }
+.widget .editor-canvas { position:absolute; left:8px; top:8px; right:10px; bottom:15px; z-index:0; }
+.widget .editor { position:relative; top:0px; bottom:0px; width:100%; height:100%; overflow:hidden; cursor:text; word-wrap:break-word; font-size:13px;}
+.widget .editor:focus { outline:none; }
+.widget-selected .editor { overflow:auto; }
+.widget .editor a[href] { }
+.widget .editor a[href]:link,
+.widget .editor a[href]:visited,
+.widget .editor a[href]:active { position:relative; cursor:default!important; color:rgb(45,130,215)!important; }
+/*.edior-link-tooltip { position:absolute; color:white!important; background:rgb(45,130,215); -webkit-border-radius:3px; -moz-border-radius:3px; border:1px solid rgb(35,95,155); z-index:2147483647; }
+*/
+.edior-link-tooltip { position:absolute; display:none; padding:0px 0 0 0px; width:120px; z-index:2147483647; }
+.edior-link-tooltip  sx\:button.tooltip .button-label { padding-left:20px; padding-right:40px; color:rgb(45,130,215); text-decoration:underline!important; }
+.edior-link-tooltip  sx\:button sx\:i { top:7px; left:auto; right:18px; background-image:url(/images/buttons/btn_icon_link_gray.gif); }
+.edior-link-tooltip  sx\:button:hover sx\:i  { background-position:left top; }
+.edior-link-label { position:absolute; top:7px; left:5px; height:22px; width:100%; background:white; opacity:0; filter:progid:DXImageTransform.Microsoft.Alpha(opacity="0.0001"); cursor:pointer!important; }
+.insert-link  sx\:i { background-image:url(/images/buttons/btn_icon_link.gif); }
+
+/* http://fretlessjazz-ux.blogspot.com/2009/09/implementing-rich-text-editor-with.html */
+sx\:moz-editor-block-spacer,
+sx\:moz-editor-cursor-spacer { display:none; }
+
+/*.widget-hover .editor { overflow:auto; }*/
+.widget-activate .editor { overflow:auto; }
+.widget .handles { position:absolute; overflow:hidden; width:16px; height:100%; right:0px; top:0px; }
+.widget-hover .handles { opacity:0.2; filter:progid:DXImageTransform.Microsoft.Alpha(opacity="20"); }
+.widget-hover.widget-selected .handles { opacity:1; filter:progid:DXImageTransform.Microsoft.Alpha(opacity="100"); }
+.widget .base-bg { position:absolute; top:0px; left:0px; height:100%; width:100%; background:url(/images/main_template/white_gradient_transp_300.png) no-repeat 0px 0px; opacity:inherit; filter:alpha(opacity="100");  z-index:-1; }		
+.widget.no-background-fill .base-bg { background-image:none!important; background-color:transparent!important; }
+
+.widget-highlighted .focus { visibility:visible; border-color:rgb(255,150,20)!important; }
+.widget-highlighted { z-index:100000000!important; }
+.widget-highlighted .shadow { right:-12px; opacity:0.5;}
+.widget-highlighted .shadow s { width:12px; }
+.widget-highlighted .shadow u { height:12px; }
+.widget-highlighted .shadow i { height:12px; }
+
+.widget-locked, 
+.widget-locked .base,
+.widget-locked * { cursor:default!important; }
+
+
+/* Editor iframe */
+.editor-body { /*margin: 0px;*/ }
+.editor-window-init { position: absolute; top: 0px; left: 0px; visibility: hidden; z-index: -2; }
+.editor-window { border: none; width: 100%; height:  100%; }
+/*
+Change this rule to add window.scrollTo() functionality to the iframe
+.editor-document { position:relative; height:auto!important; }
+*/
+.editor-document { height:  100%; }
+.editor-document a:link,
+.editor-document a:visited,
+.editor-document a:active   { color: rgb(45,130,215)!important; }
+
+.editor-window body ul, 
+.editor-window body ol{ margin: 0px; }
+
+@media print {
+	.widget-hover { border:none; }
+	.widget .shadow { display:none!important; }
+	.widget .focus { border:none; }
+	.widget-hover .resizer { visibility:hidden; }
+	.widget-selected .resizer { visibility:hidden; }
+	.widget-hover .remove { visibility:hidden; }
+	.widget-selected .remove { visibility:hidden; }
+	.widget-hover .editor-bg { display:none; }
+}
+
+

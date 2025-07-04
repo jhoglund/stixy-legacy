@@ -1,0 +1,8 @@
+
+<h2>Newsletter list</h2>
+
+
+<span class="adminmenu"><%= link_to 'Create newsletter', :controller => 'admin/newsletter', :action => 'create' %></span>
+<span class="adminmenu"><%= link_to 'Back', :controller => 'admin/user', :action => 'list' %></span>
+
+<%= render :partial => 'newsletter_list' %>

@@ -1,0 +1,31 @@
+/*----------------*/
+/* 008 ORANGE BAR */
+/*----------------*/
+
+#pending .text-saving,
+#pending .text-save { color:rgb(165,95,0); }
+#pending .text-saving { background-image:url(/images/spinners/spinner_orange.gif); }
+#pending .text-save { cursor:pointer; }
+#pending .toolbar { border-top-color:rgb(255,209,54); border-bottom-color:rgb(214,122,0); }
+#pending .toolbar-background { background:rgb(245,160,0); }
+#pending .toolbar-background-gradient { background-image:url(/images/main_template/mt_gradient_radius_horizontal_orange.png); }
+#pending .toolbar .opt-switcher-bg { background-image:url(/images/switchers/switcher_bg_orange.png)}
+#pending .toolbar .opt-switch,
+#pending .toolbar .board-list-switch-shadow-line,
+#pending .toolbar .opt-switch-shadow-line { border-left:1px solid rgb(214,122,0); }
+#pending .toolbar .opt-switch,
+#pending .toolbar .board-list-switch-highlight-line,
+#pending .toolbar .opt-switch-highlight-line { border-right:1px solid rgb(255,209,54); }
+#pending .toolbar-button sx\:l sx\:p,
+#pending .toolbar-button sx\:r sx\:p { background-image:url(/images/buttons/btn_toolbar_bg_orange.png); }
+#pending .toolbar-button a:hover { color:rgb(255,235,90); }
+#pending .bopt-switcher-open { background-image:url(/images/switchers/switcher_down_orange.gif); }
+#pending .bopt-switcher-closed { background-image:url(/images/switchers/switcher_right_orange.gif); }
+#pending a.bopt-switcher-open:hover,
+#pending a.bopt-switcher-closed:hover { color:rgb(165,95,0)!important; }
+
+#pending .bopt-header .opt-switcher { background-image:url(/images/switchers/switcher_right_orange.gif); }
+#pending.bopt-open .bopt-header .opt-switcher { background-image:url(/images/switchers/switcher_down_orange.gif); }
+#pending .bopt-header .opt-switcher:hover { color:rgb(165,95,0); }
+#pending .bopt-header .opt-header-right,
+#pending .bopt-header .opt-header-right  { border-left-color: rgb(214,122,0); border-right-color: rgb(255,209,54); }

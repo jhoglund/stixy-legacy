@@ -1,0 +1,61 @@
+<div class="calendar-todo">
+	<div class="calendar-edit-progress">&nbsp;</div>
+	<div class="calendar-edit-pending-panel">&nbsp;</div>
+	<div class="todo widget<%= " todo-reminder" unless @entry.reminders.empty? %>" style="position:relative; <%= @entry.style_prop(:height) %>; width:100%;">
+	  <%= render :partial => "/widgets/default/shadow_focus" %>
+	  <div class="base">
+			<div class="base-bg todo-bg"><p></p></div>
+	    <div class="todo-header">
+				<div class="header-bg"><p>&nbsp;</p></div>
+	 			<div class="todo-content">
+	 			<% widget_time = current_user.adjusted_time(@entry.time) -%>
+	 				<div class="todo-reminder-icon">&nbsp;</div>
+	 				<div class="todo-indicator">TODO</div>
+	 				<div class="todo-day"><%= widget_time.day %></div>
+	 				<div class="todo-month-year"><span class="todo-month"><%= Date::MONTHNAMES[widget_time.month] %></span> <span class="todo-year"><%= widget_time.year %></span></div>
+	 				<div class="todo-dayname-time">
+	 					<span class="todo-dayname"><%= Date::DAYNAMES[widget_time.wday] %></span>
+	 					<span class="todo-time">
+	 						<span class="todo-hour"><%= widget_time.strftime("%I").to_i.to_s %></span>:<span class="todo-minute"><%= widget_time.strftime("%M") %></span>
+	 			 			<span class="todo-postfix"><%= widget_time.strftime("%p") %></span>
+	 					</span>
+	 				</div>
+	 			</div>
+	    	<div class="todo-comments">COMMENTS</div>
+				<div class="todo-event-catcher"></div>
+			</div>
+			<div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+			<div class="editor-canvas"><div class="editor"><%= @entry.comment 	%></div> </div>
+		  <%= render :partial => "/widgets/default/remove_resize" %>
+		</div>
+	</div>
+	<div class="todo-calendar-view-navigation">
+		<%= link_to_function "Edit widget...", "Stixy.calendar.openWidget.b(top.Stixy)(#{calendar_panel.board.id}, #{calendar_panel.id}, true);" %>
+		<h3 style="margin-top:20px;">Stixyboard info</h3>
+		<div class="todo-calendar-row"><span class="title">Title:</span> <%= calendar_panel.board.display_name %></div>
+		<div class="todo-calendar-row"><span class="title">Updated on:</span> <%= calendar_panel.updated_on.strftime(current_user.time_format.get_long_date[:value]) %></div>
+		<div class="todo-calendar-row">
+			<div class="title">Shared by:</div>
+			<ul>
+			<% calendar_panel.board.shared_with.each do |user| %>
+				<li><%= user.display_name %></li>
+			<% end %>
+			</ul>
+		</div>
+		<% unless calendar_panel.reminders.empty? %>
+		<% reminder_time = calendar_panel.reminders.first.time.dup %>
+		<% reminder_to_all = calendar_panel.reminders.delete_if{ |r| r.user_id == 0} %>
+		<div class="todo-calendar-row">
+			<div><span class="title">Send reminder to:</span><% if reminder_to_all.empty? %> All<% end %></div>
+			<% unless reminder_to_all.empty? %>
+			<ul>
+			<% calendar_panel.reminders.each do |reminder| %>
+				<li><%= reminder.user.display_name %></li>
+			<% end %>
+			</ul>
+			<% end %>
+		</div>
+		<div class="todo-calendar-row"><span class="title">Remind at:</span> <%= reminder_time.strftime(current_user.time_format.get_long_date[:value]) %></div>
+		<% end %>
+	</div>
+</div>

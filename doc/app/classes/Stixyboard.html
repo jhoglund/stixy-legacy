@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Stixyboard</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Stixyboard</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/controllers/stixyboard_rb.html">
+                app/controllers/stixyboard.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="BaseController.html">
+                BaseController
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000231">board_list_compact_ajax</a>&nbsp;&nbsp;
+      <a href="#M000232">board_list_compact_item_ajax</a>&nbsp;&nbsp;
+      <a href="#M000223">board_list_detailed</a>&nbsp;&nbsp;
+      <a href="#M000230">board_list_detailed_ajax</a>&nbsp;&nbsp;
+      <a href="#M000229">board_option_ajax</a>&nbsp;&nbsp;
+      <a href="#M000233">board_options</a>&nbsp;&nbsp;
+      <a href="#M000228">board_shared_and_invited_ajax</a>&nbsp;&nbsp;
+      <a href="#M000234">create_invite</a>&nbsp;&nbsp;
+      <a href="#M000219">editable_sample</a>&nbsp;&nbsp;
+      <a href="#M000225">flash_upload_player_ajax</a>&nbsp;&nbsp;
+      <a href="#M000215">index</a>&nbsp;&nbsp;
+      <a href="#M000221">invite</a>&nbsp;&nbsp;
+      <a href="#M000224">new_stixyboard</a>&nbsp;&nbsp;
+      <a href="#M000222">option</a>&nbsp;&nbsp;
+      <a href="#M000227">options_shared_and_invited_ajax</a>&nbsp;&nbsp;
+      <a href="#M000236">personal_thumb</a>&nbsp;&nbsp;
+      <a href="#M000218">render_cached</a>&nbsp;&nbsp;
+      <a href="#M000217">sample</a>&nbsp;&nbsp;
+      <a href="#M000235">send_reminder_ajax</a>&nbsp;&nbsp;
+      <a href="#M000226">utility_navigation_ajax</a>&nbsp;&nbsp;
+      <a href="#M000216">welcome</a>&nbsp;&nbsp;
+      <a href="#M000220">widget_options</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="SortHelper.html">SortHelper</a></span>
+        <span class="include-name"><a href="BoardHelper.html">BoardHelper</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">NON_EDITABLE_SAMPLES</td>
+          <td>=</td>
+          <td class="context-item-value">%w{photo_album}</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+STIXYBOARD CANVAS
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000231" class="method-detail">
+        <a name="M000231"></a>
+
+        <div class="method-heading">
+          <a href="#M000231" class="method-signature">
+          <span class="method-name">board_list_compact_ajax</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000231-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000231-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 127</span>
+127:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">board_list_compact_ajax</span>
+128:     <span class="ruby-identifier">list_of_boards_compact</span>
+129:     <span class="ruby-identifier">render</span> <span class="ruby-identifier">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'/board/board_list_bar'</span>
+130:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000232" class="method-detail">
+        <a name="M000232"></a>
+
+        <div class="method-heading">
+          <a href="#M000232" class="method-signature">
+          <span class="method-name">board_list_compact_item_ajax</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000232-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000232-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 132</span>
+132:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">board_list_compact_item_ajax</span>
+133:     <span class="ruby-ivar">@current</span> = <span class="ruby-identifier">get_board</span>
+134:     <span class="ruby-identifier">render</span> <span class="ruby-identifier">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;/board/board_list_compact_item&quot;</span>, <span class="ruby-identifier">:locals</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">:board</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@current</span> }
+135:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000223" class="method-detail">
+        <a name="M000223"></a>
+
+        <div class="method-heading">
+          <a href="#M000223" class="method-signature">
+          <span class="method-name">board_list_detailed</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000223-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000223-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 80</span>
+80:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">board_list_detailed</span>
+81:     <span class="ruby-identifier">render_as_popup</span> <span class="ruby-keyword kw">do</span>
+82:       <span class="ruby-identifier">list_of_boards_detailed</span>
+83:       <span class="ruby-identifier">render</span> <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;decorator-popup&quot;</span>, <span class="ruby-identifier">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;board/board_list_detailed&quot;</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">return</span>
+84:     <span class="ruby-keyword kw">end</span>
+85:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000230" class="method-detail">
+        <a name="M000230"></a>
+
+        <div class="method-heading">
+          <a href="#M000230" class="method-signature">
+          <span class="method-name">board_list_detailed_ajax</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000230-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000230-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 122</span>
+122:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">board_list_detailed_ajax</span>
+123:     <span class="ruby-identifier">list_of_boards_detailed</span>
+124:     <span class="ruby-identifier">render</span> <span class="ruby-identifier">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'/board/board_list_detailed'</span>
+125:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000229" class="method-detail">
+        <a name="M000229"></a>
+
+        <div class="method-heading">
+          <a href="#M000229" class="method-signature">
+          <span class="method-name">board_option_ajax</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000229-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000229-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 117</span>
+117:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">board_option_ajax</span>
+118:     <span class="ruby-ivar">@board</span> = <span class="ruby-identifier">get_board</span>
+119:     <span class="ruby-identifier">render</span> <span class="ruby-identifier">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'/board/board_options'</span>
+120:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000233" class="method-detail">
+        <a name="M000233"></a>
+
+        <div class="method-heading">
+          <a href="#M000233" class="method-signature">
+          <span class="method-name">board_options</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Do nothing for unauthorized user and returns to board
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000233-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000233-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 139</span>
+139:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">board_options</span>
+140:     <span class="ruby-ivar">@board</span> = <span class="ruby-identifier">get_board</span>
+141:     <span class="ruby-identifier">render_popup_and_update</span>
+142:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000228" class="method-detail">
+        <a name="M000228"></a>
+
+        <div class="method-heading">
+          <a href="#M000228" class="method-signature">
+          <span class="method-name">board_shared_and_invited_ajax</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000228-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000228-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 111</span>
+111:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">board_shared_and_invited_ajax</span>
+112:     <span class="ruby-ivar">@board</span> = <span class="ruby-identifier">get_board</span>
+113:     <span class="ruby-ivar">@board</span>.<span class="ruby-identifier">invites</span>.<span class="ruby-identifier">reload</span>
+114:     <span class="ruby-identifier">render</span> <span class="ruby-identifier">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'/board/board_shared_and_invited'</span>
+115:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000234" class="method-detail">
+        <a name="M000234"></a>
+
+        <div class="method-heading">
+          <a href="#M000234" class="method-signature">
+          <span class="method-name">create_invite</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Do nothing for unauthorized user and returns to board
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000234-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000234-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 145</span>
+145:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_invite</span>
+146:     <span class="ruby-ivar">@board</span> = <span class="ruby-identifier">get_board</span>
+147:     <span class="ruby-identifier">render_popup_result</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">result</span><span class="ruby-operator">|</span>
+148:       <span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;&lt;meta id='error' value='We were unable to sent the invitation.'/&gt;&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@status</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:error</span>
+149:     <span class="ruby-keyword kw">end</span>
+150:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000219" class="method-detail">
+        <a name="M000219"></a>
+
+        <div class="method-heading">
+          <a href="#M000219" class="method-signature">
+          <span class="method-name">editable_sample</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000219-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000219-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 52</span>
+52:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">editable_sample</span>
+53:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">NON_EDITABLE_SAMPLES</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>]
+54:     <span class="ruby-identifier">render</span> <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;cached/#{@cached_dir_path}/index&quot;</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+55:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000225" class="method-detail">
+        <a name="M000225"></a>
+
+        <div class="method-heading">
+          <a href="#M000225" class="method-signature">
+          <span class="method-name">flash_upload_player_ajax</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+AJAX PARTIALS
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000225-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000225-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 97</span>
+97:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">flash_upload_player_ajax</span>
+98:     <span class="ruby-identifier">render</span> <span class="ruby-identifier">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;/shared/flash_upload&quot;</span>
+99:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000215" class="method-detail">
+        <a name="M000215"></a>
+
+        <div class="method-heading">
+          <a href="#M000215" class="method-signature">
+          <span class="method-name">index</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000215-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000215-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 19</span>
+19:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+20:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">xhr?</span> 
+21:       <span class="ruby-identifier">show_board_partial</span>
+22:     <span class="ruby-keyword kw">else</span>
+23:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">authorized?</span>
+24:         <span class="ruby-identifier">show_board_complete</span>
+25:       <span class="ruby-keyword kw">else</span>
+26:         <span class="ruby-identifier">welcome</span>
+27:       <span class="ruby-keyword kw">end</span>
+28:     <span class="ruby-keyword kw">end</span>
+29:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000221" class="method-detail">
+        <a name="M000221"></a>
+
+        <div class="method-heading">
+          <a href="#M000221" class="method-signature">
+          <span class="method-name">invite</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+POPUPS
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000221-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000221-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 64</span>
+64:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">invite</span>
+65:     <span class="ruby-identifier">render_as_popup</span> <span class="ruby-keyword kw">do</span>
+66:       <span class="ruby-ivar">@board</span> = <span class="ruby-identifier">get_board</span>
+67:       <span class="ruby-ivar">@feature_partial</span> = <span class="ruby-value str">&quot;/board/invite&quot;</span>
+68:       <span class="ruby-identifier">render</span> <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;decorator-feature&quot;</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">return</span>
+69:     <span class="ruby-keyword kw">end</span>
+70:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000224" class="method-detail">
+        <a name="M000224"></a>
+
+        <div class="method-heading">
+          <a href="#M000224" class="method-signature">
+          <span class="method-name">new_stixyboard</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+POPUP FALLBACKS
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000224-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000224-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 89</span>
+89:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_stixyboard</span>
+90:     <span class="ruby-identifier">render_as_popup</span> <span class="ruby-keyword kw">do</span>
+91:       <span class="ruby-identifier">render</span> <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;decorator-public&quot;</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">return</span>
+92:     <span class="ruby-keyword kw">end</span>
+93:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000222" class="method-detail">
+        <a name="M000222"></a>
+
+        <div class="method-heading">
+          <a href="#M000222" class="method-signature">
+          <span class="method-name">option</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000222-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000222-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 72</span>
+72:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">option</span>
+73:     <span class="ruby-identifier">render_as_popup</span> <span class="ruby-keyword kw">do</span>
+74:       <span class="ruby-ivar">@board</span> = <span class="ruby-identifier">get_board</span>
+75:       <span class="ruby-ivar">@feature_partial</span> = <span class="ruby-value str">&quot;/board/option&quot;</span>
+76:       <span class="ruby-identifier">render</span> <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;decorator-feature&quot;</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">return</span>
+77:     <span class="ruby-keyword kw">end</span>
+78:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000227" class="method-detail">
+        <a name="M000227"></a>
+
+        <div class="method-heading">
+          <a href="#M000227" class="method-signature">
+          <span class="method-name">options_shared_and_invited_ajax</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000227-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000227-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 105</span>
+105:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">options_shared_and_invited_ajax</span>
+106:     <span class="ruby-ivar">@board</span> = <span class="ruby-identifier">get_board</span>
+107:     <span class="ruby-ivar">@board</span>.<span class="ruby-identifier">invites</span>.<span class="ruby-identifier">reload</span>
+108:     <span class="ruby-identifier">render</span> <span class="ruby-identifier">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'/board/options_shared_and_invited'</span>
+109:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000236" class="method-detail">
+        <a name="M000236"></a>
+
+        <div class="method-heading">
+          <a href="#M000236" class="method-signature">
+          <span class="method-name">personal_thumb</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+displays given users thumbnail or nothing TODO - kill me once we certain
+nothing uses it anymore
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000236-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000236-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 163</span>
+163:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">personal_thumb</span>
+164:     <span class="ruby-ivar">@thumb_user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>]) <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
+165:     <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@thumb_user</span>.<span class="ruby-identifier">avatar_url</span>
+166:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000218" class="method-detail">
+        <a name="M000218"></a>
+
+        <div class="method-heading">
+          <a href="#M000218" class="method-signature">
+          <span class="method-name">render_cached</span><span class="method-args">(path=&quot;&quot;)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000218-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000218-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 47</span>
+47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render_cached</span> <span class="ruby-identifier">path</span>=<span class="ruby-value str">&quot;&quot;</span>
+48:     <span class="ruby-ivar">@cached_dir_path</span> = <span class="ruby-identifier">path</span>
+49:     <span class="ruby-identifier">render</span> <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;cached/#{@cached_dir_path}/index&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">editable_sample</span>
+50:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000217" class="method-detail">
+        <a name="M000217"></a>
+
+        <div class="method-heading">
+          <a href="#M000217" class="method-signature">
+          <span class="method-name">sample</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000217-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000217-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 36</span>
+36:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sample</span>
+37:     <span class="ruby-identifier">list_of_boards</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">authorized?</span>
+38:     <span class="ruby-identifier">sample_board</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>]
+39:     <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;394&quot;</span><span class="ruby-operator">:</span> <span class="ruby-value str">&quot;photo_album&quot;</span>
+40:     <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;395&quot;</span><span class="ruby-operator">:</span> <span class="ruby-value str">&quot;shop&quot;</span>
+41:     <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;396&quot;</span><span class="ruby-operator">:</span> <span class="ruby-value str">&quot;work&quot;</span>
+42:     <span class="ruby-keyword kw">else</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>]
+43:     <span class="ruby-keyword kw">end</span>
+44:     <span class="ruby-identifier">render_cached</span> <span class="ruby-node">&quot;samples/#{sample_board}&quot;</span>
+45:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000235" class="method-detail">
+        <a name="M000235"></a>
+
+        <div class="method-heading">
+          <a href="#M000235" class="method-signature">
+          <span class="method-name">send_reminder_ajax</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+resends the invitation mail to the given invitee
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000235-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000235-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 153</span>
+153:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">send_reminder_ajax</span>
+154:     <span class="ruby-ivar">@board</span> = <span class="ruby-identifier">get_board</span>
+155:     <span class="ruby-identifier">render</span> <span class="ruby-identifier">:update</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">page</span><span class="ruby-operator">|</span>
+156:       <span class="ruby-identifier">page</span>.<span class="ruby-identifier">replace_html</span> <span class="ruby-value str">'options_shared_and_invited'</span>, <span class="ruby-identifier">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'options_shared_and_invited'</span>
+157:    <span class="ruby-keyword kw">end</span>
+158:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000226" class="method-detail">
+        <a name="M000226"></a>
+
+        <div class="method-heading">
+          <a href="#M000226" class="method-signature">
+          <span class="method-name">utility_navigation_ajax</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000226-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000226-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 101</span>
+101:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">utility_navigation_ajax</span>
+102:     <span class="ruby-identifier">render</span> <span class="ruby-identifier">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'/shared/utility'</span>
+103:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000216" class="method-detail">
+        <a name="M000216"></a>
+
+        <div class="method-heading">
+          <a href="#M000216" class="method-signature">
+          <span class="method-name">welcome</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000216-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000216-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 31</span>
+31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">welcome</span>
+32:     <span class="ruby-identifier">list_of_boards</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">authorized?</span>
+33:     <span class="ruby-identifier">render_cached</span> <span class="ruby-value str">&quot;home&quot;</span>
+34:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000220" class="method-detail">
+        <a name="M000220"></a>
+
+        <div class="method-heading">
+          <a href="#M000220" class="method-signature">
+          <span class="method-name">widget_options</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000220-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000220-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/stixyboard.rb, line 57</span>
+57:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">widget_options</span>
+58:     <span class="ruby-ivar">@board</span> = <span class="ruby-identifier">get_board</span>
+59:     <span class="ruby-identifier">render</span> <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;board/widget_options&quot;</span>
+60:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

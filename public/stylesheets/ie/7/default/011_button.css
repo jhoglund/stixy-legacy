@@ -1,0 +1,6 @@
+/*----------------*/
+/*   BUTTON IE 7  */
+/*----------------*/
+
+sx\:button .button-label { top:4px;  }
+sx\:button.large .button-label { top:8px; }

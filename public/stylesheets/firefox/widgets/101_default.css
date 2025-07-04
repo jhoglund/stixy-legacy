@@ -1,0 +1,14 @@
+/*------------------------------*/
+/* 101 DEFAULT WIDGETS, FIREFOX */
+/*------------------------------*/
+
+/* http://fretlessjazz-ux.blogspot.com/2009/09/implementing-rich-text-editor-with.html */
+sx\:moz-editor-block-spacer { display:inline; }
+  
+
+/**
+A spacer object and a character is always needed in an element with contenteditable="true". If not presented, on a second click
+inside the editable area will cause the caret to be as heigh as the editable area and it will not be able to type.
+*/
+sx\:moz-editor-cursor-spacer { position:relative; display:inline; }
+sx\:moz-editor-cursor-spacer:before { content: "|"; font-family:monospace; font-size:16px; letter-spacing:-10px; color:transparent; }

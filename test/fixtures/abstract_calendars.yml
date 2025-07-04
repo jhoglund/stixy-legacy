@@ -1,0 +1,24 @@
+
+calendar_with_notification_selected_user:
+  id: 1
+  subject: selected users
+  note: en liten note
+  location: karlshamn
+  status: 1
+  type: CalendarEntry
+  
+calendar_with_notification_all_users:
+  id: 2
+  subject: all users subject
+  note: en liten note
+  location: karlshamn
+  status: 1
+  type: CalendarEntry
+  
+calendar_with_notification_one_user:
+  id: 3
+  subject: one users
+  note: en liten note
+  location: karlshamn
+  status: 1
+  type: CalendarEntry

@@ -1,0 +1,12 @@
+/*---------------------*/
+/*  FEATURE PROMOTION  */
+/*---------------------*/
+
+a:link,
+a:visited { color:rgb(135,190,245);}
+a:hover,
+a:active { color:rgb(255,235,90);}
+.feature-promo-canvas { position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; background: white; opacity: 0.7; filter:alpha(opacity=70); z-index: 1000; }
+.feature-promo-bg { position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; background: rgb(50,50,50); opacity: 0.8; filter:alpha(opacity=80); z-index: -1; }
+.feature-promo-content { position:relative; border:1px solid rgb(235,235,235); color:rgb(245,245,245); left:-300px; width:600px; padding:20px; margin:80px 0 0 50%; z-index:1001; }
+.feature-promo-buttons {margin-top:20px; text-align:right; }

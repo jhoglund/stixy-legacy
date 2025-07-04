@@ -1,0 +1,8 @@
+/*--------------------*/
+/* 001 CALENDAR IE 8 */
+/*--------------------*/
+
+.stixy-calendar .calendar { width:auto; }
+.calendar-panel-todo { display:block; height:auto; width:200px; }
+.stixy-calendar-pending-background { -ms-filter:'progid:DXImageTransform.Microsoft.Alpha(Opacity=50)'; }
+.stixy-calendar-panel .calendar-edit-pending-panel { -ms-filter:'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)'; }

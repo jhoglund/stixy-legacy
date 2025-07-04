@@ -1,0 +1,44 @@
+<% form_tag(:action => 'signin') do -%>
+<div class="beta-message">	
+	<h1>New and Exciting Times at Stixy</h1>
+
+	<p>We created Stixy with a simple idea of making online collaboration useful and fun.</p> 
+	<p>Since we first launched last year, we kept meticulous notes on how we can improve the Stixy experience and we are now ready for a major site overhaul. During this period, we will close the site to new sign-ups so we can focus on re-launching the site in mid-November of this year (that is, 2008).    </p>
+	<p>If you are already a member, please don't fret. During the overhaul you will still be able to use Stixy as usual. If you are not a member, please drop us a note at <a href="mailto:SignMeUp@stixy.com">SignMeUp@stixy.com</a> and we'll keep you posted on our progress.   </p>
+	<p>Again, we want to thank you for all your support, encouraging words, and guidance.</p>
+	<p>Team Stixy</p>
+</div>
+
+<div id="signin_widget" style="top:120px; left:585px; width:220px; height:280px; z-index:100;" class="note widget">
+  <div class="shadow"><s></s><b><i></i><u></u></b></div>
+	<div class="focus">
+		<div class="focus-border-spacer"> </div>
+	</div>
+	<div class="base">
+    <div style="opacity:0.7" class="base-bg note-bg"><p/></div>
+		<div class="editor-canvas">
+			<div class="editor">
+				<h1 style="margin:5px 0">Member Sign In</h1>
+				<p style="margin-bottom:5px">If you already a member, please sign in to start using Stixy.</p>
+				<div class="field-title">E-mail address</div>
+				<input type="text" name="user[login]" size="30" autocomplete="on" value="" class="text-field" /><br />
+				<div class="field-title">Password</div>
+				<input type="password" name="user[pwd]" size="30" maxlength="60" value="" class="text-field" /><br />
+				<div class="field-title">
+					<label><input name="remember_me" value="1"<% if params[:remember_me]=="1" %> checked<% end %> type="checkbox" style="position:relative;top:2px;"> Keep me signed in</label>
+				</div>
+				<div class="field-title" style="margin-top:8px;">
+				  <%= link_to "Forgot your password?", :controller => "public", :action => "forgot_password" %>
+				</div>
+				<div style="margin-top: 10px; text-align: right;">
+					<div style="margin-top: 10px; text-align: right;">
+						<sx:button class="default"><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r><sx:t><a class="button-label" href="#" onclick="document.forms[0].submit(); return false;">Sign in</a></sx:t></sx:button>
+					  <input name="commit" style="display:none" type="submit" value="" />
+					</div>
+				  <%= submit_tag '', :style => "display:none" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>

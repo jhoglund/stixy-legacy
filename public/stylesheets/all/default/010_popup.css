@@ -1,0 +1,27 @@
+/*-----------*/
+/* 010 POPUP */
+/*-----------*/
+
+.popup-container { position: absolute; visibility:hidden; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 1000; }
+.popup-background { position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; background: black url(/images/spinners/spinner_inverted.gif) no-repeat center center; opacity: 0.3; filter:alpha(opacity=30); z-index: 0; }
+.popup { position: absolute; display:none; left: 50%; top: 50%; background-color: white; border: 1px solid rgb(150,150,150); z-index: 1; }
+.popup-canvas { position:absolute; overflow:hidden; top:0; right:0; bottom:0; left:0; height:100%; width:100%; background:white; z-index:0; }
+.popup-pending { display:none; position:absolute;left:0;top:0;right:0;bottom:0;z-index:1000000; }
+.show-pending .popup-pending { display:block; }
+.popup-pending-background { position:absolute; left:0; top:0; right:0; bottom:0; background:rgb(180,180,180); opacity:0.8; filter:alpha(opacity=80); cursor:wait; z-index:-1; }
+.popup-pending-content { position:relative; top:-10px; font-size:20px; padding-top:20%; color:black; text-align:center; cursor:wait; }
+.show-pending .button .left div,
+.show-pending .button .right div { background-image:url(/images/buttons/btn_background_ghosted.png)!important }
+.popup-grid { border-collapse:collapse; height:100%; width:100%; }
+.popup-top,
+.popup-bottom { padding:0; vertical-align:top; }
+.popup-top {  overflow:hidden; }
+.popup-bottom { height:50px; text-align:right; }
+.popup-top-line { position:absolute; overflow:hidden; top:24px; width:100%; height:1px; background:rgb(215,215,215); z-index:10; }
+.popup-top-close { position:absolute; right:4px; top:4px; width:16px; height:16px; background:url(/images/buttons/btn_bar_close.gif) no-repeat -6px -4px; z-index:10; }
+.popup-content { position:absolute; overflow:auto; top:25px; right:0; bottom:51px; left:0; padding:0 20px; }
+.popup-button-bar { position:absolute; right:0; bottom:0; left:0; height:35px; background:rgb(235,235,235); border-top:1px solid rgb(215,215,215); padding:15px 20px 0; }
+.popup-buttons sx\:button { margin-left:15px; }
+.popup-load-progress { position:absolute; display:none; top:25px; bottom:50px; width:100%; background:white url(/images/spinners/spinner.gif) no-repeat center center; opacity:0.8; filter:alpha(opacity=80); z-index:1000; }
+.popup-blog { position:absolute; width:100%; }
+.popup-external-frame { position:absolute; left:0; top:0; width:100%; height:100%; }

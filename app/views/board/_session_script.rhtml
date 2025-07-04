@@ -1,0 +1,4 @@
+<script type="text/javascript">
+	Stixy.session.id = "<%= session[:session_key] %>"
+	Stixy.board.authorized = <%= current_user.authorized? %>;
+</script>

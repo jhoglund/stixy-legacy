@@ -1,0 +1,193 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+guest:
+  id: 1
+  login: guest@stixy.com
+  time_offset: 0
+  #roles: anon
+
+jonas:
+  id: 2
+  login: jonas@stixy.com
+  email: jonas@stixy.com
+  crypted_password: "89a30687956406ce4dab55381ec47bf3458163da" #Unencrypted passord is: password
+  salt: yo-ma-salt
+  first_name: Jonas
+  last_name: Höglund
+  description: Proud father of Max and Meg
+  last_login_date: <%= -2.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  created_on: 2006-08-27 10:00:00
+  updated_on: 2006-09-13 21:12:47
+  created_by_id: 1
+  updated_by_id: 1
+  status: <%= Status::ACTIVE %>
+  address: Genvägen 9
+  city: Karlshamn
+  zip: 37437
+  country: Sweden
+  #contacts: adam, maria
+  pref_enable_grag_drop: 0
+  pref_send_email_and_mobile: 0
+  pref_photo_auto_upload: 1
+  time_offset: <%= 1*3600 %>
+  daylight_savings: 0
+  pref_disable_flash_upload: 0
+  display_ad: false
+  #roles: user, admin
+
+adam:
+  id: 3
+  login: adam@stixy.com
+  email: adam@stixy.com
+  crypted_password: "89a30687956406ce4dab55381ec47bf3458163da" #Unencrypted passord is: password>
+  salt: yo-ma-salt
+  description: adam
+  last_login_date: <%= -8.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  created_on: 2006-09-07 13:02:00
+  updated_on: 2006-09-13 11:12:47
+  created_by_id: 1
+  updated_by_id: 2
+  status: <%= Status::ACTIVE %>
+  pref_enable_grag_drop: 0
+  pref_send_email_and_mobile: 0
+  pref_photo_auto_upload: 1
+  time_offset: <%= -8*3600 %>
+  daylight_savings: 0
+  pref_disable_flash_upload: 1
+  #contacts: jonas, maria
+  #roles: user
+
+maria:
+  id: 4
+  login: maria@stixy.com
+  email: maria@stixy.com
+  crypted_password: "89a30687956406ce4dab55381ec47bf3458163da" #Unencrypted passord is: password
+  salt: yo-ma-salt
+  first_name: Maria
+  last_name: Distner
+  description: Proud mother of Max & Meg
+  last_login_date: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  created_on: 2006-08-27 10:00:00
+  updated_on: 2006-09-13 21:12:47
+  created_by_id: 1
+  updated_by_id: 1
+  status: <%= Status::ACTIVE %>
+  address: Genvägen 9
+  city: Karlshamn
+  state: N/A
+  zip: 37437
+  country: Sweden
+  phone: +46-454-10775
+  mobile_phone: +46-709-961400
+  pref_enable_grag_drop: 0
+  pref_send_email_and_mobile: 0
+  pref_photo_auto_upload: 1
+  time_offset: <%= 1*3600 %>
+  daylight_savings: 0
+  #roles: user
+
+camilla:
+  id: 5
+  login: camilla@stixy.com
+  email: camilla@stixy.com
+  crypted_password: "89a30687956406ce4dab55381ec47bf3458163da" #Unencrypted passord is: password
+  salt: yo-ma-salt
+  nick_name: milla
+  first_name: Camilla
+  last_name: Alteus
+  description: Proud mother of Gustav och Olle
+  last_login_date: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  created_on: 2006-08-27 10:00:00
+  updated_on: 2006-09-13 21:12:47
+  created_by_id: 3
+  updated_by_id: 4
+  status: <%= Status::ACTIVE %>
+  city: Bromma
+  country: Sweden
+  mobile_phone: +46-709-960000
+  pref_enable_grag_drop: 0
+  pref_send_email_and_mobile: 0
+  pref_photo_auto_upload: 0
+  time_offset: <%= 1*3600 %>
+  daylight_savings: 0
+  #roles: user
+
+staffan:
+  id: 6
+  login: staffan@stixy.com
+  email: staffan@stixy.com
+  crypted_password: "89a30687956406ce4dab55381ec47bf3458163da" #Unencrypted passord is: password
+  salt: yo-ma-salt
+  last_name: Alteus
+  description: Proud father of Gustav och Olle
+  last_login_date: 1970-01-01 00:00:00
+  created_on: 2006-08-27 10:00:00
+  updated_on: 2006-09-13 21:12:47
+  created_by_id: 1
+  updated_by_id: 1
+  status: <%= Status::PENDING %>
+  pref_enable_grag_drop: 0
+  pref_send_email_and_mobile: 0
+  pref_photo_auto_upload: 0
+  time_offset: 0
+  daylight_savings: 0
+  #roles: user
+  
+quentin:
+  id: 7
+  login: quentin@example.com
+  email: quentin@example.com
+  salt: yo-ma-salt
+  description: quentin
+  crypted_password: "89a30687956406ce4dab55381ec47bf3458163da" #Unencrypted passord is: password
+  #crypted_password: "ce2/iFrNtQ8=\n" # quentin, use only if you're using 2-way encryption
+  last_login_date: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  created_on: 2006-08-27 10:00:00
+  updated_on: 2006-09-13 21:12:47
+  created_by_id: 1
+  updated_by_id: 1
+  status: <%= Status::ACTIVE %>
+  #roles: user
+
+aaron:
+  id: 8
+  login: aaron@example.com
+  email: aaron@example.com
+  salt: yo-ma-salt
+  description: aaron
+  crypted_password: "89a30687956406ce4dab55381ec47bf3458163da" #Unencrypted passord is: password
+  # activation_code: aaronscode # only if you're activating new signups
+  created_on: 2006-08-27 10:00:00
+  updated_on: 2006-09-13 21:12:47
+  created_by_id: 1
+  updated_by_id: 1
+  status: <%= Status::ACTIVE %>
+  #roles: user
+  
+regina:
+  id: 9
+  login: regina@example.com
+  email: regina@example.com
+  salt: yo-ma-salt
+  description: regina
+  crypted_password: "89a30687956406ce4dab55381ec47bf3458163da" #Unencrypted passord is: password
+  created_on: 2006-08-27 10:00:00
+  updated_on: 2006-09-13 21:12:47
+  created_by_id: 1
+  updated_by_id: 1
+  status: <%= Status::PENDING %>
+  #roles: user
+  
+deactivated:
+  id: 10
+  login: deactivated@example.com
+  email: deactivated@example.com
+  salt: yo-ma-salt
+  description: deactivated
+  crypted_password: "89a30687956406ce4dab55381ec47bf3458163da" #Unencrypted passord is: password
+  created_on: 2006-08-27 10:00:00
+  updated_on: 2007-09-13 21:12:47
+  created_by_id: 1
+  updated_by_id: 1
+  status: <%= Status::CANCELED %>
+  #roles: user
+  

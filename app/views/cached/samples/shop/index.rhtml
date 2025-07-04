@@ -1,0 +1,1047 @@
+<%= @doc_type %>
+<html xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<title>Stixy: For Flexible Online Creation Collaboration and Sharing</title>
+	<%= render :partial => "/shared/meta" %>
+	<script type="text/javascript" >var STIXY_ENV = "<%= ENV["RAILS_ENV"] %>"</script>
+	<%= include_resource :javascript, :default %>
+	<%= include_resource :javascript, :stixyboard %>
+	<%= include_resource :stylesheet, :default %>
+	<%= include_resource :stylesheet, :sample %>
+	<%= include_resource :stylesheet, :static %>
+	<%= render :partial => "cached/#{@cached_dir_path}/script" %>
+</head>
+<body scroll="no"  class="<%= body_classes %>"> 
+	<iframe unselectable="on" height="100%" style="position:absolute;height:100%;width:100%;z-index:1000000;" frameborder="0" allowtransparency="true" id="load_error_frame" src="/load_wait.html"></iframe>
+	<%= render :partial => "shared/header" %>
+	<!-- BOARD LIST -->
+	<div class="board-list-bar" id="board_list_bar">
+		<% unless current_user.authorized? %>
+			<%= render :partial => "cached/board_list" %>
+		<% else %>
+		<%= render :partial => "board/board_list_bar" %>
+		<% end %>
+	</div>	
+	
+	
+	
+	<!-- CANVAS -->
+	<div  class="canvas" id="stixyboard">
+		<%= render :partial => "cached/sample_nav" %>
+		
+		<div class="min-space"></div>
+    <div class="canvas-content" id="canvas_content">
+
+ 
+    <div class="note widget" style="top:1270px;left:90px;width:710px;height:540px;; z-index:1000001" id="widget_4088">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+	<div class="base">
+    <div class="base-bg note-bg" style="background-color:rgb(245, 245, 245);"><p></p></div>
+
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor">
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">REAR DER SRAM <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp; </span>X9 long cage <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">FRONT DER <span style="">&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp; </span>Shimano
+M760A (XT) <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">SHIFTERS <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp; </span>SRAM X9 triggers <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">CRANKSET <span style="">&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><st1:street w:st="on"><st1:address w:st="on">Giga X Drive</st1:address></st1:street>
+22/32/44 <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">BOTTOM BRACKET <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Included
+w/ crankset <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">CASSETTE <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp; </span>SRAM PG 980, 11-34 <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">CHAIN <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>SRAM PC 971<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">BRAKES <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp; </span>Avid
+Juicy 7's  <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">BRAKE LEVERS <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Avid
+Juicy 7's <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">BARS <span style=""> </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp; </span>Race Face Dues XC  <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">STEM <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Race Face Dues XC <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">GRIPS <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Lizard Skin lock on <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">HEADSET<span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp; </span>CHRIS
+KING SEALED S3 SEAT POST Thompson <o:p></o:p></font> </p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">SADDLE <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp; </span>WTB Pure V Stealth <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">WHEELS <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp; </span>MAVIC
+321 Disc rims laced to DT 340 hubs w/DT 14/15 spokes<o:p></o:p></font></p>
+
+<p class="MsoPlainText"><font size="2"><span style="font-family: Verdana;">TIRES  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; WTB Mutano Raptor 2.24 TUBES Kenda
+Freeride</span></font><o:p></o:p></p>
+
+</div></div>
+		<div class="handles">
+
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+ 
+    <div class="note widget wopt-theme-3" style="top:678px;left:86px;width:710px;height:580px;; z-index:1000002" id="widget_4076">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+
+</div>
+	<div class="base">
+    <div class="base-bg note-bg" style="background-color:none;"><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor"><font size="4" style="FONT-FAMILY: Georgia"><font size="5">2006 Santa Cruz Nomad $2,400</font><br></font><span style="FONT-FAMILY: Verdana">Reply to:</span><br style="FONT-FAMILY: Verdana"><span style="FONT-FAMILY: Verdana">Date: 2007-06-06, 11:41AM PDT</span> <br><br><font size="3" style="FONT-FAMILY: Georgia">It's plain and simple folks. Here Santa Cruz has got two bikes for the price of one. On one hand, Santa Cruz has a peach of a trail bike that will allow full immersion in your masochistic love affair with the climb without any bothersome bobbing or mushy feeling. On the other hand, they've got a rip-roaring, died-in-the-wool freeride bike that will devour any rock garden or log-drop like hotdogs at a Coney Island eating competition. Proudly possessing a full 165mm of rear wheel travel, room for a front derailleur, and a QR-ready rear drop out, you won't know if you're Mark Weir climbing, or Mark Weir descending.<br><br>The bike is in excellent shape. It does not have more than 100 miles. I do not ride as much now and its too nice to keep it sitting in the garage. It gets plenty of compliments everywhere I go. It climbs like a goat and descends like a motorcross bike. There is one small dent on the downtube that barely showed up in the picture. It is purely cosmetic and does not affect the functionality of the bike.<br><br></font><font face="Times New Roman" size="3">
+<div style="TEXT-ALIGN: center">
+<div style="FONT-FAMILY: Verdana; TEXT-ALIGN: left"><font size="2"><font size="3"><font size="4"><span>Loaded with only the best components:<br></span></font><br></font></font></div></div>
+
+<ul style="FONT-FAMILY: Verdana">
+<li><font size="2">Fox 36 Talas RC2 150mm<br></font></li></ul>
+<ul style="FONT-FAMILY: Verdana">
+<li><font size="2">Fox DHX 5 Air</font></li></ul>
+<ul style="FONT-WEIGHT: normal; FONT-FAMILY: Verdana">
+<li><font size="2">165mm rear wheel travel </font></li>
+<li><font size="2">Custom butted 6069/6061 tubeset</font></li>
+<li><font size="2">Up to 180mm dual crown fork</font></li>
+<li><font size="2">Replaceable dropout</font></li>
+<li><font size="2">VPP Suspension</font></li>
+
+<li><font size="2">Disc only</font></li>
+<li><font size="2">Rear Shock: Fox DHX 5 Air</font></li>
+<li><font size="2">Front Shock: Fox 36 Talas RC2</font></li></ul></font><br></div></div>
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+ 
+    <div class="photo widget" style="top:90px;left:810px;width:751px;height:569px;; z-index:1000003" id="widget_4086">
+
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+  <div class="base">
+  		<div class="frame" style='margin:10px; top:-10px; bottom:10px; padding:10px 0;'>
+		  <div class="photo-load">loading...</div>
+							<!-- <div class="photo-canvas"><img galleryimg="false" src="http://s3.amazonaws.com/stixy/content/thumbs/21241/BH_III_Brown_t.jpg?AWSAccessKeyId=1BANHXME8F73Q29YWKG2&Expires=1188017499&Signature=ROHrIbFNXE8hOacylnz3Y%2B4SIgM%3D" alt="BH_III_Brown.jpg" width="100%" /></div> -->
+
+	      <div class="photo-canvas"><img galleryimg="false" src="http://s3.amazonaws.com:/stixy/content/public/shop/BH_III_Brown_t.jpg" alt="BH_III_Brown.jpg" width="100%" /></div>
+	    			
+		</div>
+
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+  </div>
+</div>
+ 
+    <div class="photo widget" style="top:100px;left:79px;width:715px;height:541px;; z-index:1000004" id="widget_4077">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+  <div class="base">
+  		<div class="frame" style='margin:10px; top:-10px; bottom:10px; padding:10px 0;'>
+		  <div class="photo-load">loading...</div>
+							<!-- <div class="photo-canvas"><img galleryimg="false" src="http://s3.amazonaws.com/stixy/content/thumbs/21238/IMG_4535_t.jpg?AWSAccessKeyId=1BANHXME8F73Q29YWKG2&Expires=1188017499&Signature=Q15bVLVzgE0RATlLJBoNa7Q%2F39s%3D" alt="IMG_4535.jpg" width="100%" /></div> -->
+	      <div class="photo-canvas"><img galleryimg="false" src="http://s3.amazonaws.com:/stixy/content/public/shop/IMG_4535_t.jpg" alt="IMG_4535.jpg" width="100%" /></div>
+	    			
+		</div>
+
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+  </div>
+</div>
+ 
+    <div class="photo widget" style="top:1050px;left:430px;width:340px;height:270px;; z-index:1000005" id="widget_4078">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+  <div class="base">
+  		<div class="frame" style='margin:10px; top:-10px; bottom:10px; padding:10px 0;'>
+		  <div class="photo-load">loading...</div>
+							<!-- <div class="photo-canvas"><img galleryimg="false" src="http://s3.amazonaws.com/stixy/content/thumbs/7634/IMG_4540_t.jpg?AWSAccessKeyId=1BANHXME8F73Q29YWKG2&Expires=1188017499&Signature=qctq3lmr3iyY%2BTzJpem3%2F28tiPc%3D" alt="IMG_4540.jpg" width="100%" /></div> -->
+	      <div class="photo-canvas"><img galleryimg="false" src="http://s3.amazonaws.com:/stixy/content/public/shop/IMG_4540_t.jpg" alt="IMG_4540.jpg" width="100%" /></div>
+		</div>
+
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+  </div>
+</div>
+ 
+    <div class="note widget wopt-theme-4" style="top:80px;left:740px;width:263px;height:225px;; z-index:1000006" id="widget_4087">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+	<div class="base">
+    <div class="base-bg note-bg" style="background-color:none;"><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor"><font size="3">Check out the specification below this is cut and paste directly from Specilized's site. <br><br>The <span style="font-weight: bold;">MSRP is $2,800 </span><br><br>The 08 bikes will soon be in the stores and I would think you can get <span style="font-weight: bold;">$200 - $300</span> off on the 07 models.<br></font></div></div>
+
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+ 
+    <div class="note widget" style="top:680px;left:820px;width:740px;height:370px;; z-index:1000007" id="widget_4085">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+	<div class="base">
+    <div class="base-bg note-bg" style=""><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor"><font size="3"><font size="5">2007 BigHit FSR III<br></font><a href="http://www.specialized.com/bc/SBCBkModel.jsp?spid=21983"><font size="2"><span style="font-family: Verdana;">www.specialized.com</span></font></a><br></font><font size="3"><br>BigHit models are purpose-built for breaking boundaries
+and, well, going a little too far. Occasionally, it occurs to you that
+perhaps this whole thing isn't such a good idea? The body armor, the
+full-face helmet, the family-size bottle of Advil. Yes, dropping off
+cliffs, rolling down lines that have never been rolled, recycling
+fallen timber into a launch pad-it can all take a toll. And when it
+does, you need something built for going too far. That's why we've
+designed every BigHit model to be solid and dependable,
+especially when you're entering new territory. Thanks to stable
+handling and the ultimate in suspension technology, BigHit
+models are purpose-built for bringing you back safe, even when you've
+gone a little too far.<br><br></font><ul style="font-family: Verdana;"><li><font size="2"><span class="table">BigHit FSR, A1 Premium Aluminum ORE TT/DT, full
+cartridge bearing pivots, symetrical rear triangle</span></font>
+                  
+                   </li><li><font size="2"><span class="table">Fox DHX 4.0 shock</span></font>
+
+                  
+                   </li><li><font size="2"><span class="table">Marzocchi 888 RV fork</span></font>
+                  
+                   </li><li><font size="2"><span class="table">Avid Juicy 5, hydraulic disc brakes</span></font>
+                  
+                   </li><li><font size="2"><span class="table">Truvativ Husseffelt crankset, 36t ring, 170mm, w/ BlackSpire DS-1 guide</span></font>
+                  
+                   </li><li><font size="2"><span class="table">Specialized Chunder 26x2.3" tires</span></font></li></ul><br></div></div>
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+
+</div>
+	</div>
+</div>
+ 
+    <div class="note widget" style="top:1070px;left:820px;width:740px;height:890px;; z-index:1000008" id="widget_4090">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+	<div class="base">
+
+    <div class="base-bg note-bg" style="background-color:rgb(245, 245, 245);"><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor">
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">FRAME<span style="">&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>BigHit
+FSR, A1 Premium Aluminum ORE TT/DT, full cartridge bearing
+pivots, ISCG &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; mount, asymetrical rear triangle, 26" F/R wheel,
+8.2" travel<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">REAR SHOCK <span style=""> </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Fox DHX 4.0, 8.75x2.75", pro
+pedal, S:400, M:450, L:500<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">FORK <span style=""> </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Marzocchi
+888 RV, 200mm travel, alloy steerer, external rebound adj, double clamp, &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 20mm thru axle<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">HEADSET <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>1 1/8" Threadless, 7050 alloy
+cups <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">STEM <span style=""> </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Truvativ
+Hussefelt forged/CNC stem, 5 degree x 40mm, 31.8 <o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">HANDLEBARS <span style=""> </span>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; Specialized
+BH rise bar, 6061 alloy, 31.8mm, 6 degree up, 9 degree
+backsweep, &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 680mm width<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">TAPE / GRIPS <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Specialized
+MTB, dual density<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">FRONT BRAKE <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Avid
+Juicy 5, hydraulic disc, G2 Clean Sweep 200mm rotor<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">REAR BRAKE <span style=""> </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Avid Juicy 5, hydraulic disc, G2 Clean
+Sweep 200mm rotor<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">BRAKE LEVERS <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Avid
+Juicy 5<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">FRONT DERAILLEUR <span style="">&nbsp; </span>N/A<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">REAR DERAILLEUR <span style="">&nbsp;&nbsp;&nbsp; </span>SRAM
+X-9, 9-speed, short cage<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">SHIFT LEVERS <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>SRAM
+X-7, aluminum trigger 9-speed<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">CASSETTE <span style="">&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Shimano HG50, 9-speed, 11/34t<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">CHAIN <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>SRAM PC-951 w /Power Link<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">CRANKSET <span style="">&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Truvativ Husseffelt, 36t ring, 170mm,
+w/ BlackSpire DS-1 guide<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">CHAINRINGS <span style=""> </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>36t, 4 bolt, compact 104mm pattern<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">BOTTOM BRACKET <span style="">&nbsp;&nbsp; </span>Truvativ
+Howitzer XR, oversize sealed outboard cartridge bearing, 73mm shell<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">PEDALS <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Alloy platform, 3mm pressed pins,
+9/16" Cr-Mo axle<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">RIMS <span style="">&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Mavic EX325 disc, 36h<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">FRONT HUB <span style="">&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Specialized disc, 20mm thru axle, 36h<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">REAR HUB <span style="">&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Specialized bolt-on 135mm, hollow
+Cro-Mo axle w/ RD guard<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">SPOKES <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>2.0mm stainless, black, brass nipples<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">FRONT TIRE <span style="">&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Specialized Chunder 26x2.3",
+60TPI, steel bead, 2 ply<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">REAR TIRE <span style="">&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Specialized Chunder 26x2.3,"
+60TPI, steel bead, 2 ply<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">TUBES <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Specialized 26x2.3", schraeder<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">SADDLE <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Specialized Enduro, 8mm hollow Cro-Mo
+rails, SL foam<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">SEAT POST <span style="">&nbsp;&nbsp; </span><span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Alloy microadjust, 30.9 x 300mm<o:p></o:p></font></p>
+
+<p class="MsoPlainText" style="font-family: Verdana;"><font size="2">SEAT BINDER <span style="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>7050
+hard annodized alloy collar w/ QR, 34.9mm clamp ID, black<o:p></o:p></font></p>
+
+</div></div>
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+
+ 
+    <div class="photo widget" style="top:1330px;left:430px;width:340px;height:260px;; z-index:1000009" id="widget_4079">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+  <div class="base">
+  		<div class="frame" style='margin:10px; top:-10px; bottom:10px; padding:10px 0;'>
+		  <div class="photo-load">loading...</div>
+
+							<!-- <div class="photo-canvas"><img galleryimg="false" src="http://s3.amazonaws.com/stixy/content/thumbs/21235/IMG_4536_t.jpg?AWSAccessKeyId=1BANHXME8F73Q29YWKG2&Expires=1188017499&Signature=NbiIKG5oQ1wyi9KNSj9lmY3XLd8%3D" alt="IMG_4536.jpg" width="100%" /></div> -->
+	      <div class="photo-canvas"><img galleryimg="false" src="http://s3.amazonaws.com:/stixy/content/public/shop/IMG_4536_t.jpg" alt="IMG_4536.jpg" width="100%" /></div>
+	    			
+		</div>
+
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+  </div>
+</div>
+ 
+    <div class="note widget" style="top:79px;left:20px;width:270px;height:150px;; z-index:1000010" id="widget_4065">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+	<div class="base">
+    <div class="base-bg note-bg" style=""><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor"><font size="3">Hi Rey,<br><br>This is the <span style="font-weight: bold;">Santa Cruz Nomad</span> I found on Craigslist. Compare components and price to the  new <span style="font-weight: bold;">BigHit FSR III</span> from Specialized.<br><br></font></div></div>
+
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+	</div>
+</div>
+
+<!-- <div class="loading-state"></div> -->
+
+	</div>
+	<div class="canvas-hand-scroll" id="stixyboard_hand_scroll" title="Hold down the mouse button to move the canvas">&nbsp;</div>
+	
+	<!-- OPTIONBAR -->
+
+	<div class="opt-bar bopt-panel-open wopt-panel-closed" id="opt_bar">
+		<table class="opt-bar-grid">
+			<tr><td class="opt-bar-top"></td></tr>
+			<tr>
+				<td class="opt-bar-middle">
+					<div class="bopt-bar" id="bopt">
+						
+<div class="opt-background">
+	<div class="opt-gradient"></div>
+</div>
+
+<div class="opt-panel">
+	<div class="bar-tools"><a class="bar-close" href="#" onclick="Stixy.ui.boptClose(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)"></a></div>
+	<div class="opt-scroll">
+		<div class="opt-content">
+			<h3 style="margin-bottom:4px;">Stixy: Sample: Shop Compare</h3>
+			<table class="option-list">
+				<tr><td>
+					<span class="option-list-title">Tags:</span> <span class="no-data">(None)</span>
+
+					<p/><span class="option-list-title">Description:</span> <span class="no-data">(None)</span>
+					<p/><span class="option-list-title">Public Web Access:</span> 
+					
+						No
+					
+				</td></tr>
+			</table>
+			<div style="text-align:right;margin-top:4px;">
+					<a href="/board/options/396" onclick="Stixy.board.openOption(); return false;" style="font-weight:bold;">Edit Stixyboard Options</a>
+
+			</div>
+			<div id="board_shared_and_invited" style="margin-top:20px;margin-bottom:10px">
+	<h4 class="subhead">This Stixyboard is shared by</h4>
+	<table class="option-list" id="invited_788">
+		<tr>
+			<td style="width:58px;">
+			 	<div style="background-image:url(http://s3.amazonaws.com:/stixy/content/avatars/22099/08_Reinerio_Dennett.png)" class="personal-thumb" id="personal_thumb">&nbsp;</div>
+	    </td>
+			<td>
+				<h4>Reinerio Dennett</h4>
+				<div class="mail-address"><a href="mailto:demo08@stixy.com" title="demo08@stixy.com">reinerio@dennett.com</a></div>
+				<span class="option-list-title">Last Signed In </span> <nobr>Aug 09, 2007</nobr>
+			</td>
+	  </tr>
+	</table>
+	<table class="option-list" id="invited_799">
+		<tr>
+			<td style="width:58px;">
+			 	<div style="background-image:url(http://s3.amazonaws.com:/stixy/content/avatars/22108/13_Rey_Hohwy.png)" class="personal-thumb" id="personal_thumb">&nbsp;</div>
+	    </td>
+			<td>
+				<h4>Rey Hohwy</h4>
+				<div class="mail-address"><a href="mailto:demo13@stixy.com" title="demo13@stixy.com">rey@hohwy.com</a></div>
+				<span class="option-list-title">Last Signed In </span> <nobr>Aug 09, 2007</nobr>
+			</td>
+	  </tr>
+	</table>
+
+	
+	<div style="text-align:right;margin-top:10px;">
+		<a href="#" onclick="Stixy.board.openInvite(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)" style="font-weight:bold;">Add more users</a>
+	</div>
+
+</div>
+		</div>
+	</div>
+</div>
+					</div>
+					<div class="wopt-bar">
+						<div class="bar-tools">
+							<span class="wopt-auto-open" id="wopt_auto_show"><input type="checkbox"<%= if current_user.pref_ui_auto_show_wopt.to_i==1; " checked" end %> class="opt-check" id="wopt_auto_show_checkbox"> <label for="wopt_auto_show_checkbox" id="wopt_auto_show_title">Auto open</label></span>
+				      <a class="bar-close" href="#" onclick="Stixy.ui.woptClose(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)"></a>
+						</div>
+						<div class="opt-background">
+							<div class="opt-gradient"></div>
+						</div>
+						<div class="opt-panel wopt wopt-deactivated" id="wopt-todo">
+							<span class="opt-tab">
+							  <div class="left"><div>&nbsp;</div></div>
+							  <div class="right"><div>&nbsp;</div></div>
+								<div class="label">Todo options<a class="wopt-close" href="#" onclick="Stixy.ui.woptClose(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a></div>
+							</span>
+							<div class="wopt-locked-panel">&nbsp;</div>
+							<div class="opt-scroll wopt-locked-ghosted">
+								<div class="opt-content">
+						      <div style="margin-top:10px">
+										<h4 style="display:inline;">View: </h4>
+									  <input type="radio" id="todo_full_view" value="full" name="todo_view"><label for="todo_full_view">Full</label>
+									  <input type="radio" id="todo_compact_view" value="compact" name="todo_view"><label for="todo_compact_view">Compact</label>
+									</div>
+						      <div style="margin-top:10px">
+										<h4>Date</h4>
+									  <div id="todo_calendar" class="todo-calendar">
+											<table class="calendar" id="todo_calendar" border="0" cellspacing="0" cellpadding="0">
+												<thead>
+													<tr class="monthName">
+						        				<th colspan="7" class="calendar-nav">
+															<div>
+						          					<span class="prev-month" id="todo_calendar_nav_previuos"><a href="#" onclick="Stixy.nothing(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a></span>
+						          					<span class="todo-calendar-month-title"><span id="todo_progress_indicator" style="display:none"></span>October 2007</span>
+						          					<span class="next-month" id="todo_calendar_nav_next"><a href="#" onclick="Stixy.nothing(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a></span>
+						        					</div>
+														</th>
+													</tr>
+													<tr class="dayName">
+														<th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="otherMonth weekendDay" id="2007-September-Sunday-30">30</td><td class="day" id="2007-October-Monday-1">1</td><td class="day" id="2007-October-Tuesday-2">2</td><td class="day" id="2007-October-Wednesday-3">3</td><td class="day" id="2007-October-Thursday-4">4</td><td class="day" id="2007-October-Friday-5">5</td><td class="day weekendDay" id="2007-October-Saturday-6">6</td></tr><tr><td class="day weekendDay firstDayOfWeek" id="2007-October-Sunday-7">7</td><td class="day" id="2007-October-Monday-8">8</td><td class="day" id="2007-October-Tuesday-9">9</td><td class="day todayDay" id="2007-October-Wednesday-10">10</td><td class="day" id="2007-October-Thursday-11">11</td><td class="day" id="2007-October-Friday-12">12</td><td class="day weekendDay" id="2007-October-Saturday-13">13</td></tr><tr><td class="day weekendDay firstDayOfWeek" id="2007-October-Sunday-14">14</td><td class="day" id="2007-October-Monday-15">15</td><td class="day" id="2007-October-Tuesday-16">16</td><td class="day" id="2007-October-Wednesday-17">17</td><td class="day" id="2007-October-Thursday-18">18</td><td class="day" id="2007-October-Friday-19">19</td><td class="day weekendDay" id="2007-October-Saturday-20">20</td></tr><tr><td class="day weekendDay firstDayOfWeek" id="2007-October-Sunday-21">21</td><td class="day" id="2007-October-Monday-22">22</td><td class="day" id="2007-October-Tuesday-23">23</td><td class="day" id="2007-October-Wednesday-24">24</td><td class="day" id="2007-October-Thursday-25">25</td><td class="day" id="2007-October-Friday-26">26</td><td class="day weekendDay" id="2007-October-Saturday-27">27</td></tr><tr><td class="day weekendDay firstDayOfWeek" id="2007-October-Sunday-28">28</td><td class="day" id="2007-October-Monday-29">29</td><td class="day" id="2007-October-Tuesday-30">30</td><td class="day" id="2007-October-Wednesday-31">31</td><td class="otherMonth" id="2007-November-Thursday-1">1</td><td class="otherMonth" id="2007-November-Friday-2">2</td><td class="otherMonth weekendDay" id="2007-November-Saturday-3">3</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div style="margin-top:10px">
+										<h4>Time</h4>
+										<select id="todo_hour">
+											<option value="1" >1</option>
+											<option value="2" >2</option>
+											<option value="3" >3</option>
+											<option value="4" >4</option>
+											<option value="5" >5</option>
+											<option value="6" >6</option>
+											<option value="7" >7</option>
+											<option value="8" >8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+										</select>
+										<select id="todo_minute">
+											<option value="00" selected>00</option>
+											<option value="15">15</option>
+											<option value="30">30</option>
+											<option value="45">45</option>
+										</select>
+										<select id="todo_postfix">
+											<option value="AM" selected>AM</option>
+											<option value="PM">PM</option>
+										</select>
+									</div>
+									<h4 style="margin-top:10px"><input type="checkbox" id="todo_reminder_switcher"> <label for="todo_reminder_switcher">Send reminder</label></h4>
+									<div class="ghosted" id="todo_reminder_panel" style="margin-top:5px;">
+										<div>
+											<select disabled id="todo_remind_at">
+												<option value="0.25">15 minutes</option>
+												<option value="1.00" selected>1 hour</option>
+												<option value="2.00">2 hours</option>
+												<option value="3.00">3 hours</option>
+												<option value="5.00">5 hours</option>
+												<option value="12.00">12 hours</option>
+
+												<option value="48.00">2 days</option>
+												<option value="72.00">3 days</option>
+												<option value="168.00">1 week</option>
+											</select> before activity
+										</div>
+										<div style="margin-top:10px">
+											Send reminder to<br />
+											<input type="radio" name="reminder_to" checked disabled id="todo_remind_all"> All
+											<input type="radio" name="reminder_to" disabled id="todo_remind_from_list"> Selected users<br />
+											<div id="todo_remind_only" class="ghosted" style="height:100px;overflow:auto;border:1px solid rgb(204,204,204);background:white;padding:4px;">
+										    <table>
+													<tr style="cursor:default">
+							  						<td valign="top" nowrap>
+															<input type="checkbox" value="3" id="todo_user_3" class="todo-remind-only">
+															<label for="todo_user_3" title="Jonas Höglund">Jonas Höglund</label>
+														</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+						    </div>
+						  </div>
+						</div>
+						<div class="opt-panel wopt wopt-deactivated" id="wopt-note">
+							<span class="opt-tab">
+							  <div class="left"><div>&nbsp;</div></div>
+							  <div class="right"><div>&nbsp;</div></div>
+								<div class="label">Note options<a class="wopt-close" href="#" onclick="Stixy.ui.woptClose(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a></div>
+							</span>
+							<div class="wopt-locked-panel">&nbsp;</div>
+							<div class="opt-scroll wopt-locked-ghosted">
+								<div class="opt-content">
+						      <h4>Note Style</h4>
+									<div class="opt-themes" id="widget_note_opt_themes">
+										<div class="opt-theme-spacer">&nbsp;</div>
+										<div class="wopt-theme opt-theme wopt-theme-1" id="wopt-theme-1"><span class="label">Indian</span></div>
+						        <div class="wopt-theme opt-theme wopt-theme-2" id="wopt-theme-2"><span class="label">Spring</span></div>
+						        <div class="wopt-theme opt-theme wopt-theme-3" id="wopt-theme-3"><span class="label">Caribbean</span></div>
+						        <div class="wopt-theme opt-theme wopt-theme-4" id="wopt-theme-4"><span class="label">New Haven</span></div>
+									</div>
+						      <div class="deactivated opt-row" style="padding-top:6px;">
+                    <div class="opt-devider"></div>
+                    <h4>Link to web page</h4>
+                    <div class="opt-row" style="padding-top: 6px;">
+                      <sx:button class="button-label insert-link button-icon   ghosted" id="link_text" onmouseover="Stixy.events.stop(event)" onmousedown="Stixy.events.stop(event)"><sx:i>&nbsp;</sx:i><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r><sx:t><a class="button-label" href="#" onclick="; return false;">Insert link</a></sx:t></sx:button>
+                    </div>
+						      </div>
+						      <span class="wopt-style-more">
+						        <div class="deactivated opt-row w-n-font">
+											<div class="opt-devider"></div>
+						          <h4>Font</h4>
+						          <span>
+						            <select style="width:100%; margin:2px 0px 8px;" id="widget_note_font" disabled="true">
+						              <optgroup style="border-bottom:1px solid gray;padding-bottom:5px;margin-bottom:5px;">
+														<option value="Georgia" style="font-family:Georgia;">Georgia</option>
+						              	<option value="Times" style="font-family:Times;">Times</option>
+						              	<option value="Verdana" style="font-family:Verdana;">Verdana</option>
+
+														<option value="Arial" style="font-family:Arial;">Arial</option>
+														<option value="Trebushe MS" style="font-family:Trebushe MS;">Trebushe MS</option>
+														<option value="Comic Sans MS" style="font-family:Comic Sans;">Comic Sans</option>
+													</optgroup>
+													<optgroup>
+														<option value="Monospace" style="font-family:Monospace;">Monospace</option>
+														<option value="Cursive" style="font-family:Cursive;">Cursive</option>
+
+														<option value="Fantasy" style="font-family:Fantasy;">Fantasy</option>
+														<option value="Sans-Serif" style="font-family:Sans-Serif;">Sans-Serif</option>
+														<option value="Serif" style="font-family:Serif;">Serif</option>
+													</optgroup>
+						            </select>
+						          </span>
+						          <div class="deactivated opt-font-style">
+						            <span style="float:left">
+						              <div style="font-style:italic" class="w-n-text-italic" id="widget_note_italic">Italic</div>
+						              <div style="font-weight:bold" class="w-n-text-bold" id="widget_note_bold">Bold</div>
+						            </span>
+						            <span style="float:right">
+						              <div style="text-decoration:underline; font-weight:bold" class="w-n-text-underline" id="widget_note_underline">U</div>
+						              <div style="text-decoration:line-through; font-weight:bold" class="w-n-text-strikethrough" id="widget_note_strikethrough">S</div>
+						            </span>
+						          </div>
+						        </div>
+						        <div class="opt-row" style="padding-bottom:30px;">
+						          <div class="deactivated opt-font-size-palett" id="widget_note_size">
+						            <div size="1" style="font-size:13px;" class="w-n-size"><span  style="margin-top:-30px;">&nbsp;</span>a</div>
+									      <div size="2" style="font-size:16px;" class="w-n-size"><span style="margin-top:-31px;">&nbsp;</span>a</div>
+									      <div size="3" style="font-size:19px;" class="w-n-size"><span style="margin-top:-33px;">&nbsp;</span>a</div>
+									      <div size="4" style="font-size:22px;" class="w-n-size"><span style="margin-top:-34px;">&nbsp;</span>a</div>
+									      <div size="5" style="font-size:24px;" class="w-n-size"><span style="margin-top:-35px;">&nbsp;</span>a</div>
+									      <div size="6" style="font-size:28px;" class="w-n-size"><span style="margin-top:-36px;">&nbsp;</span>a</div>
+												<div size="7" style="font-size:32px;" class="w-n-size"><span style="margin-top:-38px;">&nbsp;</span>a</div>
+						          </div>
+						        </div>
+						        <div class="deactivated opt-color-palett opt-row" id="widget_note_fgcolor">
+											<span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(255,255,255)">&nbsp;</div></span>
+										  <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(240,0,25)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(255,150,20)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(245,204,0)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(150,210,10)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(85,165,240)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(180,60,150)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(255,25,115)">&nbsp;</div></span><br class="activated-color-palett" clear="both" />
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(50,50,50)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(165,0,15)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(165,95,0)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(170,140,0)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(90,145,25)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(35,95,155)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(105,35,85)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(185,5,70)">&nbsp;</div></span>
+											<span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(239,239,239)">&nbsp;</div></span>
+										  <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(236,188,193)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(239,218,192)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(237,229,188)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(218,230,190)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(197,214,231)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(224,200,218)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(239,193,211)">&nbsp;</div></span><br class="deactivated-color-palett" clear="both" />
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(198,198,198)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(221,188,191)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(221,207,188)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(222,216,188)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(206,217,193)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(195,207,219)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(209,195,205)">&nbsp;</div></span>
+						          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(225,189,202)">&nbsp;</div></span>
+						        </div>
+
+						        <div class="opt-row" style="padding-top:0;">
+						          <span class="deactivated" style="width:108px;float:left;">
+						            <h4>Text Align</h4>
+						            <select style="width:100px" id="widget_note_align" disabled="true">
+						              <option value="justifyleft">Left</option>
+						              <option value="justifyright">Right</option>
+						              <option value="justifycenter">Center</option>
+						            </select>
+						          </span>
+						          <span class="deactivated" style="width:108px;float:right;">
+						            <h4>List</h4>
+						            <select style="width:100px" id="widget_note_list" disabled="true">
+						              <option value="">None</option>
+						              <option value="insertunorderedlist">Bullet</option>
+						              <option value="insertorderedlist">Numbered</option>
+						            </select>
+						          </span>
+						        </div>
+						        <div class="opt-row">
+						          <div class="opt-devider"></div>
+						          <h4><input type="checkbox" class="opt-check w-n-bg-switch" id="note_bg_switch"/> <label for="note_bg_switch">Background color</label></h4>
+						          <div class="deactivated opt-color-palett" id="widget_note_bgcolor">
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(245,245,245)">&nbsp;</div></span>
+											  <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(250,155,165)">&nbsp;</div></span>
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(255,215,160)">&nbsp;</div></span>
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(250,250,170)">&nbsp;</div></span>
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(225,250,160)">&nbsp;</div></span>
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(190,220,250)">&nbsp;</div></span>
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(225,180,215)">&nbsp;</div></span>
+						            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(255,165,200)">&nbsp;</div></span><br class="activated-color-palett" clear="both" />
+												<span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(125,125,125)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(240,0,25)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(255,150,20)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(255,220,30)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(175,225,45)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(85,165,240)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(180,60,150)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(225,25,115)">&nbsp;</div></span>
+												<span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(237,237,237)">&nbsp;</div></span>
+											  <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(238,219,221)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,231,220)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(238,238,222)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(236,239,230)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(226,232,238)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(233,224,231)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,221,228)">&nbsp;</div></span><br class="deactivated-color-palett" clear="both" />
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(213,213,213)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(236,188,193)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,218,192)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,232,194)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(223,233,197)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(205,221,236)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(224,200,218)">&nbsp;</div></span>
+							          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,207,220)">&nbsp;</div></span>
+											</div>
+										</div>
+
+										<div class="opt-row">
+											<h4>Background opacity</h4>
+						          <span>
+						            <select id="widget_note_bg_opacity" style="margin:2px 0px 8px;">
+						              <option value="1">100%</option>
+													<option value="0.9">90%</option>
+													<option value="0.8">80%</option>
+													<option value="0.7">70%</option>
+													<option value="0.6">60%</option>
+													<option value="0.5">50%</option>
+													<option value="0.4">40%</option>
+													<option value="0.3">30%</option>
+													<option value="0.2">20%</option>
+													<option value="0.1">10%</option>
+						            </select>
+						          </span>
+						        </div>
+						      </span>
+						    </div>
+						  </div>
+						</div>
+						<div class="opt-panel wopt wopt-deactivated" id="wopt-photo">
+							<span class="opt-tab">
+							  <div class="left"><div>&nbsp;</div></div>
+							  <div class="right"><div>&nbsp;</div></div>
+								<div class="label">Photo options<a class="wopt-close" href="#" onclick="Stixy.ui.woptClose(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a></div>
+							</span>
+							<div class="wopt-locked-panel">&nbsp;</div>
+							<div class="opt-scroll wopt-locked-ghosted">
+								<div class="opt-content">
+						      <div class="opt-row">
+						        <h4>Image name</h4>
+						        <div class="w-p-image-name ghosted" style="margin:4px 0"></div>
+										<div style="margin:8px 0">
+											<%= link_to_function("Add photo(s)", nil, :button => {:type => "default"}, :class => "w-p-upload") %>
+											<%= link_to_function("Replace photo", nil, :button => {:type => false}, :class => "w-p-upload w-p-replace") %>
+											<%= link_to_function("Get", nil, :button => {:type => false}, :class => "w-p-get-original", :style => "margin-left:10px") %>
+										</div>
+						      </div>
+						      <div class="opt-row">
+						        <div class="opt-devider"></div>
+										<h4>Effect</h4>
+										<div class="opt-themes" style="">
+						        	<div class="opt-theme-spacer">&nbsp;</div>
+											<div class="opt-theme w-p-theme-effects" id="w-p-theme-noeffect"></div>
+							        <div class="opt-theme w-p-theme-effects" id="w-p-theme-sepia"></div>
+							        <div class="opt-theme w-p-theme-effects" id="w-p-theme-gray"></div>
+										</div>
+						      </div>
+						      <div class="opt-row">
+						        <div class="opt-devider" style="margin-bottom:10px"></div>
+						        <h4>Frame</h4>
+										<div class="opt-themes">
+						         	<div class="opt-theme-spacer">&nbsp;</div>
+											<div class="opt-theme w-p-theme-border" id="w-p-theme-noframe"></div>
+						          <div class="opt-theme w-p-theme-border" id="w-p-theme-frame"></div>
+										</div>
+									</div>
+									<div class="opt-row">
+							      <div class="opt-devider" style="margin-bottom:10px"></div>
+						        <h4>Rotate</h4>
+										<div class="opt-themes">
+						          <div class="opt-theme-spacer">&nbsp;</div>
+											<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-0"></div>
+											<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-90"></div>
+											<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-180"></div>
+											<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-270"></div>
+										</div>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						<div class="opt-panel wopt wopt-deactivated" id="wopt-document">
+							<span class="opt-tab">
+							  <div class="left"><div>&nbsp;</div></div>
+							  <div class="right"><div>&nbsp;</div></div>
+								<div class="label">Documents options<a class="wopt-close" href="#" onclick="Stixy.ui.woptClose(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a></div>
+							</span>
+							<div class="wopt-locked-panel">&nbsp;</div>
+							<div class="opt-scroll wopt-locked-ghosted">
+								<div class="opt-content">
+						      <div class="opt-row">
+						        <h4>Document name</h4>
+						        <div class="w-d-document-name ghosted" style="margin:4px 0"></div>
+										<div style="margin:8px 0">
+											<%= link_to_function("Add document(s)", nil, :button => {:type => "default"}, :class => "w-d-upload") %>
+											<%= link_to_function("Replace document", nil, :button => {:type => false}, :class => "w-d-upload w-d-replace") %>
+										</div>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</div>
+				</td>
+
+			</tr>
+			<tr>
+				<td class="opt-bar-bottom">
+					<div class="wopt-common-tools" id="wopt_common_tools">
+						<div class="wopt-defaults" id="wopt-default">
+						  <div class="wopt-locked-panel">&nbsp;</div>
+							<div class="opt-cont wopt-locked-ghosted">
+						    <div class="opt-row">
+								  <input type="checkbox" class="opt-check w-drop-shadow" id="widget_drop_shadow"> <label for="widget_drop_shadow" id="widget_drop_shadow_title">Drop Shadow</label>
+						      <div class="opt-devider" style="postion:relative; top:3px; margin:0"></div>
+							  </div>
+								<span>
+							    <h4 style="position:relative; top:2px; margin:-8px 8px 0px 0; display:inline">Bring to</h4>
+									<%= link_to_function("Front", nil, :button => {:type => false}, :class => "w-top") %>
+									<%= link_to_function("Back", nil, :button => {:type => false}, :class => "w-bottom",  :style => "margin-left:6px") %>
+								</span>
+						    <div class="opt-row" style="margin-top:12px;">
+						      <span class="wopt-locked-ghosted">
+										<input type="checkbox" class="opt-check w-auto-move" id="widget_bring_forward"> <label for="widget_bring_forward" id="widget_bring_forward_title">Bring forward when selected</label><br>
+								  </span>
+								</div>    
+						  </div>
+							<div class="opt-row wopt-locked-controller">
+							  <div class="opt-devider" style="postion:relative; top:-2px; margin:0"></div>
+								<input type="checkbox" class="opt-check w-lock" id="widget_locked"> <label for="widget_locked" id="widget_locked_title">Lock widget</label><br>
+							</div>
+						</div>
+
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	
+<!-- TRAY -->
+<div class="tray">
+	<div class="tray-highlight-line"></div>
+
+	<div class="tray-background">
+		<div class="tray-background-gradient"></div>
+	</div>
+	<div class="tray-content">
+		<div class="tray-slot">
+			<div class="tray-icon" id="widget-tray-note" title="Drag, position, and drop">
+				<div class="tray-item">
+	        <div class="note widget" style="top:100px;left:100px;width:180px;height:150px;; z-index:0" id="widget_">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+	<div class="base">
+    <div class="base-bg note-bg" style=""><p></p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor"><font size='3'></font></div></div>
+		<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+
+</div>
+	</div>
+</div>
+	      </div>
+			</div>
+			<div class="tray-label">Note</div>
+		</div>
+		<div class="tray-slot">
+			<div class="tray-icon" id="widget-tray-photo" title="Drag, position, and drop">
+
+				<div class="tray-item">
+					<div class="photo widget" style="top:100px;left:100px;width:220px;height:160px;; z-index:0" id="widget_">
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+  <div class="base">
+  		<div class="frame" style='margin:10px; top:-10px; bottom:10px; padding:10px 0;'>
+
+		  <div class="photo-load">loading...</div>
+				      <img alt="Add a photo" galleryimg="false" src="/images/widgets/photo/widget_photo_placeholder_200x140.jpg?1167834735" width="100%" />
+	       
+				<div class="upload-pane" style="display:block;">
+					<div class="upload-offset">
+						<div class="upload-overlay"><div>&nbsp;</div></div>
+						<div class="w-p-upload upload-button">
+				      <%= link_to_function("Add photo(s)", nil, :button => {:type => "default"}, :style => "position:relative;top:-10px;font:11px 'Verdana', 'Lucida Grande', 'Bitstream Vera Sans', 'Sans';") %>
+						</div>
+					</div>
+				</div>
+		</div>
+		<div class="handles">
+
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+  </div>
+</div>
+				</div>
+			</div>
+			<div class="tray-label">Photo</div>
+		</div>
+
+		<div class="tray-slot">
+			<div class="tray-icon" id="widget-tray-document" title="Drag, position, and drop">
+				<div class="tray-item">
+				<div class="document widget" style="z-index:0; top:100px;left:100px;width:150px;height:110px;" id="widget_">
+	<div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+
+  <div class="base">
+    <div class="base-bg document-bg">&nbsp;</div>
+				<div class="document-icon document-icon-generic"></div>
+		<div class="w-d-file-link file-link">
+            </div>
+						<%= link_to_function("Add document(s)", nil, :button => {:type => "default"}, :class => "w-d-upload", :style => "margin-left:10px; font:11px 'Verdana', 'Lucida Grande', 'Bitstream Vera Sans', 'Sans';") %>
+				<div class="handles">
+	<div class="remove"></div>
+	<div class="resizer"></div>
+</div>
+	</div>
+
+</div>
+				</div>
+			</div>
+			<div class="tray-label">Document</div>
+		</div>
+		<div class="tray-slot">
+			<div class="tray-icon" id="widget-tray-todo" title="Drag, position, and drop">
+				<div class="tray-item">
+					<div class="todo widget" style="width:230px;height:200px;top:100px;left:100px;; z-index:0" id="widget_">
+
+  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+<div class="focus">
+	<div class="focus-border-spacer">&nbsp;</div>
+</div>
+  <div class="base">
+		<div class="base-bg todo-bg"><p></p></div>
+    <div class="todo-header">
+			<div class="header-bg"><p></p></div>
+
+			<div class="todo-content">
+							<div class="todo-reminder-icon">&nbsp;</div>
+				<div class="todo-indicator">TODO</div>
+				<div class="todo-day">26</div>
+				<div class="todo-month-year"><span class="todo-month">August</span> <span class="todo-year">2007</span></div>
+				<div class="todo-dayname-time">
+
+					<span class="todo-dayname">Sunday</span>
+					<span class="todo-time">
+						<span class="todo-hour">6</span>:<span class="todo-minute">00</span>
+			 			<span class="todo-postfix">AM</span>
+					</span>
+				</div>
+
+			</div>
+    </div>
+    <div class="todo-comments">COMMENTS</div>
+		<div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor">&nbsp;</div>
+  	</div>
+	  <div class="handles">
+	<div class="remove"></div>
+
+	<div class="resizer"></div>
+</div>
+	</div>
+</div>
+				</div>
+			</div>
+			<div class="tray-label">Todo</div>
+		</div>
+	</div>
+
+</div>
+<div class="tray-bar">
+	<div class="tray-bar-background"><div class="tray-bar-background-gradient"></div></div>
+	<div class="tray-bar-highlight-line"></div>
+	<div class="tray-switch">
+		<div class="opt-switcher-bg"></div>
+		<a href="#" class="tray-switcher-open" id="tray_show">
+			Hide Widgets
+		</a>
+		<a href="#" class="tray-switcher-closed" id="tray_hide">
+
+			Show Widgets
+		</a>
+	</div>
+	<!-- WIDGET OPTIONS SWITCH -->
+	<div class="opt-switch wopt-switch">
+		<div class="opt-switch-highlight-line"></div>
+		<div class="opt-switcher-bg"></div>
+		<div class="opt-switch-label">
+		  <a href="#" class="wopt-switcher-open" id="wopt_show">
+
+				Hide Widget Options
+			</a>
+			<a href="#" class="wopt-switcher-closed" id="wopt_hide">
+				Show Widget Options
+			</a>
+			<span class="wopt-switcher-ghosted">Widget Options</span>
+		</div>
+		<div class="opt-switch-shadow-line"></div>
+	</div>
+
+</div>
+
+<%= render(:partial => "/shared/google_analytics") %>
+</body>
+</html>

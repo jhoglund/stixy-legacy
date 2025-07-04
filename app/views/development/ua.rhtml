@@ -1,0 +1,17 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript">
+	</script>	
+	<style>
+	</style>
+</head>
+<body>
+	<% @browser = Stixy::UserAgent.new(request.env["HTTP_USER_AGENT"]) %>
+	<%= @browser.name %><br>
+	<%= @browser.version %><br>
+	<%= @browser.major_version %><br>
+	<%= request.env["HTTP_USER_AGENT"] %>
+	
+</body>
+</html>

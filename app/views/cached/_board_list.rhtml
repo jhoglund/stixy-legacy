@@ -1,0 +1,69 @@
+<div class="bar-tools">
+	<div class="pager">
+		<span class='previous'><span>&nbsp;</span>Previous</span>
+		<span class='next'>Next<span>&nbsp;</span></span>
+	</div>
+	<a href="#" onclick="Stixy.board.openOverview(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">Detailed view</a>
+	<a class="bar-close" href="#" onclick="Stixy.ui.boardListToggle(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">&nbsp;</a>
+</div>
+<div class="tag-filter">
+	<input class="no-filter" id="tag_filter" title="Show only tagged with" type="text" value="Show only tagged with" />
+	<a class="reset-filter" href="#" onclick="Stixy.board.addBoardFilter(0); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)" title="Show all Stixyboards"></a>
+	<%= link_to_function("Show", nil, :button => {:type => "ghosted"}) %>
+	<div class="disabled">&nbsp;</div>
+</div>
+<table class="board-list-grid">
+	<tr><td class="board-list-top"></td></tr>
+	<tr>
+		<td class="board-list-bottom">
+			<div class="board-list-panel">
+				<div class="board-list-scroll" id="board_list_scroll">
+					<div class="board-list-content">
+						<div id="board_list_item_272">
+							<div class="board-list-item<% if @cached_dir_path=="home" %> board-list-current<% end %>" id="board_list_style_272">
+								<h3><a href="/welcome">Welcome to Stixy</a></h3>
+								<div><span class="option-list-title">Updated:</span> Aug 21, 2007</div>
+								<div><span class="option-list-title">By:</span> Jonas Höglund</div>
+								<div><span class="option-list-title">Shared with:</span> J Höglund, A Ottoson</div>
+							</div>
+						</div>
+						<div id="board_list_item_395">
+							<div class="board-list-item<% if @cached_dir_path=="samples/work" %> board-list-current<% end %>" id="board_list_style_395">
+								<h3><a href="/sample/work">Stixy: Sample: Work</a></h3>
+								<div><span class="option-list-title">Updated:</span> Aug 22, 2007</div>
+								<div><span class="option-list-title">By:</span> Joseph Levine</div>
+								<div><span class="option-list-title">Shared with:</span> J Levine, L DeWald, L Wack, M Ludwig, M Lycan</div>
+							</div>
+						</div>
+						<div id="board_list_item_396">
+							<div class="board-list-item<% if @cached_dir_path=="samples/shop" %> board-list-current<% end %>" id="board_list_style_396">
+								<h3><a href="/sample/shop">Stixy: Sample: Shop Compare</a></h3>
+								<div><span class="option-list-title">Updated:</span> Aug 07, 2007</div>
+								<div><span class="option-list-title">By:</span> Jonas Höglund</div>
+								<div><span class="option-list-title">Shared with:</span> P Guest, J Höglund, A Ottoson...&nbsp;(<span class="total-length">4</span>)</div>
+							</div>
+						</div>
+						<div id="board_list_item_394">
+							<div class="board-list-item " id="board_list_style_394">
+								<h3><a href="/sample/photo_album">Stixy: Sample: Photo Album</a></h3>
+								<div><span class="option-list-title">Updated:</span> Aug 07, 2007</div>
+								<div><span class="option-list-title">By:</span> Jonas Höglund</div>
+								<div><span class="option-list-title">Shared with:</span> <span class="no-data">None</span></div>
+							</div>
+						</div>
+						<div class="bottom-pager">
+							<span class="pager">
+								<span class='next'>Next<span>&nbsp;</span></span>
+							</span>
+						</div>
+						<div class="board-list-item board-list-invitation" style="margin-top:20px;padding-bottom:8px">
+							<h3>Can’t see your Stixyboards?</h3> 
+							You need to <a href="/public/signin" onclick="Stixy.board.openSignin(); return false;">sign-in </a> 
+							first to access all your saved Stixyboards.
+						</div>
+					</div>
+				</div>
+			</div>
+		</td>
+	</tr>
+</table>

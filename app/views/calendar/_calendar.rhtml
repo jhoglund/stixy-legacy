@@ -1,0 +1,14 @@
+<div class="calendar-month-title" id="calendar_month" sx:date="<%= calendar().year %>-<%= calendar().month %>-1">
+	<%= Date::MONTHNAMES[calendar().month] %> <%= calendar().year %>
+	<div class="calendar-month-navigation">
+		<%= link_to_function "&nbsp;", "Stixy.calendar.navigateCalendar('#{calendar().previous.to_s}')", :class => "calendar-month-navigation-previous" %>
+		<%= link_to_function "&nbsp;", "Stixy.calendar.navigateCalendar('#{calendar().next.to_s}')", :class => "calendar-month-navigation-next" %>
+	</div>
+</div>
+<span id="calendar_navigation_pending">
+	<div class="stixy-calendar-pending-panel">
+		<div class="stixy-calendar-pending-background">&nbsp;</div>
+		<div class="stixy-calendar-progress">&nbsp;</div>
+	</div>
+</span>
+<%= generate_calendar %>

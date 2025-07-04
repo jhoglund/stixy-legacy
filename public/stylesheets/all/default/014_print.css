@@ -1,0 +1,16 @@
+@media print{
+	html { background-image:none; overflow:auto; }
+	body { padding:0; background-image:none; }
+	.board-list-open .canvas { left:0; }
+	.canvas { background-image:none; overflow:visible; width:auto; height:auto; }
+	.header,
+	.toolbar, 
+	.tools, 
+	.tray,
+	.tray-cont,
+	.tray-bg,
+	.tray-bar,
+	.opt-bar,
+	#opt_bar,
+	#board_list_bar { display: none!important; }
+}

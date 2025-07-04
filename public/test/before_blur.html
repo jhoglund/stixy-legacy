@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>
+		Test
+	</title>
+	<style>
+		body { background:rgb(215,215,215); }
+		.editor { position:relative; width:400px; height:200px; border:1px inset; background:white; margin:10px; padding:5px; }
+		#_stixy_bogus_hidden { position:absolute;width:0;height:0;overflow:hidden;}
+	</style>
+	<script>
+	  onload = function(){
+	    var editor1 = document.getElementById("editor_1")
+  	  var editor2 = document.getElementById("editor_2")
+      
+  		function setSize(size){
+  		}
+
+  		document.addEventListener('mousedown', function(){
+  		  console.log(window.getSelection().toString())
+  		}, false)
+  	  document.addEventListener('keydown', function(e){
+  		  console.log(e.keyCode)
+  		}, false)
+  		
+	  }
+	
+	</script>
+</head>
+<body> 
+	<div><div class="editor" contenteditable="true" id="editor_1">This doesn't work, if you select all text through a dubble-click select or cmd-A short cut. The editable tag is not a direct child of the body tag<br> (&lt;body&gt;&lt;div&gt;&lt;div contenteditable="true"&gt;...&lt;/div&gt;&lt;/div&gt;)</div></div>
+	<div><div class="editor" contenteditable="true" id="editor_2">This doesn't work, if you select all text through a dubble-click select or cmd-A short cut. The editable tag is not a direct child of the body tag<br> (&lt;body&gt;&lt;div&gt;&lt;div contenteditable="true"&gt;...&lt;/div&gt;&lt;/div&gt;)</div></div>
+
+</body>
+</html>

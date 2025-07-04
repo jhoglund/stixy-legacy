@@ -1,0 +1,27 @@
+<div id="users_list">
+	<%= render :partial => "/admin/shared/page_size", :locals => { :title => "Users per page:", :action => "user_list", :update => "users_list" } %>
+	<table class="admin">
+  <tr>
+		<th>ID</th>
+    <th>Login Name</th>
+    <th>E-mail</th>
+    <th>Display Name</th>
+    
+		<th>&nbsp;</th>
+  </tr>
+  
+<% @users.each_with_index  do |user, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+%>
+  <tr class="<%= color %>">
+    <td><%= user.id %></td>
+    <td><%= user.login %></td>
+		<td><%= user.email %></td>
+		<td><%= user.display_name %></td>
+    <td><%= link_to 'Add', :action => 'add_user', :id => @board, :user => user.id %></td>
+  </tr>
+<% end %>
+</table>
+<%= render :partial => "/admin/shared/page_nav", :locals => { :pages => @user_pages, :action => "user_list", :update => "users_list" } %>
+</div>

@@ -1,0 +1,26 @@
+<html debug="true">
+<head>
+	<title></title>
+	<script src="/javascripts/firebug/firebug.js"></script>
+	<script>
+		function getColor(value){
+			console.log("RGB MATCH")
+			console.log(value.match(/\d+/g))
+			console.log("RGB TEST")
+			console.log(/rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)/g.test(value))
+		}
+		getColor("rgb(  255, 0 ,200)")
+		getColor("bold")
+	</script>
+</head>
+<body>
+	<div>
+				<div class="editor">
+					This</FONT> is 
+					<STRONG><FONT color=rgb(105,35,85)>some</FONT></FONT></STRONG></FONT> 
+					<FONT color="#4455FF">test</FONT></FONT> of <FONT color=rgb(255,250,160)>some</FONT> 
+					text</FONT></FONT></FONT>
+				</div>
+	</div>
+</body>
+</html>

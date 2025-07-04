@@ -1,0 +1,23 @@
+<div class="wopt-defaults" id="wopt-default">
+  <div class="wopt-locked-panel">&nbsp;</div>
+	<div class="opt-cont wopt-locked-ghosted">
+    <div class="opt-row">
+		  <input type="checkbox" class="opt-check w-drop-shadow" id="widget_drop_shadow"> <label for="widget_drop_shadow" id="widget_drop_shadow_title">Drop Shadow</label>
+      <div class="opt-devider" style="postion:relative; top:3px; margin:0"></div>
+	  </div>
+		<span>
+	    <h4 style="position:relative; top:2px; margin:-8px 8px 0px 0; display:inline">Bring to</h4>
+			<%= link_to_function("Front", nil, :button => {:type => false}, :class => "w-top") %>
+			<%= link_to_function("Back", nil, :button => {:type => false}, :class => "w-bottom",  :style => "margin-left:6px") %>
+		</span>
+    <div class="opt-row" style="margin-top:12px;">
+      <span class="wopt-locked-ghosted">
+				<input type="checkbox" class="opt-check w-auto-move" id="widget_bring_forward"> <label for="widget_bring_forward" id="widget_bring_forward_title">Bring forward when selected</label><br>
+		  </span>
+		</div>    
+  </div>
+	<div class="opt-row wopt-locked-controller">
+	  <div class="opt-devider" style="postion:relative; top:-2px; margin:0"></div>
+		<input type="checkbox" class="opt-check w-lock" id="widget_locked"> <label for="widget_locked" id="widget_locked_title">Lock widget</label><br>
+	</div>
+</div>

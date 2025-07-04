@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+anon:
+  id: 1
+  name: guest
+  status: 1
+  
+admin:
+  id: 2
+  name: admin
+  status: 1
+  
+user:
+  id: 3
+  name: user
+  status: 1
+  
+calendar_beta:
+  id: 4
+  name: calendar_beta
+  status: 1
+  
+calendar_beta_pending:
+  id: 5
+  name: calendar_beta_pending
+  status: 1

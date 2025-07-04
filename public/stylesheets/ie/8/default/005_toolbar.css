@@ -1,0 +1,9 @@
+/*--------------*/
+/* TOOLBAR IE 8 */
+/*--------------*/
+
+sx\:button.toolbar-button {  }
+sx\:button.toolbar-button .button-label { padding-top:2px; top:0; }
+.text-save .toolbar-button { float:right; margin-top:-2px; }
+
+.toolbar-button { z-index:100; }

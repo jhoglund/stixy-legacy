@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>
+		Test
+	</title>
+	<style>
+		body { background:rgb(215,215,215); }
+		.editor { position:relative; width:400px; height:200px; border:1px inset; background:white; margin:10px; padding:5px; }
+		#_stixy_bogus_hidden { position:absolute;width:0;height:0;overflow:hidden;}
+	  input { -moz-user-select:none; -webkit-user-select:none; }
+	  /*.stixy-spacer { position:relative; }
+    .stixy-spacer:before { content: "|"; font-family:monospace; font-size:16px; letter-spacing:-10px; color:transparent; }
+  */
+  </style>
+	<script>
+	  		
+		
+		function selectWord(){
+      
+      var editor = document.getElementById('editor_1');
+      //if(editor.outerHTML) console.log(editor.outerHTML)
+      var anchor = this.getAnchor();
+      var anchorNode = anchor.anchorNode;
+      var anchorOffset = anchor.anchorOffset;
+      function traverse(node, left, parent, previous){
+        var regExp, subStrOffset, textNode, sameNode, 
+            data, offset, inlineElement, displayProperty, previous;
+        // Define methods and properties depending on if to traverse to left or right from the selection.
+        var child = left ? 'lastChild' : 'firstChild';
+        var sibling = left ? 'previousSibling' : 'nextSibling';
+        var parent = parent || node.parentNode;
+        if(node){
+          do{
+            textNode = (node.nodeName == "#text");
+            sameNode = (node == anchorNode);
+            data = (textNode) ? node.data : "";
+            regExp = left ? /\s(?!.*\s)/ : /\s/;
+            // If the selection focus is inside the current text node, chop the string so only the part left/right of the text is searched for white space.
+      	    if(left && sameNode){
+    	        data = data.substr(0, anchorOffset);
+            }else if(!left && sameNode){
+    	        data = data.substr(anchorOffset);    	        
+    	      }
+            // Search for white space
+            offset = data.search(regExp);
+          	if(node.tagName){
+              displayProperty = (node.style) ? node.currentStyle ? node.currentStyle.getAttribute('display') : document.defaultView.getComputedStyle(node,false).getPropertyValue('display') : null;
+            	// Check for block elements, which is equal to word break
+            	console.log(node.tagName)
+              switch(node.tagName){
+                // Word breking elements
+                case  "ADDRESS" || "BLOCKQUOTE" || "DIV" || "DL" || "FIELDSET" || "FORM" || "H1" || 
+                      "H2" || "H3" || "H4" || "H5" || "H6" || "HR" || "NOSCRIPT" || "OL" || "P" || 
+                      "PRE" || "TABLE" || "UL" || "DD" || "DT" || "LI" || "TBODY" || "TD" || "TFOOT" || 
+                      "TH" || "THEAD" || "TR" || "BR" : inlineElement = -1
+              }
+              console.log(inlineElement)
+            	// Change it to an inline element if it's manualy altered as one
+              inlineElement = inlineElement || (displayProperty ? displayProperty.search(/inline/) : 0);
+            }
+            previous = (textNode) ? node : previous;
+            if(inlineElement == -1){
+              // If block, set selection to previous node or to current node if no previous
+              offset = previous ? (left ? 0 : previous.data.length) : anchorOffset;
+              previous = previous || node
+              return { node:previous, offset:offset }
+            }else if(offset!=-1){
+              // If whitespace is found, set offset to the node
+    	        offset = left ? ++offset : (sameNode ? offset + anchorOffset : offset);
+              return { node:node, offset:offset }
+            }else if(node.hasChildNodes && node.hasChildNodes()){
+              // If node has children, continue one level deeper in the hierarchy
+              return traverse(node[child], left, null, previous);
+            }
+          }while(node = node[sibling]);
+          
+        }
+        //if(node.outerHTML) console.log(node.outerHTML, editor.outerHTML)
+        if(node != editor){
+          // Break if top most node, else continue one level up in the hierarchy  	      
+          return traverse(parent[sibling], left, parent.parentNode, previous);
+        }
+    	}
+
+    	  var selection = document.selection || getSelection();
+        // Safari will not select the end nodes, so we have to add nodes to the end and to the begining during the selection phase
+        var spacerLeft = document.createElement('div');
+        spacerLeft.textContent = ' ';
+        spacerLeft.style.position = 'absolute';
+        var spacerRight = spacerLeft.cloneNode(true);
+        editor.insertBefore(spacerLeft, editor.firstChild);
+        editor.appendChild(spacerRight);
+        // Extend to select word
+        var left = traverse(anchorNode, true)
+        var right = traverse(anchorNode, false)
+        if(selection.getRangeAt){
+          var range = selection.getRangeAt(0);
+          range.setStart(left.node, left.offset);
+          range.setEnd(right.node, right.offset);
+      		selection.addRange(range);
+        }else{
+          function getElement(node){
+            while(node.nodeType!=1){
+              node = node.parentNode;
+            }
+            return node;
+          }
+          function getOffset(node, offset, left){
+            var start = left ? getElement(anchorNode).sourceIndex : getElement(node).sourceIndex ;
+            var stop = left ? getElement(node).sourceIndex : getElement(anchorNode).sourceIndex;
+            var text = "";
+            for(var i=start; i<stop; i++){
+              text += document.all[i].innerText;
+            }
+            return text.length + (left ? -offset : offset);
+          }
+          var range = selection.createRange();
+          range.moveStart('character', -getOffset(left.node, left.offset, true));
+          range.moveEnd('character', getOffset(right.node, right.offset, false));
+          range.select();
+        }
+        // Remove the spacer elements after the selection is done
+        editor.removeChild(spacerLeft);
+        editor.removeChild(spacerRight);
+		}
+		
+		function addWord(link_value){
+		  var selection = getSelection();
+		  selectWord();
+		  if(selection.isCollapsed && link_value.length > 0){
+		    var range = selection.getRangeAt(0);
+        var node = range.createContextualFragment(link_value);
+        range.insertNode(node);
+        selectWord();
+        selection.addRange(range);
+        if(selection.isCollapsed){
+          range.setEnd(selection.focusNode, selection.focusOffset+1);
+        }
+		  }
+		  document.execCommand("createlink", false, link_value)
+		}
+		
+		function getAnchor(){
+		  var anchorNode, anchorOffset;
+			var selection = document.selection || window.getSelection();
+      if(document.selection){
+    		var range = selection.createRange();
+        range.pasteHTML('<i id="_ie_bocus_cursor_position" style="position:absolute;width:0;overflow:hidden;">_ie_bocus_cursor_position</i>');
+    	  var bogusNode = document.getElementById('_ie_bocus_cursor_position');
+    		anchorNode = range.parentElement();
+    		if(anchorNode==bogusNode) anchorNode = anchorNode.parentElement
+    		anchorOffset = anchorNode.innerText.search(/_ie_bocus_cursor_position/);
+    		anchorNode.removeChild(bogusNode);
+    	}else{
+    	  anchorNode = selection.anchorNode;
+    		anchorOffset = selection.anchorOffset;
+    	}
+			return { anchorNode:anchorNode, anchorOffset:anchorOffset }
+		}
+		
+		function getIeSelection(){
+		  
+		}
+		
+		function resetSelection(){
+		  var selection = document.selection || getSelection();
+		}
+	
+	</script>
+</head>
+<body> 
+	<input type="button" onclick="selectWord()" value="Set selection" unselectable='on'>
+	<input type="button" onclick="addWord('the_link.com')" value="Set link" unselectable='on'>
+	<input type="button" onclick="resetSelection()" value="Reset" unselectable='on'>
+	<input type="button" onclick="cursorPosition()" value="Cursor position" unselectable='on'>
+	<span id="_stixy_bogus_hidden"></span>
+	<div class="editor" contenteditable="true" id="editor_1">
+	  http://www.byarumsbruk.se/ fff<br>
+    http://www.designcollage.se/product_info.php?cPath=553_554_136&products_id=2068<br>
+    ddd ddd <b>dsdsd.ds</b> dd http://fdfd.fd ffdf
+	</div>
+	
+  <!-- <div><div class="editor" contenteditable="true" id="editor_2" style="-moz-user-select:none">This doesn't work, if you select all text through a dubble-click select or cmd-A short cut. The editable tag is not a direct child of the body tag<br> (&lt;body&gt;&lt;div&gt;&lt;div contenteditable="true"&gt;...&lt;/div&gt;&lt;/div&gt;)</div></div> -->
+
+</body>
+</html>

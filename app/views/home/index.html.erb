@@ -1,0 +1,163 @@
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+  <!-- Navigation -->
+  <nav class="bg-white shadow-sm border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <h1 class="text-2xl font-bold text-indigo-600">Stixy</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+          <% if current_user %>
+            <%= link_to "My Boards", boards_path, class: "text-gray-700 hover:text-indigo-600" %>
+            <%= link_to "Profile", current_user, class: "text-gray-700 hover:text-indigo-600" %>
+            <%= button_to "Logout", logout_path, method: :delete, class: "text-gray-700 hover:text-indigo-600" %>
+          <% else %>
+            <%= link_to "Login", login_path, class: "text-gray-700 hover:text-indigo-600" %>
+            <%= link_to "Sign Up", signup_path, class: "bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- Hero Section -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <% if current_user %>
+      <!-- Dashboard for logged in users -->
+      <div class="mb-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-2">Welcome back, <%= current_user.display_name %>!</h2>
+        <p class="text-gray-600">Here's what's happening with your boards.</p>
+      </div>
+      <!-- Stats -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center">
+            <div class="p-2 bg-blue-100 rounded-lg">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-500">Total Boards</p>
+              <p class="text-2xl font-semibold text-gray-900"><%= @total_boards %></p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center">
+            <div class="p-2 bg-green-100 rounded-lg">
+              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-500">Total Files</p>
+              <p class="text-2xl font-semibold text-gray-900"><%= @total_files %></p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center">
+            <div class="p-2 bg-purple-100 rounded-lg">
+              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-500">Storage Used</p>
+              <p class="text-2xl font-semibold text-gray-900"><%= @total_storage %></p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center">
+            <div class="p-2 bg-yellow-100 rounded-lg">
+              <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <p class="text-sm font-medium text-gray-500">Last Login</p>
+              <p class="text-2xl font-semibold text-gray-900"><%= current_user.last_login_date&.strftime("%m/%d") || "New" %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Recent Boards -->
+      <div class="bg-white rounded-lg shadow">
+        <div class="px-6 py-4 border-b border-gray-200">
+          <h3 class="text-lg font-medium text-gray-900">Recent Boards</h3>
+        </div>
+        <div class="p-6">
+          <% if @recent_boards.any? %>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <% @recent_boards.each do |board| %>
+                <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <h4 class="font-medium text-gray-900 mb-2"><%= board.title %></h4>
+                  <p class="text-sm text-gray-600 mb-3"><%= truncate(board.description, length: 100) %></p>
+                  <div class="flex justify-between items-center text-sm text-gray-500">
+                    <span><%= pluralize(board.widget_count, 'widget') %></span>
+                    <span><%= time_ago_in_words(board.updated_at) %> ago</span>
+                  </div>
+                  <%= link_to "Open", board_path(board), class: "mt-3 inline-block text-indigo-600 hover:text-indigo-800 text-sm font-medium" %>
+                </div>
+              <% end %>
+            </div>
+            <div class="mt-6 text-center">
+              <%= link_to "View All Boards", boards_path, class: "text-indigo-600 hover:text-indigo-800 font-medium" %>
+            </div>
+          <% else %>
+            <div class="text-center py-8">
+              <p class="text-gray-500 mb-4">You haven't created any boards yet.</p>
+              <%= link_to "Create Your First Board", new_board_path, class: "bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <!-- Landing page for anonymous users -->
+      <div class="text-center">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+          Organize Your Ideas with Stixy
+        </h1>
+        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          Create collaborative workspaces where you can organize notes, photos, documents, and more. 
+          Share with your team and work together in real-time.
+        </p>
+        <div class="flex justify-center space-x-4 mb-12">
+          <%= link_to "Get Started", signup_path, class: "bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-medium hover:bg-indigo-700" %>
+          <%= link_to "Learn More", "#", class: "border border-gray-300 text-gray-700 px-8 py-3 rounded-lg text-lg font-medium hover:bg-gray-50" %>
+        </div>
+        <!-- Features -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+          <div class="text-center">
+            <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">Organize Everything</h3>
+            <p class="text-gray-600">Keep your notes, photos, and documents organized in beautiful workspaces.</p>
+          </div>
+          <div class="text-center">
+            <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">Collaborate</h3>
+            <p class="text-gray-600">Invite team members and work together in real-time on your projects.</p>
+          </div>
+          <div class="text-center">
+            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">Secure</h3>
+            <p class="text-gray-600">Your data is secure and private. Control who has access to your workspaces.</p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,843 @@
+<!--[if lte IE 6]><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 transitional//EN"><![endif]-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Welcome to Stixy</title>
+	<link href="/stylesheets/global.css?1175107273" media="all" rel="Stylesheet" type="text/css"></link>
+	<!--[if lte IE 6]>
+	<link href="/stylesheets/global_ie.css?1175107273" media="all" rel="Stylesheet" type="text/css"></link>
+	<![endif]-->
+	<style type="text/css">
+	html { overflow:hidden; height:100%; }
+	body { height:100%; width:100%; margin:0; background-image:url(/images/bg_pattern_dot.gif); background-color:white; }
+
+	table { table-layout:fixed; }
+
+	/* HEADER */
+	.header,
+	.header-background, 
+	.header-background-pattern, 
+	.utility-navigation { position:absolute; top:0; height:34px; width:100%; }
+	.header { left:-17px; background:rgb(50,50,50); }
+	.header-background { overflow:hidden; z-index:0; }
+	.header-background-pattern { height:100%; background-image:url("/images/bg_pattern_dot.gif"); filter:alpha(opacity=20); opacity:0.20; }
+	.header-background-gradient { position:relative; top:-480px; height:1000px; width:1000px; margin:0 auto; background:url(/images/white_gradient_radius_horizontal.png) no-repeat center 480px; z-index:-1; }
+	.utility-navigation { height:24px; top:10px; right:10px; text-align:right; }
+	.header a:link { color:rgb(204,204,204); }
+	.header a:visited { color:rgb(204,204,204); }
+	.header a:hover { color:white; }
+	.header a:link.member-name { color:rgb(255,235,90); }
+	.header .stixy-signature-top { position:absolute; top:0px; left:0px; width:200px; height:34px; background-image:url(/images/mt_signature_stixyboard_black.png); }
+	.header .stixy-signature-bottom { position:absolute; top:34px; left:0px; width:130px; height:24px; overflow:hidden; }
+	.header .stixy-signature-bottom div { position:absolute; top:-34px; width:130px; height:58px; background-image:url(/images/mt_signature_stixyboard_black.png); }
+
+	/* OPTIONBAR */
+	.opt-bar { position:absolute; overflow:hidden; right:27px; bottom:16px; height:100%; width:255px; }
+	.opt-bar .bar-tools { top:-24px; border-bottom:1px solid rgb(255,255,255);}
+	.opt-bar-grid { border-collapse:collapse; top:0; bottom:0; height:100%; width:0; }
+	.opt-bar-grid td { padding:0; vertical-align:top; }
+	.opt-panel { position:absolute; display:none; top:0; right:0; bottom:0; width:100%; }
+	.opt-scroll { position:absolute; overflow:auto; top:0; right:0; bottom:0; left:0; height:100%; width:100%; }
+	.opt-content { height:200px; margin:10px; }
+	.opt-background { position:absolute; width:100%; background-color:rgb(235,235,235); filter:alpha(opacity=75); opacity:0.75; }
+	.opt-gradient { position:relative; top:0; left:-5000px; height:200%; width:10000px; }
+	.opt-tab,
+	.opt-tab .left,
+	.opt-tab .right,
+	.opt-tab .left div,
+	.opt-tab .right div { position:absolute; top:0; height:21px; z-index:-1; }
+	.opt-tab { display:inline; top:-21px; height:19px; line-height:21px; }
+	.opt-tab .left { overflow:hidden; left:0; width:50%; }
+	.opt-tab .right { overflow:hidden; right:0; width:51%; }
+	.opt-tab .left div,
+	.opt-tab .right div { width:100%; background:url(/images/edit_options_tab.png) no-repeat; }
+	.opt-tab .left div { left:0; background-position:left top; }
+	.opt-tab .right div { right:0; background-position:right top; }
+	.opt-tab .label { padding:0px 15px 0 15px; white-space:nowrap; color:white; }
+
+	.wopt-common-tools { position:absolute; display:none; bottom:24px; height:80px; width:235px; padding:10px; background-color:rgb(220,220,220); }
+	.wopt-frame { position:absolute; display:none; top:91px; right:0; bottom:124px; bottom:0; width:100%; border:none; }
+
+	 /* OPTION BAR STATES*/
+	.wopt-show .tray { right:292px; }
+
+	.bopt-open .opt-background { top:0; bottom:0; }
+	.bopt-open .opt-panel { top:106px; bottom:135px; }
+	.tray-hide .bopt-open .opt-panel { bottom:35px; }
+	.bopt-open .opt-panel { border-bottom:1px solid rgb(215,215,215); }
+
+	.wopt-hide .bopt-closed .opt-bar { display:none; }
+	.bopt-open .opt-panel.bopt, 
+	.wopt-open .wopt-frame,
+	.wopt-open .opt-bar,
+	.wopt-open .wopt-common-tools { display:block; }
+	.wopt-open .opt-bar { z-index:3; }
+
+	.bopt-show .bopt-switcher-show,
+	.bopt-hide .bopt-switcher-hide,
+	.wopt-show .wopt-switcher-show,
+	.wopt-hide .wopt-switcher-hide { display:block;}
+
+	/* OPTIONBAR SWITCHES */
+	.opt-switch,
+	.opt-switch-highlight-line,
+	.opt-switch-shadow-line { position:absolute; height:24px; }
+	.opt-switch { top:0; right:9px; width:254px; }
+	.opt-switch-highlight-line,
+	.opt-switch-shadow-line { overflow:hidden; top:0; width:0; }
+	.opt-switch-highlight-line { left:0; }
+	.opt-switch-shadow-line { right:0; }
+	.bopt-switcher-show,
+	.bopt-switcher-hide,
+	.wopt-switcher-show,
+	.wopt-switcher-hide { display:none; padding:5px 0 4px 30px; background:no-repeat 8px -10px; }
+	a.bopt-switcher-show,
+	a.bopt-switcher-hide,
+	a.wopt-switcher-show,
+	a.wopt-switcher-hide { color:white!important; }
+	.bopt-switcher-show:hover,
+	.bopt-switcher-hide:hover,
+	.wopt-switcher-show:hover,
+	.wopt-switcher-hide:hover { background-position:8px -40px; }
+
+	/* BOARD LIST */
+	.board-list-bar { position:relative; float:left; height:100%; width:255px; border-right:1px solid rgb(215,215,215); background:rgb(255,255,255); }
+	.board-list-bar .bar-tools { top:60px; }
+	.board-list-grid { border-collapse:collapse; height:100%; width:255px; }
+	.board-list-grid td { padding:0; vertical-align:top; }
+	.board-list-top { height:84px; }
+	.board-list-bottom { overflow:hidden; }
+	.board-list-panel { position:absolute; top:84px; bottom:0; width:100%; }
+	.board-list-scroll { position:absolute; overflow:auto; height:100%; width:100%; top:0; right:0; bottom:0; left:0; }
+	.board-list-content { margin:10px; }
+	.board-list-switch,
+	.board-list-switch-highlight-line,
+	.board-list-switch-shadow-line { height:24px; }
+	.board-list-switch { position:relative; float:left; top:0; left:17px; width:255px; margin-right:17px; }
+	.board-list-switch .toolbar-button { float:right; margin-left:0; margin-right:10px; }
+	.board-list-switch-highlight-line,
+	.board-list-switch-shadow-line { position:absolute; overflow:hidden; top:0; width:0; }
+	.board-list-switch-highlight-line { right:-2px; }
+	.board-list-switch-shadow-line { right:-1px; }
+	.board-list-bar .no-data { font-style:normal; }
+	.board-list-bar h3 { margin:0; padding:4px 0 2px; }
+	.board-list-item { margin:0 -10px 0; padding:0 20px 4px; border-top:1px solid white; }
+	.board-list-invitation { background:rgb(235,235,235); }
+	.board-list-current { background:rgb(240,255,210); }
+	.board-list-loading h3 { padding-right:10px; background:url(/images/spinner_light_green.gif) no-repeat right 5px; margin-right:-15px;}
+	.board-list-bar .pager { text-align:left; float:left; margin:0 4px 0 -6px; }
+	.board-list-bar .pager a,
+	.board-list-bar .pager span { padding:0 6px 0 0; }
+	.board-list-bar .pager a.number:hover { background:url(/images/btn_page_hover.gif) no-repeat top center; }
+	.board-list-bar .pager .previous span,
+	.board-list-bar .pager .next span { position:relative; top:3px; display:inline-block; display:-moz-inline-box; background-repeat:no-repeat; height:10px; width:19px; overflow:hidden; }
+	.board-list-bar .pager .previous span { background-image:url(/images/btn_arrow_previous_page.gif); background-position:right -10px; }
+	.board-list-bar .pager .next span { background-image:url(/images/btn_arrow_next_page.gif); background-position:left -10px; }
+	.board-list-bar .pager a.previous:hover span { background-position:right -30px; }
+	.board-list-bar .pager a.next:hover span { background-position:left -30px; }
+	.board-list-bar .pager span.previous span { background-position:right -50px; }
+	.board-list-bar .pager span.next span { background-position:left -50px; }
+	.board-list-bar .pager span.previous,
+	.board-list-bar .pager span.next { color:rgb(180,180,180); }
+	.board-list-bar .bottom-pager { padding:8px auto; text-align:right; }
+	.board-list-bar .bottom-pager.pager { float:right; margin-bottom:8px; }
+
+	/* BOARD LIST STATES*/
+	.board-list-hide .board-list-bar { display:none; }
+	.board-list-show .board-list-bar,
+	.tray-highlight-line,
+	.tray-bar-highlight-line { display:block; }
+	.board-list-show .tray { left:265px; }
+	.board-list-show .tray-switch { left:282px; }
+	.board-list-show .tray-bar-highlight-line { left:273px; }
+
+	/* BAR TOOLS */
+	.bar-tools { position:absolute; height:19px; width:235px; padding:5px 10px 0; background:rgb(235,235,235); }
+	.bar-close { position:absolute; top:0; right:0; height:24px; width:24px; background:url(/images/btn_bar_close.gif); }
+	.board-list-bar .pager { text-align:left; float:left; margin:0 4px 0 -6px; }
+	.board-list-bar .pager a,
+	.board-list-bar .pager span { padding:0 6px 0 0; }
+	.board-list-bar .pager a.number:hover { background:url(/images/btn_page_hover.gif) no-repeat top center; }
+	.board-list-bar .pager .previous span,
+	.board-list-bar .pager .next span { position:relative; top:3px; display:inline-block; display:-moz-inline-box; background-repeat:no-repeat; height:10px; width:19px; overflow:hidden; }
+	.board-list-bar .pager .previous span { background-image:url(/images/btn_arrow_previous_page.gif); background-position:right -10px; }
+	.board-list-bar .pager .next span { background-image:url(/images/btn_arrow_next_page.gif); background-position:left -10px; }
+	.board-list-bar .pager a.previous:hover span { background-position:right -30px; }
+	.board-list-bar .pager a.next:hover span { background-position:left -30px; }
+	.board-list-bar .pager span.previous span { background-position:right -50px; }
+	.board-list-bar .pager span.next span { background-position:left -50px; }
+	.board-list-bar .pager span.previous,
+	.board-list-bar .pager span.next { color:rgb(180,180,180); }
+
+	/* CANVAS */
+	.canvas { position:relative; overflow:scroll; height:100%; }
+	.min-space { height:5000px; width:5000px; background:transparent; }
+	.loading-state { position:absolute; display:none; top:0; right:0; bottom:0; left:0; background:url(/images/bg_pattern_dot.gif) white; opacity:0.8; filter:alpha(opacity=80); z-index:10000000; }
+	.loading .loading-state { display:block; }
+
+	/* TOOLBAR */
+	.toolbar { position:absolute; top:34px; left:-17px; height:24px; width:100%; }
+	.toolbar-background { position:absolute; overflow:hidden; top:0; left:0; height:24px; width:100%; z-index:-1; }
+	.toolbar-background-gradient { position:relative; top:-485px; left:0; height:1000px; width:1000px; margin:0 auto; background:no-repeat center 485px; z-index:0; }
+	.toolbar-tools { float:left; margin:0; }
+	.toolbar-button,
+	.toolbar-button .left,
+	.toolbar-button .right,
+	.toolbar-button .left div,
+	.toolbar-button .right div { position:absolute; top:0; height:18px; z-index:-1; }
+	.toolbar-button { position:relative; display:inline; float:left; height:18px; margin:3px 0 0 10px; line-height:16px; color:white; z-index:0; }
+	.toolbar-button .left { overflow:hidden; left:0; width:50%; }
+	.toolbar-button .right { overflow:hidden; right:0; width:51%; }
+	.toolbar-button .left div,
+	.toolbar-button .right div { width:100%; background-repeat:no-repeat; }
+	.toolbar-button .left div { left:0; background-position:left top; }
+	.toolbar-button .right div { right:0; background-position:right top; }
+	.toolbar-button .label { padding:0px 15px 0 15px; margin-top:0; top:0; }
+	.toolbar-button:hover .left div { background-position:left -18px; }
+	.toolbar-button:hover .right div { background-position:right -18px; }
+	.toolbar-button:link,
+	.toolbar-button:visited { color:white; }
+	.toolbar .save-indicator { position:absolute; right:275px; height:24px;  width:300px; text-align:right; }
+
+	/* SAVE STATES */
+	.text-saved,
+	.text-saving,
+	.text-save  { display:none; cursor:default; padding:5px 0; background:no-repeat right 4px; }
+	.text-save .toolbar-button { float:right; margin-top:-2px; }
+	.text-save #save_counter { color:white; }
+	.text-saved { display:block; }
+	.pending .text-saved { display:none; }
+	.text-saving { padding-right:20px; }
+	.save .text-saved,
+	.saving .text-saved { display:none; }
+	.saving .text-saving,
+	.save .text-save { display:block; }
+
+	/* TRAY */
+	.tray,
+	.tray-bar,
+	.tray-background,
+	.tray-bar-background,
+	.tray-background-gradient,
+	.tray-switch,
+	.tray-highlight-line,
+	.tray-bar-highlight-line { position:absolute; }
+	.tray-bar,
+	.tray-bar-background,
+	.tray-background { width:100%; }
+	.tray, 
+	.tray-bar { left:-17px; }
+	.tray { display:none; bottom:40px; height:100px; left:10px; right:27px; }
+	.tray-bar,
+	.tray-bar-background,
+	.tray-switch { height:24px; }
+	.tray-bar { bottom:16px; }
+	.tray-content { height:97px; padding:0 0 0 27px; overflow:auto; white-space:nowrap;}
+	.tray-background { overflow:hidden; top:0; left:0; height:100px; z-index:-1; }
+	.tray-background-gradient { top:-480px; height:1000px; width:1000px; margin:0 auto; }
+	.tray-background { background:rgb(235,235,235); filter:alpha(opacity=85); opacity:0.85; }
+	.tray-background-gradient { background:url(/images/mt_gradient_1000x100_gray.png) no-repeat left 480px; }
+	.tray-bar-background { overflow:hidden; top:0; z-index:-1; }
+	.tray-bar-background-gradient { position:relative; top:-485px; left:0; height:1000px; width:1000px; margin:0 auto; background:no-repeat center 485px; z-index:0; }
+	.tray-switch { left:27px; }
+	a.tray-switcher-show,
+	a.tray-switcher-hide { color:white!important; }
+	.tray-switcher-show:hover,
+	.tray-switcher-hide:hover { background-position:0 -40px; }
+	.tray-highlight-line,
+	.tray-bar-highlight-line { display:block; height:100%; width:1px; border-left:1px solid rgb(245,245,245); }
+	.tray-slot { position:relative; float:left; height:90px; width:90px; cursor:move; }
+	.tray-icon { position:absolute; height:72px; width:75px; top:5px; left:0px; background-position:0px 0px; background-repeat:no-repeat; }
+	.tray-icon:hover { background-position:0px -77px; }
+	.tray-label { position:absolute; bottom:0px; width:75px; left:5px; right:5px; text-align:center; }
+	.tray-item { display:none; }
+	#widget-tray-note { background-image:url(/images/icon_widget_note.png); }
+	#widget-tray-photo { background-image:url(/images/icon_widget_photo.png); }
+	#widget-tray-document { background-image:url(/images/icon_widget_document.png); }
+	#widget-tray-todo { background-image:url(/images/icon_widget_reminder.png); }
+
+	/* TRAY STATES*/
+	.tray-show .tray { display:block; }
+	.tray-hide .tray { display:none; }
+	.tray-switcher-show,
+	.tray-switcher-hide { display:none; padding:5px 0 4px 22px; background:no-repeat left -10px;  }
+	.tray-show .tray-switcher-show,
+	.tray-hide .tray-switcher-hide { display:block;}
+
+	/* GREEN BARS */
+	.opt-switch,
+	.board-list-switch-shadow-line,
+	.opt-switch-shadow-line { border-left:1px solid rgb(90,145,25); }
+	.opt-switch,
+	.board-list-switch-highlight-line,
+	.opt-switch-highlight-line,
+	.tray-bar-highlight-line { border-right:1px solid rgb(190,240,70); }
+	.toolbar,
+	.tray-bar { border-top:1px solid rgb(190,240,70); border-bottom:1px solid rgb(90,145,25); }
+	.toolbar-background,
+	.tray-bar-background { background:rgb(150,210,10); }
+	.toolbar-background-gradient,
+	.tray-bar-background-gradient { background-image:url(/images/mt_gradient_radius_horizontal_green.png); }
+	.toolbar-button .left div,
+	.toolbar-button .right div { background-image:url(/images/btn_toolbar_bg_green.gif); }
+	.toolbar-button:hover { color:rgb(175,225,45); }
+	.bopt-switcher-show { background-image:url(/images/btn_menu_toggle_down.gif); }
+	.bopt-switcher-hide { background-image:url(/images/btn_menu_toggle_right.gif); }
+	.tray-switcher-show,
+	.wopt-switcher-show { background-image:url(/images/btn_menu_toggle_up.gif); }
+	.tray-switcher-hide,
+	.wopt-switcher-hide { background-image:url(/images/btn_menu_toggle_right.gif); }
+	.bopt-switcher-show:hover,
+	.bopt-switcher-hide:hover,
+	.wopt-switcher-show:hover,
+	.wopt-switcher-hide:hover,
+	.tray-switcher-show:hover,
+	.tray-switcher-hide:hover { color:rgb(90,145,25)!important; }
+	.text-saved { color:rgb(90,145,25); }
+
+	/* ORANGE BAR*/
+	.pending .text-saving { background-image:url(/images/icon_spinner_orange.gif); }
+	.pending .text-save { color:rgb(165,95,0); cursor:pointer; }
+	.pending .toolbar { border-top-color:rgb(255,209,54); border-bottom-color:rgb(214,122,0); }
+	.pending .toolbar-background { background:rgb(245,160,0); }
+	.pending .toolbar-background-gradient { background-image:url(/images/mt_gradient_radius_horizontal_orange.png); }
+	.pending .toolbar .opt-switch,
+	.pending .toolbar .board-list-switch-shadow-line,
+	.pending .toolbar .opt-switch-shadow-line { border-left:1px solid rgb(214,122,0); }
+	.pending .toolbar .opt-switch,
+	.pending .toolbar .board-list-switch-highlight-line,
+	.pending .toolbar .opt-switch-highlight-line { border-right:1px solid rgb(255,209,54); }
+	.pending .toolbar-button .left div,
+	.pending .toolbar-button .right div { background-image:url(/images/btn_toolbar_bg_orange.gif); }
+	.pending .toolbar-button:hover { color:rgb(255,235,90); }
+	.pending .bopt-switcher-show { background-image:url(/images/btn_menu_toggle_down_orange.gif); }
+	.pending .bopt-switcher-hide { background-image:url(/images/btn_menu_toggle_right_orange.gif); }
+	.pending .bopt-switcher-hide:hover,
+	.pending .bopt-switcher-hide:hover { color:rgb(165,95,0); }
+
+	.pending .bopt-header .opt-switcher { background-image:url(/images/btn_menu_toggle_right_orange.gif); }
+	.pending.bopt-show .bopt-header .opt-switcher { background-image:url(/images/btn_menu_toggle_down_orange.gif); }
+	.pending .bopt-header .opt-switcher:hover { color:rgb(165,95,0); }
+	.pending .bopt-header .opt-header-right,
+	.pending .bopt-header .opt-header-right  { border-left-color: rgb(214,122,0); border-right-color: rgb(255,209,54); }
+
+	/* STACK ORDER */
+	.header,
+	.board-list-switch,
+	.opt-switch { z-index:7; }
+	.toolbar { z-index:6; }
+	.board-list-bar { z-index:5; }
+	.tray-bar { z-index:4; }
+	.tray { z-index:2; }
+	.opt-bar { z-index:1; }
+	.canvas { z-index:0; }
+
+
+	/* Optionbar content default */
+	.opt-bar .mail-address {width: 166px; ;height:14px; overflow:hidden; }
+	.opt-bar .opt-devider	 { position:relative; clear:both; height:0; top:8px; border-top:1px solid rgb(180,180,180); border-bottom:1px solid white; margin:0 0 16px; overflow:hidden; }
+	.opt-more { text-align:right; }
+	.opt-bar h3 { font-size:15px; margin:15px 0px 10px; }
+	.opt-bar h4 { margin:5px 0px 3px; }
+	.opt-bar .subhead { margin:0px 0px 5px; }
+	.opt-sub-header { position:absolute; z-index:2; bottom:0px; height:27px; font-weight:bold; color:rgb(102,102,102); padding:0px 27px 0px 10px; width:218px; cursor:default; }
+	.opt-sub-header hr { position:relative; top:0px; margin:0px -27px 0px -10px; }
+	.opt-row { clear:both; padding:0 0 8px; }
+	.opt-color-palett span { position:relative; float:left; display:block; height:15px; width:11.5%; overflow:hidden; margin:1px; }
+	.opt-bar .deactivated-color-palett,
+	.opt-bar .deactivated .activated-color-palett { display:none; }
+	.opt-bar .deactivated .deactivated-color-palett { display:block; }
+	.opt-color-palett div { position:absolute; top:0; right:0; bottom:0; left:0; }
+	.opt-color-palett span.active { border:1px solid rgb(255,150,20); margin:0; }
+	.opt-color-palett span.active div { height:13px; margin:1px; }
+	.opt-themes { position:relative; }
+	.opt-theme-spacer { height:1px; overflow:hidden; }
+	.opt-themes .opt-theme { position:relative; float:left; width:50px; height:40px; margin:0 4px 0 0; cursor:default; background-color: white; background-image:url(/images/white_gradient_transp_300.png); background-repeat:no-repeat; background-position:-100px -100px; }
+	.opt-themes .opt-theme .label { position:absolute; font-size:22px; line-height:22px; bottom:4px; left:12px; width:35px; overflow:hidden; white-space:nowrap; }
+	.opt-themes .active { border:1px solid rgb(255,150,20); margin:-1px 3px -1px -1px;}
+	.opt-themes-tooltips { position:absolute; top:13px; left:0; width:100%; height:40px; }
+	.opt-themes-tooltips div { position:relative; float:left; width:50px; height:40px; margin:0 4px 0 0; cursor:default; }
+	.opt-themes-tooltips span { position:absolute; opacity:0.6; filter:alpha(opacity=60); display:none; z-index:1; top:-5px; right:-12px; background:rgb(240,250,215); text-align:center; font:bold 10px "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; color: rgb(90,145,25); padding:6px; }
+	.opt-themes-tooltips div:hover span { display:block; }
+	.opt-check {margin:2px 0 0 0; text-align:text-top; width:13px; height:13px; overflow:hidden; }
+	.opt-font-size-palett { font-weight:bold; margin-left:8px; }
+	.opt-font-size-palett .active { border:1px solid rgb(255,150,20); margin:0; background:white;}
+	.opt-font-size-palett div { cursor:default; overflow:hidden; float:left; line-height:30px; margin:1px; width:12%; height:23px; margin:1px; text-align:center; }
+	.opt-font-size-palett div span { position:relative; display:block; top:-30px;}
+	.opt-font-size-palett .decrease-font,
+	.opt-font-size-palett .increase-font { display:block; float:left; width:25px; height:25px;}
+	.opt-font-size-palett .decrease-font { background:url(/images/edit_btn_minus.png) no-repeat 1px 4px; }
+	.opt-font-size-palett .increase-font { background:url(/images/edit_btn_plus.png) no-repeat 6px 4px; }
+	.opt-font-size-palett .decrease-font:hover { background-position: 1px -23px; }
+	.opt-font-size-palett .increase-font:hover { background-position: 6px -23px; }
+	.opt-font-style div { float:left; margin-right:4px; padding:0px 6px; border:1px solid white; font-size:13px; cursor:default; }
+	.opt-font-style div.active { border:1px solid rgb(255,150,20); background:white; }
+	.opt-bar-load-indicator { position: absolute; top: 50px; left: 0px; display:none; padding-left:35px; color:  rgb(180,180,180);font-size:1.2em; background:url(/images/spinner.gif) no-repeat 15px top; }
+
+	.opt-bar .no-data,
+	.opt-bar .ghosted,
+	.opt-bar .deactivated { color: rgb(150,150,150); }
+	.opt-bar .activated { color:rgb(50,50,50); }
+
+	/* BOARD LIST DETAILED VIEW */
+	.board-list-detailed .pager a,
+	.board-list-detailed .pager span { padding:3px 6px 3px 6px; }
+	.board-list-detailed .pager a.number:hover { background:url(/images/btn_page_hover.gif) no-repeat top center; }
+	.board-list-detailed .pager .previous span,
+	.board-list-detailed .pager .next span { position:relative; top:3px; display:inline-block; display:-moz-inline-box; background-repeat:no-repeat; height:10px; width:19px; overflow:hidden; }
+	.board-list-detailed .pager .previous span { background-image:url(/images/btn_arrow_previous_page.gif); background-position:right -10px; }
+	.board-list-detailed .pager .next span { background-image:url(/images/btn_arrow_next_page.gif); background-position:left -10px; }
+	.board-list-detailed .pager a.previous:hover span { background-position:right -30px; }
+	.board-list-detailed .pager a.next:hover span { background-position:left -30px; }
+	.board-list-detailed .pager span.previous span { background-position:right -50px; }
+	.board-list-detailed .pager span.next span { background-position:left -50px; }
+	.board-list-detailed .pager span.previous,
+	.board-list-detailed .pager span.next { color:rgb(204,204,204); }
+	.board-list-detailed .pager { text-align:right; margin:15px 0px 15px;}
+	.board-list-detailed .pager .pager-active { color:white; padding:3px 6px; background:url(/images/btn_page_active.gif) no-repeat top center; }
+	.board-list-detailed .bottom-pager { padding:8px auto; text-align:right; }
+
+	.board-list-detailed .number-of-boards { float:left ;}
+	.board-list-detailed .number-of-boards a { padding:3px 6px 3px 6px; }
+	.board-list-detailed .number-of-boards  .pager-active { color:white; padding:3px 6px; background:url(/images/btn_pagenumber_active.gif) no-repeat top center; }
+
+	.board-list-detailed table { border-collapse: collapse; width:100%;}
+	.board-list-detailed thead { border-width: 0px 1px; border-style: solid;border-color: rgb(225,235,245); }
+	.board-list-detailed tbody { border-width: 0px 1px 2px 1px; border-style: solid; border-color: rgb(245,245,245); }
+	.board-list-detailed th,
+	.board-list-detailed td { text-align:left; vertical-align:top; padding:6px 8px; }
+	.board-list-detailed th { background-color: rgb(225,235,245); color: rgb(35,95,155) ;}
+	.board-list-detailed th a { padding:5px 0px;}
+	.board-list-detailed .title { font-weight:bold; }
+	.board-list-detailed .dark-stripe td { background-color: rgb(245,245,245); }
+	.board-list-detailed-desc,
+	.board-list-detailed-asc { padding-right: 20px!important; }
+	.board-list-detailed-desc { background:url(/images/btn_list_sortorder_down.gif) no-repeat right 5px; }
+	.board-list-detailed-asc { background:url(/images/btn_list_sortorder_up.gif) no-repeat right 5px; }
+
+	/* POPUP */
+
+	.popup-container { position: absolute; visibility:hidden; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 1000; }
+	.popup-background { position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; background: black; opacity: 0.6; filter:alpha(opacity=60); z-index: 0; }
+	.popup { position: absolute; display:none; left: 50%; top: 50%; background-color: white; border: 1px solid rgb(150,150,150); z-index: 1; }
+	.popup-canvas { position:absolute; overflow:hidden; top:0; right:0; bottom:0; left:0; height:100%; width:100%; background:white; z-index:0; }
+	.popup-pending { display:none; position:absolute;left:0;top:0;right:0;bottom:0;z-index:1000000; }
+	.show-pending .popup-pending { display:block; }
+	.popup-pending-background { position:absolute; left:0; top:0; right:0; bottom:0; background:rgb(180,180,180); opacity:0.8; filter:alpha(opacity=80); cursor:wait; z-index:-1; }
+	.popup-pending-content { position:relative; top:-10px; font-size:20px; padding-top:20%; color:black; text-align:center; cursor:wait; }
+	.show-pending .button .left div,
+	.show-pending .button .right div { background-image:url(/images/btn_background_ghosted.png)!important }
+	.popup-grid { border-collapse:collapse; height:100%; width:100%; }
+	.popup-top,
+	.popup-bottom { padding:0; vertical-align:top; }
+	.popup-top {  overflow:hidden; }
+	.popup-bottom { height:50px; }
+	.popup-content { position:absolute; overflow:auto; top:0; right:0; bottom:51px; left:0; padding:25px 20px 0 20px; }
+	.popup-button-bar { position:absolute; right:0; bottom:0; left:0; height:35px; background:rgb(235,235,235); border-top:1px solid rgb(215,215,215); padding:15px 20px 0; text-align:right; }		
+	</style>
+	<!--[if lte IE 6]>
+		<style>
+			.header-background-gradient { filter:alpha(opacity=20,finishOpacity=0,style=2); background:white; }
+			.tray-background { background:rgb(200,200,200); }
+			.tray-background-gradient { width:2000px; height:500px; top:-150px; right:-1000px; filter:alpha(opacity=100,finishOpacity=0,style=2); background:white; }
+			.canvas { width:100%; }
+			.board-list-bar { width:252px; margin-right:-3px; }
+			.board-list-panel { position:relative; top:auto; left:auto; height:100%; }
+			.toolbar-background-gradient { filter:alpha(opacity=100,finishOpacity=0,style=2); background:rgb(192,240,70); }
+			.tray-bar-background-gradient { filter:alpha(opacity=100,finishOpacity=0,style=2); background:rgb(192,240,70); }
+			.toolbar-background,
+			.tray-bar-background { height:22px; }
+			.toolbar-button { margin-top:2px; }
+			.text-save .toolbar-button { float:right; margin-top:-3px; }
+			.board-list-top { height:88px; }
+			.board-list-bar .bar-tools { top:64px;}
+			
+			/* OPTIONBAR */
+			.opt-panel { top:auto; bottom:auto; height:100%; }
+			.opt-bar .bar-tools { top:-25px;}
+			.opt-bar-grid { width:255px; }
+			.opt-gradient { filter:alpha(opacity=100,finishOpacity=10,style=2); background:white;}
+			.bopt-open .opt-background { top:auto; height:100%; z-index:-1; }
+			
+			.wopt-frame { top:auto; bottom:auto; height:100%; }
+			.wopt-common-tools { position:relative; bottom:auto; height:100%; width:100%; }
+			
+			 /* OPTIONBAR STATES*/
+			.wopt-open .opt-bar-top { height:91px; }
+			.wopt-open .opt-bar-bottom { height:125px; }
+			
+			.opt-bar-top { height:106px; }
+			.bopt-open .opt-bar-bottom { height:135px; }
+			.tray-hide .bopt-open .opt-bar-bottom { height:34px; }
+			
+			/* OPTIONBAR SWITCHES */
+			.opt-switch-shadow-line { right:-1px; }
+			.opt-switch-highlight-line,
+			.board-list-switch-highlight-line,
+			.board-list-switch-shadow-line,
+			.opt-switch-shadow-line { height:22px; width:1px; }
+			
+			.board-list-switch,
+			.opt-switch { height:22px; }
+			
+		</style>
+	 <![endif]-->
+	<script>
+		/*onload = function(){
+			var canvas = document.getElementById("canvas");
+			var scrollbar_size = canvas.offsetWidth-canvas.clientWidth;
+			alert(scrollbar_size);
+		}*/
+	</script>
+</head>
+<body scroll="no" class="board-list-show wopt-show bopt-hide tray-show">
+	
+		<!-- HEADER -->
+	<div class="header">
+		<div class="header-background">
+			<div class="header-background-gradient"></div>
+			<div class="header-background-pattern"></div>
+		</div>
+
+		<div class="utility-navigation" id="utility_navigation">
+
+		<a href="/setting">Personal Settings</a>
+			<span class="pipe"></span> 
+		<a href="/admin/user">Administration</a>
+			<span class="pipe"></span> 
+		<a href="/public/signout">Sign Out: </a>
+		<a href="/public/signout" class="member-name">Jonas Höglund</a>
+
+		</div>
+		<a href="/"><div class="stixy-signature-top"></div><div class="stixy-signature-bottom"><div></div></div></a>
+	</div>
+
+	<!-- TOOLBAR -->
+	<div class="toolbar">
+		<div class="toolbar-background"><div class="toolbar-background-gradient"></div></div>
+		<div class="board-list-switch">
+			<a class="button toolbar-button" href="#" > <div class='left'><div>&nbsp;</div></div>
+	                    <div class='right'><div>&nbsp;</div></div>
+
+	                    <div class='label'>New</div></a> 
+
+			<a href="#" class="toolbar-button" id="board_list_open">
+			  <div class="left"><div>&nbsp;</div></div>
+			  <div class="right"><div>&nbsp;</div></div>
+				<div class="label">Open</div>
+			</a>
+
+			<div class="board-list-switch-shadow-line"></div>
+			<div class="board-list-switch-highlight-line"></div>
+
+		</div>
+		<a href="#" class="toolbar-button" id="share_open">
+		  <div class="left"><div>&nbsp;</div></div>
+		  <div class="right"><div>&nbsp;</div></div>
+			<div class="label">Share</div>
+		</a>
+		<a href="#" class="toolbar-button" id="board_option_open">
+		  <div class="left"><div>&nbsp;</div></div>
+
+		  <div class="right"><div>&nbsp;</div></div>
+			<div class="label">Options</div>
+		</a>
+		<div class="save-indicator" id="save-state">
+			<div class="text-save">
+				<span class="toolbar-button">
+					<div class="left"><div>&nbsp;</div></div>
+					<div class="right"><div>&nbsp;</div></div>
+
+					<div class="label">Save now</div>
+				</span>
+				<span id="save_counter" class="save-counter">60</span> seconds to auto-save
+			</div>
+			<div class="text-saved">
+				Nothing to be saved
+			</div>
+			<div class="text-saving">
+
+				Saving
+			</div>
+		</div>
+		<!-- BOARD OPTIONS SWITCH -->
+		<div class="opt-switch bopt-switch">
+			<div class="opt-switch-highlight-line"></div>
+			<div class="opt-switch-label">
+				<a href="#" class="bopt-switcher-show" id="bopt_show">
+					Hide Stixyboard Options
+				</a>
+
+				<a href="#" class="bopt-switcher-hide" id="bopt_hide">
+					Show Stixyboard Options
+				</a>
+			</div>
+			<div class="opt-switch-shadow-line"></div>
+		</div>
+	</div>	
+	
+	<!-- BOARD LIST -->
+	<div class="board-list-bar">
+		<div class="bar-tools">
+			<div class="bar-close"></div>
+		</div>
+		<table class="board-list-grid">
+			<tr><td class="board-list-top"></td></tr>
+			<tr>
+				<td class="board-list-bottom">
+					<div class="board-list-panel">
+						<div class="board-list-scroll">
+							<div class="board-list-content">ss</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- CANVAS -->
+	<div  class="canvas" id="canvas">
+		<div class="min-space"></div>
+		<div style="position:absolute;top:200px;left:100px;width:1000px;height:410px;background:lightgreen">
+			<a href="xxx">Test</a>
+		</div>
+	</div>
+	
+	<!-- OPTIONBAR -->
+	<div class="opt-bar wopt-open" id="opt_bar">
+		<table class="opt-bar-grid">
+			<tr><td class="opt-bar-top">s</td></tr>
+			<tr>
+				<td class="opt-bar-middle">
+					<div class="opt-panel bopt">
+						<div class="opt-background">
+							<div class="opt-gradient"></div>
+						</div>
+						<div class="bar-tools"><div class="bar-close"></div></div>
+						<div class="opt-scroll">
+							<div class="opt-content" style="padding-bottom:1000px">sas</div>
+						</div>
+					</div>
+					<!-- <div class="opt-panel">s</div> -->
+					<iframe src="/test_optionbar_frame.html" frameborder="0" allowtransparency="true" class="wopt-frame"></iframe>
+				</td>
+			</tr>
+			<tr>
+				<td class="opt-bar-bottom">
+					<div class="wopt-common-tools">s</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<!-- TRAY -->
+
+	<div class="tray">
+		<div class="tray-highlight-line"></div>
+		<div class="tray-background">
+			<div class="tray-background-gradient"></div>
+		</div>
+		<div class="tray-content">
+			<div class="tray-slot">
+				<div class="tray-icon" id="widget-tray-note" title="Drag, position, and drop">
+					<div class="tray-item">
+
+		        <div class="note widget" style="top:100px;left:100px;width:180px;height:150px;; z-index:0" id="widget_">
+	  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+	<div class="focus">
+		<div class="focus-border-spacer">&nbsp;</div>
+	</div>
+		<div class="base">
+	    <div class="base-bg note-bg" style=""><p></p></div>
+	    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+
+			<div class="editor-canvas"><div class="editor"><font size='3'></font></div></div>
+			<div class="handles">
+		<div class="remove"></div>
+		<div class="resizer"></div>
+	</div>
+		</div>
+	</div>
+		      </div>
+				</div>
+				<div class="tray-label">Note</div>
+
+			</div>
+			<div class="tray-slot">
+				<div class="tray-icon" id="widget-tray-photo" title="Drag, position, and drop">
+					<div class="tray-item">
+						<div class="photo widget" style="top:100px;left:100px;width:220px;height:160px;; z-index:0" id="widget_">
+	  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+	<div class="focus">
+		<div class="focus-border-spacer">&nbsp;</div>
+
+	</div>
+	  <div class="base">
+	  		<div class="frame" style='margin:10px; top:-10px; bottom:10px; padding:10px 0;'>
+			  <div class="photo-load">loading...</div>
+					      <img alt="Add a photo" galleryimg="false" src="/images/widget_photo_placeholder_200x140.jpg?1167834735" width="100%" />
+
+					<div class="upload-pane" style="display:block;">
+						<div class="upload-offset">
+							<div class="upload-overlay"><div>&nbsp;</div></div>
+							<div class="w-p-upload upload-button">
+
+					      <span class="button default"  style="position:relative;top:-10px;font:11px 'Verdana', 'Lucida Grande', 'Bitstream Vera Sans', 'Sans';">
+									<div class="left"><div>&nbsp;</div></div>
+									<div class="right"><div>&nbsp;</div></div>
+									<div class="label">Add photo(s)</div>
+								</span>
+							</div>
+						</div>
+					</div>
+
+						    			<div class="status-pane">
+					<div class="status-canvas">
+						<div class="status-bg"></div>
+						<div class="status-content">
+							<div class="status-file-name">File Name <span class="status-file-name-text">hh</span></div>
+							<div class="status-file-size">Size <span class="status-file-size-loaded">0 KB</span> of  <span class="status-file-size-total">? KB</span></div>
+
+						</div>
+						<div class="progress-canvas">
+							<div class="progress-bar" style="width:75%;"></div>
+							<div class="progress-number">0%</div>
+						</div>
+					</div>
+				</div>
+				<div class="error-pane">
+
+					<div class="error-pane-background"></div>
+					<strong>We're sorry!</strong>
+					<div style="display:none;">An error occured while the photo was uploaded to Stixy</div>
+					<div style="display:none;">There is an error in the file and it can not be uploaded to Stixy</div>
+					<div style="display:none;">There was an unspeciefied error while uploading the photo to Stixy</div>
+				</div>
+			</div>
+
+			<div class="handles">
+		<div class="remove"></div>
+		<div class="resizer"></div>
+	</div>
+	  </div>
+	</div>
+					</div>
+				</div>
+				<div class="tray-label">Photo</div>
+
+			</div>
+			<div class="tray-slot">
+				<div class="tray-icon" id="widget-tray-document" title="Drag, position, and drop">
+					<div class="tray-item">
+					<div class="document widget" style="z-index:0; top:100px;left:100px;width:150px;height:110px;" id="widget_">
+		<div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+	<div class="focus">
+		<div class="focus-border-spacer">&nbsp;</div>
+
+	</div>
+	  <div class="base">
+	    <div class="base-bg document-bg">&nbsp;</div>
+					<div class="document-icon" style="background-image:url(/images/widgets/document/icons/generic.png);"></div>
+	    <div class="progress-canvas">
+				<div class="progress-bar"></div>
+				<div class="progress-number">0%</div>
+			</div>
+			<div class="status-pane">
+
+				<div class="status-file-size">Size <span class="status-file-size-loaded">0 KB</span> of  <span class="status-file-size-total">? KB</span></div>
+				<div class="status-file-name-text">--</div>
+			</div>
+			<div class="w-d-file-link file-link"></div>
+					<span class="button default w-d-upload"  style="margin-left:10px; font:11px 'Verdana', 'Lucida Grande', 'Bitstream Vera Sans', 'Sans';">
+				<div class="left"><div>&nbsp;</div></div>
+
+				<div class="right"><div>&nbsp;</div></div>
+				<div class="label">Add document</div>
+			</span>
+					<div class="handles">
+		<div class="remove"></div>
+		<div class="resizer"></div>
+	</div>
+		</div>
+	</div>
+
+					</div>
+				</div>
+				<div class="tray-label">Document</div>
+			</div>
+			<div class="tray-slot">
+				<div class="tray-icon" id="widget-tray-todo" title="Drag, position, and drop">
+					<div class="tray-item">
+						<div class="todo widget" style="width:230px;height:200px;top:100px;left:100px;; z-index:0" id="widget_">
+
+	  <div class="shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+	<div class="focus">
+		<div class="focus-border-spacer">&nbsp;</div>
+	</div>
+	  <div class="base">
+			<div class="base-bg todo-bg"><p></p></div>
+	    <div class="todo-header">
+				<div class="header-bg"><p></p></div>
+
+				<div class="todo-content">
+								<div class="todo-reminder-icon">&nbsp;</div>
+					<div class="todo-indicator">TODO</div>
+					<div class="todo-day">13</div>
+					<div class="todo-month-year"><span class="todo-month">April</span> <span class="todo-year">2007</span></div>
+					<div class="todo-dayname-time">
+
+						<span class="todo-dayname">Friday</span>
+						<span class="todo-time">
+							<span class="todo-hour">5</span>:<span class="todo-minute">00</span>
+				 			<span class="todo-postfix">PM</span>
+						</span>
+					</div>
+
+				</div>
+	    </div>
+	    <div class="todo-comments">COMMENTS</div>
+			<div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+			<div class="editor-canvas"><div class="editor"></div></div>
+	  	</div>
+		  <div class="handles">
+		<div class="remove"></div>
+
+		<div class="resizer"></div>
+	</div>
+	</div>
+					</div>
+				</div>
+				<div class="tray-label">Todo</div>
+			</div>
+		</div>
+	</div>
+	<div class="tray-bar">
+
+		<div class="tray-bar-background"><div class="tray-bar-background-gradient"></div></div>
+		<div class="tray-bar-highlight-line"></div>
+		<div class="tray-switch">
+			<a href="#" class="tray-switcher-show" id="tray_show">
+				Hide Widgets
+			</a>
+			<a href="#" class="tray-switcher-hide" id="tray_hide">
+				Show Widgets
+			</a>
+		</div>
+
+		<!-- WIDGET OPTIONS SWITCH -->
+		<div class="opt-switch wopt-switch">
+			<div class="opt-switch-highlight-line"></div>
+			<div class="opt-switch-label">
+			  <a href="#" class="wopt-switcher-show" id="wopt_show">
+					Hide Widget Options
+				</a>
+				<a href="#" class="wopt-switcher-hide" id="wopt_hide">
+					Show Widget Options
+				</a>
+
+			</div>
+			<div class="opt-switch-shadow-line"></div>
+		</div>
+	</div>
+</body>
+</html>

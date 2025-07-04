@@ -1,0 +1,35 @@
+/*--------*/
+/* GUEST */
+/*--------*/
+
+
+/* Toolbar */
+/* AD SIZE UPDATE top:25px;  => top:125px; */
+.toolbar { top:<%= current_user.display_ad? ? 125 : 25 %>px; }
+.toolbar .save-indicator { right:25px; }
+
+/* Header */
+.header .stixy-signature { position:absolute; top:0px; left:0px; width:200px; height:60px; background-repeat:no-repeat;}
+<%- if current_user.display_ad?  -%>
+.header .stixy-signature { height:125px; left:17px; background-image:url(/images/main_template/mt_signature_stixyboard_large_green.png); }
+<%- else -%>
+.header .stixy-signature { background-image:url(/images/main_template/mt_signature_stixyboard_black.png); }
+<%- end -%>
+.header { left:-17px; }
+/* AD SIZE UPDATE height:25px;  => height:125px; */
+.header,
+.header-background, 
+.header-background-pattern, 
+/* AD SIZE UPDATE height:25px;  => height:125px; */
+.utility-navigation { height:<%= current_user.display_ad? ? 125 : 25 %>px;  }
+.header .header-content { position:absolute; top:0; left:0; width:100%; z-index:1; }
+/* AD SIZE UPDATE top:5px;  => height:105px; */
+.header .utility-navigation { position:absolute; top:<%= current_user.display_ad? ? 105 : 5 %>px; width:auto; }
+/* AD SIZE UPDATE left:120px;  => height:37px; */
+.header .global-navigation { position:absolute; top:<%= current_user.display_ad? ? 105 : 5 %>px; left:<%= current_user.display_ad? ? 37 : 120 %>px; width:auto; }
+
+.wopt-bar { top:74px; }
+  
+<%- if current_user.display_ad?  -%>
+.sample-column-content { margin-top:60px!important; }
+<%- end -%>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html debug="true">
+<head>
+	<title>Welcome to Stixy</title>
+	<script language="javascript" type="text/javascript" src="/javascripts/all/firebug/firebug.js"></script>
+	<script>
+		var temp_selection;
+		onload = function(){
+			var frame = window.frames[0]
+			//frame.document.designMode = "on";
+			button.onclick = makeBold;
+			var field = document.getElementById("field");
+			var content = document.getElementById("content");
+			var font = document.getElementById("widget_note_font")
+			var options = document.getElementById("options");
+			font.onchange = setFont;
+			content.onbeforedeactivate = function(){
+				
+				if(!options.contains(event.toElement)){
+					console.log(event.toElement.tagName);
+				}
+				temp_selection = document.selection.createRange();
+			};
+			font.onbeforeactivate = function(){
+				
+			};
+			document.getElementById("link").onclick = function(){
+				//console.log(temp_selection)
+				temp_selection.select();
+				document.execCommand("createlink", false, "this.value")
+			};
+		}
+		function makeBold(){
+			document.execCommand("bold", false, null)
+		}
+		function makeItalic(){
+			document.execCommand("italic", false, null)
+		}
+		function setFont(){
+			var el = document.getElementById("widget_note_font")
+			content.setActive()
+			console.log(document.activeElement.tagName)
+			document.execCommand("fontname", false, el.options[el.selectedIndex].value)
+		}
+	</script>
+	
+	<style>
+		body { }
+		div[contenteditable=true] {
+			outline: none;
+			-webkit-user-modify: read-write;
+		}
+		[unselectable=on] {
+			-webkit-user-select: none;
+		}
+		.w-n-font {
+			-webkit-user-select: none;
+		}
+	</style>
+</head>
+<body>
+<div style="background:salmon;width:200px;height:100px;padding:10px;" contenteditable="true" id="content">dsd dsadasd dsd</div>
+<div id="button" unselectable="on" style="width:40px;height:20px;background:red;">BOLD</div>
+<div id="make" unselectable="on">Make</div>
+<div id="insert">Insert</div>
+<div id="options">
+<form>
+<select unselectable="on" style="margin:2px 0px 8px;" class="w-n-font" id="widget_note_font">
+  <optgroup style="border-bottom:1px solid gray;padding-bottom:5px;margin-bottom:5px;">
+		<option value="Georgia" style="font-family:Georgia;">Georgia</option>
+  	<option value="Times" style="font-family:Times;">Times</option>
+  	<option value="Verdana" style="font-family:Verdana;">Verdana</option>
+		<option value="Arial" style="font-family:Arial;">Arial</option>
+		<option value="Trebushe MS" style="font-family:Trebushe MS;">Trebushe MS</option>
+		<option value="Comic Sans" style="font-family:Comic Sans;">Comic Sans</option>
+	</optgroup>
+	<optgroup>
+		<option value="Monospace" style="font-family:Monospace;">Monospace</option>
+		<option value="Cursive" style="font-family:Cursive;">Cursive</option>
+		<option value="Fantasy" style="font-family:Fantasy;">Fantasy</option>
+		<option value="Sans-Serif" style="font-family:Sans-Serif;">Sans-Serif</option>
+		<option value="Serif" style="font-family:Serif;">Serif</option>
+	</optgroup>
+</select>
+<input id="field" type="text">
+<input type="button" id="link" value="insert link">
+</form>
+</div>
+<iframe unselectable="on" src="/test/test_editor_ie_iframe.html" width="200" height="200"></iframe>
+</body>
+</html>

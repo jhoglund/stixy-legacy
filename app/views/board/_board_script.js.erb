@@ -1,0 +1,14 @@
+<%- cache("board/board_script/#{@board.id}", :expires_in => 30.days) do -%>
+<%= "urchinTracker('/board/#{@board.id.to_s}/#{current_user.id.to_s}');" if ENV['RAILS_ENV'] == 'production'  %>
+try{
+  document.title = unescape('<%= "#{@board.id ? URI.escape(@board.document_title, "\'\"\/\<\>") : 'New Stixyboard' }" %>');
+  Stixy.board.id = <%= @board.id ? @board.id : 0 %>;
+  Stixy.server.canBeSaved = <%= current_user.authorized? || !(@board.id) %>;
+  Stixy.ui.scrollPositions = { left:<%= @board.left %>,top:<%= @board.top %> };
+	/*Stixy.ui.scrollToPosition({ left:<%= @board.left %>,top:<%= @board.top %> })*/;
+  <%- @board.widgets.each do |widget_instance| -%>
+  Stixy.widgets.addWidget(new Stixy.widgets.<%= widget_instance.widget.name %>('widget_<%= widget_instance.id %>', { <%= Object.const_get('Widget'<< widget_instance.widget.name).find(widget_instance.id).instance_attributes(widget_instance.auto_front) %> }));
+  <%- end -%>
+  Stixy.board.announce('load');
+}catch(e){ new StixyError(e) }
+<%- end -%>

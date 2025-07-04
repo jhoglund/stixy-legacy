@@ -1,0 +1,45 @@
+<%= link_to 'Edit', :action => 'edit', :id => @user %> |
+<%= link_to 'List', :action => 'list' %>
+
+<table class="admin">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  <tr class="light">
+    <td>Id:</td>
+    <td><%= @user.id %></td>
+  </tr>
+  <tr class="dark">
+  <td>Roles:</td>
+    <td>
+	<% @user.roles.each do |role| %>
+       <%= role.name %>,&nbsp;
+    <% end %>
+    </td>
+  </tr>
+  <tr class="light">
+  <td>Contacts:</td>
+    <td>
+		<%= formated_collection(@user.contacts, nil, "(None)"){|c| link_to c.display_name, :action => 'show', :id => c } %>
+    </td>
+  </tr>
+	<tr class="dark">
+  <td>Invited:</td>
+    <td>
+			<%= formated_collection(@user.invited_by, nil, "(None)"){|u| link_to u.display_name, :action => "show", :id => u } %>
+    </td>
+  </tr>
+<% User.content_columns.each_with_index  do |column, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+%>
+  <tr class="<%= color %>">
+    <td><%= column.human_name %>:</td>
+    <td><%=h @user.send(column.name) %></td>
+    </tr>
+<% end %>
+    
+</table>
+
+

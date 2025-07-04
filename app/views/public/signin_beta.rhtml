@@ -1,0 +1,27 @@
+<div class="right-column-bg"></div>
+
+<%= error_messages_for 'user' %>
+
+<% form_tag(:action => 'signin') do -%>
+
+<%= render :partial => "public_navigation" %>
+<div class="left-column">
+	<% if flash[:message].nil? %>
+	<h1>Sign In to Stixy</h1>
+	<p>
+		<%= render :partial => "signin" %>
+		<div class="field-title">
+			<label><input name="remember_me" value="1"<% if params[:remember_me]=="1" %> checked<% end %> type="checkbox" style="position:relative;top:2px;"> Keep me signed in</label>
+		</div>
+		<div class="field-title" style="margin-top:8px;">
+		  <%= link_to "Forgot your password?", :controller => "public", :action => "forgot_password" %>
+		</div>
+		<div style="margin-top: 10px; text-align: right;">
+			<%= link_to_function("Sign in", "document.forms[0].submit()", :button => {:type => 'default'}) %>
+		  <%= submit_tag '', :style => "display:none" %>
+		</div>	</p>
+	<% else %>
+	<%= flash[:message] %>
+	<% end %>
+</div>
+<% end -%>

@@ -1,0 +1,45 @@
+<%= @doc_type %>
+<html lang="en" style="background:white;" xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<title>Stixy: For Flexible Online Creation Collaboration and Sharing</title>
+	<%= render :partial => "/shared/meta" %>
+	<%= stylesheet_link_tag "/resources/default/#{ session[:browser][:type] }" -%>
+	<%= stylesheet_link_tag "/resources/public/#{ session[:browser][:type] }" -%>
+	<%= stylesheet_link_tag "/resources/beta/#{ session[:browser][:type] }" -%>
+	<style>
+		#signin_widget * {cursor:default!important;}
+		#signin_widget .text-field {cursor:text!important;}
+		#signin_widget a {cursor:pointer!important;}
+	</style>
+</head>
+<body scroll="no">
+	<div class="header">
+	  <div class="header-bg"></div>
+		<a href="/"><img src="/images/main_template/mt_beta_logo.png" width="87" height="32" class="logo" border="0"></a>
+		<div class="utility-navigation">
+			<% if current_user.authorized? %>
+				<%= link_to "Sign Out: ", :controller => "signout" %>
+				<%= link_to current_user.display_name , {:controller => "public", :action => 'signout'}, :class => "member-name" %>
+			<% else %>
+				<%= link_to "Sign In", {:controller => "signin"} %>
+			<% end %>
+		</div>
+	</div>
+	<div class="content">
+	  <%= @content_for_layout %>
+		<div style="clear:both"></div>
+	</div>
+	<div class="footer">
+		<div class="footer-bg"></div>
+		<%#= link_to "Contact Us", :controller => "contact_us" %>
+		<%= link_to "Terms of Service", :controller => "terms_of_service" %>
+		<%= link_to "Privacy Policy", :controller => "privacy_policy" %>
+		<%= link_to "Contact Us", :controller => "contact_us" %>
+	</div>
+	<div class="copyright">
+		<div class="copyright-bg"></div>
+		&copy; 2008 Stixy, Inc. All rights reserved.
+	</div>
+	<%= render(:partial => "/shared/google_analytics") %>
+</body>
+</html>

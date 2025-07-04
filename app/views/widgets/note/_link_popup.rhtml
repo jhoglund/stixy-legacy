@@ -1,0 +1,8 @@
+<h2 style="margin:10px 0 0;"><%= edit==true ? "Edit or remove link" : "Insert link" %></h2>
+<p>
+<h4 style="margin-bottom:2px">Link label</h4>
+<input type="text" id="label" style="width:310px;" value="" tabindex="1">
+<p>
+<h4 style="margin-bottom:2px">Web page or an e-mail address</h4>
+<input type="text" id="link" style="width:230px;" value="" tabindex="2">
+<%= "#{ link_to_function "Open", "navigate()", :button => {:type => false}, :style => "position:relative;top:-3px; left:8px;" }" %>

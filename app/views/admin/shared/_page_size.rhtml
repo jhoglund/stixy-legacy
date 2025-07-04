@@ -1,0 +1,14 @@
+<div class="number-of-pages">
+	<span class="title"><%= title %></span>
+	<% [10,25,50,100].each do | val | %>
+	<% if session[:page_size] != val %>
+		<%= stixy_remote_link(val, 
+			{ :url => { :action => action, :page_size => val },
+				:update => update},
+				:id => "page_size_#{val}",
+				:class => "number" ) -%>
+		<% else %>
+			<span class="pager-active"><%= val %></span>
+		<% end %>
+	<% end %>
+</div>

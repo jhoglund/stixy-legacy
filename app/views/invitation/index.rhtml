@@ -1,0 +1,44 @@
+<span class="invite">
+<% unless @invite.nil? %>
+
+<div class="left-column">
+	<div class="date">
+		<%= formated_date(@invite.updated_on) %>
+	</div>
+	<p>To: <span style="color:rgb(150,210,10);"><%= @invite.accepted_user.display_name %></span></p>
+	
+	<h1>Hello!</h1>
+	<p>
+	<b><%= @invite.inviter_user.display_name %></b> has invited you to join
+	<% unless @invite.board.title.empty? %>
+   Stixyboard <span style="font-weight:bold;color:rgb(150,210,10);">"<%= @invite.board.title %>"</span>.
+	<% else %>
+		a Stixyboard.
+	<% end %>
+	This is a Stixyboard where you and your friends can share experiences and ideas, photos and documents. Just within your own group
+	or with the whole wide world.
+	</p>
+	<p>
+	Go ahead and accept your invitation!
+	</p>
+	<div class="button-bar">
+		<%= link_to "Accept invitation", {:controller => "invitation", :action => "join", :token => @invite.reference_token}, :button => {:type => 'default'} %>
+	</div>
+	<% unless @invite.invitation_text.empty? %>
+	<div class="message">
+		<div style="text-align:right;margin-top:-12px;margin-bottom:12px;">Personal message from <strong><%= @invite.inviter_user.nick_name %></strong></div>
+		<p><%= (@invite.invitation_text).gsub(/\n/, "<br>") %></p>
+		<div class="nw"><p>&nbsp;</p></div><div class="ne"><p>&nbsp;</p></div><div class="se"><p>&nbsp;</p></div><div class="sw"><p>&nbsp;</p></div><div class="callout">&nbsp;</div>
+	</div>
+	<% end %>
+</div>
+<div class="right-column-bg">&nbsp;</div>
+<div class="right-column">
+	<h3>This Stixyboard is shared by</h3>
+	<%= render :partial => "board/user_list", :collection => @invite.board.users, :locals => {:compact => false } %>
+	<h3 style="margin-top:6px;">Invited to share are</h3>
+	<%= render :partial => "board/user_list", :collection => @invite.board.invited_users, :locals => {:compact => false, :invite => @invite } %>
+</div>   
+ 
+<% end %>
+</span>

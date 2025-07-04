@@ -1,0 +1,33 @@
+/*-------------------------*/
+/*   WIDGETS DEFAULT IE 6  */
+/*-------------------------*/
+
+.widget .base { width:100%; height:100%; padding:0; right:auto; bottom:auto; }
+.widget .shadow { position:absolute; top:8px; left:8px; width:100%; height:100%; }
+.widget .shadow s { position:relative; float:right; overflow:hidden; top:-8px; right:0; height:100%; padding-bottom:8px; background:none; }
+.widget .shadow s a {  width:16px; right:4px; }
+.widget .shadow b { width:100%; overflow:hidden; }
+.widget .shadow b a { padding-right:100%; height:16px; bottom:4px;}
+.widget .shadow b u,
+.widget .shadow b i { position:relative; overflow:hidden; background:none; right:4px; }
+.widget .shadow i a { right:0; }
+.widget .shadow a {  position:absolute; height:100%; background:white; filter:progid:DXImageTransform.Microsoft.blur(pixelradius=4.0, makeshadow='true', ShadowOpacity=0.2); }
+.widget .editor { position:relative; top:0px; left:0px; height:100%; width:auto; }
+.widget .editor-bg,
+.widget .editor-canvas { top:0px; left:0px; height:100%; width:100%; padding:8px 8px 13px 8px; }
+.widget .editor,
+.widget .editor-bg-border { position:relative; height:100%; }
+
+.widget .focus { position:relative; top:-2px; left:-2px; width:100%; height:100%;}
+.widget .focus-border-spacer { width:100%; height:100%; }
+.widget-selected .focus-border-spacer { margin-bottom:2px; padding-right:100%; }
+.widget .handles { right:-1px; }
+.widget .resizer { bottom:-1px; }
+.widget-hover .resizer { 	background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/default/edit_btn_resize_hover.png', sizingMethod='crop'); }
+.widget-selected .resizer { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/default/edit_btn_resize_active.png', sizingMethod='crop'); }
+.widget-hover .remove { 	background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/default/edit_btn_close_hover.png', sizingMethod='crop') }
+.widget-selected .remove { 	background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/default/edit_btn_close_active.png', sizingMethod='crop'); }
+.widget .base-bg { background-image:none!important; overflow:hidden }
+.widget .base-bg p { position:relative; top:-250px; left:-250px; background-image:none!important; width:500px; height:500px; background:white; filter:progid:DXImageTransform.Microsoft.Alpha(opacity="80", finishopacity="0", style="2")  }
+.widget-highlighted .focus-border-spacer { margin-bottom:2px; padding-right:100%; }
+		

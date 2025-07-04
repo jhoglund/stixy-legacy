@@ -1,0 +1,151 @@
+<% if @reload_board %>
+	<script>
+		top.Stixy.board.navigate(<%= @board.id %>);
+	</script>
+<% end %>
+<style>
+	.trash-can-containor { position:absolute; width:100%;height:100%;background:rgb(245,245,245);margin:0 -20px 0 -20px; }
+	.widget { position:relative; top:0px!important; left:0px!important;  cursor:default; }
+	.widget * { cursor:default!important; } 
+	.widget-containor { position:relative; float:left; margin:20px 10px 20px 40px; }
+	.widget-layout { border-collapse:collapse; width:100%; }
+	.widget-layout td { vertical-align:top; padding:0; background:rgb(245,245,245); } 
+	.widget-layout td.alternated-row { border-bottom:1px solid rgb(235,235,235);  }
+	.top-bar { padding:6px 20px 12px; border-bottom:1px solid rgb(215,215,215); background: rgb(235,235,235); }
+	.select-tools { float:right; margin-top:3px; color:rgb(150,150,150); }
+	.notice,
+	.error { margin:20px 20px 0; padding:10px; font: 11px "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; }
+	.notice { color: rgb(90, 145, 25); background:rgb(225, 250, 160); }
+	.error { color: rgb(185,5,70); background:rgb(255,160,200); }
+
+</style>
+
+<!--[if lte IE 7]>
+<style>
+	.trash-can-containor { margin:0; width:expression(document.body.clientWidth); left:0px; }
+	.top-bar sx\:button { position:relative; top:2px; }
+	.widget-layout td { padding:0 0 10px; } 
+</style>
+<![endif]-->
+
+<div class="trash-can-containor">
+
+<% widget_instances = @board.widgets(Status::DISABLED) %>
+<% if widget_instances.empty? %>
+ <div style="position:absolute;width:100%;top:-20px;font-size:1.4em;color:rgb(150,150,150);text-align:center;margin-top:25%;">The trash can is empty</div>
+<% 
+@buttons = "#{ link_to_function "Close", 'window.parent.Stixy.popup.close()', :button => {:type => 'default'} }"
+%>
+<%  else %>
+
+<script>
+	var StixyRecoverWidgets = {
+		checkboxes: [],
+		selected_checkboxes: 0,
+		toggleElement: function(element){
+			if(element.checked){
+				this.selected_checkboxes++;
+			}else{
+				this.selected_checkboxes--;
+			}
+			this.toggleButtons(this.selected_checkboxes > 0)
+		},
+		toggleButtons: function(test){
+			if(test){
+				Stixy.element.replaceClassName(StixyRecoverWidgets.recoverCloseButton, "ghosted", "default");
+				Stixy.element.removeClassName(StixyRecoverWidgets.recoverButton, "ghosted");
+				Stixy.element.removeClassName(StixyRecoverWidgets.deleteButton, "ghosted");
+			}else{
+				Stixy.element.replaceClassName(StixyRecoverWidgets.recoverCloseButton, "default", "ghosted");
+				if(!Stixy.element.hasClassName(StixyRecoverWidgets.recoverButton, "ghosted")){
+					Stixy.element.addClassName(StixyRecoverWidgets.recoverButton, "ghosted");
+				}
+				if(!Stixy.element.hasClassName(StixyRecoverWidgets.deleteButton, "ghosted")){
+					Stixy.element.addClassName(StixyRecoverWidgets.deleteButton, "ghosted");
+				}
+			}
+		},
+		recover: function(closePopup){
+			if(this.selected_checkboxes > 0){
+				StixyRecoverWidgets.form.action = "/board/recover_widgets?popupClose=" + (closePopup==true) + "&popupWidth=" + top.Stixy.popup.width;
+				StixyRecoverWidgets.form.submit();
+			}
+		},
+		remove: function(){
+			if(this.selected_checkboxes > 0 && confirm("Are you sure you want to delete the widgets?\n\nThis action will delete the widgets forever, and you will not be able to recover them at a later stage\n\n")){
+				StixyRecoverWidgets.form.action = "/board/delete_widgets?popupWidth=" + top.Stixy.popup.width;
+				StixyRecoverWidgets.form.submit();
+			}
+		},
+		select: function(select){
+			for(var i=0; i<this.checkboxes.length; i++){
+				this.selected_checkboxes =  (select==true ? this.checkboxes.length : 0);
+				this.checkboxes[i].checked = (select==true);
+			}
+			this.toggleButtons(select);
+		}
+	}
+	Stixy.listen("ready", function(){
+		StixyRecoverWidgets.recoverCloseButton = Stixy.element.$ID("recovery_close_button");
+		StixyRecoverWidgets.recoverButton = Stixy.element.$ID("recovery_button");
+		StixyRecoverWidgets.deleteButton = Stixy.element.$ID("delete_button");
+		StixyRecoverWidgets.form = document.forms[0];
+		var checkboxes = document.body.getElementsByTagName("input");
+		for(var i=0; i<checkboxes.length; i++){
+			if(checkboxes[i].type=="checkbox"){
+				StixyRecoverWidgets.checkboxes.push(checkboxes[i]);
+				if(checkboxes[i].checked){
+					StixyRecoverWidgets.selected_checkboxes++;
+				}
+			}
+		}
+		StixyRecoverWidgets.toggleButtons(StixyRecoverWidgets.selected_checkboxes > 0);
+	})
+</script>
+
+<% form_tag(:id => @board) do -%>
+	<div class="top-bar">
+		<span class="select-tools">
+			Select widgets:
+			<%= link_to_function "all", 'StixyRecoverWidgets.select(true)' %>
+			|
+			<%= link_to_function "none", 'StixyRecoverWidgets.select(false)' %>
+		</span>
+		<%= link_to_function "Recover", 'StixyRecoverWidgets.recover()', :button => {:type => 'ghosted'}, :id => "recovery_button"   %>
+		<%= link_to_function "Delete", 'StixyRecoverWidgets.remove()', :button => {:type => 'ghosted'}, :style => "margin-left:10px;", :id => "delete_button"  %>
+	</div>
+	<% unless flash[:success].nil? %>
+		<div class="notice"><%= flash[:success] %></div>
+	<% end %>
+	<% unless flash[:error].nil? %>
+		<div class="error"><%= flash[:error] %></div>
+	<% end %>
+	<table class="widget-layout">
+		<tr><td>
+		<%
+			total = []
+			row_index = 0
+			widget_instances.each do |widget_instance| 
+				widget_width = widget_instance.width.nil? ? 150 : widget_instance.width
+				total << widget_width
+				if new_row = total.inject {|sum, n| sum + n + 55 } > (params[:popupWidth].to_i - 56)
+					row_index += 1
+					total = [widget_width]
+				end	
+		%>
+		<% if new_row %></td></tr><tr><td class="alternated-row"><% end %>
+			<div class="widget-containor">
+		  	<input type="checkbox" style="position:absolute;top:0;left:-23px;" onclick="StixyRecoverWidgets.toggleElement(this)" id="widget_<%= widget_instance.id %>" name="widgets[<%= widget_instance.id %>]">
+				<%=  render(:partial => "/widgets/#{widget_instance.widget.name.downcase}/widget", :object => widget_instance, :locals => { :index => 0 }) %>
+			</div>
+		<% end %>
+	
+	</td></tr>
+</table>
+
+<% end %>
+<% 
+@buttons = "#{ link_to_function "Cancel", 'window.parent.Stixy.popup.close()', :button => {:type => false} } 
+						#{ link_to_function "Recover and close", 'StixyRecoverWidgets.recover(true)', :button => {:type => 'ghosted'}, :style => "margin-left:10px;", :id => "recovery_close_button"  }"
+%>
+<% end %>

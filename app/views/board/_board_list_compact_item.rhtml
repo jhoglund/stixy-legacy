@@ -1,0 +1,15 @@
+<% 
+	invite = (@invites) ? @invites.include?(board.id) : nil
+	token = invite ? "'" + current_user.board_invitation(board).reference_token + "'" : false
+%>
+
+<div id="board_list_item_<%= board.id||0 %>">
+<div class="board-list-item <% if invite %>board-list-invitation <% end %><% if board.id == @current.id %>board-list-current<% end %>" id="board_list_style_<%= board.id||0 %>">
+<h3 <%= formated_tooltip{ board.title } if board.title.size > 30 %>>
+  <a href="/board/<%= board.id %>" onclick="Stixy.board.navigate(<%= board.id||0 %>, <%= token %>); return false;"><%= formated_str(board.display_name, 30) %></a>
+</h3>
+<div><span class="option-list-title">Updated:</span> <%= formated_date(board.updated_on) %></div>
+<div><span class="option-list-title">By:</span> <%= board.updated_by.display_name %></div>
+<% if invite %><div><a href="/board/<%= board.id %>" onclick="Stixy.board.navigate(<%= board.id %>, <%= token %>); return false;">Open</a> | Invitation | Reject</div><% end %>
+</div>
+</div>

@@ -1,0 +1,31 @@
+<div class="photo widget<%= if widget.locked?; " widget-locked" end %><%= " no-drop-shadow" if widget.shadow == 0 %>" style="<%= widget.style_prop(:top,:left,:width,:height) %>; z-index:<%=index%>" id="widget_<%= widget[:id]  %>">
+  <%= render :partial => "/widgets/default/shadow_focus" %>
+  <div class="base">
+  <% 
+		image_margin = widget.styles.detect{|style| style.name == "image-margin" } 
+		true_margin = image_margin ? image_margin.value : 10
+	-%>
+		<div class="frame"<%= " style='margin:#{true_margin}px; top:-#{true_margin}px; bottom:#{true_margin}px; padding:#{true_margin}px 0;'" %>>
+		  <div class="photo-load">loading...</div>
+			<% if widget.photos.size > 0 && widget.photos.first
+	      picture = widget.photos.first
+			-%>
+				<div class="photo-canvas"><div class="photo-cover"></div><img galleryimg="false" src="<%= picture.thumb(:t).public_uri %>" alt="<%= picture.filename %>" width="100%" /></div>
+	    <% else -%>
+	      <div class="photo-cover"></div><%= image_tag "/images/widgets/photo/widget_photo_placeholder_200x140.jpg", {:width => "100%", :alt => "Add a photo", :galleryimg => "false"} %>
+	      <% unless @none_edit_view %> 
+				<div class="upload-pane" style="display:block;">
+					<div class="upload-offset">
+						<div class="upload-overlay"><div>&nbsp;</div></div>
+						<div class="w-p-upload upload-button">
+				      <%= link_to_function("Add photo(s)", nil, :button => {:type => "default"}, :style => "position:relative;top:-10px;font:11px 'Verdana', 'Lucida Grande', 'Bitstream Vera Sans', 'Sans';") %>
+						</div>
+						<div class="max-file-size">Maximum file size: 4 MB</div>
+					</div>
+				</div>
+				<% end -%>
+	    <% end -%>
+		</div>
+		<%= render :partial => "/widgets/default/remove_resize" %>
+  </div>
+</div>

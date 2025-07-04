@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml" style="position:relative;height:100%;margin:0;padding:0;">
+
+<head>
+  <title>XTech SVG Demo</title>
+  <style>
+		/*#content { display:none; }*/
+  </style>
+  <script>
+		onload = function(){
+			zoom(document.getElementById("content"), 50)
+		}
+		var zoom = function(root, factor){
+			var zoomframe = document.createElement("iframe");
+			zoomframe.cssText = "width:100px;height:100px;background:green"
+			var loader = function(){
+				zoomframe.removeEventListener("load",loader,false)
+				var zoom_body = zoomframe.contentDocument.getElementsByTagName("body")[0];
+				
+				var xmlns_svg = "http://www.w3.org/2000/svg";
+				var svn = zoomframe.contentDocument.createElementNS(xmlns_svg, "svg");
+				var fo = zoomframe.contentDocument.createElementNS(xmlns_svg, "foreignObject");
+				var source = root.innerHTML;
+				fo.setAttribute("width", (100/Number(factor/100) + "%"));
+				fo.setAttribute("height", (100/Number(factor/100) + "%"));
+				fo.setAttribute("transform", "scale(" + factor/100 + ")");
+				// frame.setAttribute("src", "data:text/html,<html><body></body></html>")
+				svn.appendChild(fo);
+				var body = fo.ownerDocument.createElementNS("http://www.w3.org/1999/xhtml","body");
+				var frame = fo.ownerDocument.createElementNS("http://www.w3.org/1999/xhtml","iframe");
+				frame.src = "http://localhost"
+				body.appendChild(frame)
+				fo.appendChild(body)
+				//zoomframe.contentDocument.body.innerHTML = "dsds"
+				//document.body.appendChild(zoomframe);
+				zoom_body.appendChild(svn);
+				//setTimeout(function(){
+				//	//frame.cssText = "width:100px;height:100px;background:yellow;display:block"
+				//	//root.appendChild(zoomframe);
+				//	//var fr = fo.ownerDocument.adoptNode(frame)
+				//	//fo.appendChild(fr)
+				//	//frame.src = "about:blank"
+				//	//setTimeout(function(){
+				//	//	fr.contentDocument.documentElement.lastChild.innerHTML = source;
+				//	//	//console.log(fr.getNamespace())
+				//	//},10)
+				//	//console.log(zoomframe.contentDocument.firstChild.firstChild.innerHTML)
+				//},10)
+				//console.log(zoomframe.contentDocument.firstChild.firstChild.innerHTML)
+			}
+			var load_default = function(){
+				zoomframe.removeEventListener("load",load_default,false)
+				zoomframe.addEventListener("load",loader,false)
+				zoomframe.setAttribute("src", 'data:text/xml,<html xmlns="http://www.w3.org/1999/xhtml"><body></body></html>')
+			}
+			document.body.appendChild(zoomframe);
+			zoomframe.addEventListener("load",load_default,false)
+			//zoomframe.contenDocument.body.appendChild(zoomframe);
+			//frame.contentDocument.body.innerHTML = root.innerHTML;
+		}
+  </script>
+</head>
+
+<body style="position:relative;height:100%;background:red;margin:0;padding:0">
+	<div id="content">
+		<ul>
+			<li>aaa</li>
+		</ul>
+		<i>t</i>
+	</div>
+</body>
+</html>

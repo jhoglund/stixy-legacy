@@ -1,0 +1,2 @@
+module Questioners::BthHelper
+end

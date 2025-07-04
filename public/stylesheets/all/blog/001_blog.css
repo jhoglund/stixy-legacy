@@ -1,0 +1,18 @@
+html { overflow:auto; }
+body { position:relative; margin:0; }
+h1 a:link,
+h1 a:visited,
+h1 a:hover { color:rgb(150,210,10);}
+h1 { line-height:1.2em; margin: .6em 0 .3em; }
+h3 { font-family:Georgia, serif; font-size:16px;  margin: 0; padding:15px 0 5px; color:rgb(100,100,100); }
+h4 { margin: 1em 0 .4em; }
+.content { margin-left:47px;}
+li { margin: 5px 0; }
+.right-column-bg { border-left: 1px solid rgb(245,245,245); }
+.blog-loading { display:none; }
+.blog-results h3 { font: 11px "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; }
+.blog-powered { padding-top:30px; }
+.blog-author,
+.blog-meta { font: 12px "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; margin:0.3em 0 0.5em; }
+.blog-meta { margin:0.8em 0 1.6em; }
+a img { border:none; }

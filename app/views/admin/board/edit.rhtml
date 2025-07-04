@@ -1,0 +1,9 @@
+<h2>Editing board</h2>
+
+<span class="adminmenu"><%= link_to 'Show', :action => 'show', :id => @board %></span> |
+<span class="adminmenu"><%= link_to 'Back', :action => 'list' %></span>
+
+<% form_tag(:action => 'update', :id => @board) do -%>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end -%>

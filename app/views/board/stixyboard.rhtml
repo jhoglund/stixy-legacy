@@ -1,0 +1,53 @@
+<% if not @board.nil? %>
+	<!-- BOARD LIST -->
+	<div class="board-list-bar" id="board_list_bar">
+		<%= render :partial => "/board/board_list_bar"	%>
+	</div>	
+	
+	
+	
+	<!-- CANVAS -->
+	<div  class="canvas" id="stixyboard">
+		<% if show_promotion? %>
+		<%= render :partial => "cached/sample_nav" %>
+		<% end %>
+		<%= render :partial => "/board/board_canvas" %>
+	</div>
+	<div class="canvas-hand-scroll" id="stixyboard_hand_scroll" title="Hold down the mouse button to move the canvas">&nbsp;</div>
+	
+	<!-- OPTIONBAR -->
+	<div class="opt-bar bopt-panel-open wopt-panel-closed" id="opt_bar">
+		<table class="opt-bar-grid">
+			<tr><td class="opt-bar-top"></td></tr>
+			<tr>
+				<td class="opt-bar-middle">
+					<div class="bopt-bar" id="bopt">
+						<%= render :partial => "/board/board_options" %>
+					</div>
+					<div class="wopt-bar">
+						<div class="bar-tools">
+							<span class="wopt-auto-open" id="wopt_auto_show"><input type="checkbox"<%= if current_user.pref_ui_auto_show_wopt.to_i==1; " checked" end %> class="opt-check" id="wopt_auto_show_checkbox"> <label for="wopt_auto_show_checkbox" id="wopt_auto_show_title">Auto open</label></span>
+				      <a class="bar-close" href="#" onclick="Stixy.ui.woptClose(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)"></a>
+						</div>
+						<div class="opt-background">
+							<div class="opt-gradient"></div>
+						</div>
+						<%= render :partial => "/widgets/todo/options" %>
+						<%= render :partial => "/widgets/note/options" %>
+						<%= render :partial => "/widgets/photo/options" %>
+						<%= render :partial => "/widgets/document/options" %>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="opt-bar-bottom">
+					<div class="wopt-common-tools" id="wopt_common_tools">
+						<%= render :partial => "/widgets/default/options_default" %>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<%= render :partial => "/board/widget_tray" %>
+<% end %>

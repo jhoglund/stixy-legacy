@@ -1,0 +1,19 @@
+<div class="personal-settings ">
+	<div class="fixed-column-300" style="margin:50px 0 0 300px">
+		<h1>Deactivate Account</h1>
+		We're truly sorry to see you leave. 
+
+		<p>If you cancel your account, you will no longer have access to photos, documents, and other information added to Stixy. If you have shared some of your Stixyboards, these will still be accessible to the other users. 
+		</p>
+
+					<div class="full-width title" style="padding-top:10px; text-align:right">
+							<%= link_to "< Back", {:controller => :setting}, :button => {:type => 'default'} %>
+							<%= link_to "Deactivate", {:controller => :setting, :action => "deactivate_user_account"}, :confirm => "Are you sure you want to deactivate your account?", :button => {:type => 'false'}, :style => "margin-left:10px;" %>
+				  </div> 
+		
+
+	</div>
+</div>
+<% 
+@buttons = "#{ link_to_function "Cancel", 'window.parent.Stixy.popup.close()', :button => {:type => 'false'} }"
+%>

@@ -1,0 +1,28 @@
+<div class="todo widget<%= if widget.locked?; " widget-locked" end %><%= " no-drop-shadow" if widget.shadow == 0 %><%= " todo-compact" if widget.styles.detect{|s| s.attr=="view" and s.value=="1"} %><%= " todo-reminder" unless widget.reminders.empty? %>" style="<%= widget.style_prop(:width,:height,:top,:left) %>; z-index:<%=index%>" id="widget_<%= widget[:id]  %>">
+  <%= render :partial => "/widgets/default/shadow_focus" %>
+  <div class="base">
+		<div class="base-bg todo-bg"><p></p></div>
+    <div class="todo-header">
+ 			<div class="header-bg"><p>&nbsp;</p></div>
+ 			<div class="todo-content">
+ 			<% widget_time = current_user.adjusted_time(widget.time) -%>
+ 				<div class="todo-reminder-icon">&nbsp;</div>
+ 				<div class="todo-indicator">TODO</div>
+ 				<div class="todo-day"><%= widget_time.day %></div>
+ 				<div class="todo-month-year"><span class="todo-month"><%= Date::MONTHNAMES[widget_time.month] %></span> <span class="todo-year"><%= widget_time.year %></span></div>
+ 				<div class="todo-dayname-time">
+ 					<span class="todo-dayname"><%= Date::DAYNAMES[widget_time.wday] %></span>
+ 					<span class="todo-time">
+ 						<span class="todo-hour"><%= widget_time.strftime("%I").to_i.to_s %></span>:<span class="todo-minute"><%= widget_time.strftime("%M") %></span>
+ 			 			<span class="todo-postfix"><%= widget_time.strftime("%p") %></span>
+ 					</span>
+ 				</div>
+ 			</div>
+    	<div class="todo-comments">COMMENTS</div>
+			<div class="todo-event-catcher"></div>
+		</div>
+		<div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor"><%= widget.comment 	%></div> </div>
+	  <%= render :partial => "/widgets/default/remove_resize" %>
+	</div>
+</div>

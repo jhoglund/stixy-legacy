@@ -1,0 +1,9 @@
+<div class="header">
+	<%= link_header_unless_current({:controller => ""}, :class => "global_nav_home") %>
+	<span class="pipe"><%= image_tag "mt_guest_global_nav_pipe", :size => "8x20" %></span>                          
+	<a href="http://stixy.wordpress.com/" class="global_nav_blog"></a>
+	<span class="pipe"><%= image_tag "mt_guest_global_nav_pipe", :size => "8x20" %></span>                          
+	<%= link_header_unless_current({:controller => "this_is_stixy"}, :class => "global_nav_stixy") %>
+	<span class="pipe"><%= image_tag "mt_guest_global_nav_pipe", :size => "8x20" %></span>                          
+	<%= link_header_unless_current({:controller => "signup"}, :class => "global_nav_signup") %>
+</div>

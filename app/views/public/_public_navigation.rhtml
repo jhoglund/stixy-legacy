@@ -1,0 +1,35 @@
+<% unless PRIVATE_BETA %>
+<div class="navigation-column-bg">&nbsp;</div>
+<div class="navigation-column">
+	<div class="navigation-item">
+		<%= link_to_popup_nav "How Stixy Works", :controller => "how_stixy_works" %>
+	</div>
+	<div class="navigation-item">
+		<%= link_to_popup_nav "Sign Up Now!", :controller => "signup" %>
+	</div>
+	<div class="navigation-item">
+		<%= link_to_popup_nav "Sign In to Stixy", :controller => "signin" %>
+	</div>
+	<div class="navigation-item">
+		<a href="http://stixy.wordpress.com" target="_stixy_blog">Stixy Blog</a>
+	</div>
+	<div class="navigation-item">
+		<%= link_to_popup_nav "This is Stixy", :controller => "this_is_stixy" %>
+	</div>
+	<div class="navigation-item">
+		<%= link_to_popup_nav "Contact Us", :controller => "contact_us" %>
+	</div>
+	<div class="navigation-item">
+		<%= link_to_popup_nav "Terms of Service", :controller => "terms_of_service" %>
+	</div>
+	<div class="navigation-item">
+		<%= link_to_popup_nav "Privacy Policy", :controller => "privacy_policy" %>
+	</div>
+	<div class="navigation-item">
+		<a href="<%= support_path %>" onclick="Stixy.events.stop(event); top.Stixy.popup.openExternal('<%= support_path %>',null,null); return false;">Support</a>
+	</div>
+	<div class="navigation-item">
+		<%= link_to_popup_nav "Report A Bug", :controller => "report_a_bug" %>
+	</div>
+</div>
+<% end %>

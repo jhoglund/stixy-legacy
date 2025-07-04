@@ -1,0 +1,11 @@
+<div class="popup-calendar">
+	<div class="calendar-nav">
+	  <span class="prev-month" id="popup_calendar_nav_previuos"><%= link_to_function "&nbsp;", "Stixy.nothing()" %></span>
+	  <span class="calendar-month-title">
+	    <span id="popup_progress_indicator" style="display:none"></span>
+	    <%= Date::MONTHNAMES[@calendar.month] %> <%= @calendar.year %>
+	  </span>
+	  <span class="next-month" id="popup_calendar_nav_next"><%= link_to_function "&nbsp;", "Stixy.nothing()" %></span>
+	</div>
+	<%=	calendar(:year => @calendar.year, :month => @calendar.month)  %>
+</div>

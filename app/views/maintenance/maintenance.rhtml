@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>  
+	<style>
+		.body { font: 11px/1.2em "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; color: rgb(102,102,102); margin: 0;  background:url(/images/mt_guest_bg_pattern.gif) white top center; }
+		p { font: 15px/140% Georgia; }
+		h1 { font-size: 2.2em;font-family: Georgia;font-weight: normal;color:rgb(150,210,10);margin: 0.7em 0 0.2em;}
+		a:link, a:visited, a:active   { color: rgb(45,130,215); text-decoration: none; }
+		a:hover { color: rgb(35,95,155);  text-decoration: none; }
+		.invite-date { color: rgb(180,180,180); text-align: right; margin-top: -24px; font-size: 14px; }
+		.invited { font-size: 14px; margin-bottom: 40px;}
+		.canvas { position: relative; width: 624px; left: 1px; margin: 24px auto; padding: 0px; border: 1px solid rgb(235,235,235);; }
+		.canvas .content { position: relative; text-align: left;padding: 79px 48px 24px 48px; background: white; z-index: 0; min-height:400px; }
+		.utility { background: white; overflow: hidden; font-size: 0.95em; color: rgb(183,183,183); height: 24px; }
+		.signature { position: absolute; left: 43px; top: 0px; }
+		.color-green { color:rgb(150,210,10);}
+		.footer { position: relative; font-size: 0.95em; clear: both; background: rgb(245,245,245); height: 24px; padding: 0 48px; }
+		.footer-navigation { float: left; margin: 5px 12px 0px 0px; }
+		.copyright { float: right; margin: 5px 12px 0px 0px; color: rgb(180,180,180); }
+		.foot-notes { padding-top: 20px;color: rgb(150,150,150); }
+		hr { position: relative; top: 0px; border-width: 1px 0px 0px; border-style: solid; border-color: rgb(222,222,222); height: 1px; margin: 10px 0px 10px;}
+	</style>
+	<title>STIXY - Scheduled Maintenance</title>
+</head>
+<body class="body">
+
+<div class="utility">&nbsp;</div>
+<div class="canvas">
+	<div class="content">
+		<img src="/images/mt_guest_signature_white_bg.png" width="86" height="68" class="signature" >
+		<h1>Scheduled Maintenance</h1>
+		<p>
+			STIXY is down for scheduled maintenance as of <%= Time.now.strftime("%H:%M %Z") %>.<br/> 
+			We should be back up shortly.
+		</p>		
+	</div>
+	<div class="footer">
+		<div class="copyright">&copy; STIXY 2006</div>
+	</div>
+</div>
+</body>
+</html>

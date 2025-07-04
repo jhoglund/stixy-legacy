@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>jeremyevans's exception_notification at master &mdash; GitHub</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub" />
+    <link rel="fluid-icon" href="http://github.com/fluidicon.png" title="GitHub" />
+
+    
+      <link href="/stylesheets/bundle.css?fdda4acd32121e34031eb0614d2aa7a302d727f4" media="screen" rel="stylesheet" type="text/css" />
+    
+
+    
+      
+        <script src="/javascripts/bundle.js?fdda4acd32121e34031eb0614d2aa7a302d727f4" type="text/javascript"></script>
+      
+    
+    
+  
+    
+  
+
+  <link href="http://github.com/feeds/jeremyevans/commits/exception_notification/master" rel="alternate" title="Recent Commits to exception_notification:master" type="application/atom+xml" />
+
+
+    
+  </head>
+
+  
+
+  <body>
+    
+
+    <div id="main">
+      <div id="header" class="">
+        <div class="site">
+          <div class="logo">
+            <a href="/"><img src="/images/modules/header/logo.png" alt="git-hub" /></a>
+          </div>
+          
+            <div class="actions">
+              <a href="/">Home</a>
+              <a href="/plans"><b><u>Pricing and Signup</u></b></a>
+              <a href="/repositories">Repositories</a>
+              <a href="/news">News</a>
+              <a href="/login">Login</a>
+            </div>
+          
+        </div>
+      </div>
+      
+      
+        
+  <div id="repo_menu">
+    <div class="site">
+      <ul>
+        
+          <li class="active"><a href="/jeremyevans/exception_notification/tree/master">Source</a></li>
+
+          <li class=""><a href="/jeremyevans/exception_notification/commits/master">Commits</a></li>
+
+          <li class=""><a href="/jeremyevans/exception_notification/graphs">Graphs</a></li>
+
+          <li class=""><a href="/jeremyevans/exception_notification/wikis">Wiki (1)</a></li>
+
+          <li class=""><a href="/jeremyevans/exception_notification/watchers">Watchers (2)</a></li>
+
+          <li class=""><a href="/jeremyevans/exception_notification/network">Network (3)</a></li>
+
+          
+
+        
+      </ul>
+    </div>
+  </div>
+
+  <div id="repo_sub_menu">
+    <div class="site">
+      <div class="joiner"></div>
+      
+
+      
+
+      
+        <ul>
+          <li>
+            <a class="active" href="/jeremyevans/exception_notification/tree/56a75f39eec8c86bbd04b55a9511c5de612687a2">master</a>
+          </li>
+          <li>
+            <a href="#">all branches</a>
+            <ul>
+              
+                <li><a href="/jeremyevans/exception_notification/tree/master">master</a></li>
+              
+            </ul>
+          </li>
+          <li>
+            <a href="#">all tags</a>
+            
+          </li>
+        </ul>
+
+      
+    </div>
+  </div>
+
+  <div class="site">
+    
+
+
+
+<div id="repos">
+  
+
+
+<div class="repo public">
+  <div class="title">
+    <div class="path">
+      <a href="/jeremyevans">jeremyevans</a> / <b><a href="/jeremyevans/exception_notification/tree">exception_notification</a></b>
+
+      
+
+        
+
+        
+          
+
+          
+            
+            <a href="/signup"><img alt="fork" class="button" src="/images/modules/repos/fork_button.png?fdda4acd32121e34031eb0614d2aa7a302d727f4" /></a> 
+          
+        
+
+        <a href="/signup" class="toggle_watch"><img alt="watch" class="button" src="/images/modules/repos/watch_button.png?fdda4acd32121e34031eb0614d2aa7a302d727f4" /></a><a href="/signup" class="toggle_watch" style="display:none;"><img alt="watch" class="button" src="/images/modules/repos/unwatch_button.png?fdda4acd32121e34031eb0614d2aa7a302d727f4" /></a>
+
+        
+          <a href="#" id="download_button" rel="/jeremyevans/exception_notification/downloads/master"><img alt="download tarball" class="button" src="/images/modules/repos/download_button.png?fdda4acd32121e34031eb0614d2aa7a302d727f4" /></a> 
+        
+      
+    </div>
+
+    <div class="security private_security" style="display:none">
+      <a href="#private_repo" rel="facebox"><img src="/images/icons/private.png" alt="private" /></a>
+    </div>
+
+    <div id="private_repo" class="hidden">
+      This repository is private.  
+      All pages are served over SSL and all pushing and pulling is done over SSH.
+      No one may fork, clone, or view it unless they are added as a <a href="/jeremyevans/exception_notification/edit/collaborators">member</a>.
+
+      <br/>
+      <br/>
+      Every repository with this icon (<img src="/images/icons/private.png" alt="private" />) is private.
+    </div>
+
+    <div class="security public_security" style="">
+      <a href="#public_repo" rel="facebox"><img src="/images/icons/public.png" alt="public" /></a>
+    </div>
+
+    <div id="public_repo" class="hidden">
+      This repository is public.
+      Anyone may fork, clone, or view it.
+
+      <br/>
+      <br/>
+      Every repository with this icon (<img src="/images/icons/public.png" alt="public" />) is public.
+    </div>
+
+    
+      <div class="security" style="margin-right:0.5em;">
+        <a href="#rubygem_install" rel="facebox"><img alt="Rubygem" src="/images/icons/rubygem.png?fdda4acd32121e34031eb0614d2aa7a302d727f4" /></a>
+      </div>
+
+      <div id="rubygem_install" class="hidden">
+        
+          <p>Run the following if you haven't already:</p>
+          <pre>gem sources -a http://gems.github.com</pre>
+          <p>Install the gem(s):</p>
+          
+            <pre>sudo gem install jeremyevans-exception_notification</pre>
+          
+        
+      </div>
+    
+  </div>
+  <div class="meta">
+    <table>
+      
+        <tr>
+          <td class="label" colspan="2">
+            <em>Fork of <a href="/pager/exception_notification/tree">pager/exception_notification</a></em>
+          </td>
+        </tr>
+      
+      
+        <tr>
+          <td class="label">Description:</td>
+          <td>
+            <span id="repository_description" rel="/jeremyevans/exception_notification/edit/update" class="">Gemified exception_notification rails plugin, compatible with Rails 2.1</span> 
+            
+          </td>
+        </tr>
+      
+
+      
+        
+        
+          <tr>
+            <td class="label">Clone&nbsp;URL:</td>
+            
+            <td>
+              <a href="git://github.com/jeremyevans/exception_notification.git" class="git_url_facebox" rel="#git-clone">git://github.com/jeremyevans/exception_notification.git</a>
+              <div id="git-clone" style="display:none;">
+                Give this clone URL to anyone.
+                <br/>
+                <code>git clone git://github.com/jeremyevans/exception_notification.git </code>
+              </div>
+            </td>
+          </tr>
+        
+        
+        
+        <tr>
+          <td class="label">Search Repo:</td>
+          <td>
+            <form action="/jeremyevans/exception_notification/search" method="get">
+              <input type="text" name="q" value="" /> <select name="choice"><option value="code">Code</option><option value="grep">Commit Messages</option><option value="author">Author</option><option value="committer">Committer</option></select>
+              <input type="submit" value="Go" />
+            </form>
+          </td>
+        </tr>
+      
+    </table>
+    
+      </div>
+</div>
+
+</div>
+
+<div id="commit">
+  <div class="group">
+    <div class="envelope commit">
+  <div class="human">
+    
+      <div class="message"><pre><a href="/jeremyevans/exception_notification/commit/56a75f39eec8c86bbd04b55a9511c5de612687a2">Don't require exception_notifier_helper manually, Rails handles it 
+automatically</a> </pre></div>
+    
+
+    <div class="actor">
+      <div class="gravatar">
+        
+        <img alt="" height="30" src="http://www.gravatar.com/avatar/f183bcc4176b308c9edabe79299e448f?s=30&amp;d=http%3A%2F%2Fgithub.com%2Fimages%2Fgravatars%2Fgravatar-30.png" width="30" />
+      </div>
+      <div class="name"><a href="/jeremyevans">jeremyevans</a> <span>(author)</span></div>
+        <div class="date">
+          <abbr class="relatize" title="2008-09-23 11:22:38">Tue Sep 23 11:22:38 -0700 2008</abbr> 
+        </div>
+    </div>
+
+    
+
+  </div>
+  <div class="machine">
+    <span>c</span>ommit&nbsp;&nbsp;<a href="/jeremyevans/exception_notification/commit/56a75f39eec8c86bbd04b55a9511c5de612687a2" hotkey="c">56a75f39eec8c86bbd04b55a9511c5de612687a2</a><br />
+    <span>t</span>ree&nbsp;&nbsp;&nbsp;&nbsp;<a href="/jeremyevans/exception_notification/tree/56a75f39eec8c86bbd04b55a9511c5de612687a2" hotkey="t">5abb42306936dd4987fb3d9c70c576ac4d8ef440</a><br />
+
+    
+      <span>p</span>arent&nbsp;
+      
+      <a href="/jeremyevans/exception_notification/tree/40d650d5bff8ff169331df5ce5204a879e29b679" hotkey="p">40d650d5bff8ff169331df5ce5204a879e29b679</a>
+    
+
+  </div>
+</div>
+
+  </div>
+</div>
+
+
+
+  
+    <div id="path">
+      <b><a href="/jeremyevans/exception_notification/tree">exception_notification</a></b> / 
+    </div>
+
+    
+      
+<div id="browser"> 
+  <table cellpadding="0" cellspacing="0">
+    <tr>
+      <th></th>
+      <th>name</th>
+      <th>age</th>
+      <th>
+        <div class="history">
+          <a href="/jeremyevans/exception_notification/commits/master/">history</a>
+        </div>
+        message
+      </th>
+    </tr>
+
+    
+
+    
+      <tr class="alt">
+        <td class="icon"> <img alt="file" src="/images/icons/txt.png?fdda4acd32121e34031eb0614d2aa7a302d727f4" /> </td>
+        <td> <a href="/jeremyevans/exception_notification/tree/master/README">README</a> </td>
+        <td> <span class="relatize">Sat Oct 29 17:00:58 -0700 2005</span> </td>
+        <td> <a href="/jeremyevans/exception_notification/commit/eaa5001ff276a454da319f965aab16c9f5698546" class="message">Correct error in documentation</a> [minam] </td>
+      </tr>
+    
+      <tr class="">
+        <td class="icon"> <img alt="file" src="/images/icons/txt.png?fdda4acd32121e34031eb0614d2aa7a302d727f4" /> </td>
+        <td> <a href="/jeremyevans/exception_notification/tree/master/exception_notification.gemspec">exception_notification.gemspec</a> </td>
+        <td> <span class="relatize">Tue Sep 23 11:22:38 -0700 2008</span> </td>
+        <td> <a href="/jeremyevans/exception_notification/commit/56a75f39eec8c86bbd04b55a9511c5de612687a2" class="message">Don't require exception_notifier_helper manuall...</a> [<a href="/jeremyevans">jeremyevans</a>] </td>
+      </tr>
+    
+      <tr class="alt">
+        <td class="icon"> <img alt="directory" src="/images/icons/dir.png?fdda4acd32121e34031eb0614d2aa7a302d727f4" /> </td>
+        <td> <a href="/jeremyevans/exception_notification/tree/master/lib">lib/</a> </td>
+        <td> <span class="relatize">Tue Sep 23 11:22:38 -0700 2008</span> </td>
+        <td> <a href="/jeremyevans/exception_notification/commit/56a75f39eec8c86bbd04b55a9511c5de612687a2" class="message">Don't require exception_notifier_helper manuall...</a> [<a href="/jeremyevans">jeremyevans</a>] </td>
+      </tr>
+    
+      <tr class="">
+        <td class="icon"> <img alt="directory" src="/images/icons/dir.png?fdda4acd32121e34031eb0614d2aa7a302d727f4" /> </td>
+        <td> <a href="/jeremyevans/exception_notification/tree/master/rails">rails/</a> </td>
+        <td> <span class="relatize">Wed May 07 08:30:28 -0700 2008</span> </td>
+        <td> <a href="/jeremyevans/exception_notification/commit/0cb48c3b1640feb367a1f44fc04262e82be1650e" class="message">Initialization code moved to rails/init.rb</a> [<a href="/pager">pager</a>] </td>
+      </tr>
+    
+      <tr class="alt">
+        <td class="icon"> <img alt="directory" src="/images/icons/dir.png?fdda4acd32121e34031eb0614d2aa7a302d727f4" /> </td>
+        <td> <a href="/jeremyevans/exception_notification/tree/master/test">test/</a> </td>
+        <td> <span class="relatize">Tue Jun 26 19:52:48 -0700 2007</span> </td>
+        <td> <a href="/jeremyevans/exception_notification/commit/d5cfa5ca2ecba2aa6cc32e2f396b9f1fbe9e590a" class="message">param filtering for exception notification (clo...</a> [minam] </td>
+      </tr>
+    
+      <tr class="">
+        <td class="icon"> <img alt="directory" src="/images/icons/dir.png?fdda4acd32121e34031eb0614d2aa7a302d727f4" /> </td>
+        <td> <a href="/jeremyevans/exception_notification/tree/master/views">views/</a> </td>
+        <td> <span class="relatize">Fri Nov 23 09:22:21 -0800 2007</span> </td>
+        <td> <a href="/jeremyevans/exception_notification/commit/dd6d855dec908f681463bf0171c74e0748e60841" class="message">consider the X-FORWARDED-HOST value before HOST...</a> [minam] </td>
+      </tr>
+    
+  </table>
+</div>
+
+<div id="readme"><span class="name">README</span><div class="plain"><pre>= Exception Notifier Plugin for Rails
+
+The Exception Notifier plugin provides a mailer object and a default set of
+templates for sending email notifications when errors occur in a Rails
+application. The plugin is configurable, allowing programmers to specify:
+
+* the sender address of the email
+* the recipient addresses
+* the text used to prefix the subject line
+
+The email includes information about the current request, session, and
+environment, and also gives a backtrace of the exception.
+
+== Usage
+
+First, include the ExceptionNotifiable mixin in whichever controller you want
+to generate error emails (typically ApplicationController):
+
+  class ApplicationController &lt; ActionController::Base
+    include ExceptionNotifiable
+    ...
+  end
+
+Then, specify the email recipients in your environment:
+
+  ExceptionNotifier.exception_recipients = %w(<a href="mailto:joe@schmoe.com">joe@schmoe.com</a> <a href="mailto:bill@schmoe.com">bill@schmoe.com</a>)
+
+And that's it! The defaults take care of the rest.
+
+== Configuration
+
+You can tweak other values to your liking, as well. In your environment file,
+just set any or all of the following values:
+
+  # defaults to <a href="mailto:exception.notifier@default.com">exception.notifier@default.com</a>
+  ExceptionNotifier.sender_address =
+    %(&quot;Application Error&quot; &lt;<a href="mailto:app.error@myapp.com">app.error@myapp.com</a>&gt;)
+
+  # defaults to &quot;[ERROR] &quot;
+  ExceptionNotifier.email_prefix = &quot;[APP] &quot;
+
+Email notifications will only occur when the IP address is determined not to
+be local. You can specify certain addresses to always be local so that you'll
+get a detailed error instead of the generic error page. You do this in your
+controller (or even per-controller):
+
+  consider_local &quot;64.72.18.143&quot;, &quot;14.17.21.25&quot;
+
+You can specify subnet masks as well, so that all matching addresses are
+considered local:
+
+  consider_local &quot;64.72.18.143/24&quot;
+
+The address &quot;127.0.0.1&quot; is always considered local. If you want to completely
+reset the list of all addresses (for instance, if you wanted &quot;127.0.0.1&quot; to
+NOT be considered local), you can simply do, somewhere in your controller:
+
+  local_addresses.clear
+
+== Customization
+
+By default, the notification email includes four parts: request, session,
+environment, and backtrace (in that order). You can customize how each of those
+sections are rendered by placing a partial named for that part in your
+app/views/exception_notifier directory (e.g., _session.rhtml). Each partial has
+access to the following variables:
+
+* @controller: the controller that caused the error
+* @request: the current request object
+* @exception: the exception that was raised
+* @host: the name of the host that made the request
+* @backtrace: a sanitized version of the exception's backtrace
+* @rails_root: a sanitized version of RAILS_ROOT
+* @data: a hash of optional data values that were passed to the notifier
+* @sections: the array of sections to include in the email
+
+You can reorder the sections, or exclude sections completely, by altering the
+ExceptionNotifier.sections variable. You can even add new sections that
+describe application-specific data--just add the section's name to the list
+(whereever you'd like), and define the corresponding partial. Then, if your
+new section requires information that isn't available by default, make sure
+it is made available to the email using the exception_data macro:
+
+  class ApplicationController &lt; ActionController::Base
+    ...
+    protected
+      exception_data :additional_data
+
+      def additional_data
+        { :document =&gt; @document,
+          :person =&gt; @person }
+      end
+    ...
+  end
+
+In the above case, @document and @person would be made available to the email
+renderer, allowing your new section(s) to access and display them. See the
+existing sections defined by the plugin for examples of how to write your own.
+
+== Advanced Customization
+
+By default, the email notifier will only notify on critical errors. For
+ActiveRecord::RecordNotFound and ActionController::UnknownAction, it will
+simply render the contents of your public/404.html file. Other exceptions
+will render public/500.html and will send the email notification. If you want
+to use different rules for the notification, you will need to implement your
+own rescue_action_in_public method. You can look at the default implementation
+in ExceptionNotifiable for an example of how to go about that.
+
+
+Copyright (c) 2005 Jamis Buck, released under the MIT license</pre></div></div>
+
+    
+  
+
+
+  </div>
+
+      
+      
+      <div class="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="site">
+        <div class="info">
+          <div class="links">
+            <a href="http://github.com/blog"><strong>Blog</strong></a> |
+            <a href="http://groups.google.com/group/github/">Google Group</a> | 
+            <a href="http://logicalawesome.lighthouseapp.com/projects/8570/home">Report a Bug</a> |
+            <a href="http://logicalawesome.lighthouseapp.com/projects/8570/home">Request a Feature</a> |
+            <a href="mailto:support@github.com">Contact</a> | 
+            <a href="http://github.wordpress.com">Status</a>
+          </div>
+          <div class="company">
+            <span id="_rrt" title="0.11736s from github.com">GitHub</span>
+            is <a href="http://logicalawesome.com/">Logical Awesome</a> | &copy;2008 | <a href="/site/terms">Terms of Service</a> | <a href="/site/privacy">Privacy Policy</a>
+          </div>
+        </div>
+        <div class="sponsor">
+          <a href="http://engineyard.com">Hosting provided by</a>&nbsp;
+          <a href="http://engineyard.com">
+            <img src="/images/modules/footer/engine_yard_logo.gif" alt="Hosted by Engine Yard" />
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div id="coming_soon" style="display:none;">
+      This feature is coming soon.  Sit tight!
+    </div>
+        <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    var pageTracker = _gat._getTracker("UA-3769691-2");
+    pageTracker._initData();
+    pageTracker._trackPageview();
+    </script>
+
+  </body>
+</html>
+

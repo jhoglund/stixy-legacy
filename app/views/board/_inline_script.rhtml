@@ -1,0 +1,22 @@
+<script type="text/javascript">
+	try {
+		Stixy.board.id = <%= @board.id||0 %>;
+		Stixy.ui.scrollPositions = { left:<%= @board ? @board.left : 0 %>,top:<%= @board ? @board.top : 0 %> };
+  	Stixy.server.autoSave = <%= current_user.authorized? %>;
+		Stixy.server.canBeSaved = <%= current_user.authorized? || !(@board.id) %>;
+		Stixy.ui.saveStates = true;
+		Stixy.widgets.Optionbar.setAutoShow(<%= current_user.pref_ui_auto_show_wopt %>);
+		Stixy.features.Upload.prototype.global.flash_enabled=<%= (current_user.pref_disable_flash_upload==0) %>;
+		<% unless @board.nil? %>
+		Stixy.listen("ready",function(){
+			<%- @board.widgets.each do |widget_instance| -%>		 	
+			Stixy.widgets.addWidget(new Stixy.widgets.<%= widget_instance.widget.name %>("widget_<%= widget_instance.id %>", { <%= widget_instance.instance_attributes %>}));
+			<%- end -%>			
+			Stixy.features.Order.prototype.global.top += <%= @board.widgets.size %>;
+		});
+		<% end %>
+	}
+	catch(e){
+		new StixyError(e);
+	}
+ </script>

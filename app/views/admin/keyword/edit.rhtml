@@ -1,0 +1,12 @@
+<h2>Editing keyword</h2>
+
+<span class="adminmenu"><%= link_to 'Show', :action => 'show', :id => @keyword %></span> |
+<span class="adminmenu"><%= link_to 'Back', :action => 'list' %></span>
+
+<% form_tag(:action => 'update', :id => @keyword) do -%>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end -%>
+
+
+

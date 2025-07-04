@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>
+		Test
+	</title>
+	<style>
+		body { background:rgb(215,215,215); }
+		.editor { position:relative; width:400px; height:200px; border:1px inset; background:white; margin:10px; padding:5px; }
+		#_stixy_bogus_hidden { position:absolute;width:0;height:0;overflow:hidden;}
+	</style>
+	<script>
+		
+		function selectText(defaultText){
+			var selection = document.selection || window.getSelection();
+			var text = selection.createRange ? selection.createRange().text : selection.toString();
+		  if(text.length == 0){
+				if(selection.createRange){
+
+			  }else{
+          var range = document.createRange();
+          if(selection.isCollapsed){
+            var left = selection.focusNode.textContent.substr(0,selection.focusOffset);
+            var leftTrimmed = left.match(/[^\s]*$/);
+            leftTrimmed = leftTrimmed ? leftTrimmed[0].length : 0;
+            var right = selection.focusNode.textContent.substr(selection.focusOffset);
+            var rightTrimmed = right.match(/^[^\s]*/);
+            rightTrimmed = rightTrimmed ? rightTrimmed[0].length : 0;
+            var offset = selection.focusOffset;
+            range.setStart(selection.focusNode, offset - leftTrimmed);
+            range.setEnd(selection.focusNode, offset + rightTrimmed);
+            selection.addRange(range);
+            if(selection.isCollapsed){
+              var node = range.createContextualFragment(defaultText);
+              range.insertNode(node);
+              selection.extend(selection.focusNode.nextSibling, defaultText.length);
+            }
+            document.getElementById('editor_1').focus()
+          }
+			  }
+			}
+		}
+		
+		function selectLink(defaultText){
+			var selection = document.selection || window.getSelection();
+			if(selection.createRange){
+
+		  }else{
+        var range = document.createRange();
+        var node = selection.focusNode;
+        do{
+          if(node.tagName && node.tagName.toLowerCase() == 'a') break;
+        }while(node = node.parentNode);
+        if(node){
+          range.selectNode(node)
+        }
+        selection.addRange(range);
+			  document.getElementById('editor_1').focus()
+      }
+		}
+		
+		
+	
+	</script>
+</head>
+<body> 
+	<input type="button" onclick="selectText('a new word')" value="Select Word">
+	<input type="button" onclick="selectLink()" value="Select Link">
+	<div class="editor" contenteditable="true" id="editor_1">   This works at all time. <a href="dsds">Select text and</a> click the button. The editable div tag is a direct child of the &lt;body&gt; tag<br> (&lt;body&gt;&lt;div contenteditable="true"&gt;...&lt;/div&gt;)</div>
+
+</body>
+</html>

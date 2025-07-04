@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - RAILS_ENV=development
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+      - /app/log
+      - /app/tmp
+      - ./db:/app/db # Mount db directory for SQLite files
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+  # Optional: Add a development shell service
+  shell:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - RAILS_ENV=development
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+      - ./db:/app/db # Mount db directory for SQLite files
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+    profiles:
+      - development
+
+volumes:
+  bundle_cache:

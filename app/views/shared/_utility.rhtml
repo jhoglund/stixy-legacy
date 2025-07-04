@@ -1,0 +1,16 @@
+<% if current_user.authorized? %>
+	<%= link_to "Calendar", {:controller => "calendar"}, :onclick => "Stixy.board.openCalendar(); return false;" %>
+	<span class="pipe"></span>
+	<%= link_to "Personal Settings", {:controller => "setting"}, :onclick => "Stixy.board.openSetting(); return false;" %>
+	<% if current_user.in_role?(Role::ADMIN) -%>
+	<span class="pipe"></span> 
+	<%= link_to "Administration", {:controller => "admin", :action => "user"} %>
+	<% end -%>
+	<span class="pipe"></span> 
+	<%= link_to "Sign Out: ", :controller => "signout" %>
+	<%= link_to current_user.display_name , {:controller => "public", :action => 'signout'}, :class => "member-name" %>
+<% else %>
+	<%#= link_to "Sign Up Now!", {:controller => "signup"}, :onclick => "Stixy.board.openSignup(); return false;",  :class => "member-name" %>
+	<!-- <span class="pipe"></span>  -->
+	<%= link_to "Sign In", {:controller => "signin"}, :onclick => "Stixy.board.openSignin(); return false;" %>
+<% end %>

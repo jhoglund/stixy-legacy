@@ -1,0 +1,15 @@
+Hello <%= @invite.accepted_user.display_name %>,
+<% if @reminder -%>
+<%= (@reminder||@invite.inviter_user).display_name %> wants to remind you that you were invited on <%= @invite.created_on.strftime("%B %d, %Y") %> to<% unless @invite.board.title.empty? %> "<%= @invite.board.title  %>",<% end %> a Stixyboard where you and your friends can share experiences and ideas, photos and documents.
+<% else -%>
+<%= @invite.inviter_user.display_name %> has invited you to join<% unless @invite.board.title.empty? %> "<%= @invite.board.title  %>",<% end %> a Stixyboard where you and your friends can share experiences and ideas, photos and documents.		
+<% end -%><% if @invite.invitation_text and not @invite.invitation_text.empty? -%>
+Personal message from <%=  @invite.inviter_user.display_name %>:
+
+<%= @invite.invitation_text.strip -%>
+<% end -%>
+View the full invitation at: <%= "http://#{SERVER}/invitation/?token=#{@invite.reference_token}" %> 
+
+A friend of yours has sent this e-mail to invite you to join his or her Stixyboard. 
+If you don't want to receive any invitations in the future, you need to contact the person who sent you this invitation. 
+If you think this invitation has been sent to you by mistake, contact us at Stixy at support@stixy.com, and we will help you.

@@ -1,0 +1,6 @@
+<public:attach event="onselectstart" onevent="cancelSelect()" />
+	<script>
+		function cancelSelect(){
+			event.returnValue = false
+		}
+  </script>

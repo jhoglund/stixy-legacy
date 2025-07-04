@@ -1,0 +1,23 @@
+<div class="navigation-column">&nbsp;</div>
+<div class="right-column-bg"></div>
+
+<%= error_messages_for 'user' %>
+
+<% form_tag(:action => 'signin_again') do -%>
+
+<div class="left-column">
+
+	<h1>Please sign in!</h1>
+	<p><span style="color:rgb(225, 25, 115)">Note!</span> You have been signed out due to low activity. Please sign in again before you continue working with Stixy.</p>
+</div>
+<div class="right-column">
+	<%= render :partial => "signin" %>
+	<div style="margin-top: 10px; text-align: right;">
+		<%= link_to_function("Sign in", "document.forms[0].submit()", :button => {:type => 'default'}) %>
+	  <%= submit_tag '', :style => "display:none" %>
+	</div>
+	
+</div>
+<% end -%>
+
+<% @buttons ||= "#{ link_to_function "Cancel", 'window.parent.Stixy.popup.close()', :button => {:type => false} }" %>

@@ -1,0 +1,135 @@
+<%= @doc_type %>
+<html debug="true">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<%= javascript_include_tag "all/firebug/firebug" %>
+	<script type="text/javascript" src="/javascripts/archive/swfobject.js"></script>
+	<script type="text/javascript">
+		var Stixy = {
+			extend: function(target,source){
+				for(var i in source){
+					target[i] = source[i]
+				}
+			}
+		};
+		Stixy.flash = {
+			pending: [],
+			add: function(src,target,name,a){
+				var a = a||{}
+				var element = (this.activeX) ? document.createElement("object") : document.createElement("embed");
+				var attr = { width:(a.width||1), height:(a.height||1), id:name }
+				var params = { menu:"false", wmode:"transparent", quality:"high", bgcolor:"#000000", src:src}
+				if(this.activeX){
+					Stixy.extend(params,{
+						_cx:"5080", _cy:"5080", flashVars:"", movie:src, play:"0", loop:"-1", sAlign:"", base:"",
+						allowScriptAccess:"", scale:"ShowAll", deviceFont:"0", embedMovie:"0", swRemote:"", movieData:"",
+						seamlessTabbing:"1", profile:"0", profileAddress:"", profilePort:"0"
+					})
+				}
+				for(var i in a){
+					if(i=="height"||i=="width") continue;
+					params[i] = a[i];
+				}
+				if(this.activeX){
+					attr.classid = "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000";
+					for(var i in attr){
+						element.setAttribute(i, attr[i]);
+					}
+					for(var i in params){
+						var p = document.createElement("param")
+						p.setAttribute("name", i);
+						p.setAttribute("value", param[i]);
+						element.appendChild(p);
+					}
+				}else{
+					params.type = "application/x-shockwave-flash" 
+					Stixy.extend(params,attr)
+					for(var i in params){
+						element.setAttribute(i, params[i]);
+					}
+				}
+				this.pending.push([target,element]);
+			},
+			loaded: (function(){
+				window.addEventListener("DOMContentLoaded", function(){
+						for(var i=0; i<Stixy.flash.pending.length; i++){
+							document.getElementById(Stixy.flash.pending[i][0]).appendChild(Stixy.flash.pending[i][1]);
+							Stixy.flash.loaded = true;
+						}
+					}, false)
+				return false;
+			})(),
+			activeX: (function(){
+				return (navigator.plugins&&navigator.mimeTypes.length) ? false:true;
+			})(),
+			version: (function(){
+				if(this.activeX){
+					try{
+						var a = new ActiveXObject("ShockwaveFlash.ShockwaveFlash"), v = 0;
+						for(var i=3; a!=null; i++){
+							a = new ActiveXObject("ShockwaveFlash.ShockwaveFlash."+i);
+							v = i;
+						}
+					}catch(e){ }
+					return v;
+				}else{
+					var p = navigator.plugins["Shockwave Flash"];
+					if(p&&p.description){ return p.description.replace(/([a-z]|[A-Z]|\s)+/,"").replace(/(\s+r|\s+b[0-9]+)/,".").split(".")[0] }
+				}
+			})(),
+			isCompatible: function(min,max){
+				var max = max||this.version;
+				return (this.version>=min&&this.version<=max)
+			}
+		}
+		if(Stixy.flash.isCompatible(8)){
+			Stixy.flash.add("/embeds/upload.swf","flash","movie");
+		}
+	</script>
+	<style>
+		body { background:transparent;  }
+		iframe {border:2px solid red;}
+	</style>
+</head>
+<body>
+	<%= debug(request.env["HTTP_CONNECTION"]) %>
+	<%= debug(request.env) %>
+	<div id="flash">
+	  This text is replaced by the Flash movie.
+	</div>
+	<div id="flashcontent">
+	  This text is replaced by the Flash movie.
+	</div>
+	<% if session[:browser][:type] == "firefox" %>
+		<!-- <embed width="1" height="1" menu="false" wmode="transparent" quality="high" bgcolor="#000000" name="StixyUploadObject" id="StixyUploadObject" src="/embeds/upload_logger.swf" type="application/x-shockwave-flash"/> -->
+	<% elsif session[:browser][:type][0..2] == "ie_"  %>
+		<object id=StixyUploadObject height=1 width=1 classid=clsid:D27CDB6E-AE6D-11cf-96B8-444553540000>
+			<param name="_cx" value="5080">
+			<param name="_cy" value="5080">
+			<param name="FlashVars" value="">
+			<param name="Movie" value="/embeds/upload.swf">
+			<param name="Src" value="/embeds/upload.swf">
+			<param name="WMode" value="Transparent">
+			<param name="Play" value="0">
+			<param name="Loop" value="-1">
+			<param name="Quality" value="High">
+			<param name="SAlign" value="">
+			<param name="Menu" value="0">
+			<param name="Base" value="">
+			<param name="AllowScriptAccess" value="">
+			<param name="Scale" value="ShowAll">
+			<param name="DeviceFont" value="0">
+			<param name="EmbedMovie" value="0">
+			<param name="BGColor" value="000000">
+			<param name="SWRemote" value="">
+			<param name="MovieData" value="">
+			<param name="SeamlessTabbing" value="1">
+			<param name="Profile" value="0">
+			<param name="ProfileAddress" value="">
+			<param name="ProfilePort" value="0">
+		</object>
+	<% else %>
+		<embed width="1" height="1" menu="false" wmode="transparent" quality="high" bgcolor="#000000" name="StixyUploadObject" id="StixyUploadObject" src="/embeds/upload.swf" type="application/x-shockwave-flash"/>
+	<% end %>
+	</body>
+</html>

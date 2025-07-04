@@ -1,0 +1,9 @@
+<% calendar(@time, :year) %>
+<div class="calendar-month-title">
+	<%= calendar().year %>
+	<div class="calendar-month-navigation">
+		<%= link_to_function "&nbsp;", "Stixy.calendar.navigateCalendar('#{calendar.previous(:year).to_s}')", :class => "calendar-month-navigation-previous" %>
+		<%= link_to_function "&nbsp;", "Stixy.calendar.navigateCalendar('#{calendar.next(:year).to_s}')", :class => "calendar-month-navigation-next" %>
+	</div>
+</div>
+<%= generate_calendar(:year, @time) %>

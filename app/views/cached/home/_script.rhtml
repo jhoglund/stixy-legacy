@@ -1,0 +1,25 @@
+<script type="text/javascript">
+	try {
+		Stixy.board.id = 272;
+		Stixy.ui.scrollPositions = { left:0,top:0 }
+		Stixy.server.autoSave = false;
+		Stixy.server.canBeSaved = false;
+		Stixy.ui.saveStates = true;
+		Stixy.widgets.Optionbar.setAutoShow(1);
+		Stixy.features.Upload.prototype.global.flash_enabled=true;
+		Stixy.listen("ready",function(){
+			Stixy.widgets.addWidget(new Stixy.widgets.Note("widget_2222", { stay:1, locked:true }));
+			Stixy.widgets.addWidget(new Stixy.widgets.Note("widget_2231", { stay:1, locked:true }));
+			Stixy.widgets.addWidget(new Stixy.widgets.Document("widget_2234", { }));
+			Stixy.widgets.addWidget(new Stixy.widgets.Todo("widget_2243", { }));
+			Stixy.widgets.addWidget(new Stixy.widgets.Photo("widget_2226", { width:142,height:102,rotation:0,filter:0,id:6874,stay:0}));
+			Stixy.widgets.addWidget(new Stixy.widgets.Photo("widget_2242", { width:133,height:102,rotation:0,filter:0,id:6882,stay:0}));
+			Stixy.widgets.addWidget(new Stixy.widgets.Document("widget_2233", { }));
+			Stixy.widgets.addWidget(new Stixy.widgets.Document("widget_2229", { }));
+			Stixy.widgets.addWidget(new Stixy.widgets.Note("widget_2223", { }));
+		});
+	}
+	catch(e){
+		new StixyError(e);
+	}
+</script>

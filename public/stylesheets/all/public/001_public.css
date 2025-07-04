@@ -1,0 +1,72 @@
+/*----------*/
+/*  PUBLIC  */
+/*----------*/
+
+h1 { font-family:Georgia, serif; font-size:22px; }
+
+body, .popup-content { background:url(/images/main_template/mt_guest_bg_pattern.gif) white -13px -1px; color:rgb(102,102,102); }
+.popup-top-line { background:url(/images/main_template/mt_guest_bg_pattern.gif) white -13px top; }
+.popup-signature { position:absolute; left:91px; top:0px; width:86px; height:68px; background:url(/images/main_template/mt_guest_signature.png) no-repeat; z-index:10; }
+.full-column, .left-column { font:14px/1.3em Georgia; }
+.content > *,
+.left-column > *,
+.right-column > *,
+.full-column > * { margin-top:0px; }
+.content { position:relative; left:1px; padding:72px 24px 24px; margin:0 0 12px 28px; background:url(/images/main_template/mt_guest_bg_pattern_light.gif) white 10px -1px!important; min-height:407px; width:862px; text-align:left; z-index:0; }
+
+.full-column { position:relative; float:left; width:670px; margin:0 0 0 24px;  z-index:1; }
+.half-column { position:relative; float:left; width:320px; margin:0 0 0 24px;  z-index:1; }
+.left-column { position:relative; float:left; width:312px; padding:0px 24px 0px 0px; margin:0 24px;  z-index:1; }
+.left-column-wide { width:456px; }
+.invite .left-column { width:360px; margin:0 24px 0 142px; }
+.right-column { position:relative; float:left; width:216px; padding:0px 0px 0px 24px; z-index:1; }
+.right-column-narrow { width:142px; }
+.right-column-bg { position:absolute; top:0; right:0px; bottom:0px; width:336px; background:url(/images/main_template/mt_guest_gradient_sidebar.png) no-repeat top left; z-index:0; }
+.right-column-bg-narrow { width:192px; }
+.navigation-column { position:relative; float:left; width:168px; margin-top:36px; z-index:1; }
+.navigation-column-bg { position:absolute; top:0; left:0; width:192px; height:100%; background:url(/images/main_template/mt_guest_gradient_sidebar.png) no-repeat top right; z-index:0; }
+
+.navigation-item { margin:0 0 10px; color:rgb(245,140,0);}
+
+.button-bar { text-align:center; padding:20px 0; }
+.text-field { width:100%; margin-bottom:5px; }
+.field-title { margin-bottom:3px; }
+
+.invite .right-column-bg { top:0px; background:rgb(240,255,210); }
+.invite .message { width:300px; margin-left:-48px; margin-top:48px; }
+.invite .date { position:relative; top:-24px; font-family:Georgia; color:rgb(180,180,180); text-align:right; margin-bottom:-12px; }
+
+.message-error { position:absolute; top:230px; width:400px; left:250px; z-index:100000; }
+
+.screen-layer { position:relative; margin-bottom:20px; }
+.screen-layer h3 { color:rgb(150,150,150); }
+.screen-bubble { position:absolute; bottom:0; left:0; z-index:1; }
+.screen-circle { position:absolute; width:19px; height:19px; background:no-repeat; }
+.screen-line { position:absolute; overflow:hidden; }
+.screen-text { position:absolute; font:11px/120% verdana, sans-serif; padding:10px; border-style:solid; border-width:0; }
+.screen-text h4 { font:normal 14px/120% verdana, sans-serif; margin:0 0 2px; }
+
+.screen-bubble-top 		.screen-text { border-top-width:1px; }
+.screen-bubble-right 	.screen-text { border-right-width:1px; }
+.screen-bubble-bottom	.screen-text { border-bottom-width:1px; }
+.screen-bubble-left 	.screen-text { border-left-width:1px; }
+
+.screen-bubble-top 		.screen-line,
+.screen-bubble-bottom	.screen-line { width:1px; }
+.screen-bubble-right 	.screen-line,
+.screen-bubble-left 	.screen-line { height:1px; }
+
+.screen-bubble-green 	.screen-line 		{ background-color:rgb(160,210,10); }
+.screen-bubble-green 	.screen-text 		{ background-color:rgb(236,246,206); border-color:rgb(160,210,10); }
+.screen-bubble-green 	.screen-circle 	{ background-image:url(/images/how_stixy_works/circle_green.png); }
+.screen-bubble-green 	.screen-text h4 { color:rgb(160,210,10); }
+
+.screen-bubble-blue	 	.screen-line 		{ background-color:rgb(45,130,215); }
+.screen-bubble-blue	 	.screen-text 		{ background-color:rgb(212,229,246); border-color:rgb(45,130,215); }
+.screen-bubble-blue	 	.screen-circle	{ background-image:url(/images/how_stixy_works/circle_blue.png); }
+.screen-bubble-blue 	.screen-text h4 { color:rgb(45,130,215); }
+
+.screen-bubble-yellow .screen-line 		{ background-color:rgb(245,204,0); }
+.screen-bubble-yellow .screen-text 		{ background-color:rgb(252,244,203); border-color:rgb(245,204,0); }
+.screen-bubble-yellow .screen-circle 	{ background-image:url(/images/how_stixy_works/circle_yellow.png); }
+.screen-bubble-yellow	.screen-text h4 { color:rgb(245,204,0); }

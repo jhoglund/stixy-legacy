@@ -1,0 +1,3 @@
+module Widgets::NoteHelper
+  
+end

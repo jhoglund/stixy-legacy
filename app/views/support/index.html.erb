@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en" style="background:white;" xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<link href="/resources/default/other.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/resources/public/other.css" media="screen" rel="stylesheet" type="text/css" />
+  <style type="text/css" media="screen">
+    html { overflow:auto; height:auto; }
+    body { background:white; height:auto; width:auto; }
+    .popup-content { position:static; overflow:auto; top:auto; right:auto; bottom:auto; }
+    label { display:block; margin:12px 0 3px; }
+    textarea,
+    input { display:block; margin:0 0 12px; }
+    blockquote { margin:0; padding:0; }
+    li { margin-bottom:12px; color:rgb(180,180,180); }
+    li p { margin:0; }
+    .toggle-quoted { margin:5px 0; font:10px verdana;}
+    .original-request { }
+    ul.comments { padding:0; margin:10px 0 20px; }
+    ul.comments li { list-style:none; border-bottom:1px solid rgb(235,235,235); padding-bottom:12px; }
+    ul.comments li p { color:rgb(75,75,75); }
+    h2 em { font-style:normal; font-weight:normal; font-size:0.7em; color:rgb(180,180,180); }
+    h3 { margin:0 0 10px; padding:10px 0 0; }
+    
+    .field,
+    .captcha input { width:300px; }
+
+    .message-title { margin:15px 0 5px;; font-size:13px; }
+    .inline-message p { font:13px Georgia; color:rgb(90,145,25); }
+
+    .full-column { width:502px;}
+    .inline-message-notice { margin:20px 0;}
+    .inline-message-error p { font: 10px verdana; margin:5px 0 0; }
+  </style>
+  <!--[if lte IE 6]>
+  <link href="/resources/default/ie_6.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="resources/public/ie_6.css" media="screen" rel="stylesheet" type="text/css" />
+  <![endif]-->
+</head>
+<body class="popup-content">
+	<div class="popup-signature">&nbsp;</div>
+	<div class="content">
+    <div class="navigation-column-bg">&nbsp;</div>
+    <div class="navigation-column">
+      <div class="navigation-item">
+        <%= link_to "New Support Request", support_path, :class => :request %>
+      </div>
+      <%- if current_user.authorized? -%>
+      <div class="navigation-item">
+        <%= link_to "View All", url_for(:host => HELPDESK_SERVER, :controller => 'support/tickets'), :class => :request %>
+      </div>
+      <%- end -%>
+
+    </div>
+    
+    <div class="full-column">
+      <h2>To our loyal Stixy users</h2>
+      <p>We have decided to pull the plug and <b style="color:red">shut down the service</b> as of <strong>September 30, 2013</strong>. Thank you all for your support of Stixy! 
+
+      <p>When we launched Stixy in August 2007 we set out with the ambition to be the best online collaboration tool available.  As a User Experience Design firm relaying on paying client projects our response to feature requests and new technology has not been as rapid as we would have liked. Still people genuinely seemed to really like the Stixy concept. Our user base is growing and the number of visitors is increasing each year.
+
+      <p>To live up to expectations from new user on smartphones and tablets Stixy need a major redesign. In our current situation we do not have the resources to take Stixy to the next level and  have decided to shut down the service as of September 30, 2013.  
+
+      <p>If you have information you want to save please go to your Stixyboards, download images and copy/paste text to your local hard drive. Your information will be available until September 30, 2013.
+
+      <p>We really appreciate your loyalty and your excitement about Stixy and we sincerely thank you for your participation in this incredible journey.
+
+      <p>- The Stixy Team
+
+      <p>PS. We would love to hear how you've been using Stixy! <br>Please drop us a mail at <%= mail_to 'feedback@stixy.com' %>
+      <hr>
+      <h2>Limited functionality and support</h2>
+      <p><b style="color:red">IMPORTANT!</b> The functionality and the support of Stixy is limited until <strong>September 30, 2013</strong>. 
+      <hr>
+      <h2>
+        Request Support
+      </h2>
+      <% form_tag url_for(:host => HELPDESK_SERVER, :controller => 'support/tickets') do %>
+        <%= label_tag :name, "Your Name" %>
+        <%= text_field_tag 'helpdesk_ticket[name]', @name, :class => 'field' %>
+        <p><%= label_tag :email, "Your Email Address" %>
+        <%= text_field_tag 'helpdesk_ticket[email]', @email, :class => 'field' %>
+        <p><%= label_tag :description, "How may we help you?" %>
+        <%= text_area_tag 'helpdesk_ticket[description]', '' , :rows => 10, :class => 'field' %>
+        <%= captcha_block %><br>
+        <p><%= submit_tag "Submit Request" %>
+        <%= hidden_field_tag "meta[user_agent]", request.env["HTTP_USER_AGENT"] %>
+        <%= hidden_field_tag "meta[message]",html_escape(params[:message]) %>
+        <% end %>
+    </div>              
+    
+		<div style="clear:both"></div>
+	</div>
+</body>
+</html>
+

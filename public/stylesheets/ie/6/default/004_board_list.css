@@ -1,0 +1,20 @@
+/*-----------------*/
+/* BOARD LIST IE 6 */
+/*-----------------*/
+
+.board-list-hide .canvas { left:0; width:100%; height:100%; }
+.board-list-bar { float:none; width:252px; margin-right:-3px; }
+.board-list-panel { position:relative; top:auto; left:auto; height:100%; }
+/* AD SIZE UPDATE (.wopt-open .opt-bar-top): top:82px; => top:182px; */
+.board-list-bar .tag-filter { width:255px; top:<%= current_user.display_ad? ? 182 : 82 %>px; }
+.board-list-bar .tag-filter input { position:relative; top:-2px; width:155px; vertical-align:top; } 
+.board-list-bar .tag-filter sx\:button { top:3px; }
+.board-list-bar .tag-filter .reset-filter { position:absolute; top:8px; left:15px; }
+/* AD SIZE UPDATE (.board-list-top): height:112px; => height:212px; */
+.board-list-top { height:<%= current_user.display_ad? ? 212 : 112 %>px; }
+/* AD SIZE UPDATE (.board-list-bar .bar-tools): top:58px; => top:158px; */
+.board-list-bar .bar-tools { top:<%= current_user.display_ad? ? 158 : 58 %>px;}
+.board-list-bar .pager .previous span,
+.board-list-bar .pager .next span,
+.board-list-detailed .pager .previous span,
+.board-list-detailed .pager .next span { top:0px; }

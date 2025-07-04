@@ -1,0 +1,10 @@
+<h2>Editing invite</h2>
+
+<span class="adminmenu"><%= link_to 'Show', :action => 'show', :id => @invite %></span> |
+<span class="adminmenu"><%= link_to 'Back', :action => 'list' %></span>
+
+<% form_tag(:action => 'update', :id => @invite) do -%>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end -%>
+

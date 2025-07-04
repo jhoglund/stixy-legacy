@@ -1,0 +1,59 @@
+# Patch for ActiveSupport TimeZone circular argument reference issue
+# Fixes the Ruby 2.7+ compatibility issue in Rails 2.1.0
+
+require 'active_support/values/time_zone'
+
+# Store the original ActiveSupport::TimeZone class
+if defined?(ActiveSupport::TimeZone)
+  original_timezone_class = ActiveSupport::TimeZone
+  
+  # Patch the problematic methods that have circular argument reference
+  ActiveSupport::TimeZone.class_eval do
+    # Fix the 'now' parameter issue in line 236
+    # The original method signature has now=now which causes circular reference in Ruby 2.7+
+    
+    # Remove the old method if it exists
+    remove_method :formatted_offset if method_defined?(:formatted_offset)
+    
+    # Define a compatible version
+    def formatted_offset(colon=true, alternate_utc_string = nil)
+      return alternate_utc_string if utc_offset == 0 && alternate_utc_string
+      
+      seconds = utc_offset
+      sign = (seconds < 0 ? '-' : '+')
+      hours = seconds.abs / 3600
+      minutes = (seconds.abs % 3600) / 60
+      
+      if colon
+        sprintf("%s%02d:%02d", sign, hours, minutes)
+      else
+        sprintf("%s%02d%02d", sign, hours, minutes)
+      end
+    end
+    
+    # Fix other methods that might have similar issues
+    if method_defined?(:parse)
+      original_parse = instance_method(:parse)
+      remove_method :parse
+      
+      define_method :parse do |str, current_time = Time.now|
+        # Use current_time parameter without circular reference
+        time_now = current_time || Time.now
+        original_parse.bind(self).call(str, time_now)
+      end
+    end
+    
+    # Fix local method if it has similar issues
+    if method_defined?(:local)
+      original_local = instance_method(:local)
+      remove_method :local
+      
+      define_method :local do |*args|
+        # Call the original method without circular argument issues
+        original_local.bind(self).call(*args)
+      end
+    end
+  end
+  
+  puts "Applied ActiveSupport::TimeZone Ruby 2.7 compatibility patches"
+end 

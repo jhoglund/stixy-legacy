@@ -1,0 +1,161 @@
+	<div class="panel-shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div>
+	<div class="bar-tools">
+		<div class="calendar-edit-progress">&nbsp;</div>
+		<div class="bar-tool-title">Event</div>
+		<%= link_to_function nil, "Stixy.calendar.panelClose();", :class => "bar-close" %>
+	</div>
+	<div class="calendar-panel-content">
+		<div class="calendar-edit-pending-panel">&nbsp;</div>
+		<%= if @calendar_entry.id; hidden_field('calendar_entry', 'id', :value => @calendar_entry.id) end %>
+		<%= hidden_field('entry_type', 'value', :value => 'calendar_entry') %>
+		
+		<div class="title">Subject</div>
+		<%= text_field('calendar_entry', 'subject', :maxsize => 200, :value => @calendar_entry.subject, :class => "text-field stixy-calendar-entry-field", :id => "calendar_entry_#{ @calendar_entry.id ? "edit" : "new" }_subject")  %>
+				
+		<table style="margin-top:10px;">
+			<tr>
+				<th class="title" width="40">From</th>
+				<td>
+					<span id="calendar_entry_<%= @calendar_entry.id ? "edit" : "new" %>_start_date">
+						<sx:start-date>
+						<% if (2==current_user.time_format.get(:numeric_date)) %>
+							<%= text_field('calendar_entry', 'start[month]', "sx:id" => "month", :maxsize => 2, :value => current_user.adjusted_time(@calendar_entry.start).strftime("%m"), :class => "text-field stixy-calendar-entry-field", :style => "width:25px", :size => 2, :title => "Month (up/down arrow keys)") %>
+							<%= text_field('calendar_entry', 'start[day]', 	"sx:id" => "day", 	:maxsize => 2, :value => current_user.adjusted_time(@calendar_entry.start).strftime("%d"), :class => "text-field stixy-calendar-entry-field", :style => "width:25px", :size => 2, :title => "Day (up/down arrow keys)") %>
+							<%= text_field('calendar_entry', 'start[year]', 	"sx:id" => "year", 	:maxsize => 4, :value => current_user.adjusted_time(@calendar_entry.start).year, :class => "text-field stixy-calendar-entry-field", :style => "width:auto", :size => 4, :title => "Year (up/down arrow keys)") %> 
+						<% else %>
+							<%= text_field('calendar_entry', 'start[year]', 	"sx:id" => "year", 	:maxsize => 4, :value => current_user.adjusted_time(@calendar_entry.start).year, :class => "text-field stixy-calendar-entry-field", :style => "width:auto", :size => 4, :title => "Year (up/down arrow keys)") %> 
+							<%= text_field('calendar_entry', 'start[month]', "sx:id" => "month", :maxsize => 2, :value => current_user.adjusted_time(@calendar_entry.start).strftime("%m"), :class => "text-field stixy-calendar-entry-field", :style => "width:25px", :size => 2, :title => "Month (up/down arrow keys)") %> 
+							<%= text_field('calendar_entry', 'start[day]', 	"sx:id" => "day", 	:maxsize => 2, :value => current_user.adjusted_time(@calendar_entry.start).strftime("%d"), :class => "text-field stixy-calendar-entry-field", :style => "width:25px", :size => 2, :title => "Day (up/down arrow keys)") %> 
+						<% end %>
+						</sx:start-date>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<th class="title" width="40">At</th>
+				<td>
+					<sx:start-time>
+						<% start_time = current_user.time_format.time(current_user.adjusted_time(@calendar_entry.start)) %>
+						<%= text_field('calendar_entry', 'start[hour]', 		"sx:id" => "hour", 		:maxsize => 2, :value => start_time[:hour], :class => "text-field calendar-entry-field", :id => "calendar_entry_#{ @calendar_entry.id ? "edit" : "new" }_start_hour", :style => "width:25px", :size => 2, :title => "Hour (up/down arrow keys)")  %>
+						<%= text_field('calendar_entry', 'start[minute]',	"sx:id" => "minute",	:maxsize => 2, :value => current_user.adjusted_time(@calendar_entry.start).strftime("%M"), :class => "text-field calendar-entry-field", :id => "calendar_entry_#{ @calendar_entry.id ? "edit" : "new" }_start_minute", :style => "width:25px", :size => 2, :title => "Minute (up/down arrow keys)")  %>
+						<%= if current_user.time_format.twelve_hour_clock?; text_field('calendar_entry', 'start[suffix]', "sx:id" => "postfix", :maxsize => 2, :value => start_time[:postfix], :class => "text-field calendar-entry-field", :id => "calendar_entry_#{ @calendar_entry.id ? "edit" : "new" }_start_suffix", :style => "width:25px", :size => 2, :title => "AM/PM (up/down arrow keys)") end  %>
+					</sx:start-time>
+				</td>
+			</tr>
+		</table>	
+		
+		<div class="divider"></div>
+		
+		<table>
+			<tr>
+				<th class="title" width="40">
+					<div style="visibility:hidden;overflow:hidden;height:0px;">From</div>
+					To
+				</th>
+				<td>
+					<span id="calendar_entry_<%= @calendar_entry.id ? "edit" : "new" %>_stop_date">
+						<sx:stop-date>
+							<% if (2==current_user.time_format.get(:numeric_date)) %>
+								<%= text_field('calendar_entry', 'stop[month]', 	"sx:id" => "month",	:maxsize => 2, :value => current_user.adjusted_time(@calendar_entry.stop).strftime("%m"), :class => "text-field stixy-calendar-entry-field", :style => "width:25px", :size => 2, :title => "Month (up/down arrow keys)") %>
+								<%= text_field('calendar_entry', 'stop[day]', 		"sx:id" => "day", 	:maxsize => 2, :value => current_user.adjusted_time(@calendar_entry.stop).strftime("%d"), :class => "text-field stixy-calendar-entry-field", :style => "width:25px", :size => 2, :title => "Day (up/down arrow keys)") %>
+								<%= text_field('calendar_entry', 'stop[year]', 	"sx:id" => "year", 	:maxsize => 4, :value => current_user.adjusted_time(@calendar_entry.stop).year, :class => "text-field stixy-calendar-entry-field", :style => "width:auto", :size => 4, :title => "Year (up/down arrow keys)") %> 
+							<% else %>
+								<%= text_field('calendar_entry', 'stop[year]', 	"sx:id" => "year", 	:maxsize => 4, :value => current_user.adjusted_time(@calendar_entry.stop).year, :class => "text-field stixy-calendar-entry-field", :style => "width:auto", :size => 4, :title => "Year (up/down arrow keys)") %> 
+								<%= text_field('calendar_entry', 'stop[month]', 	"sx:id" => "month",	:maxsize => 2, :value => current_user.adjusted_time(@calendar_entry.stop).strftime("%m"), :class => "text-field stixy-calendar-entry-field", :style => "width:25px", :size => 2, :title => "Month (up/down arrow keys)") %> 
+								<%= text_field('calendar_entry', 'stop[day]', 		"sx:id" => "day", 	:maxsize => 2, :value => current_user.adjusted_time(@calendar_entry.stop).strftime("%d"), :class => "text-field stixy-calendar-entry-field", :style => "width:25px", :size => 2, :title => "Day (up/down arrow keys)") %> 
+							<% end %>
+						</sx:stop-date>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<th class="title" width="40">At</th>
+				<td>
+					<sx:stop-time>
+						<% stop_time = current_user.time_format.time(current_user.adjusted_time(@calendar_entry.stop)) %>
+						<%= text_field('calendar_entry', 'stop[hour]', 	"sx:id" => "hour", 		:maxsize => 2, :value => stop_time[:hour], :class => "text-field calendar-entry-field", :id => "calendar_entry_#{ @calendar_entry.id ? "edit" : "new" }_start_hour", :style => "width:25px", :size => 2, :title => "Hour (up/down arrow keys)")  %>
+						<%= text_field('calendar_entry', 'stop[minute]', "sx:id" => "minute", 	:maxsize => 2, :value => current_user.adjusted_time(@calendar_entry.stop).strftime("%M"), :class => "text-field calendar-entry-field", :id => "calendar_entry_#{ @calendar_entry.id ? "edit" : "new" }_start_minute", :style => "width:25px", :size => 2, :title => "Minute (up/down arrow keys)")  %>
+						<%= if current_user.time_format.twelve_hour_clock?; text_field('calendar_entry', 'stop[suffix]', "sx:id" => "postfix", :maxsize => 2, :value => stop_time[:postfix], :class => "text-field calendar-entry-field", :id => "calendar_entry_#{ @calendar_entry.id ? "edit" : "new" }_start_suffix", :style => "width:25px", :size => 2, :title => "AM/PM (up/down arrow keys)") end  %>
+					</sx:stop-time>
+				</td>
+			</tr>
+		</table>	
+		
+		<div class="divider"></div>
+		
+		<div style="padding:8px 0 0px">
+			<span class="title">Share:</span> <span onclick="alert('We\'re sorry, sharing is not yet implemented'); return false;" class="disabled-feature" title="We're sorry, sharing is not yet implemented">Select users</span>
+		</div>
+		
+		<div class="divider"></div>
+		
+		
+		<div<%= if @calendar_entry.location.nil? or @calendar_entry.location.empty?: ' class="controls-hide"' end %> sx:id="location">
+			<%= check_box_tag('calendar_entry[location_status]',1, (!@calendar_entry.location.nil? and !@calendar_entry.location.empty?), "sx:id" => "location-switcher")  %>
+			<span class="title">Location</span>
+			<div class="controls">
+				<%= text_area('calendar_entry', 'location', :value => @calendar_entry.location, :class => "text-field stixy-calendar-entry-field", :id => "calendar_entry_#{ @calendar_entry.id ? "edit" : "new" }_location")  %>
+				<div class="divider"></div>
+			</div>
+		</div>
+		
+		<div<%= if @calendar_entry.note.nil? or @calendar_entry.note.empty?: ' class="controls-hide"' end %> sx:id="note">
+			<div>
+				<%= check_box_tag('calendar_entry[note_status]',1, (!@calendar_entry.note.nil? and !@calendar_entry.note.empty?), "sx:id" => "note-switcher")  %>
+  	    <span class="title">Note</span>
+			</div>
+			<div class="controls">
+				<%= text_area('calendar_entry', 'note', :value => @calendar_entry.note, :class => "text-field stixy-calendar-entry-field", :id => "calendar_entry_#{ @calendar_entry.id ? "edit" : "new" }_note")  %>
+			</div>
+		</div>	
+			
+		<div class="divider"></div>
+
+		<div sx:id="recurring"<%= unless @calendar_entry.activity.recurring?: 'class="controls-hide"' end %>>
+				<%= check_box_tag('calendar_entry[recurring][status]',1, @calendar_entry.activity.recurring?, :id => 'recurring_status', "sx:id" => "status", :style => "vertical-align:middle") %>
+				<span class="title">Repeat</span>
+				<div class="controls" sx:id="controls" style="margin-top:3px">
+					Every <%= text_field_tag('calendar_entry[recurring][frequency]', @calendar_entry.activity.frequency, :maxsize => 200, "sx:id" => "frequency", :disabled => (@calendar_entry.activity.recurring? ? false : "disabled"), :style => "width:20px", :class => "text-field stixy-calendar-entry-field", :id => "recurring_status_frequency")  %>
+					<% 
+						units_options = ""
+						Activity::UNITS.each_with_index do |name, index|
+							options = { :value => index }
+							options.merge!(:selected => "selected") if @calendar_entry.activity.unit == index
+				  		units_options << content_tag("option", "#{name.titlecase}s", options)
+						end
+					%>
+					<%= select_tag("calendar_entry[recurring][unit]", units_options, :disabled => (@calendar_entry.activity.recurring? ? false : "disabled"), :id => "recurring_status_unit", "sx:id" => "unit") %>
+					<div class="divider"></div>
+				</div>
+		</div>
+		<div sx:id="notify"<%= unless @calendar_entry.notify?: ' class="controls-hide"' end %>>
+			<nobr><%= check_box_tag('calendar_entry[notification_state]',1, @calendar_entry.notify?, :id => "calendar_entry#{ @calendar_entry.id ? "edit" : "new" }_notification_state", "sx:id" => "status", :style => "vertical-align:middle") %>
+			<span class="title">Send email notification</nobr></span>
+			<div class="controls" sx:id="controls" style="margin-top:3px">
+				<%= text_field_tag('calendar_entry[notification_value]', @calendar_entry.notification_value, :maxsize => 200, "sx:id" => "value", :disabled => (@calendar_entry.notify? ? false : "disabled"), :style => "width:20px", :class => "text-field stixy-calendar-entry-field", :id => "calendar_entry_notification_frequency")  %>
+				<% 
+					units_options = ""
+					Notification::UNITS.each_with_index do |name, index|
+						options = { :value => index }
+						options.merge!(:selected => "selected") if @calendar_entry.notification_unit == index
+			  		units_options << content_tag("option", "#{name.titlecase}", options)
+					end
+				%>
+				<%= select_tag("calendar_entry[notification_unit]", units_options, :disabled => (@calendar_entry.notify? ? false : "disabled"), :id => "calendar_entry_notification_unit", "sx:id" => "unit") %>
+				before
+			</div>
+		</div>
+		
+		<div class="divider"></div>
+
+		<p style="text-align:right;">
+			<% if @calendar_entry.new_record? %>
+			<%= link_to_function "Add", 'Stixy.calendar.createEntry(\'calendar_new_entry_form\')', :button => {:type => 'default'} %>
+			<% else %>
+			<%= link_to_function "Remove", "Stixy.calendar.removeEntry(#{@calendar_entry.id})", :button => {:type => false} %>
+			<%= link_to_function "Save", "Stixy.calendar.editEntry(#{@calendar_entry.id})", :button => {:type => 'default'}, :style => "margin-left:10px;" %>
+			<% end %>
+		</p>
+	</div>
+	
+	<%= submit_tag "&nbsp;", :style => "position:absolute;visibility:hidden;z-index:-1" %>

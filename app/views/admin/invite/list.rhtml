@@ -1,0 +1,44 @@
+<h2>Listing invites</h2>
+<span class="adminmenu"><%= link_to 'New invite', :action => 'new' %></span>
+<span class="adminmenu"><%= link_to 'Send reminders', :action => 'send_reminders' %></span>
+
+<table class="admin">
+  <tr>
+    <th>Id</th>
+    <th>Invited By</th>
+    <th>Board</th>
+    <th>Board ID</th>
+    <th>Accepted By</th>
+    <th>Name</th>
+    <th>E-mail</th>
+    <th>Status</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </tr>
+  
+<% @invites.each_with_index  do |invite, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+%>
+  <tr class="<%= color %>">
+    <td><%= invite.id %></td>
+    <td><%= invite.inviter_user.login %></td>
+    <td><%= invite.board.title if invite.board != nil %></td>
+    <td><%= invite.board.id if invite.board %></td>
+    <td><%= invite.accepted_user.login if invite.accepted_user != nil %></td>
+    <td><%= invite.accepted_user.display_name %></td>
+    <td><%= invite.accepted_user.email %></td>
+	<td><%= invite.status_name %></td>
+    <td><%= link_to 'Show', :action => 'show', :id => invite %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => invite %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => invite }, :confirm => 'Are you sure?' %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @page.prev.number } if @page.prev? %>
+<%= link_to 'Next page', { :page => @page.next.number } if @page.next? %> 
+
+<br />
+

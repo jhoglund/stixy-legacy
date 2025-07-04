@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Welcome to Stixy</title>
+	<script language="javascript" type="text/javascript" src="/javascripts/firebug/firebug.js"></script>
+	<script language="javascript" type="text/javascript" src="/javascripts/all/default/2_stixy.js"></script>
+	<script>
+		Stixy.events.observe(document,"click",function(e){
+			var uri = Stixy.events.element(e).href;
+			if(uri && (uri.search(new RegExp("^"+location.protocol+"\/\/"+location.host))==-1)){
+				Stixy.events.stop(e);
+				open(uri, "StixyExternalWindow");
+			}
+		})
+	</script>
+	
+	<style>
+		/*body {
+		}
+		div[contenteditable=true] {
+			outline: none;
+			-webkit-user-modify: read-write;
+		}
+		[unselectable=on] {
+			-webkit-user-select: none;
+		}
+		.w-n-font {
+			-webkit-user-select: none;
+		}*/
+	</style>
+</head>
+<body style="background-color:transparent">
+	<a href="http://192.168.0.98/404.html">localhost</a>
+	<a href="../500.html">relative</a>
+	<a href="http://news.com">news</a>
+</body>
+</html>

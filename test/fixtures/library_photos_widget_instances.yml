@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+photo_widget_1:
+  id: 1
+  library_photo_id: 4
+  widget_instance_id: 4
+photo_widget_2:
+  id: 2
+  library_photo_id: 6
+  widget_instance_id: 5
+photo_widget_home_page:
+  id: 3
+  library_photo_id: 1
+  widget_instance_id: 6
+photo_widget_jonas_board:
+  id: 4
+  library_photo_id: 5
+  widget_instance_id: 8

@@ -1,0 +1,35 @@
+<h2>Editing user</h2>
+
+<span class="adminmenu"><%= link_to 'Show', :action => 'show', :id => @user %></span> |
+<span class="adminmenu"><%= link_to 'List', :action => 'list' %></span>
+
+<% form_tag(:action => 'update_contacts', :id => @user) do -%>
+  
+  <table class="admin">
+  
+  <tr class="light">
+    <td>User:</td>
+    <td><%= @user.login %></td>
+  </tr>
+  <tr class="dark">
+  <td>Current Contacts:</td>
+    <td>
+	<% @user.contacts.each do |contact| %>
+       <%= link_to contact.login, :action => 'show', :id => @user %><br/>  
+    <% end %>&nbsp;
+    </td>
+  </tr>
+  <td>Add a new contact:</td>
+    <td>
+    <select id="user_contact_ids" name="user[contact_ids]" style="width: 250px;">
+	<%= options_for_select(@all_users.collect {|p| [ p.login, p.id ] if p.is_visible? and not @user.contacts.include?(p) and not @user == p }, {:include_blank => true}) %>
+    </select>
+    </td>
+  </tr>
+    
+</table>
+
+
+
+  <%= submit_tag 'Edit' %>
+<% end -%>

@@ -1,0 +1,39 @@
+development:
+    # IMPORTANT - set your local bucket_name to appropriate value or you imge uploads will collide with someone else
+    # DO NOT check in that change
+    # bucket_name: stixy_dev_sasha
+    # bucket_name: stixy_dev_jonas
+    #
+    # run:
+    #   rake s3:create_bucket   
+    # to create a bucket for current environment
+    #stixy_dev_jonas
+  #bucket_name: stixy
+  bucket_name: stixy_dev_jonas
+  access_key_id: 1BANHXME8F73Q29YWKG2
+  secret_access_key: OsukI+qr39zVNVQ+2LDrDvnm+jMLN/o4g9ZVK3JM
+
+cached:
+  bucket_name: stixy_dev_jonas
+  access_key_id: 1BANHXME8F73Q29YWKG2
+  secret_access_key: OsukI+qr39zVNVQ+2LDrDvnm+jMLN/o4g9ZVK3JM
+
+production_debug:
+  bucket_name: stixy_dev_jonas
+  access_key_id: 1BANHXME8F73Q29YWKG2
+  secret_access_key: OsukI+qr39zVNVQ+2LDrDvnm+jMLN/o4g9ZVK3JM
+
+test:
+  bucket_name: stixy_test
+  access_key_id: 1BANHXME8F73Q29YWKG2
+  secret_access_key: OsukI+qr39zVNVQ+2LDrDvnm+jMLN/o4g9ZVK3JM
+  
+staging:
+  bucket_name: stixy
+  access_key_id: 1BANHXME8F73Q29YWKG2
+  secret_access_key: OsukI+qr39zVNVQ+2LDrDvnm+jMLN/o4g9ZVK3JM
+
+production:
+  bucket_name: stixy
+  access_key_id: 1BANHXME8F73Q29YWKG2
+  secret_access_key: OsukI+qr39zVNVQ+2LDrDvnm+jMLN/o4g9ZVK3JM

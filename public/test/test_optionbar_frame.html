@@ -1,0 +1,206 @@
+<!--[if lte IE 6]><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 transitional//EN"><![endif]-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html style="overflow:hidden;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="/stylesheets/global.css?1175107273" media="all" rel="Stylesheet" type="text/css"></link>
+	<!--[if lte IE 6]>
+	<link href="/stylesheets/global_ie.css?1175107273" media="all" rel="Stylesheet" type="text/css"></link>
+	<![endif]-->
+	
+	<style>
+		/* OPTIONBAR */
+		html, body { margin:0; overflow:hidden; height:100%; background:transparent; }
+		table { table-layout:fixed; }
+		.opt-background { position:relative; top:21px; height:100%; background-color:rgb(235,235,235); opacity:0.75; filter:alpha(opacity=75); }
+		.opt-background-gradient { position:relative; top:0; left:-5000px; height:200%; width:10000px; }
+		.opt-tab,
+		.opt-tab .left,
+		.opt-tab .right,
+		.opt-tab .left div,
+		.opt-tab .right div { position:absolute; top:0; height:21px; z-index:-1; }
+		.opt-tab { display:inline; top:-21px; height:19px; line-height:21px; z-index:1; }
+		.opt-tab .left { overflow:hidden; left:0; width:50%; }
+		.opt-tab .right { overflow:hidden; right:0; width:51%; }
+		.opt-tab .left div,
+		.opt-tab .right div { width:100%; background:url(/images/edit_options_tab.png) no-repeat; }
+		.opt-tab .left div { left:0; background-position:left top; }
+		.opt-tab .right div { right:0; background-position:right top; }
+		.opt-tab .label { padding:0 0 0 15px; white-space:nowrap; color:white; }
+		
+		.opt-panel { position:absolute; top:21px; right:0; bottom:0; left:0; border-top:1px solid rgb(215,215,215); }
+		.opt-content { padding:10px; }
+		.wopt-close { position:relative; left:0px; font:11px/10px; padding:3px 11px; background:url(/images/wopt_close.gif) no-repeat 7px 2px; }
+		
+		
+		/* Optionbar content default */
+		.opt-bar .mail-address {width: 166px; ;height:14px; overflow:hidden; }
+		.opt-bar .opt-devider	 { position:relative; clear:both; top:8px; border-top:1px solid rgb(180,180,180); border-bottom:1px solid white; margin:0 0 16px; overflow:hidden; }
+		.opt-more { text-align:right; }
+		.opt-bar h3 { font-size:15px; margin:15px 0px 10px; }
+		.opt-bar h4 { margin:5px 0px 3px; }
+		.opt-bar .subhead { margin:0px 0px 5px; }
+		.opt-sub-header { position:absolute; z-index:2; bottom:0px; height:27px; font-weight:bold; color:rgb(102,102,102); padding:0px 27px 0px 10px; width:218px; cursor:default; }
+		.opt-sub-header hr { position:relative; top:0px; margin:0px -27px 0px -10px; }
+		.opt-row { clear:both; padding:0 0 8px; }
+		.opt-color-palett span { position:relative; float:left; display:block; height:15px; width:11.5%; overflow:hidden; margin:1px; }
+		.opt-bar .deactivated-color-palett,
+		.opt-bar .deactivated .activated-color-palett { display:none; }
+		.opt-bar .deactivated .deactivated-color-palett { display:block; }
+		.opt-color-palett div { position:absolute; top:0; right:0; bottom:0; left:0; }
+		.opt-color-palett span.active { border:1px solid rgb(255,150,20); margin:0; }
+		.opt-color-palett span.active div { height:13px; margin:1px; }
+		.opt-themes { position:relative; margin:0; }
+		.opt-theme-spacer { height:1px; overflow:hidden; }
+		.opt-themes .opt-theme { position:relative; float:left; width:50px; height:40px; margin:0 4px 0 0; cursor:default; background-color: white; background-image:url(/images/white_gradient_transp_300.png); background-repeat:no-repeat; background-position:-100px -100px; }
+		.opt-themes .opt-theme .label { position:absolute; font-size:22px; line-height:22px; bottom:4px; left:12px; width:35px; overflow:hidden; white-space:nowrap; }
+		.opt-themes .active { border:1px solid rgb(255,150,20); margin:-1px 3px -1px -1px; }
+		
+		.opt-themes-tooltips { position:absolute; top:13px; left:0; width:100%; height:40px; }
+		.opt-themes-tooltips div { position:relative; float:left; width:50px; height:40px; margin:0 4px 0 0; cursor:default; }
+		.opt-themes-tooltips span { position:absolute; opacity:0.6; filter:alpha(opacity=60); display:none; z-index:1; top:-5px; right:-12px; background:rgb(240,250,215); text-align:center; font:bold 10px "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; color: rgb(90,145,25); padding:6px; }
+		.opt-themes-tooltips div:hover span { display:block; }
+		.opt-check {margin:2px 0 0 0; text-align:text-top; width:13px; height:13px; overflow:hidden; }
+		.opt-font-size-palett { font-weight:bold; margin-left:8px; }
+		.opt-font-size-palett .active { border:1px solid rgb(255,150,20); margin:0; background:white;}
+		.opt-font-size-palett div { cursor:default; overflow:hidden; float:left; line-height:30px; margin:1px; width:12%; height:23px; margin:1px; text-align:center; }
+		.opt-font-size-palett div span { position:relative; display:block; top:-30px;}
+		.opt-font-size-palett .decrease-font,
+		.opt-font-size-palett .increase-font { display:block; float:left; width:25px; height:25px;}
+		.opt-font-size-palett .decrease-font { background:url(/images/edit_btn_minus.png) no-repeat 1px 4px; }
+		.opt-font-size-palett .increase-font { background:url(/images/edit_btn_plus.png) no-repeat 6px 4px; }
+		.opt-font-size-palett .decrease-font:hover { background-position: 1px -23px; }
+		.opt-font-size-palett .increase-font:hover { background-position: 6px -23px; }
+		.opt-font-style div { float:left; margin-right:4px; padding:0px 6px; border:1px solid white; font-size:13px; cursor:default; }
+		.opt-font-style div.active { border:1px solid rgb(255,150,20); background:white; }
+		.opt-bar-load-indicator { position: absolute; top: 50px; left: 0px; display:none; padding-left:35px; color:  rgb(180,180,180);font-size:1.2em; background:url(/images/spinner.gif) no-repeat 15px top; }
+
+		.opt-bar .no-data,
+		.opt-bar .ghosted,
+		.opt-bar .deactivated { color: rgb(150,150,150); }
+		.opt-bar .activated { color:rgb(50,50,50); }
+	</style>
+	<!--[if lte IE 6]>
+	<style>
+		/* OPTIONBAR */
+		.opt-panel {  }
+		.opt-bar .bar-tools { top:-25px;}
+		.opt-bar-grid { width:255px; }
+		.opt-background { height:100%; z-index:-1; }
+		.opt-themes .active { padding:1px!important; height:42px; width:52px;  }
+		
+		
+		/* Optionbar content default */
+		.opt-themes .opt-theme { background:none; background-position:0 0; }
+		
+		.opt-color-palett span { height:17px; width:12.0%; margin:0; }
+		.opt-color-palett span.active { position:relative;left:1px;height:18px;margin:-1px 1px -1px -1px;}
+		.opt-color-palett div { position:static; margin:1px; height:15px; width:100%; }
+		.opt-font-size-palett .active {  margin:1px; }
+		.opt-color-palett span.active div { height:14px; }
+		.opt-bar .opt-devider	 { height:2px; }
+		
+		
+		
+	</style>
+	<![endif]-->
+	
+	
+	<style>
+	.w-p-replace { display:none; }
+	.w-p-document-name { margin:0px 0px 8px; }
+	#wopt-photo .opt-themes .opt-theme { position:relative; width:50px; height:40px; background-position:0px 0px; background-repeat: no-repeat; }
+	#w-p-theme-noeffect,
+	#w-p-theme-sepia,
+	#w-p-theme-gray { background: url(/images/widgets/photo/wopt_icon_ghosted.jpg); }
+	#w-p-theme-noeffect.activated { background: url(/images/widgets/photo/wopt_icon_color.jpg); }
+	#w-p-theme-sepia.activated { background: url(/images/widgets/photo/wopt_icon_sepia.jpg); }
+	#w-p-theme-gray.activated { background: url(/images/widgets/photo/wopt_icon_bw.jpg); }
+	#w-p-theme-noframe { background: url(/images/widgets/photo/wopt_icon_noframe.jpg)!important; }
+	#w-p-theme-frame { background: url(/images/widgets/photo/wopt_icon_frame.jpg)!important; }
+	#w-p-theme-frame-1px { background: url(/images/widgets/photo/wopt_icon_frame_1px.jpg)!important; }
+	#w-p-theme-rotate-0 { background: url(/images/widgets/photo/wopt_icon_rotate_0.jpg)!important; top:5px; }
+	#w-p-theme-rotate-90 { background: url(/images/widgets/photo/wopt_icon_rotate_90.jpg)!important; width:40px!important; height:50px!important; }
+	#w-p-theme-rotate-180 { background: url(/images/widgets/photo/wopt_icon_rotate_180.jpg)!important; top:5px;  }
+	#w-p-theme-rotate-270 { background: url(/images/widgets/photo/wopt_icon_rotate_270.jpg)!important; width:40px!important; height:50px!important; }
+	#w-p-theme-rotate-0.active,
+	#w-p-theme-rotate-180.active,
+	#w-p-theme-noeffect.active,
+	#w-p-theme-sepia.active,
+	#w-p-theme-gray.active,
+	#w-p-theme-noframe.active,
+	#w-p-theme-frame.active { width:52px!important; height:42px!important; }
+	
+	</style>
+
+	<!--[if lte IE 6]>
+	<style>
+		#wopt-photo .opt-themes{ padding:0 0 1px 2px; }
+		#w-p-theme-rotate-0.active,
+		#w-p-theme-noframe.active,
+		#w-p-theme-noeffect.active { left:1px; margin-right:4px;}
+	</style>
+	<![endif]-->
+</head>
+<body style="padding:0px;" class="opt-bar widget-options-frame">
+	<div class="opt-background"><div class="opt-background-gradient"></div></div>
+	<div class="opt-panel wopt wopt-panel-show" id="wopt-photo">
+		<span class="opt-tab">
+		  <div class="left"><div>&nbsp;</div></div>
+		  <div class="right"><div>&nbsp;</div></div>
+			<div class="label">Photo options<span class="wopt-close">&nbsp;</span></div>
+		</span>
+		<div class="opt-scroll">
+			<div class="opt-content">
+	      <div class="opt-row">
+	        <h4>Image name</h4>
+	        <div class="w-p-image-name ghosted" style="margin:4px 0"></div>
+					<div style="margin:8px 0">
+						<span class="button default w-p-upload">
+							<div class="left"><div>&nbsp;</div></div>
+							<div class="right"><div>&nbsp;</div></div>
+							<div class="label">Add image</div>
+						</span>
+						<span class="button w-p-upload w-p-replace">
+							<div class="left"><div>&nbsp;</div></div>
+							<div class="right"><div>&nbsp;</div></div>
+							<div class="label">Replace image</div>
+						</span>
+					</div>
+	      </div>
+	      <div class="opt-row">
+	        <div class="opt-devider"></div>
+					<h4>Effect</h4>
+					<div class="opt-themes" style="">
+	        	<div class="opt-theme-spacer">&nbsp;</div>
+						<div class="opt-theme w-p-theme-effects activated active" id="w-p-theme-noeffect"></div>
+		        <div class="opt-theme w-p-theme-effects activated " id="w-p-theme-sepia"></div>
+		        <div class="opt-theme w-p-theme-effects activated" id="w-p-theme-gray"></div>
+					</div>
+	      </div>
+	      <div class="opt-row">
+	        <div class="opt-devider" style="margin-bottom:10px"></div>
+	        <h4>Frame</h4>
+					<div class="opt-themes">
+	         	<div class="opt-theme-spacer">&nbsp;</div>
+						<div class="opt-theme w-p-theme-border active" id="w-p-theme-noframe"></div>
+	          <div class="opt-theme w-p-theme-border " id="w-p-theme-frame"></div>
+						<!-- <div class="opt-theme w-p-theme-border" id="w-p-theme-frame-1px"></div> -->
+					</div>
+				</div>
+				<div class="opt-row">
+		      <div class="opt-devider" style="margin-bottom:10px"></div>
+	        <h4>Rotate</h4>
+					<div class="opt-themes">
+	          <div class="opt-theme-spacer">&nbsp;</div>
+						<div class="opt-theme w-p-theme-rotation " id="w-p-theme-rotate-0"></div>
+						<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-90"></div>
+						<div class="opt-theme w-p-theme-rotation active" id="w-p-theme-rotate-180"></div>
+						<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-270"></div>
+					</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</body>
+</html>

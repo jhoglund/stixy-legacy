@@ -1,0 +1,18 @@
+<div class="header">
+	<div class="header-background"><div class="header-background-pattern"></div><div class="header-background-gradient"></div></div>
+	<!-- TOP AD -->
+  <%- if current_user.display_ad? -%>
+  <%= render :partial => "shared/global_top_ad" %>
+  <%- end -%>
+	<div class="header-content">
+		<div class="global-navigation">
+			<a href="/welcome">Go To Stixy</a>
+			<span class="pipe"></span>
+	    <a href="mailto:abuse@stixy.com?subject=Report of Abuse">Report Abuse</a>
+		</div>
+		<div class="utility-navigation">
+			<%= render :partial => "/shared/utility" %>
+		</div>
+	</div>
+	<a href="/welcome"><div class="stixy-signature">&nbsp;</div></a>
+</div>

@@ -1,0 +1,4 @@
+<% if flash[:notice] %><div class="message-notice" id="message_notice"><div class="close" onclick="Stixy.element.$ID('message_notice').style.display='none'">&nbsp;</div><%= flash[:notice] %><div class="message-bg">&nbsp;</div></div><% end %>
+<% if flash[:error] %>
+<div class="message-error" id="message_error"><div class="close" onclick="Stixy.element.$ID('message_error').style.display='none'">&nbsp;</div><%= flash[:error] %><div class="message-bg">&nbsp;</div></div>
+<% end %>

@@ -1,0 +1,9 @@
+/*------------*/
+/* POPUP IE 6 */
+/*------------*/
+
+.popup-top { padding-top:25px; }
+.popup-content { position:relative; padding-top:0; top:0px; height:100%; width:100%; }
+.popup-button-bar { position:relative; height:50px; width:100%; }
+.popup-load-progress { height:expression(parentNode.clientHeight-75); }
+.popup-external-frame { width:expression(parentNode.clientWidth); }

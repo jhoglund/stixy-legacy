@@ -1,0 +1,88 @@
+<%= @doc_type %>
+<html xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<title></title>
+	<script>
+		var Stixy = {
+			element: {
+				baseDocument: document,
+				$ID: function(element, base) {
+					try{
+						return (typeof(element)=="string") ? ((base||Stixy.element.baseDocument).getElementById(element) || Stixy.widgets.Optionbar.frame.window.doc.getElementById(element)) : element;
+					}catch(e){
+						return null;
+					}
+				},
+				$CN: function(className, parentElement) {
+					try{
+				  var children = parentElement.getElementsByTagName('*'), elements = [];
+					for(var i=0; i<children.length; i++){
+						if(children[i].className.match(new RegExp("(^|\\s)" + className + "(\\s|$)"))){
+							elements.push(children[i]);
+						}
+					}
+				  return elements;
+					}catch(e){ }
+				},
+				$nsID: function(idName, nameSpaceName, parentElement){
+					try{
+						var tags = parentElement.getElementsByTagName("*");
+						for(var i=0; i<tags.length; i++){
+							var id = tags[i].getAttribute("sx:id");
+							if(id==idName) return tags[i];
+						}
+					}catch(e){
+						alert(e.message)
+					}
+					return false;
+				},
+				$nsTags: ((function(){
+					if(document.namespaceURI===undefined){
+						return function(tagName, nameSpaceName, parentElement){
+							return parentElement.getElementsByTagName(tagName)
+						}
+					}else{
+						return function(tagName, nameSpaceName, parentElement){
+							return parentElement.getElementsByTagName(nameSpaceName + ":" + tagName)
+						}
+					}
+				})())
+				
+			}
+		}
+		onload = function(){
+			alert(Stixy.element.$nsID("test", "sx", document.getElementById("root")).innerHTML)
+			var start = new Date
+			var entries = Stixy.element.$nsTags("calendar-entry", "sx", document.getElementById("stixy_calendar"));
+			var entry_time = new Date - start
+			var divs = Stixy.element.$CN("calendar-entry",document.getElementById("stixy_calendar_div"))
+			var divs_time = new Date - start - entry_time
+			var divs_m = Stixy.element.$CN("calendar-entry",document.getElementById("stixy_calendar_div_multiple"))
+			var divs_m_time = new Date - start - divs_time
+			alert("Entries length: " + entries.length + "\nNS: " + entry_time + "\nClass name: " + divs_time + "\nMultiple class names: " + divs_m_time)
+		}
+	</script>
+</head>
+<body scroll="no"> 
+	<div id="root"><div sx:id="test">2222</div><div sx:id="test">333</div></div>
+	
+	<sx:calendar id="stixy_calendar">
+			<% (0...1000).each do |i| %>
+				<sx:calendar-entry>Entry <%= i %></sx:calendar-entry>
+			<% end %>
+			</sx:calendar>
+
+			<div id="stixy_calendar_div">
+			<% (0...1000).each do |i| %>
+				<div class="calendar-entry">Entry <%= i %></div>
+			<% end %>
+			</div>
+			
+			<div id="stixy_calendar_div_multiple">
+			<% (0...1000).each do |i| %>
+				<div class="before calendar-entry after more and-more-longer">Entry <%= i %></div>
+			<% end %>
+			</div>
+	
+</body>
+</html>

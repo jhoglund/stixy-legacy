@@ -1,0 +1,9 @@
+class Status < ActiveRecord::Base
+  
+  # mapping arrays for enums
+  STATUS_NAMES = %w{DISABLED ACTIVE PENDING FINISHED DEACTIVATED CANCELED DELETED PENDING_RECURRING}
+  
+  # status values enum
+  DISABLED, ACTIVE, PENDING, FINISHED, DEACTIVATED, CANCELED, DELETED, PENDING_RECURRING = 0, 1, 2, 3, 4, 5, 6, 7
+  
+end

@@ -1,0 +1,38 @@
+/*--------------*/
+/* DEFAULT IE 6 */
+/*--------------*/
+.canvas { position:absolute; top:0; right:auto; bottom:auto; left:255px; width:expression(document.body.clientWidth-255); height:100%; }
+.board-list-closed .canvas { left:0px; width:100%; }
+
+.bar-tools { height:24px; width:255px; }
+.left-sidebar-260 { width:240px; padding-right:10px;  }
+.user-tools .pipe { margin:0 -4px 0 0; top:-3px;}
+.spinner-16 { margin-left:4px; height:16px; }
+.send-reminder,
+.remove-user { height:16px; }
+
+.inline-message-error { margin:5px 0px 5px 0px; right: 0px; }
+
+.message { padding:18px; }
+.message .nw,
+.message .ne,
+.message .se,
+.message .sw { width:expression(parentNode.clientWidth/2); height:expression(parentNode.clientHeight/2); }
+.message .nw { top: 0; left: 0; }
+.message .ne { top: 0; right: 0; }
+.message .se { bottom: 0; right: 0; }
+.message .sw { bottom: 0; left: 0; }
+.message .nw p,
+.message .ne p,
+.message .se p,
+.message .sw p,
+.message .nw p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/images/main_template/mt_message_bubble.png"); }
+.message-error .nw p,
+.message-error .ne p,
+.message-error .se p,
+.message-error .sw p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/images/main_template/mt_message_bubble_error.png"); }
+.message .callout { left: -30px; background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/images/main_template/mt_message_callout.png"); }
+.message-error .callout { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/images/main_template/mt_message_callout_error.png"); }
+
+
+

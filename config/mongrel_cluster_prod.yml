@@ -1,0 +1,8 @@
+--- 
+cwd: /home/stixy/stixy/current
+port: "8000"
+environment: production
+address: 127.0.0.1
+pid_file: /home/stixy/logs/mongrel/mongrel.pid
+log_file: /home/stixy/logs/mongrel/mongrel_production.log
+servers: 4

@@ -1,0 +1,4 @@
+<%= "#{ link_to_function "Cancel", "cancel()", :button => {:type => false} }" %>
+<%= "#{ link_to_function "Remove", "removeLink()", :button => {:type => false}, :style => "margin-left:10px;" }" if edit==true %>
+<%= "#{ link_to_function "Edit", "insertLink()", :button => {:type => "default"}, :style => "margin-left:10px;"  }" if edit==true %>
+<%= "#{ link_to_function "Insert", "insertLink()", :button => {:type => "default"}, :style => "margin-left:10px;"  }" if edit==false %>

@@ -1,0 +1,30 @@
+<%= error_messages_for 'beta_tester' %>
+
+
+
+<table class="admin">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  <%= hidden_field ("beta_tester", "id") if controller.action_name == 'edit' %>
+  
+  <tr class="dark">
+    <td><label for="user_login">Login</label></td>
+    <td>
+    <%= text_field("user", "login", "id" => "login", "size" => 30, "maxsize" => 30, "autocomplete" => "off") %>
+    </td>
+  </tr>
+	<tr class="light">
+    <td><label for="user_display_name">Comment</label></td>
+    <td><%= text_area('beta_tester', 'comment', 'rows' => 6)  %></td>
+  </tr>
+  <tr class="dark">
+    <td><label for="user_login">Only send notification of launch</label></td>
+    <td>
+    <%= check_box("beta_tester", "notify_only") %>
+    </td>
+  </tr>
+  
+</table>
+

@@ -1,0 +1,23 @@
+<%= @doc_type %>
+<% debug_state = false %>
+<html<% if ENV["RAILS_ENV"] == "development" and debug_state===true %> debug="true" debugtop="true"<% end %> xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<title>
+		<%= @board ? @board.document_title : "Stixy: For Flexible Online Creation Collaboration and Sharing" %>
+	</title>
+	<%= render :partial => "/shared/meta" %>
+	<%= javascript_include_tag "all/firebug/firebug" if ENV["RAILS_ENV"] == "development" and debug_state===true -%>
+	<%= include_resource :javascript, :default %>
+	<%= include_resource :javascript, :stixyboard %>
+	<%= include_resource :stylesheet, :default %>
+	<%= render :partial => "/board/inline_script" %>	
+</head>
+<body scroll="no" class="<%= body_classes %>"> 
+	<iframe unselectable="on" height="100%" style="position:absolute;height:100%;width:100%;z-index:1000000;" frameborder="0" allowtransparency="true" id="load_error_frame" src="/load_wait.html"></iframe>
+	<%= render :partial => "/shared/header" %>
+	<%= render :partial => "/shared/message" %>
+	<%= @content_for_layout %>
+	<%= render(:partial => "/shared/google_analytics") %>
+	<%= render :partial => "/shared/popup" if @popup %>
+</body>
+</html>

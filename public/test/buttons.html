@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 transitional//EN">
+
+<html lang="en" style="background:rgb(200,200,200);" xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<title>Stixy: For Flexible Online Creation Collaboration and Sharing</title>
+	<style>
+	
+		a { text-decoration:none; }
+		sx\:button { position:relative; font: 11px/12px "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; color:white; display:inline; display:inline-block; z-index:0; cursor:default; }
+		sx\:button sx\:l { position:absolute; top:0px; left:0px; width:50%; height:20px; overflow:hidden; z-index:-1; }
+		sx\:button sx\:r { position:absolute; top:0px; right:0px; width:51%; height:20px; overflow:hidden; z-index:-1; }
+		sx\:button sx\:l sx\:p,
+		sx\:button sx\:r sx\:p { position:absolute; z-index:-1; top:0px; right:0px; height:20px; width:100%; background:url(/images/buttons/btn_background.png) right top no-repeat; }
+		sx\:button sx\:r sx\:p { left:0px; right:auto; background-position:right top; }
+		sx\:button a { position:relative; top:3px; padding:0 20px; margin-top:3px; white-space:nowrap; display:inline; }
+
+		sx\:button a,
+		sx\:button a:link,
+		sx\:button a:active,
+		sx\:button a:visited { font-weight:normal; color:white; cursor:hand; cursor:pointer; }
+		sx\:button a:hover { color:rgb(75,75,75);}
+
+	</style>
+	<!--[if lte IE 7]>
+	<style>
+		sx\:button sx\:l sx\:p,
+		sx\:button sx\:r sx\:p { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/buttons/btn_background.png') }
+	</style>
+	<![endif]-->
+</head>
+<body scroll="no">
+	<sx:button class="default" id="button">
+		<a href="">test</a>
+		<sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r>
+	</sx:button>
+</body>
+</html>

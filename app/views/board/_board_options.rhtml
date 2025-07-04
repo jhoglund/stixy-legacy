@@ -1,0 +1,36 @@
+<%- cache("board/board_options/#{@board.id}", :expires_in => 30.days) do -%>
+<div class="opt-background">
+	<div class="opt-gradient"></div>
+</div>
+<div class="opt-panel">
+	<div class="bar-tools"><%= link_to_function "", "Stixy.ui.boptClose()", :class => "bar-close" %></div>
+	<div class="opt-scroll">
+		<div class="opt-content">
+			<h3 style="margin-bottom:4px;"><%= @board.display_name %></h3>
+			<table class="option-list">
+				<tr><td>
+					<span class="option-list-title">Tags:</span> <%= formated_collection(@board.tags){|t| t.name } %>
+					<p/><span class="option-list-title">Description:</span> <%= formated_str(@board.description) %>
+					<p/><span class="option-list-title">Public Web Access:</span> 
+					<% if @board.visible==1 %>
+						<span style="color:rgb(255,153,0)">Yes</span> | <a href="http://<%= SERVER %>/guest/<%= @board.id %>" target="StixyPreview">Preview</a>
+					<% else %>
+						No
+					<% end %>
+				</td></tr>
+			</table>
+			<div style="text-align:right;margin-top:4px;">
+					<%= link_to "Edit Stixyboard Options", {:controller => "board", :action => "options", :id => @board.id }, {:onclick => "Stixy.board.openOption(); return false;", :style => "font-weight:bold;"} %>
+			</div>
+			<div class="opt-devider"></div>
+			<%= render :partial => "/board/board_notification" %>
+			<div class="opt-devider"></div>
+			<%= render :partial => "/board/board_shared_and_invited" %>
+			<div class="opt-devider"></div>
+			<div style="font-weight:bold; padding:0 0 8px;">
+					<%= link_to "Recover deleted widgets", {:controller => "board", :action => "trash_can", :id => @board.id }, {:onclick => "Stixy.board.openTrashCan(); return false;"} %>
+			</div>
+		</div>
+	</div>
+</div>
+<%- end -%>

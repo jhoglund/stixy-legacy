@@ -1,0 +1,59 @@
+<%= render :partial => "public/public_navigation" %>
+<div class="report-a-bug">
+	<% if flash[:notice] %>
+	<div class="full-column">
+		<h1>Your feedback has been sent</h1>
+		<p>Thank you for helping us to improve Stixy. Depending on the nature of your feedback, we may be in contact with you.</p>
+	</div>
+	<% else %>
+	<% form_for(:feedback,
+	:url => {:action => 'index'},
+	:html => { :multipart => true }) do |f| %>
+	<%= f.hidden_field('name', :class => "text-field", :value => params[:id]) %>
+	<div class="full-column">
+	  <h1>Send us feedback</h1>
+	  <p>Please enter your information in the fields below. </p>
+	</div>
+	<div class="half-column">
+
+		<div class="title"><label for="user_display_name">First name</label></div>
+		<%= f.text_field('first_name','maxsize' => 200, :class => "text-field" )  %>
+
+		<div class="title"><label for="user_display_name">Last name</label></div>
+		<%= f.text_field('last_name', 'maxsize' => 200, :class => "text-field")  %>
+
+		<% if @feedback.errors[:email] %><div class="inline-message-error"><% end %>
+		<div class="title"><label for="user_email">E-mail</label></div>
+		<%= f.text_field('email', 'maxsize' => 200, :class => "text-field")  %>
+		<% if @feedback.errors[:email] %>
+			<% @feedback.errors[:email].each do |msg| %>
+				<p>Please enter your e-mail address</p>
+			<% end %>  
+			</div>
+		<% end %>
+		<%= f.hidden_field('browser', :class => "text-field", :value => @browser_info.browser) %>
+		<%= f.hidden_field('platform', :class => "text-field", :value => @browser_info.platform)  %>
+
+	</div>
+
+	<div class="half-column">
+			<% if @feedback.errors[:description] %><div class="inline-message-error"><% end %>
+			<div class="title"><label>Message:</label></div>
+			<%= f.text_area('description', :rows => 14, :class => "text-field")  %>
+			<% if @feedback.errors[:description] %>
+				<% @feedback.errors[:description].each do |msg| %>
+					<p>Please add a message</p>
+				<% end %>  
+				</div>
+			<% end %>
+	</div>
+	<% end -%>
+<% end %>
+</div>
+
+<% unless flash[:notice] %>
+	<% 
+	@buttons = "#{ link_to_function "Cancel", 'window.parent.Stixy.popup.close()', :button => {:type => false} }
+							#{ link_to_function "Send feedback", 'document.forms[0].submit()', :button => {:type => 'default'}, :style => "margin-left:10px;"  }"
+	%>
+<% end -%>

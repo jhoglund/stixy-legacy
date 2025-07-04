@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html debug="true" xmlns:stixy>
+<head>
+	<stixy:loader style="behavior:url(/bindings/load.htc)" oncontentready="Stixy.events.execute(Stixy.events.ques.ready)" />
+	<title>Welcome to Stixy</title>
+	<script src="/javascripts/firebug/firebug.js"></script>
+	<style>
+		/*	
+		*[contenteditable!=true] { -moz-user-focus: ignore; -moz-user-input: disabled; -moz-user-select: none }
+		*[contenteditable=true] { -moz-user-focus: ignore; -moz-user-input: disabled; -moz-user-select: normal }
+		*/
+	</style>
+	<script>
+	var start_all = new Date();
+	
+	function Test(test,prop){
+		this.test = test;
+		this.prop = prop;
+		this.prop2 = prop;
+	}
+	
+	for(var i=0; i<10000; i++){
+		var testar = new Test(i,10);
+	}
+	
+	console.log("Default object: " + (new Date() - start_all));
+	
+	var start_init = new Date();	
+	
+	var Stixy = {};
+	Stixy.build = function(){
+		this.make = function(){
+			this._inherit = [];
+		}
+		this.make.prototype = {
+			set: function(){
+				this._name = Array.prototype.splice.apply(arguments, [0,1])[0]
+				this._arguments = arguments;
+				return this;
+			},
+			create: function(){
+				var instance = new this.construct(this, arguments);
+				instance._id = Stixy.global.generateID();
+				for(var i=0; i<this._inherit.length; i++){
+					var child = instance[this._inherit[i].build.name];
+					if(child) child._super = instance;
+				}
+				return instance;
+			},
+			inherit: function(){
+				var length = arguments.length;
+				for(var i=0; i<length; i++){
+					var source = arguments[i];
+					source.global.call(source.construct.prototype);
+					var instance = source.create();
+					this._inherit.push({ instance: instance, build: { initiate: source.instance, name: source._name, arguments: source._arguments} });
+					delete source._name;
+					delete source._arguments;
+				}
+			},
+			construct: function(scope, args){
+				var lenght = scope._inherit.length;
+				for(var i=0; i<lenght; i++){
+					var stored = scope._inherit[i];
+					if(stored.build.name) this[stored.build.name] = stored.instance;
+					if(stored.build.arguments) stored.build.initiate.apply((this[stored.build.name]||this), stored.build.arguments);
+					else stored.build.initiate.call(this[stored.build.name]||this);
+				}
+				scope.instance.apply(this, args);
+				Stixy.events.add(scope);
+			},
+			instance: function(){},
+			global: function(){}
+		}
+		return new this.make;
+	}
+	Stixy.global = {
+		index: 0,
+		generateID: function(){ return "#" + this.index++ }
+	}
+	Stixy.events = new function(){
+		var _ref = this;
+		this.ques = { ready:[], load:[], unload:[] };
+		this.add = function(b){
+			if(b.ready) this.ques.ready.push(b.ready);
+			if(b.load) this.ques.load.push(b.load);
+			if(b.unload) this.ques.unload.push(b.unload);
+		}
+		this.execute = function(que){
+			for(var i=0; i<que.length; i++) que[i]();
+		}
+		if(document.all){
+			window.attachEvent("onload",function(){ _ref.execute(_ref.ques.load) });
+			window.attachEvent("onunload",function(){ _ref.execute(_ref.ques.unload) });
+		}else{
+			window.addEventListener("DOMContentLoaded",function(){ _ref.execute(_ref.ques.ready) }, false);
+			window.addEventListener("load",function(){ _ref.execute(_ref.ques.load) }, false);
+			window.addEventListener("unload",function(){ _ref.execute(_ref.ques.unload) }, false);
+		}
+	}
+
+  var Events = Stixy.build();
+  Events.instance = function(num){
+  	this.test = num;
+  	this.cashed_events = {};
+  }
+  Events.global = function(){
+  	this.global = new function(){ this.index = 0 };
+  	this.listen = function(type, fn){
+  		function included(ce){
+  			var length = ce.length;
+  			for(var i=0; i<length; i++) if(ce[i] == fn) return true;
+  			return false;
+  		}
+  		this.cashed_events[type] = this.cashed_events[type] || [];
+  		if(!included(this.cashed_events[type])) this.cashed_events[type].push(fn);
+   	}
+  	this.announce = function(type){
+  		var length = this.cashed_events[type] ? this.cashed_events[type].length : 0;
+  		for(var i=0; i<length; i++){
+  			this.cashed_events[type][i].call(this._super||this);
+  		}
+  	}
+  }
+  
+  var Animation = Stixy.build();
+  Animation.instance = function(size){
+  	this.size = size;
+  }
+  Animation.global = function(){
+  	this.move = function(){ }
+  }
+  
+  var Move = Stixy.build();
+  Move.instance = function(){
+  	this.grid = 100;
+  }
+  Move.global = function(){
+  	this.left = 0;
+  	this.top = 0;
+  	this.step = function(){ }
+  }
+  Move.inherit(Animation.set("animation", 100));
+	
+	var Resize = Stixy.build();
+	Resize.instance = function(){
+		this.grids = 100;
+	}
+	Resize.global = function(){
+		this.step = function(){ }
+	}
+	Resize.inherit(Animation.set("anim", 1000));
+	
+	var Base = Stixy.build();
+	Base.global = function(){
+		this.remove = function(){ }
+	}
+		
+	var Widget = Stixy.build();
+	Widget.inherit(
+		Base,
+		Events.set("events",1,2,3), 
+		Move.set("move"),
+		Resize.set("resize")
+	);
+	Widget.instance = function(prop,val){
+		this.prop = prop;
+		this.events.test = val;
+		this.events.listen("lostfocus", function(){ 
+			//console.log(this.prop)
+		});
+	}
+	Widget.global = function(){
+		this.name = "Widget";
+	}
+	Widget.ready = function(prop,val){
+		//console.log(111);
+	}
+	Widget.load = function(prop,val){
+		//console.log(222);
+	}
+	Widget.unload = function(prop,val){
+		//console.log(333);
+	}
+	
+	console.log("Initiation: " + (new Date() - start_init));
+	var start_custom = new Date();
+	
+	for(var i=0; i<100; i++){
+		var Instance1 = Widget.create(i,10);
+		//console.log(Instance1.toSource())
+		Instance1.move.animation.move();
+		Instance1.move.step();
+		Instance1.events.announce("lostfocus");
+	}
+	console.log("Custom object: " + (new Date() - start_custom));
+	
+	console.log("Total: " + (new Date() - start_all));
+	</script>
+</head>
+
+<body>
+	<img src="/public/delayd_image">
+		<!-- <div contenteditable="true" style="position:absolute;top:100px;left:100px;width:300px;height:300px;background:red;">
+			<font style="color:rgb(165,0,15)">test</font> text
+		</div>
+		
+		<div contenteditable="true" style="position:absolute;top:500px;left:500px;width:300px;height:300px;background:red;">
+			test text
+		</div> -->
+</body>
+</html>
+<!-- -moz-user-focus: auto; -moz-user-input: enabled; -moz-user-select: normal -->

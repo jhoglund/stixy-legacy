@@ -1,0 +1,23 @@
+<%= link_to 'Edit', :action => 'edit', :id => @keyword %> |
+<%= link_to 'Back', :action => 'list' %>
+
+<table class="admin">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+    <tr class="dark">
+    <td>Id:</td>
+    <td><%= @keyword.id %></td>
+  </tr>
+  <% Keyword.content_columns.each_with_index  do |column, index|
+    color = "dark"
+    color = "light" if index.remainder(2) == 0
+    %>
+    <tr class="<%= color %>">
+        <td><%= column.human_name %>:</td>
+        <td><%=h @keyword.send(column.name) %></td>
+    </tr>
+  <% end %>
+    
+</table>

@@ -1,0 +1,13 @@
+html { background-image:none; }
+/*.stixyboard { min-height: inherit; min-width:inherit; top:0px; }*/
+.header,
+.toolbar, 
+.tools, 
+.tray,
+.tray-cont,
+.tray-bg,
+.tray-bar,
+.opt-bar,
+.stixyboard-footer, 
+.bopt, 
+.wopt { display: none!important; }

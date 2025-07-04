@@ -1,0 +1,12 @@
+/*------------*/
+/* GUEST IE 6 */
+/*------------*/
+
+/* AD SIZE UPDATE */
+<%- if current_user.display_ad?  -%>
+.header .stixy-signature { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/images/main_template/mt_signature_stixyboard_large_green.png"); }
+<%- else  -%>
+.header .stixy-signature { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/images/main_template/mt_signature_stixyboard_black.png"); }
+<%- end  -%>
+
+/* Header */

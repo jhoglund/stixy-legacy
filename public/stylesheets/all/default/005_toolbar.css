@@ -1,0 +1,41 @@
+/*-------------*/
+/* 005 TOOLBAR */
+/*-------------*/
+
+/* AD SIZE UPDATE (.toolbar): top:34px;  => top:134px; */
+.toolbar { position:absolute; top:<%= current_user.display_ad? ? 134 : 34 %>px; left:-17px; height:24px; width:100%; -moz-user-select:none; -webkit-user-select:none; }
+.toolbar-background { position:absolute; overflow:hidden; top:0; left:0; height:24px; width:100%; z-index:-1; }
+.toolbar-background-gradient { position:relative; top:-485px; left:0; height:1000px; width:1000px; margin:0 auto; background:no-repeat center 485px; z-index:0; }
+.toolbar-button,
+.toolbar-button sx\:l,
+.toolbar-button sx\:r,
+.toolbar-button sx\:l sx\:p,
+.toolbar-button sx\:r sx\:p { position:absolute; top:0; height:18px; z-index:-1; }
+.toolbar-button { position:relative; display:inline; float:left; height:18px; margin:3px 0 0 10px; line-height:16px; color:white; z-index:0; }
+.toolbar-button sx\:l { overflow:hidden; left:0; width:50%; }
+.toolbar-button sx\:r { overflow:hidden; right:0; width:51%; }
+.toolbar-button sx\:l sx\:p,
+.toolbar-button sx\:r sx\:p { width:100%; background-repeat:no-repeat; }
+.toolbar-button sx\:l sx\:p { left:0; background-position:left top; }
+.toolbar-button sx\:r sx\:p { right:0; background-position:right top; }
+.toolbar-button .button-label { padding:3px 15px 3px 15px; margin-top:0; top:1px; }
+.toolbar-button:link,
+.toolbar-button:visited { color:white; }
+.toolbar .save-indicator { display:block; overflow:hidden; height:21px; margin-right:275px; text-align:right; }
+.toolbar-tools { float:left; margin:0; }
+
+
+/* SAVE STATES */
+.text-saved,
+.text-saving,
+.text-save  { display:none; cursor:default; padding:5px 0; background:no-repeat right 4px; }
+.text-save .toolbar-button { float:right; margin-top:-2px; margin-left:5px; }
+.text-save .save-counter { color:white; }
+.text-saved { display:block; }
+.pending .text-saved { display:none; }
+.text-saving { padding-right:20px; }
+.save .text-saved,
+.saving .text-saved { display:none; }
+.saving .text-saving,
+.save .text-save { display:block; }
+.disable-auto-save #auto-save-text { display:none; }

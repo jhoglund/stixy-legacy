@@ -1,0 +1,16 @@
+<div class="title">Personal image</div>
+<div style="background-image:url(<%= current_user.avatar_url -%>)" class="personal-thumb" id="personal_thumb"><div class="spinner-16" id="personal_thumb_spinner">&nbsp;</div>&nbsp;</div>
+
+<div style="padding-left:60px;">
+	Add a personal photo or any other kind of image. 
+	<div style="height:8px; overflow:hidden;">&nbsp;</div>
+	<!-- <div style="float:right;text-align:right;margin:3px 0px 0px 10px;">
+		<%#= link_to "Icon Help", {:controller => "public", :action => "help", :params => {:popup => true}, }, :popup => popup_default, :style => "margin-right:4px;" %>
+	</div> -->
+	<% unless current_user.personal_image.nil? %>
+	<%= link_to_function "Replace", "Stixy.personal_settings.upload.open(true)", :button => { :type => false } %>
+	<%= link_to_function "Remove", "Stixy.personal_settings.remove()", :button => { :type => false }, :style => "margin-left:5px;" %>
+	<% else %>
+	<%= link_to_function "Add", "Stixy.personal_settings.upload.open(true)", :button => { :type => "default" }%>
+	<% end %>
+</div>

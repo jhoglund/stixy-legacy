@@ -1,0 +1,10 @@
+<h2>New user</h2>
+
+<span class="adminmenu"><%= link_to 'Back', :action => 'list' %></span>
+
+<% form_tag(:action => 'create') do -%>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Create" %>
+<% end -%>
+
+

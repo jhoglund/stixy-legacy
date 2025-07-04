@@ -1,0 +1,88 @@
+/*-----------------*/
+/* 105 TODO WIDGET */
+/*-----------------*/
+
+.todo .base { border:1px solid rgb(215,215,215); border-top-color:rgb(235,235,235); border-left-color:rgb(235,235,235); font-family:"Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; font-size:1.2em; }
+.todo .base-bg { background:url(/images/main_template/white_gradient_transp_300.png) rgb(245,245,245) no-repeat 1px 1px; }
+.todo .todo-header { position:absolute; height:80px; overflow:hidden; color:rgb(255,255,255); left:4px; top:4px; right:4px; overflow:hidden;  }
+.todo .todo-reminder-icon { position:absolute; opacity:0.5; filter:alpha(opacity=50); height:12px; width:12px; top:5px; right:5px; background:url(/images/widgets/todo/reminder.png) no-repeat; display:none; z-index:-1; }
+.todo-reminder .todo-reminder-icon { display:block; }
+.todo .todo-indicator { padding:5px 0 0 10px; font-size:9px; color:rgb(235,10,90); letter-spacing:2px; }
+.todo .todo-content { overflow:hidden; white-space:nowrap; }
+.todo .todo-day { float:left; margin:-5px 5px 0 5px; font-family:"Verdana"; font-weight:bold; font-size:36px; line-height:45px; text-align:right; color:rgb(235,10,90); }
+.todo .todo-month-year { margin-top:2px; font-size:13px; line-height:16px; }
+.todo .todo-dayname-time { margin-top:0px; font-size:13px; line-height:16px; }
+.todo .todo-time { color:rgb(235,10,90); }
+.todo .todo-hour, .todo .todo-minute { margin-top:-1px; }
+.todo .todo-comments { position:absolute; bottom:0; left:4px; font-size:9px; letter-spacing:2px; margin:0px 0px 2px; color:rgb(150,150,150); }
+.todo-compact .todo-header { height:25px; }
+.todo-compact .todo-content { padding:5px; }
+.todo-compact .todo-indicator { display:none; }
+.todo-compact .todo-day { display:inline; float:none; margin:0 2px 0 0; font-family:inherit; font-style:inherit; font-weight:inherit; font-size:16px; line-height:16px; }
+.todo-compact .todo-dayname { display:none; }
+.todo-compact .todo-month-year { display:inline; margin-top:2px; font-size:14px; line-height:16px; }
+.todo-compact .todo-month { display:inline; }
+.todo-compact .todo-dayname-time { display:inline; font-size:14px; line-height:16px; }
+.todo-compact .todo-time { display:inline; margin-left:0px; color:rgb(235,10,90); }
+.todo-compact .todo-hour, .todo .todo-minute { margin-top:-1px; }
+.todo-compact .todo-comments { display:none; }
+.todo .editor-bg,
+.todo .editor-canvas  { top:85px; }
+.todo-compact .editor-bg,
+.todo-compact .editor-canvas { top:39px; }
+.todo .header-bg { position:absolute; height:60px; width:100%; background:url(/images/main_template/white_gradient_transp_300.png) rgb(255,165,200) no-repeat 0px 0px; z-index:-1; }		
+
+/* 	BUG PATCH: For some reason, the rollover effect doesn't work in Firefox for Todo widget when one click inside an empty area in the header.
+ 		Adding a layer that catches the event on top of it all seems to do the trick. */
+.todo .todo-event-catcher { position:absolute; left:0; top:0; height:100%; width:100%; background:none; }
+
+/* Todo calendar */
+.todo-calendar .calendar { margin: 0px; width:100%; color: white; text-align: center;}
+.todo-calendar .calendar  th { font-size: 1em; font-weight: normal; background-color: rgb(80,80,80); color: rgb(200,200,200); border-bottom: 1px solid rgb(30,30,30); }
+.todo-calendar .calendar td { cursor:pointer; }
+.todo-calendar .calendar td, 
+.todo-calendar .calendar th { padding: 0px; width: 14.29%; height: 20px; text-align: center; vertical-align: middle; }
+.todo-calendar .calendar 
+.todo-calendar .calendar-first-day-of-week { border-left: 1px solid rgb(30,30,30); }
+.todo-calendar .calendar-other-month, 
+.todo-calendar .calendar-day, 
+.todo-calendar .calendar-special-day { border-right: 1px solid rgb(30,30,30); }
+.todo-calendar .calendar-other-month { color: rgb(200,200,200); border-bottom: 1px solid rgb(30,30,30); background-color: rgb(130,130,130)!important; }
+.todo-calendar .calendar-day, 
+.todo-calendar .calendar-special-day { border-bottom: 1px solid rgb(30,30,30); background-color: #333333; }
+.todo-calendar .calendar-special-day a, 
+.todo-calendar .calendar-special-day a:visited, 
+.todo-calendar .calendar-special-day a:hover { color: white; text-decoration: none; }
+.todo-calendar .calendar-special-day a:hover { color: white; background-color: black; }
+.todo-calendar .calendar-weekend-day { background-color: rgb(80,80,80); }
+.todo-calendar .calendar-today-day { color: rgb(245,140,0)!important;  font-weight: bold; }
+.todo-calendar .calendar-nav {  position: relative; color:rgb(90,145,25); font-weight: bold; text-align: center; width:100%; background-color: rgb(150,210,10); padding:4px 0; }
+.todo-calendar .todo-calendar-month-title { position: relative; }
+.todo-calendar .calendar-nav a { position: absolute; text-decoration: none; display: block; top: 3px; width: 15px; height: 15px; background: no-repeat left -15px; }
+.todo-calendar .calendar-nav a:hover { background-position: left -45px; } 
+.todo-calendar .calendar-nav .prev-month a { background-image: url(/images/widgets/todo/calendar_nav_prev.gif); left: 7px; }
+.todo-calendar .calendar-nav .next-month a { background-image: url(/images/widgets/todo/calendar_nav_next.gif); right: 7px; }
+.todo-calendar .calendar-selected-day { background-color: white!important; border: 1px solid rgb(245,140,0)!important; color: rgb(51,51,51); font-weight: bold!important; }
+.todo-calendar #todo_progress_indicator { position: absolute; top:-1px; left: -18px; display: block; width:16px; height:16px; background:url(/images/spinners/spinner_green.gif) no-repeat; }
+
+.stixy-calendar .todo-widget sx\:sp { display:block; }
+.stixy-calendar .todo-widget sx\:sp sx\:l sx\:p,
+.stixy-calendar .todo-widget sx\:sp sx\:r sx\:p { background-image:url(/images/calendar/multiple_days_light_pink.png); }
+.stixy-calendar .todo-widget .label  { padding:0px 20px 0 10px; font-weight:normal!important; }
+.stixy-calendar .calendar-entry-rollover .todo-widget { opacity:1; color:rgb(185,5,70)!important; }
+.stixy-calendar .calendar-todo { position:relative; }
+.calendar-todo .widget * { cursor:default!important; }
+.todo-calendar-view-navigation { position:relative; padding:10px 0; }
+.todo-calendar-view-navigation .title { color:rgb(130,130,130); }
+.todo-calendar-row { margin:4px 0 6px; }
+.todo-calendar-row li { margin:3px 0; }
+.todo-calendar-list-label { color:rgb(185,5,70); }
+.calendar-entry-rollover .todo-calendar-list-label   { color:rgb(45,130,215); }
+
+@media print {
+	.todo .base { border:5px solid rgb(255,165,200); }
+	.todo .base-bg { background:white; }
+	.todo .todo-header { color:rgb(50,50,50); border-bottom:1px solid rgb(255,165,200);}
+	.todo .header-bg { background:none; }		
+	.todo .todo-comments { color:rgb(200,200,200); }
+}

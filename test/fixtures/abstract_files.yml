@@ -1,0 +1,108 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+image_home_page:
+  id: 1
+  type: ImageFile
+  filename: camilla.jpg
+  size: 32987
+  content_type: image/jpeg
+  storage_state: AbstractFile::DISABLED_FINAL
+thumbnail_thumb_home_page:
+  id: 2
+  parent_id: 1
+  thumbnail: t
+  type: ThumbnailFile 
+  filename: camilla_t.jpg
+  width: "100"
+  height: "100"
+  filter: "0"
+  rotation: "0"
+  size: 32987
+  content_type: image/jpeg
+  storage_state: AbstractFile::DISABLED_FINAL
+thumbnail_original_home_page:
+  id: 3
+  parent_id: 1
+  thumbnail: original
+  type: ThumbnailFile
+  filename: camilla_original.jpg
+  size: 32987
+  content_type: image/jpeg
+  storage_state: AbstractFile::DISABLED_FINAL
+document_home_page:
+  id: 4
+  type: DocumentFile
+  filename: camilla.jpg
+  size: 32987
+  content_type: application/pdf
+  storage_state: AbstractFile::DISABLED_FINAL
+image_jonas_board:
+  id: 5
+  type: ImageFile
+  filename: camilla.jpg
+  size: 32987
+  content_type: image/jpeg
+  storage_state: AbstractFile::DISABLED_FINAL
+thumbnail_thumb_jonas_board:
+  id: 6
+  parent_id: 5
+  thumbnail: t
+  type: ThumbnailFile 
+  filename: camilla_t.jpg
+  size: 32987
+  content_type: image/jpeg
+  storage_state: AbstractFile::DISABLED_FINAL
+thumbnail_original_jonas_board:
+  id: 7
+  parent_id: 5
+  thumbnail: original
+  type: ThumbnailFile
+  filename: camilla_original.jpg
+  size: 32987
+  content_type: image/jpeg
+  storage_state: AbstractFile::DISABLED_FINAL
+document_jonas_board:
+  id: 8
+  type: DocumentFile
+  filename: camilla.jpg
+  size: 32987
+  content_type: application/pdf
+  storage_state: AbstractFile::DISABLED_FINAL
+image_temp_jonas_board:
+  id: 9
+  type: ImageFile
+  filename: camilla.jpg
+  size: 32987
+  upload_id: 1234
+  content_type: image/jpeg
+  storage_state: AbstractFile::DISABLED_FINAL
+thumbnail_temp_thumb_jonas_board:
+  id: 10
+  parent_id: 9
+  thumbnail: t
+  type: ThumbnailFile 
+  filename: camilla_t.jpg
+  size: 32987
+  width: "100"
+  height: "100"
+  filter: "0"
+  rotation: "0"
+  content_type: image/jpeg
+  storage_state: AbstractFile::DISABLED_FINAL
+thumbnail_temp_original_jonas_board:
+  id: 11
+  parent_id: 9
+  thumbnail: original
+  type: ThumbnailFile
+  filename: camilla_original.jpg
+  size: 32987
+  content_type: image/jpeg
+  storage_state: AbstractFile::DISABLED_FINAL
+document_temp_jonas_board:
+  id: 12
+  type: DocumentFile
+  filename: camilla.jpg
+  size: 32987
+  upload_id: 1234
+  content_type: application/pdf
+  storage_state: AbstractFile::DISABLED_FINAL
+

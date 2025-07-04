@@ -1,0 +1,43 @@
+table.admin {
+	border: dashed 1px #c0c0c0;
+	padding: 0px 0px 0px 0px;
+	margin: 10px 1px 10px 1px;
+}
+
+
+table.admin th {
+	background-color: #FFFFCC;
+	font-weight: bold;
+	text-align: left;
+	font-size: 11pt;
+	padding: 5px 10px 5px 10px; /*top,right,buttom,left*/
+}
+
+table.admin td {
+	font-size: 10pt;
+	padding: 5px 3px 3px 3px;
+	vertical-align: top;
+}
+
+.dark {
+    background-color: #f0f0f0;
+}
+
+.light {
+    background-color: #ffffff;
+}
+
+
+span.adminmenu {
+    font-size: 11pt;
+    font-weight: bold;
+	border: dotted 1px #000;
+	padding: 3px 2px 3px 3px;
+	margin: 0px 2px 2px 0px;
+	color: #9F141A;
+	white-space: nowrap;
+}
+a.sitebutton { color: #9F141A; text-decoration: none; }
+a.sitebutton:visited { color: #9F141A; text-decoration: none;}
+a.sitebutton:hover { color: #fff; background-color:#000; }
+

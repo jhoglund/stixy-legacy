@@ -1,0 +1,13 @@
+<% 
+	themeClass = widget.styles.select{|s| s.name=="theme" }.collect{|i|" #{i.value}"}.to_s 
+	styleprops = widget.styles.select{|s| s.name==nil }
+-%>
+<div class="note widget<%= if widget.locked?; " widget-locked" end %><%= " no-drop-shadow" if widget.shadow == 0 %><%= themeClass %><%= " no-background-fill" if widget.styles.detect{|s| s.value=="0" && s.attr=="fill"} %>" style="<%= widget.style_prop(:top,:left,:width,:height) %>; z-index:<%=index%>" id="widget_<%= widget[:id]  %>">
+  <%= render :partial => "/widgets/default/shadow_focus" %>
+	<div class="base">
+    <div class="base-bg note-bg" style="<% widget.styles.select{|s| s.attr == "opacity"}.each do |property| %>opacity:<%=property.value %>;filter:alpha(opacity=<%=(property.value.to_f*100).to_i %>);<% end %><% widget.styles.select{|s| s.attr =~ /background/}.each do |property| %><%=property.attr.tr('_','-') %>:<%=property.value %>;<% end %>"><p>&nbsp;</p></div>
+    <div class="editor-bg"><div class="editor-bg-border">&nbsp;</div></div>
+		<div class="editor-canvas"><div class="editor"><%= widget.content %></div></div>
+		<%= render :partial => "/widgets/default/remove_resize"  %>
+	</div>
+</div>

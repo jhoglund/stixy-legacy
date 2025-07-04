@@ -1,0 +1,728 @@
+<!--[if lte IE 6]><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 transitional//EN"><![endif]-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html style="overflow:auto;">
+<head>
+	<title>Welcome to Stixy</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="/stylesheets/global.css?1175107273" media="all" rel="Stylesheet" type="text/css"></link>
+	<!--[if lte IE 6]>
+	<link href="/stylesheets/global_ie.css?1175107273" media="all" rel="Stylesheet" type="text/css"></link>
+	<![endif]-->
+	
+	<style>
+		/* OPTIONBAR */
+		table { table-layout:fixed; }
+		
+		.opt-bar { position:absolute; overflow:hidden; right:27px; bottom:16px; height:100%; width:255px; }
+		.opt-bar .bar-tools { top:-24px; border-bottom:1px solid rgb(255,255,255);}
+		.opt-bar-grid { border-collapse:collapse; top:0; bottom:0; height:100%; width:0; }
+		.opt-bar-grid td { padding:0; vertical-align:top; }
+		.opt-panel { position:absolute; display:none; top:0; right:0; bottom:0; width:100%; }
+		.opt-scroll { position:absolute; overflow:auto; top:0; right:0; bottom:0; left:0; height:100%; width:100%; }
+		.opt-content { height:200px; margin:10px; }
+		.opt-background { position:absolute; width:100%; background-color:rgb(235,235,235); opacity:0.75; }
+		.opt-gradient { position:relative; top:0; left:-5000px; height:200%; width:10000px; }
+		.opt-tab,
+		.opt-tab .left,
+		.opt-tab .right,
+		.opt-tab .left div,
+		.opt-tab .right div { position:absolute; top:0; height:21px; z-index:-1; }
+		.opt-tab { display:inline; top:-21px; height:19px; line-height:21px; z-index:1; }
+		.opt-tab .left { overflow:hidden; left:0; width:50%; }
+		.opt-tab .right { overflow:hidden; right:0; width:51%; }
+		.opt-tab .left div,
+		.opt-tab .right div { width:100%; background:url(/images/edit_options_tab.png) no-repeat; }
+		.opt-tab .left div { left:0; background-position:left top; }
+		.opt-tab .right div { right:0; background-position:right top; }
+		.opt-tab .label { padding:0 0 0 15px; white-space:nowrap; color:white; }
+		.wopt-common-tools { position:absolute; display:none; bottom:24px; height:80px; width:235px; padding:10px; background-color:rgb(220,220,220); }
+		.wopt-close { position:relative; left:0px; font:11px/10px; padding:3px 11px; background:url(/images/wopt_close.gif) no-repeat 7px 2px; }
+		
+		 /* OPTION BAR STATES*/
+		.wopt-show .opt-background,
+		.wopt-show .opt-panel { top:107px; bottom:124px; }
+		.wopt-show .opt-panel { border-top:1px solid rgb(215,215,215); }
+		.wopt-show .tray { right:292px; }
+
+		.bopt-show .opt-background { top:76px; }
+		.bopt-show .opt-panel { top:100px; }
+		.bopt-show .opt-background,
+		.bopt-show .opt-panel { bottom:135px; }
+		.bopt-show.tray-hide .opt-background,
+		.bopt-show.tray-hide .opt-panel { bottom:34px; }
+		.bopt-show .opt-panel { border-bottom:1px solid rgb(215,215,215); }
+
+		.wopt-panel-hide { display:none!important; }
+		.wopt-hide .opt-panel.wopt,
+		.wopt-hide.bopt-hide .opt-bar { display:none; }
+		.wopt-panel-show,
+		.bopt-show .opt-panel.bopt, 
+		.wopt-show .opt-panel.wopt,
+		.wopt-show .opt-bar,
+		.wopt-show .wopt-common-tools { display:block; }
+		.wopt-show .opt-bar { z-index:3; }
+		.bopt-show .bopt-switcher-show,
+		.bopt-hide .bopt-switcher-hide,
+		.wopt-show .wopt-switcher-show,
+		.wopt-hide .wopt-switcher-hide { display:block;}
+
+		
+		/* Optionbar content default */
+		.opt-bar .mail-address {width: 166px; ;height:14px; overflow:hidden; }
+		.opt-bar .opt-devider	 { position:relative; clear:both; top:8px; border-top:1px solid rgb(180,180,180); border-bottom:1px solid white; margin:0 0 16px; overflow:hidden; }
+		.opt-more { text-align:right; }
+		.opt-bar h3 { font-size:15px; margin:15px 0px 10px; }
+		.opt-bar h4 { margin:5px 0px 3px; }
+		.opt-bar .subhead { margin:0px 0px 5px; }
+		.opt-sub-header { position:absolute; z-index:2; bottom:0px; height:27px; font-weight:bold; color:rgb(102,102,102); padding:0px 27px 0px 10px; width:218px; cursor:default; }
+		.opt-sub-header hr { position:relative; top:0px; margin:0px -27px 0px -10px; }
+		.opt-row { clear:both; padding:0 0 8px; }
+		.opt-color-palett span { position:relative; float:left; display:block; height:15px; width:11.5%; overflow:hidden; margin:1px; }
+		.opt-bar .deactivated-color-palett,
+		.opt-bar .deactivated .activated-color-palett { display:none; }
+		.opt-bar .deactivated .deactivated-color-palett { display:block; }
+		.opt-color-palett div { position:absolute; top:0; right:0; bottom:0; left:0; }
+		.opt-color-palett span.active { border:1px solid rgb(255,150,20); margin:0; }
+		.opt-color-palett span.active div { height:13px; margin:1px; }
+		.opt-themes { position:relative; margin:0; }
+		.opt-theme-spacer { height:1px; overflow:hidden; }
+		.opt-themes .opt-theme { position:relative; float:left; width:50px; height:40px; margin:0 4px 0 0; cursor:default; background-color: white; background-image:url(/images/white_gradient_transp_300.png); background-repeat:no-repeat; background-position:-100px -100px; }
+		.opt-themes .opt-theme .label { position:absolute; font-size:22px; line-height:22px; bottom:4px; left:12px; width:35px; overflow:hidden; white-space:nowrap; }
+		.opt-themes .active { border:1px solid rgb(255,150,20); margin:-1px 3px -1px -1px; }
+		
+		.opt-themes-tooltips { position:absolute; top:13px; left:0; width:100%; height:40px; }
+		.opt-themes-tooltips div { position:relative; float:left; width:50px; height:40px; margin:0 4px 0 0; cursor:default; }
+		.opt-themes-tooltips span { position:absolute; opacity:0.6; filter:alpha(opacity=60); display:none; z-index:1; top:-5px; right:-12px; background:rgb(240,250,215); text-align:center; font:bold 10px "Verdana", "Lucida Grande", "Bitstream Vera Sans", "Sans"; color: rgb(90,145,25); padding:6px; }
+		.opt-themes-tooltips div:hover span { display:block; }
+		.opt-check {margin:2px 0 0 0; text-align:text-top; width:13px; height:13px; overflow:hidden; }
+		.opt-font-size-palett { font-weight:bold; margin-left:8px; }
+		.opt-font-size-palett .active { border:1px solid rgb(255,150,20); margin:0; background:white;}
+		.opt-font-size-palett div { cursor:default; overflow:hidden; float:left; line-height:30px; margin:1px; width:12%; height:23px; margin:1px; text-align:center; }
+		.opt-font-size-palett div span { position:relative; display:block; top:-30px;}
+		.opt-font-size-palett .decrease-font,
+		.opt-font-size-palett .increase-font { display:block; float:left; width:25px; height:25px;}
+		.opt-font-size-palett .decrease-font { background:url(/images/edit_btn_minus.png) no-repeat 1px 4px; }
+		.opt-font-size-palett .increase-font { background:url(/images/edit_btn_plus.png) no-repeat 6px 4px; }
+		.opt-font-size-palett .decrease-font:hover { background-position: 1px -23px; }
+		.opt-font-size-palett .increase-font:hover { background-position: 6px -23px; }
+		.opt-font-style div { float:left; margin-right:4px; padding:0px 6px; border:1px solid white; font-size:13px; cursor:default; }
+		.opt-font-style div.active { border:1px solid rgb(255,150,20); background:white; }
+		.opt-bar-load-indicator { position: absolute; top: 50px; left: 0px; display:none; padding-left:35px; color:  rgb(180,180,180);font-size:1.2em; background:url(/images/spinner.gif) no-repeat 15px top; }
+
+		.opt-bar .no-data,
+		.opt-bar .ghosted,
+		.opt-bar .deactivated { color: rgb(150,150,150); }
+		.opt-bar .activated { color:rgb(50,50,50); }
+	</style>
+	<!--[if lte IE 6]>
+	<style>
+		/* OPTIONBAR */
+		.opt-panel { top:auto; bottom:auto; height:100%; }
+		.opt-bar .bar-tools { top:-25px;}
+		.opt-bar-grid { width:255px; }
+		.opt-background { height:100%; z-index:-1; }
+		.wopt-common-tools { position:relative; bottom:auto; height:100%; width:100%; }
+		.opt-themes .active { padding:1px!important; height:42px; width:52px;  }
+		
+
+		 /* OPTIONBAR STATES*/
+		.wopt-show .opt-bar-top { height:107px; }
+		.wopt-show .opt-bar-bottom { height:125px; }
+
+		.bopt-show .opt-bar-top { height:100px; }
+		.bopt-show .opt-bar-bottom { height:135px; }
+		.bopt-show .opt-background { top:auto; bottom:135px; }
+		.bopt-show.tray-hide .opt-bar-bottom { height:34px; }
+		.bopt-show.tray-hide  .opt-background { bottom:34px; }
+
+		/* OPTIONBAR SWITCHES */
+		.opt-switch-shadow-line { right:-1px; }
+		.opt-switch-highlight-line,
+		.board-list-switch-highlight-line,
+		.board-list-switch-shadow-line,
+		.opt-switch-shadow-line { height:22px; width:1px; }
+
+		.board-list-switch,
+		.opt-switch { height:22px; }
+		
+		/* Optionbar content default */
+		.opt-themes .opt-theme { background:none; background-position:0 0; }
+		
+		.opt-color-palett span { height:17px; width:12.0%; margin:0; }
+		.opt-color-palett span.active { position:relative;left:1px;height:18px;margin:-1px 1px -1px -1px;}
+		.opt-color-palett div { position:static; margin:1px; height:15px; width:100%; }
+		.opt-font-size-palett .active {  margin:1px; }
+		.opt-color-palett span.active div { height:14px; }
+		.opt-bar .opt-devider	 { height:2px; }
+		
+		
+		
+	</style>
+	<![endif]-->
+	
+	<style>
+		.wopt div.wopt-theme-1 { background-color:rgb(250,250,170); color:rgb(50,50,50); font-family:Georgia; }
+		.wopt div.wopt-theme-2 { background-color:rgb(240,255,210); color:rgb(90,145,25); font-family:Verdana; }
+		.wopt div.wopt-theme-3 { background-color:rgb(190,220,250); color:rgb(35,95,155); font-family:"Comic Sans MS"; }
+		.wopt div.wopt-theme-4 { background-color:rgb(255,165,200); color:rgb(185,5,70); font-family:"Arial"; }
+		.w-n-font options { color:rgb(204,204,204); }
+		.w-n-font options.activated { color:auto; }
+	</style>
+	
+	<style>
+	.w-p-replace { display:none; }
+	.w-p-document-name { margin:0px 0px 8px; }
+	#wopt-photo .opt-themes .opt-theme { position:relative; width:50px; height:40px; background-position:0px 0px; background-repeat: no-repeat; }
+	#w-p-theme-noeffect,
+	#w-p-theme-sepia,
+	#w-p-theme-gray { background: url(/images/widgets/photo/wopt_icon_ghosted.jpg); }
+	#w-p-theme-noeffect.activated { background: url(/images/widgets/photo/wopt_icon_color.jpg); }
+	#w-p-theme-sepia.activated { background: url(/images/widgets/photo/wopt_icon_sepia.jpg); }
+	#w-p-theme-gray.activated { background: url(/images/widgets/photo/wopt_icon_bw.jpg); }
+	#w-p-theme-noframe { background: url(/images/widgets/photo/wopt_icon_noframe.jpg)!important; }
+	#w-p-theme-frame { background: url(/images/widgets/photo/wopt_icon_frame.jpg)!important; }
+	#w-p-theme-frame-1px { background: url(/images/widgets/photo/wopt_icon_frame_1px.jpg)!important; }
+	#w-p-theme-rotate-0 { background: url(/images/widgets/photo/wopt_icon_rotate_0.jpg)!important; top:5px; }
+	#w-p-theme-rotate-90 { background: url(/images/widgets/photo/wopt_icon_rotate_90.jpg)!important; width:40px!important; height:50px!important; }
+	#w-p-theme-rotate-180 { background: url(/images/widgets/photo/wopt_icon_rotate_180.jpg)!important; top:5px;  }
+	#w-p-theme-rotate-270 { background: url(/images/widgets/photo/wopt_icon_rotate_270.jpg)!important; width:40px!important; height:50px!important; }
+	#w-p-theme-rotate-0.active,
+	#w-p-theme-rotate-180.active,
+	#w-p-theme-noeffect.active,
+	#w-p-theme-sepia.active,
+	#w-p-theme-gray.active,
+	#w-p-theme-noframe.active,
+	#w-p-theme-frame.active { width:52px!important; height:42px!important; }
+	
+	</style>
+
+	<!--[if lte IE 6]>
+	<style>
+		#wopt-photo .opt-themes{ padding:0 0 1px 2px; }
+		#w-p-theme-rotate-0.active,
+		#w-p-theme-noframe.active,
+		#w-p-theme-noeffect.active { left:1px; margin-right:4px;}
+	</style>
+	<![endif]-->
+	
+	<style>
+		.w-d-replace { display:none; }
+	</style>
+	
+	<style>
+	/*
+		
+	*/
+	.calendar { margin: 0px; width:100%; color: white; text-align: center;}
+	.monthName th { font-weight: normal; color: black; }
+	.dayName th { font-size: 1em; font-weight: normal; background-color: rgb(80,80,80); color: rgb(200,200,200); border-bottom: 1px solid rgb(30,30,30); }
+	.calendar td { cursor:pointer; }
+	.calendar td, .calendar th { padding: 0px; width: 14.29%; height: 20px; text-align: center; vertical-align: middle; }
+	.calendar .firstDayOfWeek { border-left: 1px solid rgb(30,30,30); }
+	.otherMonth, .day, .specialDay { border-right: 1px solid rgb(30,30,30); }
+	.otherMonth { color: rgb(200,200,200); border-bottom: 1px solid rgb(30,30,30); background-color: rgb(130,130,130)!important; }
+	.day, .specialDay { border-bottom: 1px solid rgb(30,30,30); background-color: #333333; }
+	.specialDay {  }
+	.specialDay a, .specialDay a:visited, .specialDay a:hover { color: white; text-decoration: none; }
+	.specialDay a:hover { color: white; background-color: black; }
+	.weekendDay { background-color: rgb(80,80,80); }
+	.todayDay { color: rgb(245,140,0)!important;  font-weight: bold; }
+	.calendar-nav { background-color: rgb(150,210,10); }
+	.calendar-nav div { position: relative; color:rgb(90,145,25); font-weight: bold; text-align: center; width:100%; }
+	.todo-calendar-month-title { position: relative; }
+	#todo_progress_indicator { position: absolute; top:-1px; left: -18px; display: block; width:16px; height:16px; background:url(/images/icon_spinner_green.gif) no-repeat; }
+	.calendar-nav a { position: absolute; display: block; top: 0px; width: 15px; height: 15px; background: no-repeat left -15px; }
+	.calendar-nav a:hover { background-position: left -45px; } 
+	.calendar-nav .prev-month a { background-image: url(/images/btn_menu_toggle_left.gif); left: 7px; }
+	.calendar-nav .next-month a { background-image: url(/images/btn_menu_toggle_right.gif); right: 7px; }
+	.selectedDay { background-color: white!important; border: 1px solid rgb(245,140,0)!important; color: rgb(51,51,51); font-weight: bold!important; }	</style>
+</head>
+<body style="padding:10px;" class="wopt-show">
+	<div class="opt-bar">
+		<div class="opt-background">
+			<div class="opt-gradient"></div>
+		</div>
+		<table class="opt-bar-grid">
+			<tr><td class="opt-bar-top"></td></tr>
+			<tr>
+				<td class="opt-bar-middle">
+					<span id="bopt">
+						<div class="opt-panel bopt">
+							<div class="bar-tools"><div class="bar-close" id="bopt_close"></div></div>
+							<div class="opt-scroll">
+								<div class="opt-content">
+									<h3 style="margin-bottom:4px;">IKEA</h3>
+									<table class="option-list">
+										<tr><td>
+											<span class="option-list-title">Tags:</span> <span class="no-data">(None)</span>
+											<p><span class="option-list-title">Description:</span> <span class="no-data">(None)</span></p>
+											<p><span class="option-list-title">Public Web Access:</span> No</p>
+										</td></tr>
+									</table>
+									<div style="text-align:right;margin-top:4px;">
+										<a href="/board/options/289" onclick="Stixy.board.openOption(); return false;" style="font-weight:bold;">Edit Stixyboard Options</a>
+									</div>
+									<div id="board_shared_and_invited" style="margin-top:20px;margin-bottom:10px">
+										<h4 class="subhead">You share this Stixyboard with</h4>
+										<table class="option-list" id="invited_4">
+											<tr>
+												<td>
+										     	<div style="background-image:url(/board/personal_thumb/4)" class="personal-thumb" id="personal_thumb">&nbsp;</div>
+												</td>
+												<td>
+													<h4>Adam Block</h4>
+													<div class="mail-address">
+														<a href="mailto:adam_block@swatdesign.com" title="adam_block@swatdesign.com">adam<span class='no-width-space'>_ </span>block<span class='no-width-space'>@ </span>swatdesign<span class='no-width-space'>. </span>com</a>
+													</div>
+													<span class="option-list-title">Last Signed In </span> <nobr>March 22, 2007</nobr>
+												</td>
+											</tr>
+										</table>
+										<h4>Invited to share</h4>
+										<table class="option-list" id="invited_73">
+											<tr>
+												<td>
+	     										<div style="background-image:url(/board/personal_thumb/73)" class="personal-thumb" id="personal_thumb">&nbsp;</div>
+												</td>
+												<td>
+													<h4> </h4>
+													<div class="mail-address">
+														<a href="mailto:fart@fis.com" title="fart@fis.com">fart<span class='no-width-space'>@ </span>fis<span class='no-width-space'>. </span>com</a>
+													</div>
+													<span class="option-list-title">Invited on </span> <nobr>Today 11:07 AM</nobr><br />
+													<span class="option-list-title">By </span> <nobr>Jonas Höglund</nobr><br />
+												</td>
+	  									</tr>
+										</table>
+										<div style="text-align:right;margin-top:10px;">
+											<a href="#" onclick="Stixy.board.openInvite(); return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)" style="font-weight:bold;">Invite more to share</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</span>
+					<div class="wopt">
+						<div class="wopt-canvas">
+							<div class="opt-panel wopt wopt-panel-hide" id="wopt-note">
+								<span class="opt-tab">
+								  <div class="left"><div>&nbsp;</div></div>
+								  <div class="right"><div>&nbsp;</div></div>
+									<div class="label">Note options<span class="wopt-close">&nbsp;</span></div>
+								</span>
+								<div class="opt-scroll">
+									<div class="opt-content">
+										<h4>Note Style</h4>
+							      <div class="opt-themes" id="widget_note_opt_themes">
+											<div class="opt-theme-spacer">&nbsp;</div>
+											<div class="wopt-theme opt-theme wopt-theme-1"><span class="label">Indian</span></div>
+							        <div class="wopt-theme opt-theme wopt-theme-2"><span class="label">Spring</span></div>
+							        <div class="wopt-theme opt-theme wopt-theme-3 active"><span class="label">Caribbean</span></div>
+							        <div class="wopt-theme opt-theme wopt-theme-4"><span class="label">New Haven</span></div>
+							      	<div class="opt-themes-tooltips">
+												<div><span>Indian Summer</span></div>
+												<div><span>Spring Green</span></div>
+												<div><span>Caribbean</span></div>
+												<div><span><nobr>New Haven</nobr> Skies</span></div>
+											</div>
+										</div>
+						     		<div class="deactivated opt-row" style="padding-top:0;">
+											<div class="opt-devider"></div>
+											<h4>Link to web page or Stixyboard</h4>
+							        <input type="text" disabled="true" style="width:207px;border:1px solid rgb(204,204,204);padding:3px;" class="w-n-link"/>
+							      </div>
+							      <div class="opt-row">
+											<span class="w-n-link-remove button ghosted">
+												<div class="left"><div>&nbsp;</div></div>
+												<div class="right"><div>&nbsp;</div></div>
+												<div class="label" style="padding-left:10px;padding-right:10px;">Remove link</div>
+											</span>
+											<span class="w-n-link-insert button ghosted" style="margin-left:12px;">
+												<div class="left"><div>&nbsp;</div></div>
+												<div class="right"><div>&nbsp;</div></div>
+												<div class="label" style="padding-left:10px;padding-right:10px;">Insert link</div>
+											</span>
+							      </div>
+							      <span class="wopt-style-more">
+							        <div class="deactivated opt-row w-n-font" style="padding:0 0 24px;">
+							          <div class="opt-devider"></div>	
+								     		<h4>Font</h4>
+							          <span>
+							            <select style="width:100%; margin:2px 0px 8px;" id="widget_note_font" disabled="true">
+							              <optgroup style="border-bottom:1px solid gray;padding-bottom:5px;margin-bottom:5px;">
+															<option value="Georgia" style="font-family:Georgia;">Georgia</option>
+							              	<option value="Times" style="font-family:Times;">Times</option>
+							              	<option value="Verdana" style="font-family:Verdana;">Verdana</option>
+															<option value="Arial" style="font-family:Arial;">Arial</option>
+															<option value="Trebushe MS" style="font-family:Trebushe MS;">Trebushe MS</option>
+															<option value="Comic Sans" style="font-family:Comic Sans;">Comic Sans</option>
+														</optgroup>
+														<optgroup>
+															<option value="Monospace" style="font-family:Monospace;">Monospace</option>
+															<option value="Cursive" style="font-family:Cursive;">Cursive</option>
+															<option value="Fantasy" style="font-family:Fantasy;">Fantasy</option>
+															<option value="Sans-Serif" style="font-family:Sans-Serif;">Sans-Serif</option>
+															<option value="Serif" style="font-family:Serif;">Serif</option>
+														</optgroup>
+							            </select>
+							          </span>
+							          <div class="deactivated opt-font-style">
+							            <span style="float:left">
+							              <div style="font-style:italic" class="w-n-text-italic" id="widget_note_italic">Italic</div>
+							              <div style="font-weight:bold" class="w-n-text-bold" id="widget_note_bold">Bold</div>
+							            </span>
+							            <span style="float:right">
+							              <div style="text-decoration:underline; font-weight:bold" class="w-n-text-underline" id="widget_note_underline">U</div>
+							              <div style="text-decoration:line-through; font-weight:bold" class="w-n-text-strikethrough" id="widget_note_strikethrough">S</div>
+							            </span>
+							          </div>
+							        </div>
+							        <div class="opt-row" style="padding-bottom:30px;">
+							          <div class="deactivated opt-font-size-palett" id="widget_note_size">
+							            <div size="1" style="font-size:13px;" class="w-n-size"><span  style="margin-top:-30px;">&nbsp;</span>a</div>
+										      <div size="2" style="font-size:16px;" class="w-n-size"><span style="margin-top:-31px;">&nbsp;</span>a</div>
+										      <div size="3" style="font-size:19px;" class="w-n-size"><span style="margin-top:-33px;">&nbsp;</span>a</div>
+										      <div size="4" style="font-size:22px;" class="w-n-size"><span style="margin-top:-34px;">&nbsp;</span>a</div>
+										      <div size="5" style="font-size:24px;" class="w-n-size"><span style="margin-top:-35px;">&nbsp;</span>a</div>
+										      <div size="6" style="font-size:28px;" class="w-n-size"><span style="margin-top:-36px;">&nbsp;</span>a</div>
+													<div size="7" style="font-size:32px;" class="w-n-size active"><span style="margin-top:-38px;">&nbsp;</span>a</div>
+							          </div>
+							        </div>
+							        <div class="deactivated opt-color-palett opt-row" id="widget_note_fgcolor">
+												<span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(255,255,255)">&nbsp;</div></span>
+											  <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(240,0,25)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(255,150,20)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(245,204,0)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(150,210,10)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(85,165,240)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(180,60,150)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(255,25,115)">&nbsp;</div></span><br class="activated-color-palett" clear="both" />
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(50,50,50)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(165,0,15)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(165,95,0)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(170,140,0)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(90,145,25)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(35,95,155)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(105,35,85)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor activated-color-palett"><div style="background:rgb(185,5,70)">&nbsp;</div></span>
+												
+												<span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(239,239,239)">&nbsp;</div></span>
+											  <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(236,188,193)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(239,218,192)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(237,229,188)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(218,230,190)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(197,214,231)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(224,200,218)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(239,193,211)">&nbsp;</div></span><br class="deactivated-color-palett" clear="both" />
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(198,198,198)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(221,188,191)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(221,207,188)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(222,216,188)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(206,217,193)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(195,207,219)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(209,195,205)">&nbsp;</div></span>
+							          <span class="w-n-fgcolor deactivated-color-palett"><div style="background:rgb(225,189,202)">&nbsp;</div></span>
+							        </div>
+							        <div class="opt-row" style="padding-top:0px;">
+							          <span class="deactivated" style="width:108px;float:left;">
+							            <h4>Text Align</h4>
+							            <select style="width:100px" id="widget_note_align" disabled="true">
+							              <option value="justifyleft">Left</option>
+							              <option value="justifyright">Right</option>
+							              <option value="justifycenter">Center</option>
+							            </select>
+							          </span>
+							          <span class="deactivated" style="width:108px;float:right;">
+							            <h4>List</h4>
+							            <select style="width:100px" id="widget_note_list" disabled="true">
+							              <option value="">None</option>
+							              <option value="insertunorderedlist">Bullet</option>
+							              <option value="insertorderedlist">Numbered</option>
+							            </select>
+							          </span>
+							        </div>
+											<div class="opt-row">
+							          <div class="opt-devider"></div>	
+							          <h4><input type="checkbox" class="opt-check w-n-bg-switch" id="note_bg_switch"> <label for="note_bg_switch">Background color</label></h4>
+							          <div class="activated opt-color-palett" id="widget_note_bgcolor">
+							            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(245,245,245)">&nbsp;</div></span>
+												  <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(250,155,165)">&nbsp;</div></span>
+							            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(255,215,160)">&nbsp;</div></span>
+							            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(250,250,170)">&nbsp;</div></span>
+							            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(240,255,210)">&nbsp;</div></span>
+							            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(190,220,250)">&nbsp;</div></span>
+							            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(225,180,215)">&nbsp;</div></span>
+							            <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(255,165,200)">&nbsp;</div></span><br class="activated-color-palett" clear="both" />
+													<span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(125,125,125)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(240,0,25)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(255,150,20)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(255,220,30)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(175,225,45)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(85,165,240)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(180,60,150)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor activated-color-palett"><div style="background:rgb(225,25,115)">&nbsp;</div></span>
+
+													<span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(237,237,237)">&nbsp;</div></span>
+												  <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(238,219,221)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,231,220)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(238,238,222)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(236,239,230)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(226,232,238)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(233,224,231)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,221,228)">&nbsp;</div></span><br class="deactivated-color-palett" clear="both" />
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(213,213,213)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(236,188,193)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,218,192)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,232,194)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(223,233,197)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(205,221,236)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(224,200,218)">&nbsp;</div></span>
+								          <span class="w-n-bgcolor deactivated-color-palett"><div style="background:rgb(239,207,220)">&nbsp;</div></span>
+												</div>
+											</div>
+											<div class="opt-row">
+												<h4>Background opacity</h4>
+							          <span>
+							            <select id="widget_note_bg_opacity" style="margin:2px 0px 8px;">
+							              <option value="1">100%</option>
+														<option value="0.9">90%</option>
+														<option value="0.8">80%</option>
+														<option value="0.7">70%</option>
+														<option value="0.6">60%</option>
+														<option value="0.5">50%</option>
+														<option value="0.4">40%</option>
+														<option value="0.3">30%</option>
+														<option value="0.2">20%</option>
+														<option value="0.1">10%</option>
+							            </select>
+							          </span>
+							        </div>
+							      </span>
+						   		</div>
+						 		</div>
+							</div>
+	
+							<div class="opt-panel wopt wopt-panel-show" id="wopt-photo">
+								<span class="opt-tab">
+								  <div class="left"><div>&nbsp;</div></div>
+								  <div class="right"><div>&nbsp;</div></div>
+									<div class="label">Photo options<span class="wopt-close">&nbsp;</span></div>
+								</span>
+								<div class="opt-scroll">
+									<div class="opt-content">
+							      <div class="opt-row">
+							        <h4>Image name</h4>
+							        <div class="w-p-image-name ghosted" style="margin:4px 0"></div>
+											<div style="margin:8px 0">
+												<span class="button default w-p-upload">
+													<div class="left"><div>&nbsp;</div></div>
+													<div class="right"><div>&nbsp;</div></div>
+													<div class="label">Add image</div>
+												</span>
+												<span class="button w-p-upload w-p-replace">
+													<div class="left"><div>&nbsp;</div></div>
+													<div class="right"><div>&nbsp;</div></div>
+													<div class="label">Replace image</div>
+												</span>
+											</div>
+							      </div>
+							      <div class="opt-row">
+							        <div class="opt-devider"></div>
+											<h4>Effect</h4>
+											<div class="opt-themes" style="">
+							        	<div class="opt-theme-spacer">&nbsp;</div>
+												<div class="opt-theme w-p-theme-effects activated active" id="w-p-theme-noeffect"></div>
+								        <div class="opt-theme w-p-theme-effects activated " id="w-p-theme-sepia"></div>
+								        <div class="opt-theme w-p-theme-effects activated" id="w-p-theme-gray"></div>
+											</div>
+							      </div>
+							      <div class="opt-row">
+							        <div class="opt-devider" style="margin-bottom:10px"></div>
+							        <h4>Frame</h4>
+											<div class="opt-themes">
+							         	<div class="opt-theme-spacer">&nbsp;</div>
+												<div class="opt-theme w-p-theme-border active" id="w-p-theme-noframe"></div>
+							          <div class="opt-theme w-p-theme-border " id="w-p-theme-frame"></div>
+												<!-- <div class="opt-theme w-p-theme-border" id="w-p-theme-frame-1px"></div> -->
+											</div>
+										</div>
+										<div class="opt-row">
+								      <div class="opt-devider" style="margin-bottom:10px"></div>
+							        <h4>Rotate</h4>
+											<div class="opt-themes">
+							          <div class="opt-theme-spacer">&nbsp;</div>
+												<div class="opt-theme w-p-theme-rotation " id="w-p-theme-rotate-0"></div>
+												<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-90"></div>
+												<div class="opt-theme w-p-theme-rotation active" id="w-p-theme-rotate-180"></div>
+												<div class="opt-theme w-p-theme-rotation" id="w-p-theme-rotate-270"></div>
+											</div>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+	
+							<div class="opt-panel wopt wopt-panel-hide" id="wopt-document">
+								<span class="opt-tab">
+								  <div class="left"><div>&nbsp;</div></div>
+								  <div class="right"><div>&nbsp;</div></div>
+									<div class="label">Documents options<span class="wopt-close">&nbsp;</span></div>
+								</span>
+								<div class="opt-scroll">
+									<div class="opt-content">
+							      <div class="opt-row">
+							        <h4>Document name</h4>
+							        <div class="w-d-document-name ghosted" style="margin:4px 0"></div>
+											<div style="margin:8px 0">
+												<span class="button default w-d-upload">
+													<div class="left"><div>&nbsp;</div></div>
+													<div class="right"><div>&nbsp;</div></div>
+													<div class="label">Add document</div>
+												</span>
+												<span class="button w-d-upload w-d-replace">
+													<div class="left"><div>&nbsp;</div></div>
+													<div class="right"><div>&nbsp;</div></div>
+													<div class="label">Replace document</div>
+												</span>
+											</div>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+	
+							<div class="opt-panel wopt wopt-panel-hide" id="wopt-todo">
+								<span class="opt-tab">
+								  <div class="left"><div>&nbsp;</div></div>
+								  <div class="right"><div>&nbsp;</div></div>
+									<div class="label">Todo options<span class="wopt-close">&nbsp;</span></div>
+								</span>
+								<div class="opt-scroll">
+									<div class="opt-content">
+							      <div style="margin-top:10px">
+											<h4 style="display:inline;">View: </h4>
+										  <input type="radio" id="todo_full_view" value="full" name="todo_view"><label for="todo_full_view">Full</label>
+										  <input type="radio" id="todo_compact_view" value="compact" name="todo_view"><label for="todo_compact_view">Compact</label>
+										</div>
+							      <div style="margin-top:10px">
+											<h4>Date</h4>
+										  <div id="todo_calendar">
+												<table class="calendar" id="todo_calendar" border="0" cellspacing="0" cellpadding="0">
+													<thead>
+														<tr class="monthName">
+								        			<th colspan="7" class="calendar-nav">
+																<div>
+									          			<span class="prev-month"><a href="#" onclick="Stixy.server.replace('/widgets/todo/ajax_calendar?month=-1', 'todo_calendar', function(request){Stixy.widgets.Todo.prototype.optionbar.calendarReset()}); Stixy.element.$ID('todo_progress_indicator').style.display='block'; return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)"></a></span>
+									          			<span class="todo-calendar-month-title"><span id="todo_progress_indicator" style="display:none"></span>April 2007</span>
+									          			<span class="next-month"><a href="#" onclick="Stixy.server.replace('/widgets/todo/ajax_calendar?month=1', 'todo_calendar', function(request){Stixy.widgets.Todo.prototype.optionbar.calendarReset()}); Stixy.element.$ID('todo_progress_indicator').style.display='block'; return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)"></a></span>
+									        			</div>
+															</th>
+														</tr>
+														<tr class="dayName"><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>
+													</thead>
+													<tbody>
+														<tr><td class="day weekendDay firstDayOfWeek" id="2007-April-Sunday-1">1</td><td class="day todayDay selectedDay" id="2007-April-Monday-2">2</td><td class="day" id="2007-April-Tuesday-3">3</td><td class="day" id="2007-April-Wednesday-4">4</td><td class="day" id="2007-April-Thursday-5">5</td><td class="day" id="2007-April-Friday-6">6</td><td class="day weekendDay" id="2007-April-Saturday-7">7</td></tr><tr><td class="day weekendDay firstDayOfWeek" id="2007-April-Sunday-8">8</td><td class="day" id="2007-April-Monday-9">9</td><td class="day" id="2007-April-Tuesday-10">10</td><td class="day" id="2007-April-Wednesday-11">11</td><td class="day" id="2007-April-Thursday-12">12</td><td class="day" id="2007-April-Friday-13">13</td><td class="day weekendDay" id="2007-April-Saturday-14">14</td></tr><tr><td class="day weekendDay firstDayOfWeek" id="2007-April-Sunday-15">15</td><td class="day" id="2007-April-Monday-16">16</td><td class="day" id="2007-April-Tuesday-17">17</td><td class="day" id="2007-April-Wednesday-18">18</td><td class="day" id="2007-April-Thursday-19">19</td><td class="day" id="2007-April-Friday-20">20</td><td class="day weekendDay" id="2007-April-Saturday-21">21</td></tr><tr><td class="day weekendDay firstDayOfWeek" id="2007-April-Sunday-22">22</td><td class="day" id="2007-April-Monday-23">23</td><td class="day" id="2007-April-Tuesday-24">24</td><td class="day" id="2007-April-Wednesday-25">25</td><td class="day" id="2007-April-Thursday-26">26</td><td class="day" id="2007-April-Friday-27">27</td><td class="day weekendDay" id="2007-April-Saturday-28">28</td></tr><tr><td class="day weekendDay firstDayOfWeek" id="2007-April-Sunday-29">29</td><td class="day" id="2007-April-Monday-30">30</td><td class="otherMonth" id="2007-May-Tuesday-1">1</td><td class="otherMonth" id="2007-May-Wednesday-2">2</td><td class="otherMonth" id="2007-May-Thursday-3">3</td><td class="otherMonth" id="2007-May-Friday-4">4</td><td class="otherMonth weekendDay" id="2007-May-Saturday-5">5</td></tr>
+													</tbody>
+												</table>
+											</div>
+											<div style="text-align:right;">
+												<a href="#" onclick="Stixy.server.connect(null,'/widgets/todo/ajax_calendar', function(request){TodoOptions.calendarReset()}); Stixy.element.$ID('todo_progress_indicator').style.display='block'; return false;" onmousedown="Stixy.events.stop(event)" onmouseover="Stixy.events.stop(event)">Today</a>
+											</div>
+										</div>
+										<div style="margin-top:10px">
+											<h4>Time</h4>
+											<select id="todo_hour">
+												<option value="1" >1</option>
+												<option value="2" >2</option>
+												<option value="3" >3</option>
+												<option value="4" >4</option>
+												<option value="5" >5</option>
+												<option value="6" >6</option>
+												<option value="7" >7</option>
+												<option value="8" >8</option>
+												<option value="9" selected>9</option>
+												<option value="10">10</option>
+												<option value="11">11</option>
+												<option value="12">12</option>
+											</select>
+											<select id="todo_minute">
+												<option value="00" selected>00</option>
+												<option value="15">15</option>
+												<option value="30">30</option>
+												<option value="45">45</option>
+											</select>
+											<select id="todo_postfix">
+												<option value="AM" selected>AM</option>
+												<option value="PM">PM</option>
+											</select>
+										</div>
+										<h4 style="margin-top:10px"><input type="checkbox" id="todo_reminder_switcher"> <label for="todo_reminder_switcher">Send reminder</label></h4>
+										<div class="ghosted" id="todo_reminder_panel" style="margin-top:5px;">
+											<div>
+												<select disabled id="todo_remind_at">
+													<option value="0.25">15 minutes</option>
+													<option value="1.00" selected>1 hour</option>
+													<option value="2.00">2 hours</option>
+													<option value="3.00">3 hours</option>
+													<option value="5.00">5 hours</option>
+													<option value="12.00">12 hours</option>
+													<option value="24.00">1 day</option>
+													<option value="48.00">2 days</option>
+													<option value="72.00">3 days</option>
+													<option value="168.00">1 week</option>
+												</select> before activity
+											</div>
+											<div style="margin-top:10px">
+												Send reminder to<br />
+												<input type="radio" name="reminder_to" checked disabled id="todo_remind_all"> All
+												<input type="radio" name="reminder_to" disabled id="todo_remind_from_list"> Selected users<br />
+												<div id="todo_remind_only" class="ghosted" style="height:100px;overflow:auto;border:1px solid rgb(204,204,204);background:white;padding:4px;">
+													<table>
+														<tr style="cursor:default">
+														  <td valign="top" nowrap>
+																<input type="checkbox" value="4" disabled id="todo_user_4" class="todo-remind-only">
+																<label for="todo_user_4" title="Adam Block">Adam Block</label>
+															</td>
+														</tr>
+														<tr style="cursor:default">
+															<td valign="top" nowrap>
+																<input type="checkbox" value="3" disabled id="todo_user_3" class="todo-remind-only">
+																<label for="todo_user_3" title="Jonas Höglund">Jonas Höglund</label>
+															</td>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="opt-bar-bottom">
+							<div class="wopt-common-tools" id="wopt_common_tools">
+								<div class="wopt-default" id="wopt-default">
+								  <div class="opt-cont">
+								    <h4 style="margin:0px 0px 4px">Bring to</h4>
+										<span class="button w-top">
+											<div class="left"><div>&nbsp;</div></div>
+											<div class="right"><div>&nbsp;</div></div>
+											<div class="label" style="padding-left:10px;padding-right:10px;">Foreground</div>
+										</span>
+										<span class="button w-bottom" style="margin-left:12px">
+											<div class="left"><div>&nbsp;</div></div>
+											<div class="right"><div>&nbsp;</div></div>
+											<div class="label" style="padding-left:10px;padding-right:10px;">Background</div>
+										</span>
+								    <div class="opt-row" style="margin-top:12px;">
+								      <input type="checkbox" class="opt-check" id="bring_forward"> <label for="bring_forward" class="w-auto-move">Bring forward when selected</label><br>
+								    	<input type="checkbox" class="opt-check" id="drop_shadow"> <label for="drop_shadow" class="w-drop-shadow">Drop Shadow</label>
+										</div>
+								 </div>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+</body>
+</html>

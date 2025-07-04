@@ -1,0 +1,20 @@
+/*---------------------*/
+/*   NOTE WIDGET IE 6  */
+/*---------------------*/
+
+/*.note .base { font-family:Georgia; background:transparent; }
+.note .note-bg { background-color:rgb(250,250,170); }
+*//* Note Themes */
+/*.note.wopt-theme-2 .base { color:rgb(90,145,25); font-family:Verdana; }
+.note.wopt-theme-3 .base { color:rgb(35,95,155); font-family:"Comic Sans MS"; }
+.note.wopt-theme-4 .base { color:rgb(185,5,70); font-family:"Arial"; }
+.note.wopt-theme-2 .note-bg { background-color:rgb(225,250,160); }
+.note.wopt-theme-3 .note-bg { background-color:rgb(190,220,250); }
+.note.wopt-theme-4 .note-bg { background-color:rgb(255,165,200); }
+*//* Options */
+/*.wopt div.wopt-theme-1 { background-color:rgb(250,250,170); color:rgb(50,50,50); font-family:Georgia; }
+.wopt div.wopt-theme-2 { background-color:rgb(225,250,160); color:rgb(90,145,25); font-family:Verdana; }
+.wopt div.wopt-theme-3 { background-color:rgb(190,220,250); color:rgb(35,95,155); font-family:"Comic Sans MS"; }
+.wopt div.wopt-theme-4 { background-color:rgb(255,165,200); color:rgb(185,5,70); font-family:"Arial"; }
+.w-n-font options { color:rgb(204,204,204); }
+.w-n-font options.activated { color:auto; }*/

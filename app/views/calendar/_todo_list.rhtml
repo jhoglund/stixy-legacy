@@ -1,0 +1,56 @@
+<!-- <div class="panel-shadow"><s><a> </a></s><b><i><a> </a></i><u><a> </a></u></b></div> -->
+<div class="bar-tools">
+	<div class="calendar-edit-progress">&nbsp;</div>
+	<div class="bar-tool-title">List of things to-do</div>
+</div>
+<div class="calendar-panel-content">
+
+<% if todos.detect{|todo| todo.completed? }%>
+<div class="todo-list-row" style="padding:6px 10px">
+	<%= link_to_function "Clear completed todos", "Stixy.calendar.clearCompletedTodos()" %>
+</div>
+<% end %>
+
+<% unless todos.empty? %>
+<% todos.each do |todo_list| %>
+<div class="todo-list-row">
+	<sx:todo-checkbox<%= if todo_list.completed?: " class='todo-list-completed'"; end %>>
+		<sx:entry sx:entry-id="<%= todo_list.id %>" sx:entry-type="<%= todo_list.class.to_s.underscore %>">
+			<span class="todo-list-item">
+				<table class="todo-list-grid">
+					<tr>
+						<td valign="top" width="25">
+							<%= check_box_tag('todo_list[completed]',1, todo_list.completed?, :id => 'todo_status', "sx:id" => "status", "sx:entry-id" => todo_list.id, "sx:entry-type" => todo_list.class.to_s.underscore, :class => "completed-checkbox") %>
+						</td>
+						<td valign="top">
+							<% if todo_list.priority > 0 %><span class="todo-list-priority-<%= todo_list.priority(:name).downcase %>">!</span><% end %>
+							<%= todo_list.subject %>
+							<% if todo_list.duedate? %>
+							<div title="<%= todo_list.duedate.strftime(current_user.time_format.get_long_date[:value]) %>" class="todo-list-due">
+								<% if todo_list.overdue? %>
+								<span class="todo-list-past-due">Overdue!</span>
+								<% elsif todo_list.duedate.year == current_user.adjusted_time.year and todo_list.duedate.yday == current_user.adjusted_time.yday %>
+								Due: <span class="todo-list-due-today">Today</span>
+								<% else %>
+								Due: <span class="due-at"><%= todo_list.duedate.strftime(current_user.time_format.get_long_date[:value]) %></span>
+								<% end %>
+							</div>
+							<% end %>
+						</td>
+					</tr>
+				</table>
+			</span>
+		</sx:entry>
+	</sx:todo-checkbox>
+</div>			
+<% end %>
+<% else %>
+<div id="todo_list_default" class="todo-list-default todo-list-row">List of to-do's is empty</div>
+<% end %>
+<div class="todo-list-row" style="padding:6px 10px">
+<%= link_to_function "New todo", "Stixy.calendar.newTodo()" %>
+</div>
+<% [(5-todos.size), 0].max.times do |i| %>
+<div class="todo-list-row" style="padding:6px 10px">&nbsp;</div>			
+<% end %>
+</div>

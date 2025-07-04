@@ -1,0 +1,57 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+invite_adam_to_existing_board:
+  id: 1
+  inviter_user_id: 2
+  accepted_user_id: 3
+  board_id: 5
+  created_on: <%= -3.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  status: 2
+invite_adam_to_non_existing_board:
+  id: 2
+  inviter_user_id: 2
+  accepted_user_id: 3
+  board_id: 5000
+  created_on: <%= -3.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  status: 2
+invite_maria_to_existing_board:
+  id: 3
+  inviter_user_id: 2
+  accepted_user_id: 4
+  board_id: 5
+  created_on: <%= -4.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  status: 2
+accepted_invite_camilla_to_existing_board:
+  id: 4
+  inviter_user_id: 2
+  accepted_user_id: 5
+  board_id: 5
+  created_on: <%= -8.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  status: 1
+invite_staffan_to_existing_board:
+  id: 5
+  inviter_user_id: 2
+  accepted_user_id: 6
+  board_id: 5
+  created_on: <%= -8.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  status: 2
+invite_quentin_to_existing_board:
+  id: 6
+  inviter_user_id: 2
+  accepted_user_id: 7
+  board_id: 5
+  created_on: <%= -11.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  status: 2
+invite_aaron_to_existing_board:
+  id: 7
+  inviter_user_id: 2
+  accepted_user_id: 8
+  board_id: 5
+  created_on: <%= -12.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  status: 2
+invite_regina_to_existing_board:
+  id: 8
+  inviter_user_id: 2
+  accepted_user_id: 9
+  board_id: 5
+  created_on: <%= -13.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
+  status: 2

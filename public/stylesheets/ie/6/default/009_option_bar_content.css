@@ -1,0 +1,11 @@
+/*---------------------------------*/
+/* OPTION BAR content default IE 6 */
+/*---------------------------------*/
+
+.opt-themes .opt-theme { background:none; }
+.opt-color-palett span { height:17px; width:11.5%; margin:0; }
+.opt-color-palett span.active { position:relative;left:1px;height:18px;margin:-1px 1px -1px -1px;}
+.opt-color-palett div { position:static; margin:1px; height:15px; width:100%; }
+.opt-font-size-palett .active {  margin:1px; }
+.opt-color-palett span.active div { height:14px; }
+.opt-bar .opt-devider	 { height:2px; }

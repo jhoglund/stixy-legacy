@@ -1,0 +1,13 @@
+<%= error_messages_for 'keyword' %>
+
+<table class="admin">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  <%= hidden_field ("keyword", "id") if controller.action_name == 'edit' %>
+  <tr class="dark">
+    <td><label for="keyword_tag">Keyword</label></td>
+    <td><%= text_field('keyword', 'tag', 'size' => 30, 'maxsize' => 30, "autocomplete" => "off")  %></td>
+  </tr>
+</table>

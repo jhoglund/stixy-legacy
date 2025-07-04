@@ -1,0 +1,6 @@
+/*------------*/
+/* ORANGE BAR */
+/*------------*/
+#pending .toolbar .opt-switcher-bg { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/images/switchers/switcher_bg_orange.png")}
+#pending sx\:button.toolbar-button sx\:l sx\:p,
+#pending sx\:button.toolbar-button sx\:r sx\:p {  background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/images/buttons/btn_toolbar_bg_orange.png"); }

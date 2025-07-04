@@ -1,0 +1,17 @@
+/*---------------------*/
+/*   TODO WIDGET IE 6  */
+/*---------------------*/
+
+.todo .todo-header { position:relative; top:0px; left:0; width:100%; margin:0px; padding:4px; background-image:none; }
+.todo .todo-comments { margin:0 0 0 2px; }
+.todo .editor-bg,
+.todo .editor-canvas { top:0; padding:85px 8px 13px 8px; }
+.todo-compact .editor-bg,
+.todo-compact .editor-canvas, { top:0; padding:39px 8px 13px 8px; }
+.todo .header-bg { background-image:none!important; overflow:hidden }
+.todo .header-bg p { position:relative; top:-250px; left:-250px; background-image:none!important; width:500px; height:500px; background:white; filter:progid:DXImageTransform.Microsoft.Alpha(opacity="80", finishopacity="0", style="2")  }		
+.todo .todo-reminder-icon { background:none; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/widgets/todo/reminder.png', sizingMethod='crop'); }
+
+.stixy-calendar .todo-widget sx\:sp sx\:l sx\:p,
+.stixy-calendar .todo-widget sx\:sp sx\:r sx\:p { background-image:none;
+filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/calendar/multiple_days_light_pink.png', sizingMethod='crop'); }

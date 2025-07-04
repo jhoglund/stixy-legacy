@@ -1,0 +1,27 @@
+<%= error_messages_for 'role' %>
+
+<table class="admin">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  <%= hidden_field ("role", "id") if controller.action_name == 'edit' %>
+  <tr class="dark">
+    <td><label for="role_name">Name</label></td>
+    <td><%= text_field('role', 'name', 'size' => 30, 'maxsize' => 30, "autocomplete" => "off")  %></td>
+  </tr>
+  <tr class="light">
+    <td><label for="role_is_locked">Is Locked?</label></td>
+    <td><%= check_box('role', 'is_locked') %></td>
+  </tr>
+  <tr class="dark">
+    <td><label for="role_is_visible">Is Visible?</label></td>
+    <td><%= check_box('role', 'is_visible') %></td>
+  </tr>
+  <tr class="light">
+    <td><label for="role_status">Is Active?</label></td>
+    <td><%= check_box('role', 'status', {'id' => 'status'}, Status::ACTIVE, Status::DISABLED) %></td>
+  </tr>
+</table>
+
+  

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en" style="background:white;" xmlns:sx="http://www.stixy.com/v1.0">
+<head>
+	<title>Stixy: For Flexible Online Creation Collaboration and Sharing</title>
+</head>
+<body style="background:white;">
+
+			<!-- <input id="user_id" name="user[id]" type="hidden" value="3" /> -->
+	    <form action="/dev/form" method="post">
+				<!-- <input type="hidden" value="true" name="popup">
+								<input id="user_pwd_update" onclick="setPasswordState(this.checked)" style="position:relative;vertical-align:top;top:-3px;" type="checkbox" value="1" />
+								<input class="text-field" disabled="disabled" id="user_pwd" name="" size="30" type="text" value="" />
+								<input class="text-field" disabled="disabled"  id="user_pwd_confirmation" name="" size="30" type="text" value="" />
+								<input id="user_login_update" onclick="setLoginState(this.checked)" style="position:relative;vertical-align:top;top:-3px;" type="checkbox" value="1" />
+											<input class="text-field"  disabled="disabled"  id="user_login" maxsize="200" name="" size="30" type="text" value="jonas@stixy.com" />
+											<input class="text-field"  disabled="disabled"  id="user_login_confirmation" maxsize="200" name="" size="30" type="text" value="jonas@stixy.com" />
+					    <input class="text-field" id="user_first_name" maxsize="200" name="user[first_name]" size="30" type="text" value="Jonas" />
+					    <input class="text-field" id="user_last_name" maxsize="200" name="user[last_name]" size="30" type="text" value="H�glund2" />
+					    <input class="text-field" id="user_city" maxsize="200" name="user[city]" size="30" type="text" value="Karlshamn" />
+					    <input class="text-field" id="user_state" maxsize="200" name="user[state]" size="30" type="text" value="" />
+					    <input class="text-field" id="user_zip" maxsize="20" name="user[zip]" size="30" type="text" value="374 37" />
+					    <input class="text-field" id="user_country" maxsize="60" name="user[country]" size="30" type="text" value="Sweden" />
+							<select name="user[time_offset]" style="width:100%;">
+								
+								<option style="margin-right:16px;" name="" value="-43200">(GMT -12) Baker Island, Howland Island</option>
+								
+								<option style="margin-right:16px;" name="" value="-39600">(GMT -11) American Samoa, Midway Atoll, Samoa</option>
+								
+								<option style="margin-right:16px;" name="" value="-36000">(GMT -10) Cook Islands, French Polynesia, United States (HST)</option>
+								
+								<option style="margin-right:16px;" name="" value="-32400">(GMT -9) United States (AKST)</option>
+								
+								<option style="margin-right:16px;" name="" value="-28800">(GMT -8) Canada (PST—Pacific Standard Time), Mexico, United States (PST)</option>
+
+								
+								<option style="margin-right:16px;" name="" value="-25200">(GMT -7) Canada (MST—Mountain Standard Time), Mexico, United States (MST)</option>
+								
+								<option style="margin-right:16px;" name="" value="-21600">(GMT -6) Canada (CST—Central Standard Time), Mexico, United States (CST)</option>
+								
+								<option style="margin-right:16px;" name="" value="-18000">(GMT -5) Brazil, Canada (EST—Eastern Standard Time), United States (EST)</option>
+								
+								<option style="margin-right:16px;" name="" value="-14400">(GMT -4) Brazil, Canada (AST—Atlantic Standard Time)</option>
+								
+								<option style="margin-right:16px;" name="" value="-10800">(GMT -3) Argentina, Brazil</option>
+								
+								<option style="margin-right:16px;" name="" value="-7200">(GMT -2) Brazil - Ocean Islands, South Georgia</option>
+
+								
+								<option style="margin-right:16px;" name="" value="-3600">(GMT -1) Cape Verde, Portugal</option>
+								
+								<option style="margin-right:16px;" name="" value="0">(GMT 0) Iceland, Ireland, Portugal, Spain, United Kingdom (GMT / BST)</option>
+								
+								<option style="margin-right:16px;" name="" value="3600" selected>(GMT +1) Austria, Denmark, France, Germany, Netherlands, Norway, Spain, Sweden</option>
+								
+								<option style="margin-right:16px;" name="" value="7200">(GMT +2) Bulgaria, Egypt, Estonia, Finland, Israel, Russia, South Africa</option>
+								
+								<option style="margin-right:16px;" name="" value="10800">(GMT +3) Iraq, Kenya, Kuwait, Russia* (Moscow, St. Petersburg), Saudi Arabia</option>
+								
+								<option style="margin-right:16px;" name="" value="12600.0">(GMT +3.5) Iran</option>
+
+								
+								<option style="margin-right:16px;" name="" value="14400">(GMT +4) Russia, United Arab Emirates</option>
+								
+								<option style="margin-right:16px;" name="" value="16200.0">(GMT +4.5) Afghanistan</option>
+								
+								<option style="margin-right:16px;" name="" value="18000">(GMT +5) Pakistan (PST— Pakistan Standard Time), Russia</option>
+								
+								<option style="margin-right:16px;" name="" value="19800.0">(GMT +5.5) India (IST—Indian Standard Time), Sri Lanka</option>
+								
+								<option style="margin-right:16px;" name="" value="20700.0">(GMT +5.75) Nepal</option>
+								
+								<option style="margin-right:16px;" name="" value="21600">(GMT +6) Bangladesh, Russia</option>
+
+								
+								<option style="margin-right:16px;" name="" value="25200">(GMT +7) Indonesia (WIB), Russia, Thailand</option>
+								
+								<option style="margin-right:16px;" name="" value="28800">(GMT +8) Australia (AWST), China, Indonesia (WITA), Philippines, Russia</option>
+								
+								<option style="margin-right:16px;" name="" value="31500.0">(GMT +8.75) Western Australia</option>
+								
+								<option style="margin-right:16px;" name="" value="32400">(GMT +9) Indonesia (WIT), Japan (JST), South Korea (KST), Russia</option>
+								
+								<option style="margin-right:16px;" name="" value="34200.0">(GMT +9.5) Australia (ACST)</option>
+								
+								<option style="margin-right:16px;" name="" value="36000">(GMT +10) Australia (AEST), Russia</option>
+
+								
+								<option style="margin-right:16px;" name="" value="37800.0">(GMT +10.5) Australia (New South Wales)</option>
+								
+								<option style="margin-right:16px;" name="" value="39600">(GMT +11) Russia, Solomon Islands</option>
+								
+								<option style="margin-right:16px;" name="" value="43200">(GMT +12) Fiji, New Zealand, Russia</option>
+								
+							</select>-->
+					    <input checked="checked" id="user_daylight_savings" name="user[daylight_savings]" type="checkbox" value="1" /><input name="user[daylight_savings]" type="hidden" value="0" />
+					    <input class="text-field" id="user_phone" maxsize="60" name="user[phone]" size="30" type="text" value="+46-454-10775" />
+					    <input class="text-field" id="user_mobile_phone" maxsize="60" name="user[mobile_phone]" size="30" type="text" value="+46-709-961600" />
+					  	<textarea class="text-field" cols="40" id="user_description" name="user[description]" rows="6" style="margin-top:6px">Hey fokes. I'm Jonas, just so you know!</textarea>
+							<select id="time_format_date" name="user[time_format][time]"><option value="0">31/12/2008</option><option value="1">31/12/08</option><option value="2">12/31/2008</option><option value="3">12/31/2008</option><option value="4">2008/12/31</option><option value="5">08/12/31</option></select>
+							 
+			<input id="time_format_time_0" name="user[time_format][time]" style="vertical-align:middle;" type="radio" value="0" checked="checked" /> <label for="time_format_time_0">13:00</label>
+			
+			<input id="time_format_time_1" name="user[time_format][time]" style="vertical-align:middle;" type="radio" value="1" /> <label for="time_format_time_1">01:00 PM</label>
+		  
+			<input checked="checked" id="time_format_week" name="user[time_format][week]" style="vertical-align:middle;margin-top:6px;" type="checkbox" />
+		  
+		
+		<input id="user_pref_disable_flash_upload" name="user[pref_disable_flash_upload]" style="vertical-align:middle;" type="checkbox" value="1" /><input name="user[pref_disable_flash_upload]" type="hidden" value="0" />
+		  <input checked="checked" id="user_receive_newsletter" name="user[receive_newsletter]" style="vertical-align:middle;" type="checkbox" value="1" /><input name="user[receive_newsletter]" type="hidden" value="0" />
+	<input name="commit" style="display:none" type="submit" value="" />
+
+</form>
+						<sx:button class="default" style="margin-left:10px;"><sx:l><sx:p>&nbsp;</sx:p></sx:l><sx:r><sx:p>&nbsp;</sx:p></sx:r><sx:t><a class="button-label" href="#" onclick="document.forms[0].submit(); return false;">Save</a></sx:t></sx:button></div>
+	
+
+</body>
+</html>

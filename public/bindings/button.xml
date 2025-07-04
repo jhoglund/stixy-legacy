@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<bindings xmlns="http://www.mozilla.org/xbl"
+          xmlns:xbl="http://www.mozilla.org/xbl"
+          xmlns:h="http://www.w3.org/1999/xhtml"
+					xmlns:stx="http://www.stixy.com/v1.0"
+          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<binding id="button">
+		<content>
+				<h:a xbl:inherits="href,onclick,onmouseover,onmouseout,style,class,id,title"><xul:label class="label" xbl:inherits="value=label"/></h:a>
+				<stx:left class="left"></stx:left>
+				<stx:right class="right"></stx:right>
+				<h:div style="display:none"><children /></h:div>
+		</content>
+  </binding>
+    
+</bindings>

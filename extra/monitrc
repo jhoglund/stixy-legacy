@@ -1,0 +1,105 @@
+set daemon 60
+set mailserver klang.swe.net port 24, localhost with timeout 60 seconds
+set mail-format { from: monit@stixy.com }
+set alert jhoglund@ipipi.com { nonexist, timeout, resource, icmp, connection }
+set alert jonas@stixy.com
+ 
+set httpd port 2812 and
+    use address localhost  # only accept connection from localhost
+    allow localhost        # allow localhost to connect to the server and
+ 
+##### mongrel 8000 #####
+check process mongrel-8000 with pidfile /home/stixy/logs/mongrel/mongrel.8000.pid
+    group stixy_production
+    start program = "/usr/bin/ruby1.8 /usr/bin/mongrel_rails start --user stixy --group stixy -d -e production -p 8000 -a 127.0.0.1 -P /home/stixy/logs/mongrel/mongrel.8000.pid -c /home/stixy/stixy/current -l /home/stixy/logs/mongrel/mongrel_production.8000.log"
+    stop program  = "/usr/bin/ruby1.8 /usr/bin/mongrel_rails stop -P /home/stixy/logs/mongrel/mongrel.8000.pid"
+ 
+		if totalmem is greater than 300.0 MB for 5 cycles then restart	# eating up memory?
+		if cpu is greater than 50% for 2 cycles then alert							# send an email to admin
+    if cpu is greater than 80% for 3 cycles then restart						# hung process?
+    if loadavg(5min) greater than 10 for 8 cycles then restart			# bad, bad, bad
+    if 3 restarts within 5 cycles then timeout											# something is wrong, call the sys-admin
+ 
+    if failed port 8000 protocol http																# check for response
+        with timeout 10 seconds
+        then restart
+
+##### mongrel 8001 #####
+check process mongrel-8001 with pidfile /home/stixy/logs/mongrel/mongrel.8001.pid
+    group stixy_production
+    start program = "/usr/bin/ruby1.8 /usr/bin/mongrel_rails start --user stixy --group stixy -d -e production -p 8001 -a 127.0.0.1 -P /home/stixy/logs/mongrel/mongrel.8001.pid -c /home/stixy/stixy/current -l /home/stixy/logs/mongrel/mongrel_production.8001.log"
+    stop program  = "/usr/bin/ruby1.8 /usr/bin/mongrel_rails stop -P /home/stixy/logs/mongrel/mongrel.8001.pid"
+
+    if totalmem is greater than 300.0 MB for 5 cycles then restart	# eating up memory?
+    if cpu is greater than 50% for 2 cycles then alert							# send an email to admin
+    if cpu is greater than 80% for 3 cycles then restart						# hung process?
+    if loadavg(5min) greater than 10 for 8 cycles then restart			# bad, bad, bad
+    if 3 restarts within 5 cycles then timeout											# something is wrong, call the sys-admin
+
+    if failed port 8001 protocol http																# check for response
+        with timeout 10 seconds
+        then restart
+
+##### mongrel 8002 #####
+check process mongrel-8002 with pidfile /home/stixy/logs/mongrel/mongrel.8002.pid
+    group stixy_production
+    start program = "/usr/bin/ruby1.8 /usr/bin/mongrel_rails start --user stixy --group stixy -d -e production -p 8002 -a 127.0.0.1 -P /home/stixy/logs/mongrel/mongrel.8002.pid -c /home/stixy/stixy/current -l /home/stixy/logs/mongrel/mongrel_production.8002.log"
+    stop program  = "/usr/bin/ruby1.8 /usr/bin/mongrel_rails stop -P /home/stixy/logs/mongrel/mongrel.8002.pid"
+
+    if totalmem is greater than 300.0 MB for 5 cycles then restart	# eating up memory?
+    if cpu is greater than 50% for 2 cycles then alert							# send an email to admin
+    if cpu is greater than 80% for 3 cycles then restart						# hung process?
+    if loadavg(5min) greater than 10 for 8 cycles then restart			# bad, bad, bad
+    if 3 restarts within 5 cycles then timeout											# something is wrong, call the sys-admin
+
+    if failed port 8002 protocol http																# check for response
+        with timeout 10 seconds
+        then restart
+
+##### mongrel 8003 #####
+check process mongrel-8003 with pidfile /home/stixy/logs/mongrel/mongrel.8003.pid
+    group stixy_production
+    start program = "/usr/bin/ruby1.8 /usr/bin/mongrel_rails start --user stixy --group stixy -d -e production -p 8003 -a 127.0.0.1 -P /home/stixy/logs/mongrel/mongrel.8003.pid -c /home/stixy/stixy/current -l /home/stixy/logs/mongrel/mongrel_production.8003.log"
+    stop program  = "/usr/bin/ruby1.8 /usr/bin/mongrel_rails stop -P /home/stixy/logs/mongrel/mongrel.8003.pid"
+
+    if totalmem is greater than 300.0 MB for 5 cycles then restart	# eating up memory?
+    if cpu is greater than 50% for 2 cycles then alert							# send an email to admin
+    if cpu is greater than 80% for 3 cycles then restart						# hung process?
+    if loadavg(5min) greater than 10 for 8 cycles then restart			# bad, bad, bad
+    if 3 restarts within 5 cycles then timeout											# something is wrong, call the sys-admin
+
+    if failed port 8003 protocol http																# check for response
+        with timeout 10 seconds
+        then restart
+
+##### mongrel 8010 Dev #####
+check process mongrel-8010 with pidfile /home/stixy/logs/mongrel/mongrel.8010.pid
+    group stixy_development
+    start program = "/usr/bin/ruby1.8 /usr/bin/mongrel_rails start --user stixy --group stixy -d -e development -p 8010 -a 127.0.0.1 -P /home/stixy/logs/mongrel/mongrel.8010.pid -c /home/stixy/stixy_dev/current -l /home/stixy/logs/mongrel/mongrel_development.8010.log"
+    stop program  = "/usr/bin/ruby1.8 /usr/bin/mongrel_rails stop -P /home/stixy/logs/mongrel/mongrel.8010.pid"
+
+    if totalmem is greater than 300.0 MB for 5 cycles then restart	# eating up memory?
+    if cpu is greater than 50% for 2 cycles then alert							# send an email to admin
+    if cpu is greater than 80% for 3 cycles then restart						# hung process?
+    if loadavg(5min) greater than 10 for 8 cycles then restart			# bad, bad, bad
+    if 3 restarts within 5 cycles then timeout											# something is wrong, call the sys-admin
+
+    if failed port 8010 protocol http																# check for response
+        with timeout 10 seconds
+        then restart
+
+##### TODO Notify daemon #####
+check process todo_notify with pidfile /home/stixy/stixy/current/log/todo_notify.rb.pid
+    group stixy_production
+    start program = "/usr/bin/ruby1.8 /home/stixy/stixy/current/lib/daemons/todo_notify_control.rb start -f"
+    stop program  = "/usr/bin/ruby1.8 /home/stixy/stixy/current/lib/daemons/todo_notify_control.rb stop"
+		if 5 restarts within 5 cycles then timeout
+		
+##### Email daemon #####
+check process stixy_email with pidfile /home/stixy/stixy/current/log/stixy_email.rb.pid
+    group stixy_production
+    start program = "/usr/bin/ruby1.8 /home/stixy/stixy/current/lib/daemons/stixy_email_control.rb start -f"
+    stop program  = "/usr/bin/ruby1.8 /home/stixy/stixy/current/lib/daemons/stixy_email_control.rb stop"
+		if 5 restarts within 5 cycles then timeout
+
+

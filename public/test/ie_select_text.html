@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>
+		Test
+	</title>
+	<style>
+		body { background:rgb(215,215,215); }
+		.editor { position:relative; width:400px; height:200px; border:1px inset; background:white; margin:10px; padding:5px; }
+	  .tooltip { position:absolute; display:none; padding:5px 10px; background:gray; }
+	</style>
+	<script>
+		
+		function setSelection(id){
+		  var element = document.getElementById(id);
+			var editor = document.getElementById("editor_1");
+			var selection = document.selection;
+			var range = selection.createRange();
+			editor.focus()
+		  //selection.empty();
+			//range.expand('textedit');
+		  if(element){
+  			//range.moveEnd('character', 12);
+			  range.moveToElementText(element);
+			  var selection = document.selection;
+  			var range = selection.createRange();
+			  var text = range.text;
+			  var offsetLeft = text.search(/\S(?!^\s)/);
+			  var offsetRight = text.search(/\s+$/);
+			  offsetRight -= (offsetRight >= 0) ? text.length : offsetRight;
+			  range.moveStart('character', offsetLeft);
+			  range.moveEnd('character', offsetRight);
+			}
+			//selection.empty();
+			setTimeout(function(){
+			  range.select()
+			},1000)
+		}
+		
+		onload = function(){
+		  var element = document.getElementById('element');
+		  var tooltip = document.getElementById('tooltip');
+		  element.onmouseover = function(e){
+		    var offsetX = e.offsetX == undefined ? (e.layerX == undefined ? e.x : e.layerX) : e.offsetX;
+        var offsetY = e.offsetY == undefined ? (e.layerY == undefined ? e.y : e.layerY) : e.offsetY;
+    		tooltip.style.left = offsetX + 0 + "px";
+        tooltip.style.top  = offsetY + 0 + "px";
+        tooltip.style.display = 'block';
+		  }
+		  element.onmouseout = function(){
+		    tooltip.style.display = 'none';
+		  }
+		  
+		}
+	
+	</script>
+</head>
+<body> 
+	<input type="button" onclick="setSelection()" value="Reset" unselectable="on">
+	<input type="button" onclick="setSelection('element')" value="Reset" unselectable="on">
+	<div class="editor" contenteditable="true" id="editor_1"><span class="tooltip" id="tooltip">Tooltip</span>This works at all time. <span id="element">      Select   </span> text and click the button. The editable div tag is a direct child of the &lt;body&gt; tag<br> (&lt;body&gt;&lt;div contenteditable="true"&gt;...&lt;/div&gt;)</div>
+
+</body>
+</html>

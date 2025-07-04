@@ -1,0 +1,18 @@
+<%- cache("widgets/todo/user_list/#{@board.id}", {:expire => 30.days}) do -%>
+<table>
+<% if @board.shared_with(current_user).nil? %>
+	<tr id="no_contacts_message"><td>
+		<span class="no-data">(empty)</span>
+	</td></tr>
+<% end %>
+<% @board.users.each do | user | %>
+	<tr style="cursor:default">
+	  <td valign="top" nowrap>
+			<!-- disabled  -->
+			<input type="checkbox" value="<%= user.id %>" id="todo_user_<%= user.id %>" class="todo-remind-only">
+			<label for="todo_user_<%= user.id %>" title="<%= user.display_name %>"><%= user.display_name %></label>
+		</td>
+	</tr>
+<% end %>
+</table>
+<%- end -%>

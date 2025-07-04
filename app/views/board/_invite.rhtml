@@ -1,0 +1,162 @@
+<style type="text/css">
+	.show-pending .contact-list,
+	.show-pending .personal-message { overflow:hidden!important;}
+</style>
+
+<% if not @board.nil? %>
+<% @pending_content = "Sending invitation..." %>
+<div class="invitation">
+<h1 style="margin-left: 255px;">Invite to Share</h1>
+<div class="left-sidebar-260-background">&nbsp;</div>
+<% form_tag(:action => 'create_invite') do -%>
+<input name="id" type="hidden" value="<%= @board.id  %>">
+<div class="left-sidebar-260">
+	<h3>Your contacts</h3>
+	<div class="contact-list">
+		<table id="board_contacts">
+		<% if current_user.contacts.empty? %>
+			<tr id="no_contacts_message"><td>
+				You have no contacts in your list. Add new contacts by writing an e-mail address in the box below.
+			</td></tr>
+		<% end %>
+		<% current_user.contacts.sort{|a,b| a.display_name.downcase <=> b.display_name.downcase}.each do | contact | %>
+			<%= render :partial => "invite_select_list", :object => contact %>
+		<% end %>
+		</table>
+	</div>
+	<p/>
+	<h3>New contact</h3>
+	<div class="title"><label for="board_email">E-mail address</label></div>
+	<input id="new_email" type="text" autocomplete="off" style="width:100%;"/>
+
+	<div style="text-align:right;margin-top:12px;">
+		<%= link_to_function("Add new contact", "newContact();", :button => {:type => false}) %>
+	</div>
+	<script type="text/javascript">
+	//<![CDATA[ 
+		var email_field = Stixy.element.$ID('new_email');
+		var email_field_flag = false;
+		function toggle_invite(state, contact_id, email, new_contact){
+			var contact = Stixy.element.$ID("invited_"+contact_id);
+			if(state){
+				if(contact){
+					var element = Stixy.element.remove(contact);
+					element.style.display = "block";
+					Stixy.html.insert_bottom("invitation_list", element);
+				}else{
+					var uri = "/board/invite_list_ajax/<%= @board.id %>" + "?user_id=" + contact_id
+					if(email) uri += '&email=' + email
+					if(new_contact) uri += '&new_contact=true'
+					Stixy.server.connect(null, uri, function(request){
+						var result = eval(request.responseText)
+						if(result[0]) Stixy.html.insert_bottom("invitation_list", result[0]);
+					 	if(result[1]) Stixy.html.insert_bottom("board_contacts", result[1]);
+					 	if(result[2]) Stixy.element.$ID('no_contacts_message').style.display = 'none'
+				   	Stixy.element.$ID('empty_invite_list').style.display = 'none'
+					});
+				}
+			}else if(contact){
+				contact.style.display = "none";
+			}
+		}
+		var valid_email = /.*?@.+\.\w{2}/;
+		function newContact(){
+			var removed_spaces = email_field.value.replace(/\s/g,"")
+			if(removed_spaces.length==0){
+				alert("You must add a valid email address")
+				return
+			}
+			var email_list = removed_spaces.split(",");
+			var not_valid = [];
+			for(var i=0; i < email_list.length; i++){
+				var email = email_list[i];
+				if(!valid_email.test(email)){
+					not_valid.push(email);
+				}else{
+					toggle_invite(true, 0, email, true);
+				}
+			}
+			if(not_valid.length > 0){
+				alert(not_valid.join(", ") + (not_valid[1] ? " are not valid email addresses" : " is not a valid email address"))
+				email_field.value = not_valid.join(", ");
+			}else{
+				email_field.value = "";
+			}
+		}
+		function sendInvitation(){
+			if(valid_email.test(email_field.value)){
+				var tmp_id = Stixy.tempID.get();
+				var tmp_str = '<div style="position:absolute;width:0px;height:0px;visibility:hidden">' +
+				  '<input checked="checked" id="contacts_temp_' + tmp_id + '" name="contacts[temp_' + tmp_id + ']" type="checkbox" value="' + email_field.value + '" />' +
+					'</div>'
+				Stixy.html.insert_bottom("invitation_list", tmp_str);
+			}
+			var elements = document.forms[0].elements;
+			function test(){
+				for(var i=0; i < elements.length; i++)
+					if(/^contacts\[/.test(elements[i].name) && elements[i].checked && elements[i].type == "checkbox" && (!elements[i].disabled)) return true;
+				return false;
+			}
+			if(test()){
+				Stixy.element.addClassName(document.body, "show-pending");
+				document.forms[0].submit();
+			}else{
+				alert('Please add one or more contacts to the list to invite. If you don\'t want to invite anyone, click "Cancel".');
+			}
+		}
+		Stixy.listen("ready", function(){
+			Stixy.events.observe(email_field,"focus", function(){ email_field_flag = true })
+			Stixy.events.observe(email_field,"blur",  function(){ email_field_flag = false })
+			Stixy.events.observe(document,"keypress", function(event){
+				if(event.keyCode=="13"&&email_field_flag==true){
+					event.preventDefault();
+					newContact()
+				}
+			})
+		});
+	//]]>
+	</script>
+</div>
+
+<div class="fixed-column-300">
+	<% if (@invite and !@invite.errors.empty?) or (@user_to_invite and !@user_to_invite.errors.empty?) %>
+	<div class="inline-message-error"><p>
+		We're sorry, we couldn't send the invitation.
+		<ul>
+		<% if @invite  %>
+		<% @invite.errors.each_full do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+		<% end %>
+		<% if @user_to_invite %>
+		<% @user_to_invite.errors.each_full do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+		<% end %>
+		</ul>
+		</p></div>
+	<% end %>
+	<h3>Your invitation will be sent to</h3>
+	<div id="invitation_list" class="invitation-list">
+		<div style="padding-bottom:10px">
+			To add somebody to your invitation, select among the contacts to the left.
+		</div>
+		<div class="no-data" id="empty_invite_list">(No contacts selected)</div>
+	</div>
+</div>
+<div class="fixed-gutter-30">&nbsp;</div>
+<div class="fixed-column-300">
+	<h3>Personal message</h3>
+	<div style="padding-bottom:6px">Add your own personal message to be sent along with your invitation.</div>
+	<%= text_area "msg", "text", :class => "personal-message" %>
+</div>
+
+<% end -%>
+
+</div>
+
+<% end %>
+<% 
+@buttons = "#{ link_to_function "Cancel", 'window.parent.Stixy.popup.close()', :button => {:type => false} } #{ link_to_function "Send invitation", 'sendInvitation()', :button => {:type => 'default'}, :style => "margin-left:10px;"  }"
+
+%>
