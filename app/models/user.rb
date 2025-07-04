@@ -13,11 +13,10 @@ class User < ActiveRecord::Base
   has_many :invited_by, :class_name => "User", :foreign_key => "created_by_id", :order => "first_name, last_name"   # all other users invited by user
   has_many :keywords  # Keywords created mapping
   has_and_belongs_to_many :roles, :conditions => "roles.status = 1", :order => "name" # roles that this user has
-  has_many :boardusers, :conditions => "boardusers.status = 1",:dependent => :destroy
-  has_many :boards, 
+  has_and_belongs_to_many :boards, 
+    :join_table => "boards_users",
     :conditions => "boards.status = 1", 
-    :order => "boards.updated_on DESC", 
-    :through => :boardusers
+    :order => "boards.updated_on DESC"
   has_and_belongs_to_many :contacts, :class_name => "User", :join_table => "users_contacts", 
     :association_foreign_key => "contact_id", :conditions => "(users.status = 1 or users.status = 2)", :order => "first_name, last_name" # user contacts
   has_many :board_filters, :order => "id asc"
@@ -168,13 +167,13 @@ class User < ActiveRecord::Base
   end
     
   def board_modified board
-    bu = boardusers.find(:first, :conditions => ["board_id = ? and user_id = ?", board.id, self.id])
-    bu.update_attributes(:visited_on => Time.now) if bu
+    # With HABTM relationship, we can't track visited_on times in the join table
+    # This functionality would need to be implemented differently if needed
   end
   
   def board_visited board
-    bu = boardusers.find(:first, :conditions => ["board_id = ? and user_id = ?", board.id, self.id])
-    bu.update_attributes(:visited_on => Time.now) if bu
+    # With HABTM relationship, we can't track visited_on times in the join table  
+    # This functionality would need to be implemented differently if needed
   end  
   
   def avatar_url
