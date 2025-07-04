@@ -14,6 +14,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'widgets/photos/after_upload', :controller => "/widgets/photo", :action => "after_upload"
   map.connect 'widgets/photos/metadata', :controller => "/widgets/photo", :action => "metadata"
   
+  # Explicit POST route for photo form submissions
+  map.connect 'widgets/photos', :controller => "/widgets/photo", :action => "index", :conditions => { :method => :post }
+  
   # Here's a sample route:
   # map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action

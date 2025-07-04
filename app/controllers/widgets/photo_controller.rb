@@ -3,12 +3,41 @@ class Widgets::PhotoController <  Widgets::AbstractFile
   skip_before_filter :login_required
 
   # RESTfull action, limit it to REST api only
-  skip_before_filter :supported_browsers, :login_from_cookie, :login_required, :session_is_lost, :only => [:create, :update, :thumb]
+  skip_before_filter :supported_browsers, :login_from_cookie, :login_required, :session_is_lost, :only => [:create, :update, :thumb, :index]
   verify :params => "photo", :method => "post", :only => :create, :redirect_to => '/'
+  
+  # Handle HTML form uploads (like document uploads)
+  def index
+    if request.post?
+      begin
+        # Handle HTML form photo upload similar to document upload
+        photo = ImageFile.new
+        photo.uploaded_data = params[:photo][:file] if params[:photo] && params[:photo][:file]
+        photo.session_id = session[:session_key] || session.session_id || 'temp_session'
+        photo.upload_id = params[:upload_id] || 'upload_' + Time.now.to_i.to_s
+        photo.user_id = 0  # Default user for development
+        photo.save!
+        
+        # Redirect to after_upload action on successful save
+        redirect_to "/widgets/photos/after_upload?file=#{photo.id}&board_id=#{params[:board_id]}" and return
+        
+      rescue => e
+        logger.error "Photo upload error: #{e.message}"
+        redirect_to "/widgets/photos/upload?board_id=#{params[:board_id]}&error=#{e.message}" and return
+      end
+    else
+      # Handle GET requests if needed
+      render :nothing => true, :status => 404
+    end
+  end
+  
   def create
     # An empty response is is expected with a 'Location' header value:
     respond_to do |format|
-      format.html { head :method_not_allowed }
+      format.html { 
+        # Redirect to index action for HTML form handling
+        index and return
+      }
       format.xml { 
         # if id attribute is present in remote call, then update method is called
         #  - to force using create, user remote_id
