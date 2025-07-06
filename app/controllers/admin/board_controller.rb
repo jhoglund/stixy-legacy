@@ -55,14 +55,14 @@ class Admin::BoardController < Admin::AdminApplicationController
   def add_user
     @board = Board.find(params[:id])
     user = User.find(params[:user])
-    user.boardusers.create(:board => @board, :created_by =>  current_user)
+    user.boardusers.create(:board => @board, :created_by => current_user, :visited_on => Time.now)
     redirect_to :action => "users", :id => @board
   end
   
   def remove_user
     @board = Board.find(params[:id])
-    @buser = @board.boardusers.find(:first, :conditions => ["user_id=?",params[:user]])
-    @buser.update_attributes(:status => Status::DISABLED, :updated_by =>  current_user)
+    @buser = @board.boardusers.find(:first, :conditions => ["user_id=?", params[:user]])
+    @buser.update_attributes(:status => Status::DISABLED, :updated_by => current_user)
     redirect_to :action => "users", :id => @board
   end
   
@@ -75,8 +75,8 @@ class Admin::BoardController < Admin::AdminApplicationController
   def create
     @users = User.find :all, nil, 'login ASC'
     board_keywords = Board.parse_kwrds(params)
-    params[:board][:keyword_ids] = board_keywords.select { | keyword | keyword.id }
-    params[:board][:user_ids] = Array[ current_user.id]
+    params[:board][:keyword_ids] = board_keywords.select { |keyword| keyword.id }
+    params[:board][:user_ids] = Array[current_user.id]
     @board = Board.new(params[:board])
 
     if @board.save
@@ -99,7 +99,7 @@ class Admin::BoardController < Admin::AdminApplicationController
     @board = Board.find(params[:id])
     pwd = params[:board][:pwd]
     if not pwd.nil? and not pwd.empty?
-      params[:board][:pwd] = User.sha1(pwd)
+      params[:board][:pwd] = User.sha1_no_salt(pwd)
     else
       params[:board][:pwd] = @board.pwd     
     end

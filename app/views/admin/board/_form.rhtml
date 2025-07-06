@@ -1,11 +1,10 @@
 <%= error_messages_for 'board' %>
-
 <table class="admin">
   <tr>
     <th>Name</th>
     <th>Value</th>
   </tr>
-  <%= hidden_field ("board", "id") if controller.action_name == 'edit' %>
+  <%= hidden_field("board", "id") if controller.action_name == 'edit' %>
   <tr class="dark">
     <td><label for="board_title">Title</label></td>
     <td><%= text_field('board', 'title', 'size' => 30, 'maxsize' => 200, "autocomplete" => "off")  %></td>
@@ -17,7 +16,7 @@
   <tr class="light">
     <td><label for="board_keywords_str">Keywords</label> <span style="font-size:10pt;">(comma separated)</span></td>
     <td>
-    <%= text_field('board', 'keywords_str', 'size' => 30, 'maxsize' => 600, "autocomplete" => "off", "value" => @board.keywords.collect{|k| k.tag }.join(", "))  %></td>
+      <%= text_field('board', 'keywords_str', 'size' => 30, 'maxsize' => 600, "autocomplete" => "off", "value" => @board.keywords.collect{|k| k.tag }.join(", "))  %></td>
   </tr>
   <tr class="light">
     <td><label for="board_visible">Visible</label></td>
@@ -40,12 +39,6 @@
     <td><%= check_box('board', 'status', {'id' => 'status'}, Status::ACTIVE, Status::DISABLED) %></td>
   </tr>
 </table>
-
-
-
-
-
-
 <!--
 
 <p><label for="board_title">Title</label><br/>
@@ -70,4 +63,3 @@
 <%= text_field 'board', 'pwd'  %></p>
 
 -->
-

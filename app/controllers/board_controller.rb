@@ -74,7 +74,7 @@ class BoardController < Stixyboard
             end
           end
         else
-          new_user, @user_to_invite = false, User.find_by_id(value)
+          new_user, @user_to_invite = false, User.find(value) rescue nil
         end
         @invite = @board.invites.build(
           :invitation_text => params[:msg][:text],
@@ -185,7 +185,7 @@ class BoardController < Stixyboard
   	#	end
   	#end
 
-	  user = (params[:email]) ? User.find_by_login(params[:email]) || TempUser.new(:id => params[:user_id], :email => params[:email]) : User.find(params[:user_id])
+	  user = (params[:email]) ? User.find(:first, :conditions => ["login = ?", params[:email]]) || TempUser.new(:id => params[:user_id], :email => params[:email]) : User.find(params[:user_id])
 	  javascript_array_response do |item|
 	    item << render_html_string(:partial => 'user_list', :object => user, :locals => {:appear_effect => false})
 	    item << (params[:new_contact] ? render_html_string(:partial => 'invite_select_list', :object => user, :locals => {:new_contact => true}) : false)
@@ -219,8 +219,21 @@ class BoardController < Stixyboard
   end
   
   def board_user_update_ajax
-    current_user.update_attributes(params[:attributes])
-    render :nothing => true
+    begin
+      if params[:attributes] && current_user
+        # Only allow safe attributes to be updated via AJAX
+        safe_attrs = [:first_name, :last_name, :description, :time_offset, :daylight_savings]
+        safe_attributes = {}
+        safe_attrs.each do |attr|
+          safe_attributes[attr] = params[:attributes][attr] if params[:attributes].has_key?(attr)
+        end
+        current_user.update_attributes(safe_attributes) unless safe_attributes.empty?
+      end
+      render :nothing => true
+    rescue => e
+      logger.error "Error in board_user_update_ajax: #{e.message}"
+      render :nothing => true
+    end
   end
 
 

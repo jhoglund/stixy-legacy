@@ -3,7 +3,8 @@
 class Admin::AdminApplicationController < ActionController::Base
   layout "layouts/decorator-admin", :except => :boards_ajax
   helper :application
-  helper "admin/application"
+  # Temporarily remove admin helper to fix loading issues
+  # helper Admin::ApplicationHelper
   include AuthenticatedSystem
   include StixyBrowser
   
@@ -33,12 +34,12 @@ class Admin::AdminApplicationController < ActionController::Base
     return paginator, page, page.items
   end
   
-  # override this from Permission.rb to protect all actions inherited from this controlle to admin only access
+  # override this from Permission.rb to protect all actions inherited from this controller to admin only access
   def authorized?
     # authorized if users roles contain map to admin user
     return true if current_user.in_role?(Role::ADMIN)
     # otherwise error
-    flash[:error] = "You are not authorized to access this resourse. please login as user with admin privilidges."
+    flash[:error] = "You are not authorized to access this resource. Please login as user with admin privileges."
     return false
   end
   

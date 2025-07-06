@@ -16,8 +16,8 @@ class Role < ActiveRecord::Base
   # Static vars, enums and getters/setters
   # --------------------------
   
-  # role ids enum
-  ANON, ADMIN, USER, CALENDAR_BETA_TESTER, CALENDAR_PENDING = 1, 2, 3, 4, 5
+  # role ids enum - Updated to match actual database IDs
+  ANON, ADMIN, USER, CALENDAR_BETA_TESTER, CALENDAR_PENDING = 4, 5, 6, 7, 8
   
   # Yes, No enum
   No, Yes = 0, 1

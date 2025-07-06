@@ -58,8 +58,22 @@ class Admin::BetaTesterController < Admin::AdminApplicationController
     @beta_tester = BetaTester.new
     @beta_tester.user = User.new
     if request.post?
-      @beta_tester = BetaTester.new(:comment => params[:beta_tester][:comment], :notify_only => params[:beta_tester][:notify_only], :created_by_id =>  current_user.id, :updated_by_id =>  current_user.id)
-      @beta_tester.user = User.create(:role_ids => [Role::USER], :pwd => "temp_beta_pwd", :login => params[:user][:login], :login_confirmation => params[:user][:login], :email => params[:user][:login], :status => Status::PENDING, :created_by_id =>  current_user.id, :updated_by_id =>  current_user.id)
+      @beta_tester = BetaTester.new(
+        :comment => params[:beta_tester][:comment], 
+        :notify_only => params[:beta_tester][:notify_only], 
+        :created_by_id => current_user.id, 
+        :updated_by_id => current_user.id
+      )
+      @beta_tester.user = User.create(
+        :role_ids => [Role::USER], 
+        :pwd => "temp_beta_pwd", 
+        :login => params[:user][:login], 
+        :login_confirmation => params[:user][:login], 
+        :email => params[:user][:login], 
+        :status => Status::PENDING, 
+        :created_by_id => current_user.id, 
+        :updated_by_id => current_user.id
+      )
       if @beta_tester.save
         flash[:notice] = 'Beta tester was successfully created.'
         redirect_to :action => 'list'
@@ -75,14 +89,24 @@ class Admin::BetaTesterController < Admin::AdminApplicationController
   end
 
   def update
-   @beta_tester = BetaTester.find(params[:id])
-   if @beta_tester.update_attributes(:comment => params[:beta_tester][:comment], :notify_only => params[:beta_tester][:notify_only], :updated_by_id =>  current_user.id) and
-     @beta_tester.user.update_attributes(:pwd => "temp_beta_pwd", :login => params[:user][:login], :login_confirmation => params[:user][:login], :email => params[:user][:login], :updated_by_id =>  current_user.id)
-     flash[:notice] = 'User was successfully updated.'
-     redirect_to :action => 'show', :id => @beta_tester
-   else
-     render :action => 'edit'
-   end
+    @beta_tester = BetaTester.find(params[:id])
+    if @beta_tester.update_attributes(
+        :comment => params[:beta_tester][:comment], 
+        :notify_only => params[:beta_tester][:notify_only], 
+        :updated_by_id => current_user.id
+      ) and
+      @beta_tester.user.update_attributes(
+        :pwd => "temp_beta_pwd", 
+        :login => params[:user][:login], 
+        :login_confirmation => params[:user][:login], 
+        :email => params[:user][:login], 
+        :updated_by_id => current_user.id
+      )
+      flash[:notice] = 'User was successfully updated.'
+      redirect_to :action => 'show', :id => @beta_tester
+    else
+      render :action => 'edit'
+    end
   end
   
   def destroy

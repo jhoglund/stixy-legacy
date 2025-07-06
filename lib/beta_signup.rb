@@ -10,9 +10,9 @@ MESSAGE
 module BetaSignup
   
   def beta_invite_mail beta_tester=nil, invite_user=nil, board=nil, message=nil
-    unless @invite = Invite.find_by_accepted_user_id_and_inviter_user_id(beta_tester.user.id, invite_user.id)
+    unless @invite = Invite.find(:first, :conditions => ["accepted_user_id = ? AND inviter_user_id = ?", beta_tester.user.id, invite_user.id])
       @board = board.copy
-      @board.boardusers.create!(:user => invite_user)
+      @board.boardusers.create!(:user => invite_user, :created_by => invite_user, :updated_by => invite_user, :visited_on => Time.now)
       @invite = @board.invites.build(:updated_by =>  invite_user, :accepted_user => beta_tester.user)
       @invite.invitation_text = message if message
       ActiveRecord::Base.silence { Notifier::deliver_invite(@invite,  invite_user)} if @invite.save!

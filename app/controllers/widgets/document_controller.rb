@@ -49,8 +49,8 @@ class Widgets::DocumentController < Widgets::AbstractFile
   def file
     begin
       for_authorized_board do |board|
-        if widget = WidgetDocument.find_by_id_and_board_id((params[:widget_id]||0), board.id)
-          document = widget.documents.find_by_id(params[:document_id]) # widget has been saved 
+        if widget = WidgetDocument.find(:first, :conditions => ["id = ? AND board_id = ?", (params[:widget_id]||0), board.id])
+          document = widget.documents.find(params[:document_id]) rescue nil # widget has been saved 
         end
         unless document
           document = DocumentFile.find_temp(params[:document_id], params[:upload_id], session[:session_key]) # widget has not been saved

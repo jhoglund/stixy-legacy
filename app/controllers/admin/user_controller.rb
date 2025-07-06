@@ -76,8 +76,8 @@ class Admin::UserController < Admin::AdminApplicationController
       @user = User.new(params[:user])
       # do the user registration
       @user.terms_of_service = "1"
-      @user.created_by =  current_user
-      @user.updated_by =  current_user
+      @user.created_by = current_user
+      @user.updated_by = current_user
       if @user.save
         flash[:notice] = 'User was successfully created.'
         redirect_to :action => 'list'
@@ -95,9 +95,14 @@ class Admin::UserController < Admin::AdminApplicationController
   def update
     @allroles = find_all_roles
     @user = User.find(params[:id])
-    @user.empty_password = true
-    @user.updated_by_id =  current_user.id
+    @user.updated_by_id = current_user.id
     @user.roles.clear if params[:user][:role_id] == nil
+    
+    # Handle password updates - only update if password is provided
+    if !params[:user][:pwd].blank?
+      @user.password_required = true
+    end
+    
     if @user.update_attributes(params[:user])
       flash[:notice] = 'User was successfully updated.'
       redirect_to :action => 'show', :id => @user

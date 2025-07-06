@@ -24,7 +24,7 @@ class BetaTester < ActiveRecord::Base
     end
     
     def find_by_user_login login=nil
-      find(:first, :conditions => ["user_id = ?", User.find_by_login(login).id]) rescue nil
+      find(:first, :conditions => ["user_id = ?", User.find(:first, :conditions => ["login = ?", login]).id]) rescue nil
     end
     
     def accepted_invites

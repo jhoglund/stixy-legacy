@@ -11,6 +11,8 @@ class Boarduser < ActiveRecord::Base
   protected
   
   def before_create
-    write_attribute("visited_on", Time.now)
+    self.visited_on = Time.now if self.visited_on.nil?
+    self.created_on = Time.now if self.created_on.nil?
+    self.updated_on = Time.now if self.updated_on.nil?
   end
 end

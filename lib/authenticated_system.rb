@@ -14,7 +14,7 @@ module AuthenticatedSystem
     end
     
     def get_user
-      (session[:user_id] && User.find_by_id(session[:user_id])) || get_default
+      (session[:user_id] && User.find(session[:user_id]) rescue nil) || get_default
     end
     
     def get_default
@@ -151,7 +151,7 @@ module AuthenticatedSystem
     # cookie and log the user back in if apropriate
     def login_from_cookie
       return unless cookies[:auth_token] && !logged_in?
-      user = User.find_by_remember_token(cookies[:auth_token])
+      user = User.find(:first, :conditions => ["remember_token = ?", cookies[:auth_token]]) rescue nil
       if user && user.remember_token?
         user.remember_me
         self.current_user = user

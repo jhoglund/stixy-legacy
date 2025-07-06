@@ -94,7 +94,7 @@ class ApplicationController < ActionController::Base
   # The session_id and the authorized key are read in public/all/default/002_stixy_init.js
   def set_js_cookies
     cookies[:stixy_sid] = session[:session_key]
-    cookies[:stixy_authorized] = (current_user.authorized?).to_s
+    cookies[:stixy_authorized] = (logged_in? && current_user.authorized?).to_s
   end
   
   def set_session_id
@@ -132,7 +132,7 @@ class ApplicationController < ActionController::Base
     
     # Simplified authorization for development - just find the board if it exists without conditions
     # TODO: Implement proper user-board authorization when user system is fully set up
-    board = Board.find_by_id(id) rescue nil
+          board = Board.find(id) rescue nil
     return board if board
     
     # Return empty board if not found

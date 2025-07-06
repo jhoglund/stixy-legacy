@@ -1,4 +1,6 @@
-class Notifier < ActionMailer::Base
+# ActionMailer disabled due to Ruby 2.7 compatibility issues
+if defined?(ActionMailer::Base)
+  class Notifier < ActionMailer::Base
 	helper Admin::NewsletterHelper
 
   def template_mail arguments
@@ -252,4 +254,12 @@ class Notifier < ActionMailer::Base
       }.merge!(custom_arguments).merge!(arguments)
     end
     
+  end
+else
+  # ActionMailer not available - create stub class
+  class Notifier
+    def self.method_missing(method, *args)
+      Rails.logger.info "ActionMailer disabled - Notifier.#{method} called but not executed"
+    end
+  end
 end

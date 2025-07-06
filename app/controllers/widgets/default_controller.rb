@@ -37,8 +37,7 @@ class Widgets::DefaultController < Stixyboard
             widget_data = clean_up(data.last)
             widget_instance_id = data.first.match(/widget_(\d*)/)[1] rescue nil
             widget_type = Widget.find(widget_data[:widget_id], :select => :name).name
-            widget_class = Object.const_get("Widget#{widget_type}")
-            widget = widget_class.find_for_user(widget_instance_id, current_user.id) unless widget_instance_id.nil?
+            widget = WidgetInstance.find_for_user(widget_instance_id, current_user.id) unless widget_instance_id.nil? || widget_instance_id.empty?
             if widget and widget_data[:remove]=='true'
               widget.disable
             elsif widget_data[:clone_to] and clone_to = get_authorized_and_editable_board(widget_data[:clone_to])
@@ -50,7 +49,7 @@ class Widgets::DefaultController < Stixyboard
               end
             else
               if widget.nil?
-                widget = widget_class.new(:widget_name => widget_class.name)
+                widget = WidgetInstance.new(:widget_id => widget_data[:widget_id], :widget_name => widget_type)
                 @board.widget_instances << widget
               end
               clean_up_zindex(widget_data)

@@ -1,4 +1,4 @@
 <% index=1000000 %>
-<% @board.widgets.each do |widget_instance| %> 
-    <%=  render(:partial => "/widgets/#{widget_instance.widget.name.downcase}/widget", :object => widget_instance, :locals => {:index => index+=1}) %>
+<% @board.widget_instances.find(:all, :conditions => "status = 1", :order => "zindex", :include => [:widget_instance_styles, :widget_instance_texts]).each do |widget_instance| %>
+  <%=  render(:partial => "/widgets/#{widget_instance.widget.name.downcase}/widget", :object => widget_instance, :locals => {:index => index+=1}) %>
 <% end %>

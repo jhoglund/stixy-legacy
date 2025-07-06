@@ -9,7 +9,58 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 2) do
+ActiveRecord::Schema.define(:version => 20091112135503) do
+
+  create_table "abstract_files", :force => true do |t|
+    t.integer  "user_id",                    :default => 0,  :null => false
+    t.string   "type",         :limit => 20, :default => "", :null => false
+    t.integer  "size",                       :default => 0,  :null => false
+    t.integer  "width",                      :default => 0,  :null => false
+    t.integer  "height",                     :default => 0,  :null => false
+    t.integer  "filter",                     :default => 0,  :null => false
+    t.integer  "rotation",                   :default => 0,  :null => false
+    t.string   "content_type",               :default => "", :null => false
+    t.string   "filename",                   :default => "", :null => false
+    t.string   "thumbnail",    :limit => 20
+    t.integer  "parent_id"
+    t.string   "session_id",   :limit => 32
+    t.string   "upload_id"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
+
+  add_index "abstract_files", ["user_id"], :name => "index_abstract_files_on_user_id", :unique => true
+  add_index "abstract_files", ["session_id"], :name => "index_abstract_files_on_session_id", :unique => true
+  add_index "abstract_files", ["upload_id", "session_id"], :name => "index_abstract_files_on_upload_id_and_session_id", :unique => true
+
+  create_table "activities", :force => true do |t|
+    t.datetime "start"
+    t.datetime "stop"
+    t.integer  "activatable_id"
+    t.string   "activatable_type"
+    t.integer  "unit",             :default => 0
+    t.integer  "frequency",        :default => 1
+    t.integer  "recurring_status", :default => 0
+    t.integer  "status",           :default => 1
+  end
+
+  create_table "beta_testers", :force => true do |t|
+    t.integer  "user_id",       :default => 1, :null => false
+    t.text     "comment"
+    t.datetime "created_on",                   :null => false
+    t.datetime "updated_on",                   :null => false
+    t.integer  "created_by_id", :default => 0, :null => false
+    t.integer  "updated_by_id", :default => 0, :null => false
+    t.integer  "notify_only",   :default => 0, :null => false
+    t.integer  "status",        :default => 1, :null => false
+  end
+
+  create_table "board_filters", :force => true do |t|
+    t.string  "filter",  :default => "", :null => false
+    t.integer "user_id",                 :null => false
+  end
+
+  add_index "board_filters", ["user_id", "filter"], :name => "index_board_filters_on_user_id_and_filter", :unique => true
 
   create_table "boards", :force => true do |t|
     t.string   "title",                       :default => "", :null => false
@@ -24,10 +75,12 @@ ActiveRecord::Schema.define(:version => 2) do
     t.datetime "updated_on",                                  :null => false
     t.integer  "created_by_id",               :default => 1,  :null => false
     t.integer  "updated_by_id",               :default => 1,  :null => false
+    t.integer  "left",                        :default => 0
+    t.integer  "top",                         :default => 0
   end
 
-  add_index "boards", ["status", "created_by_id", "updated_by_id"], :name => "boards_status_index", :unique => true
   add_index "boards", ["title"], :name => "boards_title_index", :unique => true
+  add_index "boards", ["status", "created_by_id", "updated_by_id"], :name => "boards_status_index", :unique => true
 
   create_table "boards_keywords", :id => false, :force => true do |t|
     t.integer "board_id",   :default => 0, :null => false
@@ -50,17 +103,36 @@ ActiveRecord::Schema.define(:version => 2) do
 
   add_index "boards_widgets", ["widget_id", "board_id"], :name => "boards_widgets_widget_id_index", :unique => true
 
+  create_table "boardusers", :force => true do |t|
+    t.integer  "board_id",                     :null => false
+    t.integer  "user_id",                      :null => false
+    t.integer  "status",        :default => 1, :null => false
+    t.datetime "created_on",                   :null => false
+    t.datetime "updated_on",                   :null => false
+    t.integer  "created_by_id",                :null => false
+    t.datetime "visited_on",                   :null => false
+  end
+
+  add_index "boardusers", ["board_id"], :name => "index_boardusers_on_board_id", :unique => true
+  add_index "boardusers", ["user_id"], :name => "index_boardusers_on_user_id", :unique => true
+  add_index "boardusers", ["status"], :name => "index_boardusers_on_status", :unique => true
+
+  create_table "emails", :force => true do |t|
+  end
+
   create_table "invites", :force => true do |t|
-    t.integer "board_id",                      :default => 0, :null => false
-    t.integer "inviter_user_id",               :default => 0, :null => false
-    t.integer "accepted_user_id"
-    t.string  "nick_name"
-    t.string  "first_name"
-    t.string  "last_name"
-    t.string  "email"
-    t.string  "reference_token"
-    t.text    "invitation_text"
-    t.integer "status",           :limit => 4, :default => 0, :null => false
+    t.integer  "board_id",                      :default => 0, :null => false
+    t.integer  "inviter_user_id",               :default => 0, :null => false
+    t.integer  "accepted_user_id"
+    t.string   "nick_name"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "reference_token"
+    t.text     "invitation_text"
+    t.integer  "status",           :limit => 4, :default => 0, :null => false
+    t.datetime "updated_on"
+    t.datetime "created_on"
   end
 
   add_index "invites", ["board_id", "inviter_user_id", "accepted_user_id", "status"], :name => "invites_board_id_index", :unique => true
@@ -112,6 +184,12 @@ ActiveRecord::Schema.define(:version => 2) do
 
   add_index "library_photos_widget_instances", ["library_photo_id", "widget_instance_id"], :name => "library_photos_widget_instances_library_photo_id_index", :unique => true
 
+  create_table "members", :force => true do |t|
+    t.integer "user_id"
+    t.integer "membershipable_id"
+    t.string  "membershipable_type"
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name",          :limit => 30, :default => "", :null => false
     t.integer  "status",        :limit => 4,  :default => 0,  :null => false
@@ -130,6 +208,16 @@ ActiveRecord::Schema.define(:version => 2) do
 
   add_index "roles_users", ["user_id", "role_id"], :name => "roles_users_user_id_index", :unique => true
 
+  create_table "taggings", :force => true do |t|
+    t.integer "taggable_id"
+    t.integer "tag_id"
+    t.string  "taggable_type"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "user_images", :force => true do |t|
     t.integer "user_id",      :default => 0,  :null => false
     t.string  "content_type", :default => "", :null => false
@@ -138,38 +226,22 @@ ActiveRecord::Schema.define(:version => 2) do
     t.binary  "image"
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "login",                                                   :null => false
-    t.string   "email",                                                   :null => false
-    t.string   "pwd",                        :limit => 60
-    t.string   "crypted_password",           :limit => 40
-    t.string   "salt",                       :limit => 40
-    t.string   "remember_token"
-    t.datetime "remember_token_expires_at"
-    t.string   "nick_name"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.text     "description"
-    t.datetime "last_login_date"
-    t.datetime "created_on",                                              :null => false
-    t.datetime "updated_on",                                              :null => false
-    t.integer  "created_by_id",                            :default => 0, :null => false
-    t.integer  "updated_by_id",                            :default => 0, :null => false
-    t.integer  "status",                     :limit => 4,  :default => 1, :null => false
-    t.string   "address"
-    t.string   "city"
-    t.string   "state",                      :limit => 60
-    t.string   "zip",                        :limit => 20
-    t.string   "country",                    :limit => 60
-    t.string   "phone",                      :limit => 60
-    t.string   "mobile_phone",               :limit => 60
-    t.integer  "pref_enable_grag_drop",      :limit => 4,  :default => 0
-    t.integer  "pref_send_email_and_mobile", :limit => 4,  :default => 0
-    t.integer  "pref_photo_auto_upload",     :limit => 4,  :default => 0
+  create_table "user_notifications", :force => true do |t|
+    t.integer  "user_id",                           :null => false
+    t.integer  "widget_instance_id",                :null => false
+    t.datetime "time",                              :null => false
+    t.integer  "created_by_id",      :default => 1, :null => false
+    t.integer  "updated_by_id",      :default => 1, :null => false
+    t.datetime "created_on",                        :null => false
+    t.datetime "updated_on",                        :null => false
+    t.integer  "status",             :default => 0, :null => false
   end
 
-  add_index "users", ["status"], :name => "users_status_index", :unique => true
-  add_index "users", ["login"], :name => "users_login_index", :unique => true
+  create_table "user_tags", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "user_id"
+    t.datetime "created_on"
+  end
 
   create_table "users_contacts", :id => false, :force => true do |t|
     t.integer "user_id",    :default => 0, :null => false
@@ -192,22 +264,31 @@ ActiveRecord::Schema.define(:version => 2) do
   end
 
   create_table "widget_instances", :force => true do |t|
-    t.integer  "board_id",      :default => 0,   :null => false
-    t.integer  "widget_id",     :default => 0,   :null => false
-    t.integer  "top",           :default => 100
-    t.integer  "left",          :default => 100
+    t.integer  "board_id",                    :default => 0,   :null => false
+    t.integer  "widget_id",                   :default => 0,   :null => false
+    t.integer  "top",                         :default => 100
+    t.integer  "left",                        :default => 100
     t.integer  "width"
     t.integer  "height"
-    t.float    "zindex",        :default => 0.0, :null => false
-    t.integer  "auto_front",    :default => 0,   :null => false
-    t.integer  "opacity",       :default => 1,   :null => false
-    t.integer  "opacity_value", :default => 100, :null => false
-    t.integer  "proportional",  :default => 0,   :null => false
-    t.integer  "shadow",        :default => 1,   :null => false
-    t.integer  "created_by_id", :default => 0,   :null => false
-    t.integer  "updated_by_id", :default => 0,   :null => false
-    t.datetime "created_on",                     :null => false
-    t.datetime "updated_on",                     :null => false
+    t.float    "zindex",                      :default => 0.0, :null => false
+    t.integer  "auto_front",                  :default => 0,   :null => false
+    t.integer  "opacity",                     :default => 1,   :null => false
+    t.integer  "opacity_value",               :default => 100, :null => false
+    t.integer  "proportional",                :default => 0,   :null => false
+    t.integer  "shadow",                      :default => 1,   :null => false
+    t.integer  "created_by_id",               :default => 0,   :null => false
+    t.integer  "updated_by_id",               :default => 0,   :null => false
+    t.datetime "created_on",                                   :null => false
+    t.datetime "updated_on",                                   :null => false
+    t.integer  "locked",                      :default => 0,   :null => false
+    t.integer  "status",                      :default => 1,   :null => false
+    t.string   "widget_name",   :limit => 32, :default => ""
+  end
+
+  create_table "widget_members", :force => true do |t|
+    t.integer "widget_instance_id"
+    t.integer "widget_membership_id"
+    t.string  "widget_membership_type"
   end
 
   create_table "widgets", :force => true do |t|

@@ -35,9 +35,9 @@ class Activity < ActiveRecord::Base
     m = (y * 12) + (l.month - s.month) + (s.day < l.day ? 1 : 0)                
     d = (l - s).to_i
     n = case u 
-        when YEAR  : ((s >> (m - (m % -(f * 12)))) - s).to_i
-        when MONTH : ((s >> (m - (m % -f))) - s).to_i
-        when WEEK  : ((s +  (d - (d % -(f * 7)))) - s).to_i
+        when YEAR  then ((s >> (m - (m % -(f * 12)))) - s).to_i
+        when MONTH then ((s >> (m - (m % -f))) - s).to_i
+        when WEEK  then ((s +  (d - (d % -(f * 7)))) - s).to_i
         else         ((s +  (d - (d % -f))) - s).to_i
         end
     time + ([n,0].max*60*60*24)
@@ -46,9 +46,9 @@ class Activity < ActiveRecord::Base
   def self.next_recurrence time=Time.now, f=1, u=DAY
     s = time.to_d
     n = case u 
-        when YEAR  : (s >> (f * 12)) - s
-        when MONTH : (s >> (f)) - s
-        when WEEK  : (f * 7)
+        when YEAR  then (s >> (f * 12)) - s
+        when MONTH then (s >> (f)) - s
+        when WEEK  then (f * 7)
         else         (f)
         end
     time + (n*60*60*24)

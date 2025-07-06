@@ -16,15 +16,21 @@ config.action_controller.perform_caching             = false
 # Tell ActionMailer not to deliver emails to the real world.
 # The :test delivery method accumulates sent emails in the
 # ActionMailer::Base.deliveries array.
-ActionMailer::Base.smtp_settings = {
-  :address  => "mailout.easydns.com",
-  :port  => 587, 
-  :domain  => "stixy.com",
-  :user_name  => "stixy.com",
-  :password  => 'swb34Hs',
-  :authentication  => :plain,
-}
-ActionMailer::Base.delivery_method = :test
+# ActionMailer disabled due to Ruby 2.7 compatibility issues
+begin
+  ActionMailer::Base.smtp_settings = {
+    :address  => "mailout.easydns.com",
+    :port  => 587, 
+    :domain  => "stixy.com",
+    :user_name  => "stixy.com",
+    :password  => 'swb34Hs',
+    :authentication  => :plain,
+  }
+  ActionMailer::Base.delivery_method = :test
+rescue NameError => e
+  # ActionMailer not available in Ruby 2.7 environment
+  puts "ActionMailer disabled to avoid Ruby 2.7 compatibility issues"
+end
 
 SERVER = "localhost.com"
 HELPDESK_SERVER = "helpdesk.localhost.com"

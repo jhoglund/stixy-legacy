@@ -13,10 +13,8 @@ class User < ActiveRecord::Base
   has_many :invited_by, :class_name => "User", :foreign_key => "created_by_id", :order => "first_name, last_name"   # all other users invited by user
   has_many :keywords  # Keywords created mapping
   has_and_belongs_to_many :roles, :conditions => "roles.status = 1", :order => "name" # roles that this user has
-  has_and_belongs_to_many :boards, 
-    :join_table => "boards_users",
-    :conditions => "boards.status = 1", 
-    :order => "boards.updated_on DESC"
+  has_many :boardusers, :conditions => "boardusers.status = 1"
+  has_many :boards, :through => :boardusers, :source => :board, :conditions => "boards.status = 1", :order => "boards.updated_on DESC"
   has_and_belongs_to_many :contacts, :class_name => "User", :join_table => "users_contacts", 
     :association_foreign_key => "contact_id", :conditions => "(users.status = 1 or users.status = 2)", :order => "first_name, last_name" # user contacts
   has_many :board_filters, :order => "id asc"
@@ -97,16 +95,17 @@ class User < ActiveRecord::Base
   
   def adjusted_time(time=Time.now, daylight_saving=true)
     time = to_time(time)
-    time + read_attribute(:time_offset) + (daylight_saving ? (read_attribute(:daylight_savings)*3600) : 0)
+    time + read_attribute(:time_offset).to_f + (daylight_saving ? (read_attribute(:daylight_savings).to_i*3600) : 0)
   end
   
   def reset_time(time=Time.now, daylight_saving=true)
     time = to_time(time)
-    time - read_attribute(:time_offset) - (daylight_saving ? (read_attribute(:daylight_savings)*3600) : 0)
+    time - read_attribute(:time_offset).to_f - (daylight_saving ? (read_attribute(:daylight_savings).to_i*3600) : 0)
   end
   
   def last_login_date
     date = read_attribute(:last_login_date)
+    return nil if date.nil?
     (date < Time.parse("January 01, 2000")) ? nil : date
   end
 
@@ -277,7 +276,7 @@ class User < ActiveRecord::Base
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
-    u = find_by_login_and_status(login,Status::ACTIVE) # need to get the salt
+    u = find(:first, :conditions => ["login = ? AND status > 0", login]) # need to get the salt
     u && u.authenticated?(password) ? u : nil
   end
 
@@ -319,7 +318,7 @@ class User < ActiveRecord::Base
   protected
 		# Validate uniqueness of login exept users that are canceled
 	 def validate
-	   user_using_login = User.find_by_login(self.login, :conditions => ["status != ?", Status::CANCELED])
+	         user_using_login = User.find(:first, :conditions => ["login = ? AND status != ?", self.login, Status::CANCELED])
 	   if user_using_login && user_using_login != self
 	     errors.add :login, ErrorMessages::Login::USED
 	     return false
@@ -360,3 +359,6 @@ class User < ActiveRecord::Base
       !login_required.blank?
     end    
 end
+# Test comment
+# Test comment Sun Jul  6 10:19:39 CEST 2025
+# Test comment Sun Jul  6 10:21:44 CEST 2025

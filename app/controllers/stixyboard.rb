@@ -196,6 +196,7 @@ class Stixyboard < ApplicationController
   end
   
   def stixyboard_base id=0
+    # Note: current_user.boards already has "boards.status = 1" condition built in
     @board = current_user.boards.find(params[:id]||id) rescue last_visited_board
     list_of_boards_compact
     current_user.board_visited(@board) if params[:id] and current_user.authorized?
@@ -203,9 +204,11 @@ class Stixyboard < ApplicationController
   
   def create_board(options={})
     return Board.new if create_temp_board?
-    @board = Board.new({:status => Status::ACTIVE}.merge(options))
+    # Generate a unique title if none provided
+    default_title = options[:title] || "New Board #{Time.now.strftime('%Y%m%d_%H%M%S_%L')}_#{rand(999)}"
+    @board = Board.new({:status => Status::ACTIVE, :title => default_title}.merge(options))
     @board.created_by = @board.updated_by = current_user
-    @board.boardusers.build(:user => current_user)
+    @board.boardusers.build(:user => current_user, :created_by => current_user, :visited_on => Time.now)
     @board.is_new = true
     @board.save
     current_user.board_visited(@board)
@@ -217,8 +220,14 @@ class Stixyboard < ApplicationController
   end
   
   def create_welcome_board
-    @board = create_board
-    @board.update_attribute(:title, "Welcome to Stixy")
+    welcome_title = "Welcome to Stixy"
+    # Check if a board with this title already exists for this user
+    # Note: current_user.boards already has "boards.status = 1" condition, so no additional condition needed
+    existing_welcome = current_user.boards.find(:first, :conditions => ["title = ?", welcome_title]) rescue nil
+    if existing_welcome
+      welcome_title = "Welcome to Stixy #{Time.now.strftime('%Y%m%d_%H%M%S_%L')}_#{rand(999)}"
+    end
+    @board = create_board(:title => welcome_title)
     @board
   end
   
@@ -241,8 +250,10 @@ class Stixyboard < ApplicationController
     params[:page_size] = params[:page_size].blank? ? 10 : params[:page_size].to_i 
     begin
       @board_filters = user_board_filters if include_filters
-      @pages = ::Paginator.new(current_user.boards.count_for_list(@board_filters),params[:page_size] ) do |offset, per_page|
-        boards = current_user.boards.find_for_list(per_page, offset, sort_clause, @board_filters)
+      # Use standard association methods instead of custom class methods to avoid SQL ambiguity
+      total_count = current_user.boards.count
+      @pages = ::Paginator.new(total_count, params[:page_size]) do |offset, per_page|
+        boards = current_user.boards.find(:all, :limit => per_page, :offset => offset, :order => sort_clause)
         if boards.empty?
           debug_logger{|log| log.error "Error: Empty set #{Time.now}. User ID: #{current_user.id}. @board_filters => \"#{@board_filters}\"; @board_filters.blank? =>  #{@board_filters.blank?}; @board_filters.class => #{@board_filters.class}" }
         end
@@ -270,11 +281,23 @@ class Stixyboard < ApplicationController
     begin
       if current_user.authorized?
         last = current_user.boardusers.find(:first, :conditions => ["status = ?", Status::ACTIVE], :order => "visited_on desc") 
-        return last.board
+        return last.board if last
+        # If no last visited board, find any board the user has access to
+        # Note: current_user.boards already has "boards.status = 1" condition, so no additional condition needed
+        first_board = current_user.boards.find(:first)
+        return first_board if first_board
+        # Only create a board if the user has no boards at all
+        create_board
       else
         Board.new
       end
     rescue => msg
+      # Don't create a new board on errors, try to find any existing board first
+      if current_user.authorized?
+        # Note: current_user.boards already has "boards.status = 1" condition, so no additional condition needed
+        existing_board = current_user.boards.find(:first)
+        return existing_board if existing_board
+      end
       create_board
     end
   end

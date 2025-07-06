@@ -347,3 +347,4 @@ class UserTest < Test::Unit::TestCase
       User.create({ :login => 'quire@example.com', :login_confirmation => 'quire@example.com', :pwd => 'quiretest', :pwd_confirmation => 'quiretest', :role_ids => [Role::USER], :description => "" }.merge(options))
     end
 end
+# Another test comment

@@ -64,9 +64,9 @@ class Invite < ActiveRecord::Base
   
   # Trigger sharing of the board to the accepted user when all coditions are met
   def join_board
-    if accepted_user != nil
+    if accepted_user != nil && accepted_user.id != nil
       bu = accepted_user.boardusers.find(:first, :conditions => ["board_id = ?", board.id])
-      bu ||= accepted_user.boardusers.create(:board => board, :created_by => accepted_user)
+      bu ||= accepted_user.boardusers.create(:board => board, :created_by => accepted_user, :updated_by => accepted_user, :visited_on => Time.now)
       bu.update_attributes(:status => Status::ACTIVE, :updated_by => accepted_user)
       accepted_user.add_contact(inviter_user)
     end

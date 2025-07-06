@@ -50,7 +50,7 @@ class AbstractFile < ActiveRecord::Base
     def self.find_temp id=0, upload_id=0, session_id=0
       # this strange thing is actually a security precaution to retrive files 
       # during widget creation before the widget was saved yet
-      self.find_by_id_and_upload_id_and_session_id(id, upload_id, session_id)
+      self.find(:first, :conditions => ["id = ? AND upload_id = ? AND session_id = ?", id, upload_id, session_id])
     end
     
     def self.encode str

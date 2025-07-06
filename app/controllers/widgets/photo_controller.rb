@@ -130,7 +130,7 @@ class Widgets::PhotoController <  Widgets::AbstractFile
   def metadata
     # Temporarily bypass authorization for development
     # for_authorized_board do |board|
-    original = ImageFile.find_by_upload_id_and_session_id(params[:id], session[:session_key])
+    original = ImageFile.find(:first, :conditions => ["upload_id = ? AND session_id = ?", params[:id], session[:session_key]])
     headers["Content-Type"] = "text/xml; charset=utf-8"
     
     # Use board_id parameter, handle arrays
@@ -169,8 +169,8 @@ class Widgets::PhotoController <  Widgets::AbstractFile
       board_id = board_id.is_a?(Array) ? board_id.first : board_id
       board = board_id ? get_authorized_board(board_id) : Board.new
       
-      if widget = WidgetPhoto.find_by_id_and_board_id((params[:widget_id]||0), board.id)
-        image = widget.photos.find_by_id(params[:photo_id]) # widget has been saved 
+      if widget = WidgetPhoto.find(:first, :conditions => ["id = ? AND board_id = ?", (params[:widget_id]||0), board.id])
+        image = widget.photos.find(params[:photo_id]) rescue nil # widget has been saved 
       end
       unless image
         image = ImageFile.find_temp(params[:photo_id], params[:upload_id], session[:session_key]) # widget has not been saved

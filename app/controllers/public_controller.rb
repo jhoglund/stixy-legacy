@@ -27,12 +27,20 @@ class PublicController < Stixyboard
     def signin
       login_user do |success|
         if success
-          render_popup_result do |result|
-            result.load << "if(Global.ui.canvas_content) top.Stixy.html.replace(Global.ui.canvas_content, '');"
-            result.load << "top.location.replace('/');"
-          end and return
+          if params[:popup]
+            render_popup_result do |result|
+              result.load << "if(Global.ui.canvas_content) top.Stixy.html.replace(Global.ui.canvas_content, '');"
+              result.load << "top.location.replace('/');"
+            end and return
+          else
+            redirect_to "/" and return
+          end
         else
-          render_as_popup do
+          if params[:popup]
+            render_as_popup do
+              render :layout => "decorator-public" and return
+            end
+          else
             render :layout => "decorator-public" and return
           end
         end
@@ -70,7 +78,7 @@ class PublicController < Stixyboard
         # If so, the user will still have a status of PENDING. Then, update the user instead of create a new user
         # This is not secure since anyone could register in the name of someone else and get a hold of that persons invites
         # For this to be secure we need to implement a confirmation my mail system for new signups.
-        @new_user = User.find_by_login_and_status(params[:user][:login], Status::PENDING) if params[:user]
+        @new_user = User.find(:first, :conditions => ["login = ? AND status = ?", params[:user][:login], Status::PENDING]) if params[:user]
         @new_user ||= User.new
         @new_user.attributes = params[:user]
         # do the user registration
@@ -264,23 +272,30 @@ class PublicController < Stixyboard
       begin
         signin_user
         if request.post?
+          logger.info "POST request detected, checking temp board existence"
           if temp_board_exist?
+            logger.info "Temp board exists, removing and creating new board"
             remove_temp_board
             @board = create_board
           else
+            logger.info "No temp board, getting last visited board"
       	    @board = last_visited_board
       	  end
+          logger.info "About to yield true"
           yield true
         end
-      rescue
+      rescue => e
+        logger.error "Exception in login_user: #{e.message}"
+        logger.error e.backtrace.join("\n")
       end
+      logger.info "About to yield false"
       yield false
     end
     
     def reset_password
       @mail = ""
       if request.post?
-        user = User.find_by_login(params[:user][:login])
+        user = User.find(:first, :conditions => ["login = ?", params[:user][:login]])
         if (!user) 
           @mail = params[:user][:login]
           flash[:signin_missmatch] = "Sorry, we couldn't find a user with the e-mail address #{@mail}"
@@ -301,14 +316,16 @@ class PublicController < Stixyboard
     end
         
     def signin_user
-      @user = User.new(params[:user])
+      @user = User.new(params[:user] || {})
       if request.post?
         logout
         login(params[:user])
+        logger.info "After login: logged_in? = #{logged_in?}, current_user = #{current_user&.login}"
         if logged_in?
           return
         else
           flash.now[:signin_missmatch] = "The e-mail address (#{params[:user][:login]}) and password doesn't match"
+          logger.error "Login failed for user: #{params[:user][:login]}"
           raise SignInError.new
         end
       end
