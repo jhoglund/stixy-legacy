@@ -222,7 +222,7 @@ class BoardController < Stixyboard
     begin
       if params[:attributes] && current_user
         # Only allow safe attributes to be updated via AJAX
-        safe_attrs = [:first_name, :last_name, :description, :time_offset, :daylight_savings]
+        safe_attrs = [:first_name, :last_name, :description, :time_offset, :daylight_savings, :pref_ui_widget_tray, :pref_ui_board_list, :pref_ui_board_options, :pref_ui_auto_show_wopt]
         safe_attributes = {}
         safe_attrs.each do |attr|
           safe_attributes[attr] = params[:attributes][attr] if params[:attributes].has_key?(attr)

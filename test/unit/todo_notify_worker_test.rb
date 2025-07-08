@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 require "#{RAILS_ROOT}/vendor/plugins/backgroundrb/backgroundrb.rb"
 require "#{RAILS_ROOT}/lib/workers/todo_notify_worker"
 require 'drb'

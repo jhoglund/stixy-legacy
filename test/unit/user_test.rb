@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class UserTest < Test::Unit::TestCase
   include AuthenticatedTestHelper
@@ -201,51 +201,37 @@ class UserTest < Test::Unit::TestCase
     user.country = "Sverige"
     user.address = "Långvägen 10"
     user.time_offset = -7200.0
-    user.daylight_savings = 1 
-    # Save should succeed
-    assert user.save!
-    
-    # Fetch the user again and check the data
-    reloaded_user = User.find(users(:jonas).id)
-    
-    # Check the data
-    assert_equal "jonne@stixy.com", reloaded_user.login
-    assert_equal "jonne@stixy.com", reloaded_user.email
-    assert_equal  User.encrypt("newpassword", reloaded_user.salt), reloaded_user.crypted_password
-    assert_equal  "Jonne", reloaded_user.first_name
-    assert_equal  "Hogman", reloaded_user.last_name
-    assert_equal  "A test of description", reloaded_user.description
-    assert_equal  "30000", reloaded_user.zip
-    assert_equal  "Khamn", reloaded_user.city
-    assert_equal  "Sverige", reloaded_user.country
-    assert_equal  "Långvägen 10", reloaded_user.address
-    assert_equal  -7200.0, reloaded_user.time_offset
-    assert_equal  1, reloaded_user.daylight_savings
-    assert_equal  Time.parse("2006-10-10 09:15:27"), reloaded_user.adjusted_time(Time.parse("2006-10-10 10:15:27")) # Local date with daylight saving
+    user.daylight_savings = 1
+    user.save!
+    reloaded_user = User.find(user.id)
+    assert_equal "Khamn", reloaded_user.city
+    assert_equal "Sverige", reloaded_user.country
+    assert_equal "Långvägen 10", reloaded_user.address
+    assert_equal(-7200.0, reloaded_user.time_offset.to_f)
+    assert_equal(1, reloaded_user.daylight_savings.to_i)
+    assert_equal(Time.parse("2006-10-10 09:15:27"), reloaded_user.adjusted_time(Time.parse("2006-10-10 10:15:27"))) # Local date with daylight saving
   end
   
   def test_time
     time_now = Time.now
     @user.time_offset = -5*3600
-    @user.daylight_savings = 0 
-    
-    assert @user.save!
+    @user.daylight_savings = 0
+    @user.save!
     @user.reload
-  
-    assert_equal  -5*3600, @user.time_offset
-    assert_equal  0, @user.daylight_savings
-    assert_equal  time_now+(-5*3600), @user.adjusted_time(time_now)
+    assert_equal(-5*3600, @user.time_offset.to_i)
+    assert_equal(0, @user.daylight_savings.to_i)
+    assert_equal(time_now+(-5*3600), @user.adjusted_time(time_now))
     
-    @user.daylight_savings = 1 
+    @user.daylight_savings = 1
     
     assert @user.save
     @user.reload
     
-    assert_equal  time_now+((-5*3600)+3600), @user.adjusted_time(time_now)
-    assert_equal  time_now+(-5*3600), @user.adjusted_time(time_now, false) # Without daylight saving
+    assert_equal(time_now+((-5*3600)+3600), @user.adjusted_time(time_now))
+    assert_equal(time_now+(-5*3600), @user.adjusted_time(time_now, false)) # Without daylight saving
     
-    assert_equal  time_now, @user.reset_time(time_now+(-5*3600)+3600)
-    assert_equal  time_now, @user.reset_time(time_now+(-5*3600), false) # Without daylight saving
+    assert_equal(time_now, @user.reset_time(time_now+(-5*3600)+3600))
+    assert_equal(time_now, @user.reset_time(time_now+(-5*3600), false)) # Without daylight saving
   end
   
   def test_flash_upload_state

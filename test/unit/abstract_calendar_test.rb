@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class AbstractCalendarTest < Test::Unit::TestCase
   fixtures :roles

@@ -27,21 +27,31 @@ module CalendarHelper
   end
   
   def generate_widget_todo_calendar
-    date = calendar_date(:widget_todo, (params[:calendar_date] || (Date.civil(params[:year].to_i,Date::MONTHNAMES.index(params[:month_name])) rescue nil)))
+    # Fix: Use current date as default instead of relying on session/user data that may be missing
+    date = calendar_date(:widget_todo, (params[:calendar_date] || Date.today))
     @calendar = Stixy::Calendar.new(date)    
-    table = calendar.to_html_table { |date, day, cell| cell.content = day.day }
-    table.setHeaders(*calendar.offsetDays(Date::ABBR_DAYNAMES.dup))
+    table = @calendar.to_html_table { |date, day, cell| cell.content = day.day }
+    
+    # Use simple abbreviated day names now that Th class is fixed
+    day_names = %w[Sun Mon Tue Wed Thu Fri Sat]
+    table.setHeaders(*day_names)
+    
     table.addAttribute(:class, "todo-calendar")
     return table.to_s
   end
   
   def calendar_date name=:calendar, time=nil
     session[:calendars] ||= {}
-	  session[:calendars][name] ||= {}
-    session[:calendars][name] = if session[:calendars][name].empty? and !time then current_user.adjusted_time.to_s
-                                elsif !time then session[:calendars][name]
-                                else time.to_s end
-	  Date.parse(session[:calendars][name])
+    session[:calendars][name] ||= {}
+    session[:calendars][name] = if session[:calendars][name].empty? and !time 
+                                  # Fix: Handle case where current_user might not be available
+                                  (current_user.adjusted_time rescue Time.now).to_s
+                                elsif !time 
+                                  session[:calendars][name]
+                                else 
+                                  time.to_s 
+                                end
+    Date.parse(session[:calendars][name])
   end
   
   def calendar date=nil, view=:month

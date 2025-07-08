@@ -3,6 +3,21 @@
 
 RAILS_ROOT = "#{File.dirname(__FILE__)}/.." unless defined?(RAILS_ROOT)
 
+# Ruby 2.7 compatibility patches - load early before Rails
+if RUBY_VERSION >= '2.7'
+  # Patch BigDecimal to add yaml_as method that Rails 2.1 expects
+  require 'bigdecimal'
+  
+  # Only patch if not already patched
+  unless BigDecimal.respond_to?(:yaml_as)
+    class BigDecimal
+      def self.yaml_as(tag)
+        # no-op for Ruby 2.7 compatibility
+      end
+    end
+  end
+end
+
 module Rails
   class << self
     def boot!
@@ -101,25 +116,6 @@ module Rails
         def read_environment_rb
           File.read("#{RAILS_ROOT}/config/environment.rb")
         end
-    end
-  end
-end
-# Compatibility fix for Rails 2.1 on Ruby 2.7+
-if RUBY_VERSION >= "2.0"
-  require 'bigdecimal'
-  
-  # Add yaml_as method to BigDecimal for compatibility
-  class BigDecimal
-    def self.yaml_as(tag)
-      # No-op for compatibility
-    end
-  end
-  
-  # Patch the Module class to handle yaml_as calls
-  class Module
-    alias_method :original_yaml_as, :yaml_as if method_defined?(:yaml_as)
-    def yaml_as(tag)
-      # No-op for compatibility
     end
   end
 end

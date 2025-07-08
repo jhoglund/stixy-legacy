@@ -154,7 +154,7 @@ module Stixy
     class Table < Element
       attr_accessor :column_size
       def initialize *headers
-        setHeaders(headers)
+        setHeaders(*headers)
         @cells = []
         @column_size = 0
         super "table"
@@ -226,35 +226,35 @@ module Stixy
     end
   
     class Tr < Element
-      def initialize *arg
-        super "tr", arg
+      def initialize content=""
+        super "tr", content
       end
     end
   
     class Th < Element
-      def initialize *arg
-        super "th", arg
+      def initialize content=""
+        super "th", content
       end
     end
   
     class Td < Element
-      def initialize *arg
-        super "td", arg
+      def initialize content=""
+        super "td", content
       end
     end
     
     class Tbody < Element
-      def initialize *arg
-        super "tbody", arg
+      def initialize content=""
+        super "tbody", content
       end
     end
     
     class Thead < Element
-      def initialize *arg
-        super "thead", arg
+      def initialize content=""
+        super "thead", content
       end
     end
-    
+  
   end
   
   class Button

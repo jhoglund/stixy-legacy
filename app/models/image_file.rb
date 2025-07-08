@@ -1,9 +1,10 @@
 class ImageFile < AbstractFile
 
     has_attachment :storage => :file_system,
-        :path_prefix => 'public/system/images',
+        :path_prefix => 'public/system/photos',
         :thumbnail_class => 'ThumbnailFile',
-        :thumbnails => { :original => '600>', :t => '200>'}
+        :thumbnails => { :original => '600>', :t => '200>'},
+        :processor => :mini_magick
 
     belongs_to  :user
 
@@ -41,6 +42,8 @@ class ImageFile < AbstractFile
         orphan.destroy
       end
     end
+    
+    after_save :ensure_flat_public_path
     
 end
 

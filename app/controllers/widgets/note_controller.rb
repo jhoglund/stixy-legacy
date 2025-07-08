@@ -9,6 +9,8 @@ class Widgets::NoteController < Widgets::DefaultController
         text_record.value = params[:text][:value]
         text_record.save!
       else
+        # Ensure widget is saved before creating associated records
+        widget.save! if widget.new_record?
         widget.widget_instance_texts.create!(:name => "text", :value => params[:text][:value])
       end
       # Remove text from params since it's not a direct widget_instance attribute
@@ -42,6 +44,8 @@ class Widgets::NoteController < Widgets::DefaultController
           style_record.attribute = attribute if attribute
           style_record.save!
         else
+          # Ensure widget is saved before creating associated records
+          widget.save! if widget.new_record?
           widget.widget_instance_styles.create!(:name => style_name.to_s, :value => value, :attribute => attribute)
         end
       end

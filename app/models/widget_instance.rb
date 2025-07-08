@@ -63,7 +63,7 @@ class WidgetInstance < ActiveRecord::Base
   
   def disable
     before_disable if defined?  before_disable
-    self.status = Status::DISABLED
+    write_attribute(:status, Status::DISABLED)
     save!
     after_disable if defined?  after_disable
   end

@@ -39,7 +39,7 @@ adam:
   id: 3
   login: adam@stixy.com
   email: adam@stixy.com
-  crypted_password: "89a30687956406ce4dab55381ec47bf3458163da" #Unencrypted passord is: password>
+  crypted_password: "89a30687956406ce4dab55381ec47bf3458163da" #Unencrypted passord is: password
   salt: yo-ma-salt
   description: adam
   last_login_date: <%= -8.day.from_now.strftime("%Y-%m-%d %H:%M:%S") %>
@@ -84,6 +84,7 @@ maria:
   pref_photo_auto_upload: 1
   time_offset: <%= 1*3600 %>
   daylight_savings: 0
+  pref_disable_flash_upload: 0
   #roles: user
 
 camilla:

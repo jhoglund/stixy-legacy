@@ -1,6 +1,11 @@
 # Rails 2.1 compatibility patches for Ruby 2.7
 # This file patches known incompatibilities between Rails 2.1 and Ruby 2.7
 
+# Patch 0: Load test/unit/error compatibility patch early
+if RUBY_VERSION >= "2.7"
+  require File.join(File.dirname(__FILE__), '..', '..', 'lib', 'test_unit_error_patch')
+end
+
 # Patch 1: Prevent circular argument reference issues completely
 # Add this check at the top level to prevent loading issues
 if RUBY_VERSION >= "2.7"

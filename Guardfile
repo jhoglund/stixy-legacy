@@ -1,5 +1,8 @@
 # Simple Guardfile for Rails 2.1.0 - focusing on working tests
 # More info at https://github.com/guard/guard#readme
+# 
+# Note: Pry is disabled due to Ruby 2.7 compatibility issues
+# Use simple shell commands instead
 
 # Custom guard for running specific working tests
 guard :shell do

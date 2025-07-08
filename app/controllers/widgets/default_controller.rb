@@ -36,10 +36,11 @@ class Widgets::DefaultController < Stixyboard
           board_data.each_with_index do |data, index|
             widget_data = clean_up(data.last)
             widget_instance_id = data.first.match(/widget_(\d*)/)[1] rescue nil
-            widget_type = Widget.find(widget_data[:widget_id], :select => :name).name
+            widget_type = Widget.find(widget_data[:widget_id]).name
             widget = WidgetInstance.find_for_user(widget_instance_id, current_user.id) unless widget_instance_id.nil? || widget_instance_id.empty?
             if widget and widget_data[:remove]=='true'
               widget.disable
+              next
             elsif widget_data[:clone_to] and clone_to = get_authorized_and_editable_board(widget_data[:clone_to])
               if widget
                 clone = widget.copy(:no_reminders)
@@ -49,12 +50,24 @@ class Widgets::DefaultController < Stixyboard
               end
             else
               if widget.nil?
-                widget = WidgetInstance.new(:widget_id => widget_data[:widget_id], :widget_name => widget_type)
-                @board.widget_instances << widget
+                widget = WidgetInstance.new
+                widget.board_id = @board.id
+                widget_id_int = widget_data[:widget_id].to_i
+                begin
+                  widget_record = Widget.find(widget_id_int)
+                  widget.write_attribute(:widget_id, widget_id_int)
+                  widget.write_attribute(:widget_name, widget_record.name)
+                rescue => e
+                  widget.write_attribute(:widget_id, widget_id_int)
+                  widget.write_attribute(:widget_name, "Unknown")
+                end
+                widget.attributes = widget_data
+                # Ensure critical fields are not overwritten by mass assignment
+                widget.write_attribute(:widget_id, widget_id_int)
+                widget.write_attribute(:widget_name, widget_record ? widget_record.name : "Unknown")
               end
               clean_up_zindex(widget_data)
               widget = eval("Widgets::#{widget_type}Controller").update_widget(widget, widget_data, current_user)
-              widget.attributes = widget_data
               widget.save!
             end
             @board.save

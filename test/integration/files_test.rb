@@ -1,6 +1,6 @@
 require "#{File.dirname(__FILE__)}/../test_helper"
 require 'rubygems'
-require 'mocha'
+require 'mocha/setup'
 
 class FilesTest < ActionController::IntegrationTest
   fixtures :boards, :boardusers, :library_photos_widget_instances, :library_documents_widget_instances, :widgets, :widget_instances, :users, :roles, :roles_users, :abstract_files

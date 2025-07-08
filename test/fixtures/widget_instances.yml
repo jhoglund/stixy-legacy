@@ -5,7 +5,7 @@ todo_widget_1_jonas:
   widget_id: 4
   created_by_id: 2
   updated_by_id: 2
-  widget_name: WidgetTodo
+  widget_name: Todo
   status: <%= Status::ACTIVE %>
 todo_widget_2_adam:
   id: 2
@@ -13,7 +13,7 @@ todo_widget_2_adam:
   widget_id: 4
   created_by_id: 3
   updated_by_id: 3
-  widget_name: WidgetTodo
+  widget_name: Todo
   status: <%= Status::ACTIVE %>
 todo_widget_3_jonas:
   id: 3
@@ -21,7 +21,7 @@ todo_widget_3_jonas:
   widget_id: 4
   created_by_id: 2
   updated_by_id: 2
-  widget_name: WidgetTodo
+  widget_name: Todo
   status: <%= Status::ACTIVE %>
 photo_widget_4_jonas:
   id: 4
@@ -29,7 +29,7 @@ photo_widget_4_jonas:
   widget_id: 2
   created_by_id: 3
   updated_by_id: 3
-  widget_name: WidgetPhoto
+  widget_name: Photo
   status: <%= Status::ACTIVE %>
 photo_widget_5_jonas:
   id: 5
@@ -37,7 +37,7 @@ photo_widget_5_jonas:
   widget_id: 2
   created_by_id: 3
   updated_by_id: 3
-  widget_name: WidgetPhoto
+  widget_name: Photo
   status: <%= Status::ACTIVE %>
 photo_widget_272_guest:
   id: 6
@@ -45,7 +45,7 @@ photo_widget_272_guest:
   widget_id: 2
   created_by_id: 3
   updated_by_id: 3
-  widget_name: WidgetPhoto
+  widget_name: Photo
   status: <%= Status::ACTIVE %>
 document_widget_272_guest:
   id: 7
@@ -53,7 +53,7 @@ document_widget_272_guest:
   widget_id: 3
   created_by_id: 3
   updated_by_id: 3
-  widget_name: WidgetDocument
+  widget_name: Document
   status: <%= Status::DISABLED %>
 photo_widget_jonas_board:
   id: 8
@@ -61,7 +61,7 @@ photo_widget_jonas_board:
   widget_id: 2
   created_by_id: 2
   updated_by_id: 2
-  widget_name: WidgetPhoto
+  widget_name: Photo
   status: <%= Status::ACTIVE %>
 document_widget_jonas_board:
   id: 9
@@ -69,6 +69,6 @@ document_widget_jonas_board:
   widget_id: 3
   created_by_id: 2
   updated_by_id: 2
-  widget_name: WidgetDocument
+  widget_name: Document
   status: <%= Status::ACTIVE %>
 

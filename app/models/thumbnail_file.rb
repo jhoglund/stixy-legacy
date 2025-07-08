@@ -2,7 +2,8 @@ require 'mini_magick'
 
 class ThumbnailFile < AbstractFile
     has_attachment :storage => :file_system, 
-        :path_prefix => 'public/system/thumbs'
+        :path_prefix => 'public/system/thumbs',
+        :processor => :mini_magick
    
    # Fix so thumbnail relations are generated even though they are not specified by the has_attachment method
    belongs_to :parent, :class_name => "AbstractFile" 
@@ -30,7 +31,22 @@ class ThumbnailFile < AbstractFile
    end
   
    def public_uri
-     "/system/thumbs/#{id}/#{filename}?#{[width,height,rotation,filter].to_s}"
+     # Use the same partitioned path format that AttachmentFu uses for file storage
+     photo_id = parent_id || id
+     
+     # Generate partitioned path like AttachmentFu: ("%08d" % id).scan(/..../)
+     partitioned_dirs = ("%08d" % photo_id).scan(/..../)
+     partitioned_path = partitioned_dirs.join('/')
+     
+     # Generate proper query string instead of array representation
+     params = []
+     params << "width=#{width || 0}"
+     params << "height=#{height || 0}" 
+     params << "rotation=#{rotation || 0}"
+     params << "filter=#{filter || 0}"
+     
+     "/system/thumbs/#{partitioned_path}/#{filename}?#{params.join('&')}"
    end  
          
+   after_save :ensure_flat_public_path
 end
