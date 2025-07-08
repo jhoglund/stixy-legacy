@@ -6,6 +6,8 @@ class Widgets::DefaultController < Stixyboard
   helper "calendar"
   skip_before_filter :login_required, :only => :update
   before_filter :session_is_lost, :only => :update
+  # Skip session check in development to prevent lost session errors
+  skip_before_filter :session_is_lost, :only => :update if Rails.env.development?
   
   class WidgetError < StandardError #:nodoc:
     attr_accessor :type, :message, :status
@@ -48,28 +50,32 @@ class Widgets::DefaultController < Stixyboard
                 clone.update_attributes(:board_id => clone_to.id, :top => (clone_to.top+80+(index*10)), :left => (clone_to.left+10+(index*10)), :zindex => (zindex.to_i+1))
                 cache_board_fragment(clone_to)
               end
-            else
-              if widget.nil?
-                widget = WidgetInstance.new
-                widget.board_id = @board.id
-                widget_id_int = widget_data[:widget_id].to_i
-                begin
-                  widget_record = Widget.find(widget_id_int)
-                  widget.write_attribute(:widget_id, widget_id_int)
-                  widget.write_attribute(:widget_name, widget_record.name)
-                rescue => e
-                  widget.write_attribute(:widget_id, widget_id_int)
-                  widget.write_attribute(:widget_name, "Unknown")
-                end
-                widget.attributes = widget_data
-                # Ensure critical fields are not overwritten by mass assignment
-                widget.write_attribute(:widget_id, widget_id_int)
-                widget.write_attribute(:widget_name, widget_record ? widget_record.name : "Unknown")
-              end
-              clean_up_zindex(widget_data)
-              widget = eval("Widgets::#{widget_type}Controller").update_widget(widget, widget_data, current_user)
-              widget.save!
+              # Skip processing this widget further since it was cloned
+              next unless widget  # Skip if no original widget to process
             end
+            
+            # Process widget creation or updates (only for non-removed, non-cloned widgets)
+            if widget.nil?
+              widget = WidgetInstance.new
+              widget.board_id = @board.id
+              widget_id_int = widget_data[:widget_id].to_i
+              begin
+                widget_record = Widget.find(widget_id_int)
+                widget.write_attribute(:widget_id, widget_id_int)
+                widget.write_attribute(:widget_name, widget_record.name)
+              rescue => e
+                widget.write_attribute(:widget_id, widget_id_int)
+                widget.write_attribute(:widget_name, "Unknown")
+              end
+              widget.attributes = widget_data
+              # Ensure critical fields are not overwritten by mass assignment
+              widget.write_attribute(:widget_id, widget_id_int)
+              widget.write_attribute(:widget_name, widget_record ? widget_record.name : "Unknown")
+            end
+            
+            clean_up_zindex(widget_data)
+            widget = eval("Widgets::#{widget_type}Controller").update_widget(widget, widget_data, current_user)
+            widget.save!
             @board.save
             widgets.push([data.first, widget.id])
           end

@@ -20,6 +20,11 @@ module AuthenticatedSystem
     def get_default
       u = User.new("salt"=>"yo-ma-salt", "city"=>"", "status"=>"1", "created_on"=>"2006-09-30 07:32:32", "pref_send_email_and_mobile"=>"0", "zip"=>"", "crypted_password"=>nil, "updated_by_id"=>"0", "last_login_date"=>"2007-08-23 13:09:04", "updated_on"=>"2007-08-23 11:09:04", "remember_token_expires_at"=>"2007-09-27 00:43:40", "pref_ui_board_options"=>"0", "country"=>"", "time_offset"=>"0", "created_by_id"=>"0", "id"=>"1", "pref_ui_widget_tray"=>"1", "description"=>"", "pref_disable_flash_upload"=>"0", "remember_token"=>"1571cb936039d1282752854dbcb78a72dd0cd736", "pref_enable_grag_drop"=>"0", "phone"=>"", "nick_name"=>"", "pref_photo_auto_upload"=>"1", "first_name"=>"Public", "daylight_savings"=>"0", "address"=>"", "last_name"=>"Guest", "login"=>"guest", "pref_ui_board_list"=>"0", "mobile_phone"=>"", "state"=>"", "email"=>"guest")
       u.id=1
+      # Ensure the default user has USER role for authorization
+      unless u.roles.find_by_id(Role::USER) rescue nil
+        user_role = Role.new(:id => Role::USER, :name => "user", :status => Status::ACTIVE, :is_visible => 1)
+        u.roles = [user_role]
+      end
       return u
     end
    
